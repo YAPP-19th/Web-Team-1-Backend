@@ -1,5 +1,6 @@
 package com.yapp.giljob.common.dto
 
+import com.yapp.giljob.common.exception.ExceptionCode
 import org.springframework.http.HttpStatus
 
 class BaseResponse<T>(
@@ -7,13 +8,19 @@ class BaseResponse<T>(
     val message: String?,
     val data: T?
 ) {
+    private constructor(status: HttpStatus, message: String?) : this(status.value(), message, null)
+
     companion object {
         fun <T> of(status: HttpStatus, message: String?, data: T?): BaseResponse<T> {
             return BaseResponse(status.value(), message, data)
         }
 
         fun of(status: HttpStatus, message: String?): BaseResponse<Unit> {
-            return BaseResponse(status.value(), message, null)
+            return BaseResponse(status, message)
+        }
+
+        fun exception(exceptionCode: ExceptionCode): BaseResponse<Unit> {
+            return BaseResponse(exceptionCode.status, exceptionCode.message)
         }
     }
 }
