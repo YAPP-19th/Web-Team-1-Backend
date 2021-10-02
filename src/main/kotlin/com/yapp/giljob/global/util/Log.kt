@@ -1,4 +1,4 @@
-package com.yapp.giljob.common.util
+package com.yapp.giljob.global.util
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

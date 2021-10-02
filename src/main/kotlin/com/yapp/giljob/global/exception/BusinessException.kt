@@ -1,4 +1,4 @@
-package com.yapp.giljob.common.exception
+package com.yapp.giljob.global.exception
 
 open class BusinessException(
     val exceptionCode: ExceptionCode

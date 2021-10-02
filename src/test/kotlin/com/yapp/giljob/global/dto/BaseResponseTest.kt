@@ -1,4 +1,4 @@
-package com.yapp.giljob.common.dto
+package com.yapp.giljob.global.dto
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test

@@ -1,6 +1,6 @@
-package com.yapp.giljob.common.dto
+package com.yapp.giljob.global.dto
 
-import com.yapp.giljob.common.exception.ExceptionCode
+import com.yapp.giljob.global.exception.ExceptionCode
 import org.springframework.http.HttpStatus
 
 class BaseResponse<T>(

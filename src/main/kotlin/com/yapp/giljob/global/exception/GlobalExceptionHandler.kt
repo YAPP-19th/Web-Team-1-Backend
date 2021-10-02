@@ -1,7 +1,7 @@
-package com.yapp.giljob.common.exception
+package com.yapp.giljob.global.exception
 
-import com.yapp.giljob.common.dto.BaseResponse
-import com.yapp.giljob.common.util.Log
+import com.yapp.giljob.global.dto.BaseResponse
+import com.yapp.giljob.global.util.Log
 import org.springframework.http.HttpStatus
 
 import org.springframework.http.ResponseEntity
