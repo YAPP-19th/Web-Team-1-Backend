@@ -1,6 +1,5 @@
 package com.yapp.giljob.global.dto
 
-import com.yapp.giljob.global.exception.ExceptionCode
 import org.springframework.http.HttpStatus
 
 class BaseResponse<T>(
@@ -17,10 +16,6 @@ class BaseResponse<T>(
 
         fun of(status: HttpStatus, message: String?): BaseResponse<Unit> {
             return BaseResponse(status, message)
-        }
-
-        fun exception(exceptionCode: ExceptionCode): BaseResponse<Unit> {
-            return BaseResponse(exceptionCode.status, exceptionCode.message)
         }
     }
 }
