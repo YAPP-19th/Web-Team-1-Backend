@@ -11,5 +11,5 @@ enum class ErrorCode(
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "C001", "Internal Server Error"),
     INVALID_INPUT_VALUE(HttpStatus.BAD_REQUEST, "C002", "Invalid Input Value"),
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "C003", "Method Not Allowed"),
-    ENTITY_NOT_FOUND(HttpStatus.NOT_FOUND, "C004", " Entity Not Found");
+    ENTITY_NOT_FOUND(HttpStatus.NOT_FOUND, "C004", "Entity Not Found");
 }
