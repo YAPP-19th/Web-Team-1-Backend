@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.5.5"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("org.asciidoctor.convert") version "1.5.12"
     kotlin("jvm") version "1.5.31"
     kotlin("plugin.spring") version "1.5.31"
     kotlin("plugin.jpa") version "1.5.31"
@@ -34,15 +35,37 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.slf4j:slf4j-api:1.7.32")
+
+    asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
+tasks {
+    compileKotlin {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "11"
+        }
     }
-}
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+    test {
+        useJUnitPlatform()
+    }
+
+    val snippetsDir = file("build/generated-snippets")
+    asciidoctor {
+        inputs.dir(snippetsDir)
+        dependsOn("test")
+    }
+
+    register("restDocs") {
+        dependsOn(asciidoctor)
+        doLast {
+            copy {
+                from(file("$buildDir/asciidoc/html5"))
+                into(file("docs"))
+            }
+        }
+    }
 }
