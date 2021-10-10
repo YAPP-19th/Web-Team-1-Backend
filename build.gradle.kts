@@ -1,9 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("org.springframework.boot") version "2.5.5"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    id("org.asciidoctor.convert") version "1.5.12"
+    id("org.asciidoctor.jvm.convert") version "3.3.2"
     kotlin("jvm") version "1.5.31"
     kotlin("plugin.spring") version "1.5.31"
     kotlin("plugin.jpa") version "1.5.31"
@@ -18,6 +16,8 @@ configurations {
         extendsFrom(configurations.annotationProcessor.get())
     }
 }
+
+val asciidoctorExtensions: Configuration by configurations.creating
 
 repositories {
     mavenCentral()
@@ -36,36 +36,36 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.slf4j:slf4j-api:1.7.32")
 
-    asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
-
+    asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")
 }
 
-tasks {
-    compileKotlin {
-        kotlinOptions {
-            freeCompilerArgs = listOf("-Xjsr305=strict")
-            jvmTarget = "11"
-        }
+tasks.compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+        jvmTarget = "11"
     }
+}
 
+
+tasks {
     test {
         useJUnitPlatform()
     }
 
-    val snippetsDir = file("build/generated-snippets")
     asciidoctor {
-        inputs.dir(snippetsDir)
-        dependsOn("test")
-    }
-
-    register("restDocs") {
-        dependsOn(asciidoctor)
+        dependsOn(test)
+        configurations(asciidoctorExtensions.name)
+        baseDirFollowsSourceDir()
         doLast {
             copy {
-                from(file("$buildDir/asciidoc/html5"))
-                into(file("docs"))
+                from(outputDir)
+                into("src/main/resources/static/docs")
             }
         }
+    }
+
+    build {
+        dependsOn(asciidoctor)
     }
 }
