@@ -40,15 +40,14 @@ dependencies {
     asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")
 }
 
-tasks.compileKotlin {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
-    }
-}
-
-
 tasks {
+    compileKotlin {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "11"
+        }
+    }
+
     test {
         useJUnitPlatform()
     }
