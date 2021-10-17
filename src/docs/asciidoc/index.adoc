@@ -1,0 +1,19 @@
+= REST Docs
+Andy Wilkinson;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
+== Test API
+=== GET /api/test
+.request
+include::{snippets}/test/http-request.adoc[]
+.response
+include::{snippets}/test/http-response.adoc[]
+.response
+include::{snippets}/test/response-body.adoc[]
+.response fields
+include::{snippets}/test/response-fields.adoc[]

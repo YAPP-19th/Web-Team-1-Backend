@@ -1,8 +1,7 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("org.springframework.boot") version "2.5.5"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    id("org.asciidoctor.jvm.convert") version "3.3.2"
     kotlin("jvm") version "1.5.31"
     kotlin("plugin.spring") version "1.5.31"
     kotlin("plugin.jpa") version "1.5.31"
@@ -17,6 +16,8 @@ configurations {
         extendsFrom(configurations.annotationProcessor.get())
     }
 }
+
+val asciidoctorExtensions: Configuration by configurations.creating
 
 repositories {
     mavenCentral()
@@ -34,15 +35,36 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.slf4j:slf4j-api:1.7.32")
+
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+    asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
+tasks {
+    compileKotlin {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "11"
+        }
     }
-}
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+    test {
+        useJUnitPlatform()
+    }
+
+    asciidoctor {
+        dependsOn(test)
+        configurations(asciidoctorExtensions.name)
+        baseDirFollowsSourceDir()
+        doLast {
+            copy {
+                from(outputDir)
+                into("src/main/resources/static/docs")
+            }
+        }
+    }
+
+    build {
+        dependsOn(asciidoctor)
+    }
 }
