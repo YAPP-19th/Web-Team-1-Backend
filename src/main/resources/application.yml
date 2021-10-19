@@ -1,1 +1,6 @@
-
+spring:
+  social:
+    kakao:
+      https://kapi.kakao.com/v2/user/me
+    tokenTime:
+      2592000000

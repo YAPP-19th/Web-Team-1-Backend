@@ -29,13 +29,18 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.1.RELEASE")
+    implementation("org.springframework.security:spring-security-jwt:1.1.1.RELEASE")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("org.json:json:20210307")
     compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
     annotationProcessor("org.projectlombok:lombok")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-test"){
+        exclude (group = "com.vaadin.external.google", module = "android-json")
+    }
     implementation("org.slf4j:slf4j-api:1.7.32")
-
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")
 }
