@@ -3,7 +3,6 @@ package com.yapp.giljob.global.error
 import com.yapp.giljob.global.error.exception.BusinessException
 import com.yapp.giljob.global.util.Log
 import org.springframework.http.HttpStatus
-
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
