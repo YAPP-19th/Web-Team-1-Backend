@@ -1,8 +1,8 @@
-package com.yapp.giljob.sign.controller
+package com.yapp.giljob.domain.sign.controller
 
-import com.yapp.giljob.sign.dto.request.SignInRequest
-import com.yapp.giljob.sign.dto.request.SignUpRequest
-import com.yapp.giljob.sign.service.SignService
+import com.yapp.giljob.domain.sign.dto.request.SignInRequest
+import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
+import com.yapp.giljob.domain.sign.service.SignService
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody

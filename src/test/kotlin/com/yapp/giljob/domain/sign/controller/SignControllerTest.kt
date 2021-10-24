@@ -1,9 +1,9 @@
-package com.yapp.giljob.sign.controller
+package com.yapp.giljob.domain.sign.controller
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.yapp.giljob.global.error.ErrorCode
-import com.yapp.giljob.sign.dto.request.SignInRequest
-import com.yapp.giljob.sign.dto.request.SignUpRequest
+import com.yapp.giljob.domain.sign.dto.request.SignInRequest
+import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension

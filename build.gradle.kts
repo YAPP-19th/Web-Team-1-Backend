@@ -50,6 +50,8 @@ dependencies {
     implementation("org.slf4j:slf4j-api:1.7.32")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 }
 
 tasks {

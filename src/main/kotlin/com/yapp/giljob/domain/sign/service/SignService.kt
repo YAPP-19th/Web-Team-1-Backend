@@ -1,10 +1,10 @@
-package com.yapp.giljob.sign.service
+package com.yapp.giljob.domain.sign.service
 
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import com.yapp.giljob.security.jwt.JwtProvider
-import com.yapp.giljob.sign.dto.request.SignInRequest
-import com.yapp.giljob.sign.dto.request.SignUpRequest
+import com.yapp.giljob.domain.sign.dto.request.SignInRequest
+import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import org.json.JSONObject
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpHeaders

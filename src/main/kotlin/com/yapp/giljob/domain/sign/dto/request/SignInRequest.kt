@@ -1,4 +1,4 @@
-package com.yapp.giljob.sign.dto.request
+package com.yapp.giljob.domain.sign.dto.request
 
 data class SignInRequest (
     val kakaoAccessToken: String
