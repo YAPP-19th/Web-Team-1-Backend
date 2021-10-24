@@ -2,6 +2,7 @@ package com.yapp.giljob.domain.quest.domain
 
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.user.domain.User
+import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
 
 @Table(name = "quest")
@@ -35,4 +36,4 @@ class Quest(
 
     @Column(nullable = false)
     var detail: String
-)
+) : BaseEntity()

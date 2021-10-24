@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.subquest.domain
 
 import com.yapp.giljob.domain.quest.domain.Quest
+import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
 
 @Table(name = "sub_quest")
@@ -19,4 +20,4 @@ class SubQuest (
 
     @Column(nullable = false)
     var order: Int
-)
+) : BaseEntity()

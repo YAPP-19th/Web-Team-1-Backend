@@ -1,4 +1,4 @@
-package com.yapp.giljob.global.dto
+package com.yapp.giljob.global.common.dto
 
 import org.springframework.http.HttpStatus
 

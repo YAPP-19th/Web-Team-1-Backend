@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.user.domain
 
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
 
 @Table(name = "user")
@@ -19,4 +20,4 @@ class User (
     @ManyToOne
     @JoinColumn(name = "position_id")
     var position: Position
-)
+) : BaseEntity()

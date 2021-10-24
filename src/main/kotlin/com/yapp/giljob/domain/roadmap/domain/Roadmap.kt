@@ -2,6 +2,7 @@ package com.yapp.giljob.domain.roadmap.domain
 
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.user.domain.User
+import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
 
 @Table(name = "roadmap")
@@ -24,4 +25,4 @@ class Roadmap(
 
     @Column(nullable = false)
     var thumbnail: String
-)
+) : BaseEntity()
