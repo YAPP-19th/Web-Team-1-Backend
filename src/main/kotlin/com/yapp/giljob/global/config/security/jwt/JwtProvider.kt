@@ -1,4 +1,4 @@
-package com.yapp.giljob.security.jwt
+package com.yapp.giljob.global.config.security.jwt
 
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm

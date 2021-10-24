@@ -1,4 +1,4 @@
-package com.yapp.giljob.security.jwt
+package com.yapp.giljob.global.config.security.jwt
 
 import com.yapp.giljob.global.error.ErrorCode
 import org.junit.jupiter.api.Test

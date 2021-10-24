@@ -1,6 +1,6 @@
 package com.yapp.giljob.domain.sign.service
 
-import com.yapp.giljob.security.jwt.JwtProvider
+import com.yapp.giljob.global.config.security.jwt.JwtProvider
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

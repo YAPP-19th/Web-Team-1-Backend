@@ -1,7 +1,7 @@
-package com.yapp.giljob.security
+package com.yapp.giljob.global.config.security
 
-import com.yapp.giljob.security.jwt.JwtAuthenticationFilter
-import com.yapp.giljob.security.jwt.JwtProvider
+import com.yapp.giljob.global.config.security.jwt.JwtAuthenticationFilter
+import com.yapp.giljob.global.config.security.jwt.JwtProvider
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity

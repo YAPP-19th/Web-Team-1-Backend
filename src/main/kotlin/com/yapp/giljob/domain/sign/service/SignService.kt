@@ -2,7 +2,7 @@ package com.yapp.giljob.domain.sign.service
 
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
-import com.yapp.giljob.security.jwt.JwtProvider
+import com.yapp.giljob.global.config.security.jwt.JwtProvider
 import com.yapp.giljob.domain.sign.dto.request.SignInRequest
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import org.json.JSONObject
