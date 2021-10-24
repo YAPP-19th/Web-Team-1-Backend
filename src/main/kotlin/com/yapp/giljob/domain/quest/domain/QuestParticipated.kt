@@ -1,5 +1,7 @@
 package com.yapp.giljob.domain.quest.domain
 
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.user.domain.User
 import javax.persistence.*
 
@@ -21,4 +23,12 @@ class QuestParticipated(
 
     @Column(name = "is_completed", nullable = false)
     var isCompleted: Boolean = false
-)
+) {
+    override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
+
+    override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
+
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(QuestParticipated::id)
+    }
+}

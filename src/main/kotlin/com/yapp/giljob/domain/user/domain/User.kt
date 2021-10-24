@@ -1,5 +1,7 @@
 package com.yapp.giljob.domain.user.domain
 
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
@@ -20,4 +22,12 @@ class User (
     @ManyToOne
     @JoinColumn(name = "position_id")
     var position: Position
-) : BaseEntity()
+) : BaseEntity() {
+    override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
+
+    override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
+
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(User::id)
+    }
+}

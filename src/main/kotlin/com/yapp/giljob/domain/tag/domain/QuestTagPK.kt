@@ -1,5 +1,7 @@
 package com.yapp.giljob.domain.tag.domain
 
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
 import java.io.Serializable
 import javax.persistence.Embeddable
 
@@ -8,21 +10,11 @@ class QuestTagPK (
     var questId: Long,
     var tagId: Long
 ) : Serializable {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+    override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
-        other as QuestTagPK
+    override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
 
-        if (questId != other.questId) return false
-        if (tagId != other.tagId) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = questId.hashCode()
-        result = 31 * result + tagId.hashCode()
-        return result
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(QuestTagPK::questId, QuestTagPK::tagId)
     }
 }

@@ -1,5 +1,7 @@
 package com.yapp.giljob.domain.user.domain
 
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
 import javax.persistence.*
 
 @Table(name = "user_achievement")
@@ -19,4 +21,12 @@ class UserAchievement(
 
     @Column(name = "is_representative", nullable = false)
     var isRepresentative: Boolean = false
-)
+) {
+    override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
+
+    override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
+
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(UserAchievement::id)
+    }
+}

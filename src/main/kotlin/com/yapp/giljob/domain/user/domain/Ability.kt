@@ -1,5 +1,7 @@
 package com.yapp.giljob.domain.user.domain
 
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.position.domain.Position
 import javax.persistence.*
 
@@ -20,4 +22,12 @@ class Ability(
 
     @Column(nullable = false)
     var value: Int
-)
+) {
+    override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
+
+    override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
+
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(Ability::id)
+    }
+}

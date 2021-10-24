@@ -24,6 +24,7 @@ val asciidoctorExtensions: Configuration by configurations.creating
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 allOpen {
@@ -52,6 +53,8 @@ dependencies {
     asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
+
+    implementation("com.github.consoleau:kassava:2.1.0")
 }
 
 tasks {

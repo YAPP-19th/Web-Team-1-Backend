@@ -1,5 +1,7 @@
 package com.yapp.giljob.domain.roadmap.domain
 
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.quest.domain.Quest
 import javax.persistence.*
 
@@ -20,4 +22,12 @@ class RoadmapDetail(
 
     @Column(nullable = false)
     var order: Int
-)
+) {
+    override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
+
+    override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
+
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(RoadmapDetail::id)
+    }
+}

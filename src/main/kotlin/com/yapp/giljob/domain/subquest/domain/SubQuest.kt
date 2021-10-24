@@ -1,6 +1,9 @@
 package com.yapp.giljob.domain.subquest.domain
 
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.quest.domain.Quest
+import com.yapp.giljob.domain.tag.domain.QuestTag
 import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
 
@@ -20,4 +23,12 @@ class SubQuest (
 
     @Column(nullable = false)
     var order: Int
-) : BaseEntity()
+) : BaseEntity() {
+    override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
+
+    override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
+
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(SubQuest::id)
+    }
+}

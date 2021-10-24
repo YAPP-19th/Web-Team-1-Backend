@@ -1,5 +1,7 @@
 package com.yapp.giljob.domain.tag.domain
 
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.quest.domain.Quest
 import javax.persistence.*
 
@@ -18,4 +20,12 @@ class QuestTag(
     @ManyToOne
     @JoinColumn(name = "tag_id")
     val tag: Tag
-)
+) {
+    override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
+
+    override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
+
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(QuestTag::id)
+    }
+}

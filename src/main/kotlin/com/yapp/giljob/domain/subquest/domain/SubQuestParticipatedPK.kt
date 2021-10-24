@@ -1,5 +1,7 @@
 package com.yapp.giljob.domain.subquest.domain
 
+import au.com.console.kassava.kotlinEquals
+import au.com.console.kassava.kotlinHashCode
 import java.io.Serializable
 import javax.persistence.Embeddable
 
@@ -8,21 +10,11 @@ class SubQuestParticipatedPK(
     var participantId: Long,
     var subQuestId: Long
 ) : Serializable {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+    override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
-        other as SubQuestParticipatedPK
+    override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
 
-        if (participantId != other.participantId) return false
-        if (subQuestId != other.subQuestId) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = participantId.hashCode()
-        result = 31 * result + subQuestId.hashCode()
-        return result
+    companion object {
+        private val equalsAndHashCodeProperties = arrayOf(SubQuestParticipatedPK::participantId, SubQuestParticipatedPK::subQuestId)
     }
 }
