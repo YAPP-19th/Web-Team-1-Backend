@@ -13,15 +13,12 @@ class RoadmapDetail(
     val id: Long? = null,
 
     @ManyToOne
-    @JoinColumn(name = "quest_id")
-    val quest: Quest,
-
-    @ManyToOne
     @JoinColumn(name = "roadmap_id")
     val roadmap: Roadmap,
 
-    @Column(nullable = false)
-    var order: Int
+    @ManyToOne
+    @JoinColumn(name = "quest_id")
+    val quest: Quest
 ) {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
