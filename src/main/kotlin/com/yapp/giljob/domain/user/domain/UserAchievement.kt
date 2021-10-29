@@ -9,7 +9,7 @@ import javax.persistence.*
 class UserAchievement(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_achievement_id")
-    val id: Long? = null, // 꼭 필요할까요?
+    val id: Long? = null,
 
     @ManyToOne
     @JoinColumn(name = "user_id")
