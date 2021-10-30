@@ -5,15 +5,15 @@ import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.position.domain.Position
 import javax.persistence.*
 
-@Table(name = "ability")
+@Table(name = "point")
 @Entity
 class Ability(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ability_id")
+    @Column(name = "point_id")
     val id: Long? = null,
 
     @ManyToOne
-    @JoinColumn(name = "register_user_id")
+    @JoinColumn(name = "user_id")
     val user: User,
 
     @ManyToOne
@@ -21,7 +21,7 @@ class Ability(
     val position: Position,
 
     @Column(nullable = false)
-    var value: Int
+    var point: Int
 ) {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
