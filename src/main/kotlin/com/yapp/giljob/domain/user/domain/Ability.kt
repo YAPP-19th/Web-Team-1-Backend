@@ -5,11 +5,11 @@ import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.position.domain.Position
 import javax.persistence.*
 
-@Table(name = "point")
+@Table(name = "ability")
 @Entity
 class Ability(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "point_id")
+    @Column(name = "ability_id")
     val id: Long? = null,
 
     @ManyToOne
