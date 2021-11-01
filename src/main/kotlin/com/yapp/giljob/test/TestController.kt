@@ -1,5 +1,5 @@
 package com.yapp.giljob.test
-import com.yapp.giljob.global.dto.BaseResponse
+import com.yapp.giljob.global.common.dto.BaseResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
