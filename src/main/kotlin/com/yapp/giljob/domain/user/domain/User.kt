@@ -14,7 +14,7 @@ class User (
     val id: Long? = null,
 
     @Column(name = "social_id", nullable = false)
-    val socialId: String,
+    var socialId: String,
 
     @Column(nullable = false)
     var nickname: String,

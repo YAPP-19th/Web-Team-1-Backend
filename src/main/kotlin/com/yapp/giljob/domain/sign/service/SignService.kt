@@ -1,11 +1,16 @@
 package com.yapp.giljob.domain.sign.service
 
+import com.yapp.giljob.domain.sign.converter.SignConverter
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import com.yapp.giljob.global.config.security.jwt.JwtProvider
 import com.yapp.giljob.domain.sign.dto.request.SignInRequest
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
+import com.yapp.giljob.domain.sign.repository.SignRepository
+import com.yapp.giljob.domain.user.domain.User
+import com.yapp.giljob.global.util.KakaoUtil.Companion.getKakaoIdFromToken
 import org.json.JSONObject
+import org.mapstruct.factory.Mappers
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -18,60 +23,34 @@ import javax.servlet.http.HttpServletResponse
 
 @Service
 class SignService (
-    private val jwtProvider: JwtProvider
+    private val jwtProvider: JwtProvider,
+    private val signRepository: SignRepository
     ) {
 
-    @Value("\${spring.social.kakao}")
-    private lateinit var kakaoUrl: String
-
      fun signUp(signUpRequest: SignUpRequest, response: HttpServletResponse) {
-         getKakaoIdFromToken(signUpRequest.kakaoAccessToken)
 
-         // DB에서 확인 결과 기가입자일 경우 에러 던지기
-         // DB에 사용자 저장
-         // security context holder 에 사용자 추가
+         val kakaoId = getKakaoIdFromToken(signUpRequest.kakaoAccessToken)
+         val converter = Mappers.getMapper(SignConverter::class.java)
 
-         returnWithAccessToken(response)
+         signRepository.findBySocialId(kakaoId)?.let { throw BusinessException(ErrorCode.ALREADY_SIGN_UP_USER_ERROR) }
+
+         val user = converter.signUpConvertToModel(signUpRequest)
+         user.socialId = kakaoId
+         signRepository.save(user)
+
+         returnWithAccessToken(response, user)
      }
 
      fun signIn(signInRequest: SignInRequest, response: HttpServletResponse) {
-         getKakaoIdFromToken(signInRequest.kakaoAccessToken)
+         val kakaoId = getKakaoIdFromToken(signInRequest.kakaoAccessToken)
 
-         // DB에서 확인 결과 미가입자일 경우 에러 던지기
-         // security context holder 에 사용자 추가
+         val user = signRepository.findBySocialId(kakaoId) ?: throw BusinessException(ErrorCode.NOT_SIGN_UP_USER_ERROR)
 
-        returnWithAccessToken(response)
+         returnWithAccessToken(response, user)
      }
 
-    fun getKakaoIdFromToken(kakaoAccessToken: String): Long {
-        val content = getResponseFromKakao(kakaoAccessToken)
-        return getIdFromKakaoResponse(content)
-    }
-
-    fun getResponseFromKakao(kakaoAccessToken: String): String {
-        val url = URL(kakaoUrl)
-        val con: HttpURLConnection = url.openConnection() as HttpURLConnection
-
-        con.setRequestProperty(HttpHeaders.AUTHORIZATION, "Bearer $kakaoAccessToken")
-
-        val responseCode: Int = con.responseCode
-        if (responseCode != HttpStatus.OK.value())
-            throw BusinessException(ErrorCode.CAN_NOT_GET_KAKAO_ID_ERROR)
-
-        val br = BufferedReader(InputStreamReader(con.inputStream))
-        val content = br.readText()
-        br.close()
-
-        return content
-    }
-
-    fun getIdFromKakaoResponse(content: String): Long {
-        val obj = JSONObject(content)
-        return obj.optLong("id")
-    }
-
-    fun returnWithAccessToken(response: HttpServletResponse) {
-        val accessToken: String = jwtProvider.createAccessToken("access token")
+    fun returnWithAccessToken(response: HttpServletResponse, user: User) {
+        val accessToken: String = jwtProvider.createAccessToken(user.id)
         response.setHeader("Authorization", accessToken)
     }
 }

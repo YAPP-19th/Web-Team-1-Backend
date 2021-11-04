@@ -36,7 +36,7 @@ class WebSecurityConfigTest{
 
     @Test
     fun `access token 으로 필터 통과하기 성공`() {
-        val accessToken = jwtProvider.createAccessToken("access token")
+        val accessToken = jwtProvider.createAccessToken(1L)
 
         mockMvc
             .perform(post("/pass-filter-with-token").header("Authorization", accessToken))

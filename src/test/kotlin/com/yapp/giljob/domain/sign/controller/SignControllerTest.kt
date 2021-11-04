@@ -64,5 +64,4 @@ class SignControllerTest {
             .andExpect(MockMvcResultMatchers.jsonPath("$.message")
                 .value(ErrorCode.CAN_NOT_GET_KAKAO_ID_ERROR.message))
     }
-
 }

@@ -1,22 +1,29 @@
 package com.yapp.giljob.domain.sign.service
 
-import com.yapp.giljob.global.config.security.jwt.JwtProvider
+import com.yapp.giljob.global.util.KakaoUtil.Companion.getIdFromKakaoResponse
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 
-class SignServiceTest {
-
-    private val signService: SignService = SignService(jwtProvider = JwtProvider())
+@SpringBootTest
+class SignServiceTest (
+    @Autowired
+    private val signService: SignService
+    ) {
 
     @Test
-    fun `getIdFromKakaoResponse 성공`() {
-        val content = "{\n" +
-                "    \"id\": 1,\n" +
-                "    \"connected_at\": \"2021-10-18T05:26:52Z\"\n" +
-                "}"
+    fun `returnWithAccessToken 성공`() {
+        TODO("Not yet implemented")
+    }
 
-        val id = signService.getIdFromKakaoResponse(content)
+    @Test
+    fun `기가입자가 회원가입시 에러`() {
 
-        assertEquals(id, 1)
+    }
+
+    @Test
+    fun `미가입자가 로그인시 에러`() {
+        TODO("Not yet implemented")
     }
 }

@@ -16,7 +16,8 @@ class JwtProvider {
     @Value("\${spring.social.tokenTime}")
     private lateinit var accessTokenValidTime: String
 
-    fun createAccessToken(sub: String): String {
+    fun createAccessToken(id: Long?): String {
+        val sub = id.toString()
         return createToken(sub, accessTokenValidTime.toLong())
     }
 

@@ -20,6 +20,10 @@ class JwtAuthenticationFilter(
             val token: String = jwtProvider.getTokenFromHeader(request as HttpServletRequest, response as HttpServletResponse)
             jwtProvider.decodeToken(token)
 
+
+
+
+
         } catch (e: ExpiredJwtException) {
             jwtFailureTask(response as HttpServletResponse, ErrorCode.EXPIRED_TOKEN_ERROR)
             return
@@ -34,10 +38,14 @@ class JwtAuthenticationFilter(
         chain!!.doFilter(request, response)
     }
 
-    fun jwtFailureTask(
+    private fun jwtFailureTask(
         response: HttpServletResponse,
         e: ErrorCode
     ){
         HandlerResponseUtil.doResponse(response, ErrorResponse.error(e), e.status)
     }
+
+//    private fun saveUser{
+//
+//    }
 }
