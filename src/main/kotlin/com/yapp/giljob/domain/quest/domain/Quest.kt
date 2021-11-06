@@ -17,8 +17,8 @@ class Quest(
     @JoinColumn(name = "register_user_id")
     val user: User,
 
-    @ManyToOne
-    @JoinColumn(name = "position_id")
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "position_id")
     var position: Position,
 
     @Column(nullable = false)

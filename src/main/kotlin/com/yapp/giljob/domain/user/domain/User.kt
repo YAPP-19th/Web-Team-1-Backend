@@ -19,8 +19,8 @@ class User (
     @Column(nullable = false)
     var nickname: String,
 
-    @ManyToOne
-    @JoinColumn(name = "position_id")
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "position_id")
     var position: Position
 ) : BaseEntity() {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
