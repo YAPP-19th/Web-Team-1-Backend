@@ -18,7 +18,7 @@ class Ability(
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "position_id")
-    var position: Position,
+    val position: Position,
 
     @Column(nullable = false)
     var point: Int
