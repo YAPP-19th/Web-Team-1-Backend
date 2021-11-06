@@ -16,9 +16,9 @@ class Ability(
     @JoinColumn(name = "user_id")
     val user: User,
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "position_id")
-    var position: Position,
+    @ManyToOne
+    @JoinColumn(name = "position_id")
+    val position: Position,
 
     @Column(nullable = false)
     var point: Int

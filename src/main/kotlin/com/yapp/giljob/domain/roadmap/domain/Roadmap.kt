@@ -18,9 +18,9 @@ class Roadmap(
     @JoinColumn(name = "register_user_id")
     val user: User,
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "position_id")
-    var position: Position,
+    @ManyToOne
+    @JoinColumn(name = "position_id")
+    val position: Position,
 
     @Column(nullable = false)
     var name: String,
