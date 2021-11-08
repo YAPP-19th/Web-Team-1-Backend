@@ -3,6 +3,7 @@ package com.yapp.giljob.domain.user.domain
 import au.com.console.kassava.kotlinEquals
 import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
 
@@ -29,5 +30,13 @@ class User (
 
     companion object {
         private val equalsAndHashCodeProperties = arrayOf(User::id)
+
+        fun of (signUpRequest: SignUpRequest, kakaoId: String): User {
+            return User(
+                socialId = kakaoId,
+                nickname = signUpRequest.nickname,
+                position = Position.valueOf(signUpRequest.position)
+            )
+        }
     }
 }

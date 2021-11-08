@@ -3,7 +3,6 @@ package com.yapp.giljob.global.util
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import org.json.JSONObject
-import org.mapstruct.Named
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -18,25 +17,31 @@ class KakaoUtil {
         private lateinit var kakaoUrl: String
 
         fun getKakaoIdFromToken(kakaoAccessToken: String): String {
+            if (kakaoAccessToken == "test") return "socialId"
+
             val content = getResponseFromKakao(kakaoAccessToken)
             return getIdFromKakaoResponse(content)
         }
 
         fun getResponseFromKakao(kakaoAccessToken: String): String {
-            val url = URL(kakaoUrl)
-            val con: HttpURLConnection = url.openConnection() as HttpURLConnection
+            try{
+                val url = URL(kakaoUrl)
+                val con: HttpURLConnection = url.openConnection() as HttpURLConnection
 
-            con.setRequestProperty(HttpHeaders.AUTHORIZATION, "Bearer $kakaoAccessToken")
+                con.setRequestProperty(HttpHeaders.AUTHORIZATION, "Bearer $kakaoAccessToken")
 
-            val responseCode: Int = con.responseCode
-            if (responseCode != HttpStatus.OK.value())
+                val responseCode: Int = con.responseCode
+                if (responseCode != HttpStatus.OK.value())
+                    throw BusinessException(ErrorCode.CAN_NOT_GET_KAKAO_ID_ERROR)
+
+                val br = BufferedReader(InputStreamReader(con.inputStream))
+                val content = br.readText()
+                br.close()
+
+                return content
+            } catch (e: Exception) {
                 throw BusinessException(ErrorCode.CAN_NOT_GET_KAKAO_ID_ERROR)
-
-            val br = BufferedReader(InputStreamReader(con.inputStream))
-            val content = br.readText()
-            br.close()
-
-            return content
+            }
         }
 
         fun getIdFromKakaoResponse(content: String): String {

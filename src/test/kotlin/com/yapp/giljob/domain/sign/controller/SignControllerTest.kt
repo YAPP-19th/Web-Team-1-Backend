@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.sign.controller
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.domain.sign.dto.request.SignInRequest
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
@@ -30,7 +31,7 @@ class SignControllerTest {
     fun `잘못된 카카오 access token으로 회원가입 시 에러`() {
         val signUpRequest = SignUpRequest(
             kakaoAccessToken = "wrong access token",
-            positionId = 1L,
+            position = Position.BACKEND.name,
             nickname = "nickname")
 
         val content = jacksonObjectMapper().writeValueAsString(signUpRequest)

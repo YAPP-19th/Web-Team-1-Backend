@@ -64,6 +64,8 @@ dependencies {
 
     implementation("org.mapstruct:mapstruct:1.5.0.Beta1")
     kapt("org.mapstruct:mapstruct-processor:1.5.0.Beta1")
+
+    testImplementation("com.nhaarman:mockito-kotlin:1.5.0")
 }
 
 kapt {

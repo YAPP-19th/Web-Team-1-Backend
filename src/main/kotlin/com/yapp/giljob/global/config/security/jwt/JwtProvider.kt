@@ -14,7 +14,7 @@ class JwtProvider {
     private val secretKey: String = Base64.getEncoder().encodeToString("secretKey".encodeToByteArray())
 
     @Value("\${spring.social.tokenTime}")
-    private lateinit var accessTokenValidTime: String
+    private val accessTokenValidTime: String = "100000"
 
     fun createAccessToken(id: Long?): String {
         val sub = id.toString()
