@@ -21,7 +21,9 @@ class User (
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "position_id")
-    var position: Position
+    var position: Position,
+
+    val authority: String = "ROLE_USER"
 ) : BaseEntity() {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
