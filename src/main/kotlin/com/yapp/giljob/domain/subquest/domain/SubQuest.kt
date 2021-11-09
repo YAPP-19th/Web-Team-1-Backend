@@ -15,7 +15,7 @@ class SubQuest (
 
     @ManyToOne
     @JoinColumn(name = "quest_id")
-    val quest: Quest,
+    var quest: Quest? = null,
 
     @Column(nullable = false)
     var name: String

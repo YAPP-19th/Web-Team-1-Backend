@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 plugins {
     val kotlinVersion = "1.5.31"
     id("org.springframework.boot") version "2.5.5"
@@ -8,6 +10,7 @@ plugins {
     kotlin("plugin.jpa") version kotlinVersion
     kotlin("plugin.allopen") version kotlinVersion
     kotlin("plugin.noarg") version kotlinVersion
+    kotlin("kapt") version kotlinVersion
 }
 
 group = "com.yapp"
@@ -48,6 +51,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-test"){
         exclude (group = "com.vaadin.external.google", module = "android-json")
     }
+    testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("io.mockk:mockk:1.12.0")
+
     implementation("org.slf4j:slf4j-api:1.7.32")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")
@@ -55,6 +61,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
     implementation("com.github.consoleau:kassava:2.1.0")
+
+    implementation("org.mapstruct:mapstruct:1.4.2.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
 }
 
 tasks {

@@ -3,6 +3,8 @@ package com.yapp.giljob.domain.quest.domain
 import au.com.console.kassava.kotlinEquals
 import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.subquest.domain.SubQuest
+import com.yapp.giljob.domain.tag.domain.QuestTag
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
@@ -15,14 +17,14 @@ class Quest(
 
     @ManyToOne
     @JoinColumn(name = "register_user_id")
-    val user: User,
+    var user: User,
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "position_id")
     var position: Position,
 
     @Column(nullable = false)
-    var isRealQuest: Boolean,
+    var isRealQuest: Boolean = true,
 
     @Column(nullable = false)
     var name: String,
@@ -34,10 +36,13 @@ class Quest(
     var thumbnail: String,
 
     @Column(nullable = false)
-    var attachment: String,
+    var detail: String,
 
-    @Column(nullable = false)
-    var detail: String
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var subQuestList: MutableList<SubQuest> = mutableListOf(),
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var tagList: MutableList<QuestTag> = mutableListOf(),
 ) : BaseEntity() {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 

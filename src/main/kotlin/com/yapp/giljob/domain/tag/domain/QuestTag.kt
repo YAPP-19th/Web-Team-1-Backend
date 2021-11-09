@@ -14,12 +14,12 @@ class QuestTag(
     @MapsId("questId")
     @ManyToOne
     @JoinColumn(name = "quest_id")
-    val quest: Quest,
+    val quest: Quest? = null,
 
     @MapsId("tagId")
     @ManyToOne
     @JoinColumn(name = "tag_id")
-    val tag: Tag
+    val tag: Tag ?= null
 ) {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 

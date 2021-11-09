@@ -7,8 +7,8 @@ import javax.persistence.Embeddable
 
 @Embeddable
 class QuestTagPK (
-    var questId: Long,
-    var tagId: Long
+    var questId: Long?,
+    var tagId: Long?
 ) : Serializable {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
