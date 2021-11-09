@@ -1,9 +1,14 @@
 package com.yapp.giljob.global.config.security.jwt
 
+import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.ErrorResponse
 import com.yapp.giljob.global.util.HandlerResponseUtil
+import com.yapp.giljob.global.util.JwtUtil
 import io.jsonwebtoken.ExpiredJwtException
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
 import javax.servlet.FilterChain
 import javax.servlet.ServletRequest
@@ -11,14 +16,13 @@ import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class JwtAuthenticationFilter(
-    private val jwtProvider: JwtProvider
-    ): GenericFilterBean() {
+class JwtAuthenticationFilter: GenericFilterBean() {
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         try {
 
-            val token: String = jwtProvider.getTokenFromHeader(request as HttpServletRequest, response as HttpServletResponse)
-            jwtProvider.decodeToken(token)
+            val token: String = JwtUtil.getTokenFromHeader(request as HttpServletRequest, response as HttpServletResponse)
+            val userId: Long = JwtUtil.decodeToken(token)
+            saveUserId(userId)
 
         } catch (e: ExpiredJwtException) {
             jwtFailureTask(response as HttpServletResponse, ErrorCode.EXPIRED_TOKEN_ERROR)
@@ -41,7 +45,8 @@ class JwtAuthenticationFilter(
         HandlerResponseUtil.doResponse(response, ErrorResponse.error(e), e.status)
     }
 
-//    private fun saveUser{
-//
-//    }
+    private fun saveUserId(userId: Long){
+        val authentication: Authentication = UsernamePasswordAuthenticationToken(userId, null, null)
+        SecurityContextHolder.getContext().authentication = authentication
+    }
 }

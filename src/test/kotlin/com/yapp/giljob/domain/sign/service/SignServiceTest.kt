@@ -5,7 +5,6 @@ import com.yapp.giljob.domain.sign.dto.request.SignInRequest
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import com.yapp.giljob.domain.sign.repository.SignRepository
 import com.yapp.giljob.domain.user.domain.User
-import com.yapp.giljob.global.config.security.jwt.JwtProvider
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import org.junit.jupiter.api.*
@@ -26,9 +25,6 @@ import kotlin.properties.Delegates
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension::class, MockitoExtension::class)
 class SignServiceTest {
-
-    @Spy
-    lateinit var jwtProvider: JwtProvider
 
     @Mock
     lateinit var signRepository: SignRepository

@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository
 interface  SignRepository: JpaRepository<User, Long>{
 
     fun findBySocialId(socialId: String): User?
+
+    fun deleteBySocialId(socialId: String)
 }

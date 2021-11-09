@@ -2,11 +2,11 @@ package com.yapp.giljob.domain.sign.service
 
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
-import com.yapp.giljob.global.config.security.jwt.JwtProvider
 import com.yapp.giljob.domain.sign.dto.request.SignInRequest
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import com.yapp.giljob.domain.sign.repository.SignRepository
 import com.yapp.giljob.domain.user.domain.User
+import com.yapp.giljob.global.util.JwtUtil
 import com.yapp.giljob.global.util.KakaoUtil.Companion.getKakaoIdFromToken
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse
 
 @Service
 class SignService{
-    @Autowired
-    private lateinit var jwtProvider: JwtProvider
 
     @Autowired
     private lateinit var signRepository: SignRepository
@@ -42,7 +40,7 @@ class SignService{
      }
 
     fun returnWithAccessToken(response: HttpServletResponse, user: User) {
-        val accessToken: String = jwtProvider.createAccessToken(user.id)
+        val accessToken: String = JwtUtil.createAccessToken(user.id)
         response.setHeader(HttpHeaders.AUTHORIZATION , accessToken)
     }
 }
