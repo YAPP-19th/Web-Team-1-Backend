@@ -14,11 +14,13 @@ class SignController (private val signService: SignService){
 
     @PostMapping("/sign-up")
     fun signUp(@Validated @RequestBody signUpRequest: SignUpRequest, response: HttpServletResponse) {
-        signService.signUp(signUpRequest, response)
+        val user = signService.signUp(signUpRequest, response)
+        signService.setAccessTokenInHeader(response, user)
     }
 
     @PostMapping("/sign-in")
     fun signIn(@Validated @RequestBody signInRequest: SignInRequest, response: HttpServletResponse) {
-        signService.signIn(signInRequest, response)
+        val user = signService.signIn(signInRequest, response)
+        signService.setAccessTokenInHeader(response, user)
     }
 }

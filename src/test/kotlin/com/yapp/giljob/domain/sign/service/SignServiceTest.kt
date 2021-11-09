@@ -41,7 +41,7 @@ class SignServiceTest {
     @BeforeAll
     fun setUp() {
         user = User(
-            socialId = "kakaoId",
+            socialId = "socialId",
             nickname = "닉네임",
             position = Position.BACKEND
         )
@@ -63,18 +63,20 @@ class SignServiceTest {
     fun `회원가입 성공`() {
         given(signRepository.findBySocialId(anyString())).willReturn(null)
 
-        signService.signUp(signUpRequest, response)
+        val user = signService.signUp(signUpRequest, response)
 
-        verify(signService).returnWithAccessToken(response, user)
+        assertEquals(user.socialId, "socialId")
+        assertEquals(user.nickname, signUpRequest.nickname)
+        assertEquals(user.position.name, signUpRequest.position)
     }
 
     @Test
     fun `로그인 성공`() {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
 
-        signService.signIn(signInRequest, response)
+        val user = signService.signIn(signInRequest, response)
 
-        verify(signService).returnWithAccessToken(response, user)
+        assertEquals(user.socialId, "socialId")
     }
 
     @Test

@@ -19,7 +19,7 @@ class SignService{
     @Autowired
     private lateinit var signRepository: SignRepository
 
-     fun signUp(signUpRequest: SignUpRequest, response: HttpServletResponse) {
+     fun signUp(signUpRequest: SignUpRequest, response: HttpServletResponse): User {
 
          val kakaoId = getKakaoIdFromToken(signUpRequest.kakaoAccessToken)
 
@@ -28,18 +28,16 @@ class SignService{
          val user = User.of(signUpRequest, kakaoId)
          signRepository.save(user)
 
-         returnWithAccessToken(response, user)
+         return user
      }
 
-     fun signIn(signInRequest: SignInRequest, response: HttpServletResponse) {
-         val kakaoId = getKakaoIdFromToken(signInRequest.kakaoAccessToken)
+    fun signIn(signInRequest: SignInRequest, response: HttpServletResponse): User {
+        val kakaoId = getKakaoIdFromToken(signInRequest.kakaoAccessToken)
 
-         val user = signRepository.findBySocialId(kakaoId) ?: throw BusinessException(ErrorCode.NOT_SIGN_UP_USER_ERROR)
+        return signRepository.findBySocialId(kakaoId) ?: throw BusinessException(ErrorCode.NOT_SIGN_UP_USER_ERROR)
+    }
 
-         returnWithAccessToken(response, user)
-     }
-
-    fun returnWithAccessToken(response: HttpServletResponse, user: User) {
+    fun setAccessTokenInHeader(response: HttpServletResponse, user: User) {
         val accessToken: String = JwtUtil.createAccessToken(user.id)
         response.setHeader(HttpHeaders.AUTHORIZATION , accessToken)
     }
