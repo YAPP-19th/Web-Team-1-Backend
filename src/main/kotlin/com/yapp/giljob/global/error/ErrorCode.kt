@@ -24,6 +24,6 @@ enum class ErrorCode(
     NOT_SIGN_UP_USER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "S003", "Not Sign Up User Error"),
 
     //Position
-    POSTION_DOES_NOT_EXIST(HttpStatus.INTERNAL_SERVER_ERROR, "P001", "Position Does Not Existz")
+    POSITION_DOES_NOT_EXIST(HttpStatus.INTERNAL_SERVER_ERROR, "P001", "Position Does Not Exist")
 
 }
