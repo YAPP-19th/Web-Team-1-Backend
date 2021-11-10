@@ -34,11 +34,11 @@ internal class QuestControllerTest : AbstractRestDocs() {
     private lateinit var tagMapper: TagMapper
 
     private val user = EntityFactory.testUser()
-    private val tag =  EntityFactory.testSavedTag()
-    private val quest = EntityFactory.testQuestWithId()
+    private val tag =  EntityFactory.testTag()
+    private val quest = EntityFactory.testQuest()
 
-    private val questRequest = DtoFactory.teatQuestRequest()
-    private val tagRequest = DtoFactory.teatTagRequest()
+    private val questRequest = DtoFactory.testQuestRequest()
+    private val tagRequest = DtoFactory.testTagRequest()
 
     @BeforeEach
     fun setUp() {

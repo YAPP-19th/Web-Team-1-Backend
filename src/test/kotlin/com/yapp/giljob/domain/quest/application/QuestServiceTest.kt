@@ -1,11 +1,10 @@
 package com.yapp.giljob.domain.quest.application
 
 import com.yapp.giljob.domain.quest.dao.QuestRepository
+import com.yapp.giljob.domain.quest.mapper.QuestMapper
 import com.yapp.giljob.domain.tag.dao.TagRepository
-import com.yapp.giljob.domain.tag.domain.QuestTag
-import com.yapp.giljob.domain.tag.domain.QuestTagPK
-import com.yapp.giljob.domain.tag.domain.Tag
 import com.yapp.giljob.global.common.domain.EntityFactory
+import com.yapp.giljob.global.common.dto.DtoFactory
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -24,58 +23,57 @@ class QuestServiceTest {
     @MockK
     private lateinit var tagRepository: TagRepository
 
+    @MockK
+    private lateinit var questMapper: QuestMapper
+
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        questService = QuestService(questRepository, tagRepository)
+        questService = QuestService(questRepository, tagRepository, questMapper)
     }
 
     @Nested
-    inner class QuestTag {
-        private val questWithoutId = EntityFactory.testQuestWithoutId()
-        private val questWithId = EntityFactory.testQuestWithId()
+    inner class Tag {
+        private val user = EntityFactory.testUser()
+        private val quest = EntityFactory.testQuest()
 
-        private lateinit var tagList: MutableList<Tag>
+        private val questRequest = DtoFactory.testQuestRequest()
 
-        private val savedTag = EntityFactory.testSavedTag()
-        private val savedTagName = savedTag.name
-
-        private val newTag = EntityFactory.testNewTag()
-        private val newTagName = newTag.name
+        private val tag = EntityFactory.testTag()
 
         @Test
         fun `이미 저장된 태그 저장되는지 테스트`() {
             // given
-            tagList = mutableListOf(Tag(name = savedTagName))
-            questWithId.tagList = mutableListOf(QuestTag(QuestTagPK(questWithId.id, savedTag.id)))
+            every { tagRepository.findByName(any()) } returns tag
+            every { questRepository.save(any()) } returns quest
 
-            every { tagRepository.findByName(savedTagName) } returns savedTag
-            every { questRepository.save(any()) } returns questWithId
+            every { questMapper.toEntity(any(), any()) } returns quest
 
             // when
-            val savedQuest = questService.saveQuest(questWithoutId, tagList)
+            val savedQuest = questService.saveQuest(questRequest, user)
 
             // them
-            assertEquals(savedTag.id, savedQuest.tagList[0].id.tagId)
-            assertEquals(questWithId.id, savedQuest.tagList[0].id.questId)
+            assertEquals(tag.id, savedQuest.tagList[0].id.tagId)
+            assertEquals(quest.id, savedQuest.tagList[0].id.questId)
+            assertEquals(questRequest.tagList.size, savedQuest.tagList.size)
         }
 
         @Test
         fun `새로 저장된 태그 저장되는지 테스트`() {
             // given
-            tagList = mutableListOf(Tag(name = newTagName))
-            questWithId.tagList = mutableListOf(QuestTag(QuestTagPK(questWithId.id, newTag.id)))
+            every { tagRepository.findByName(any()) } returns null
+            every { tagRepository.save(any()) } returns tag
+            every { questRepository.save(any()) } returns quest
 
-            every { tagRepository.findByName(newTagName) } returns null
-            every { tagRepository.save(any()) } returns newTag
-            every { questRepository.save(any()) } returns questWithId
+            every { questMapper.toEntity(any(), any()) } returns quest
 
             // when
-            val savedQuest = questService.saveQuest(questWithoutId, tagList)
+            val savedQuest = questService.saveQuest(questRequest, user)
 
             // then
-            assertEquals(newTag.id, savedQuest.tagList[0].id.tagId)
-            assertEquals(questWithId.id, savedQuest.tagList[0].id.questId)
+            assertEquals(tag.id, savedQuest.tagList[0].id.tagId)
+            assertEquals(quest.id, savedQuest.tagList[0].id.questId)
+            assertEquals(questRequest.tagList.size, savedQuest.tagList.size)
         }
     }
 }

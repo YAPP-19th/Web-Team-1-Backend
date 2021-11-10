@@ -7,7 +7,7 @@ import com.yapp.giljob.domain.tag.dto.TagRequest
 
 class DtoFactory {
     companion object {
-        fun teatQuestRequest() = QuestRequest(
+        fun testQuestRequest() = QuestRequest(
             name = "test quest",
             position = Position.BACKEND,
             tagList = listOf(TagRequest("tag1"), TagRequest("tag2")),
@@ -16,6 +16,6 @@ class DtoFactory {
             detail = "test quest detail",
             subQuestList = listOf(SubQuestRequest("sub quest 1"), SubQuestRequest("sub quest 2"))
         )
-        fun teatTagRequest() = TagRequest("tag1")
+        fun testTagRequest() = TagRequest("tag1")
     }
 }

@@ -15,7 +15,7 @@ class QuestMapperTest(
     @Test
     fun `toEntity 테스트`() {
         // given
-        val questRequest = DtoFactory.teatQuestRequest()
+        val questRequest = DtoFactory.testQuestRequest()
         val user = EntityFactory.testUser()
 
         // when

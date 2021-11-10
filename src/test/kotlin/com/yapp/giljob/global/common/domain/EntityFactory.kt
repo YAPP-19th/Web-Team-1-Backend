@@ -16,7 +16,7 @@ class EntityFactory {
             nickname = "testNickname",
             position = Position.BACKEND
         )
-        fun testQuestWithId() = Quest(
+        fun testQuest() = Quest(
             id = 1L,
             name = "test quest",
             user = testUser(),
@@ -27,18 +27,6 @@ class EntityFactory {
             detail = "test quest detail",
             subQuestList = mutableListOf(SubQuest(name = "sub quest 1"), SubQuest(name = "sub quest 2"))
         )
-        fun testQuestWithoutId() = Quest(
-            name = "test quest",
-            user = testUser(),
-            position = Position.BACKEND,
-            tagList = mutableListOf(),
-            difficulty = 1,
-            thumbnail = "test.png",
-            detail = "test quest detail",
-            subQuestList = mutableListOf(SubQuest(name = "sub quest 1"), SubQuest(name = "sub quest 2"))
-        )
-        fun testSavedTag() = Tag(1L, "tag1")
-        fun testNewTag() = Tag(2L, "tag2")
-        fun testQuestTag() = QuestTag(QuestTagPK(testQuestWithId().id, testSavedTag().id))
+        fun testTag() = Tag(1L, "tag1")
     }
 }

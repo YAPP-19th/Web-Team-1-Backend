@@ -1,5 +1,10 @@
 package com.yapp.giljob.domain.position.domain
 
-enum class Position {
-    BACKEND, FRONTEND
+import com.fasterxml.jackson.annotation.JsonProperty
+
+enum class Position{
+    @JsonProperty("backend")
+    BACKEND,
+    @JsonProperty("frontend")
+    FRONTEND
 }

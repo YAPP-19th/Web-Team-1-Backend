@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass
 abstract class BaseEntity {
     @CreatedDate
     @Column(name = "created_at", updatable = false)
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    var createdAt: LocalDateTime = LocalDateTime.now()
 
     @LastModifiedDate
     @Column(name = "modified_at")
