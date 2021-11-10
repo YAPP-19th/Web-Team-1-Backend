@@ -7,13 +7,14 @@ Andy Wilkinson;
 :toclevels: 3
 :sectlinks:
 
-== Test API
-=== GET /api/test
+== Quest API
+=== POST /api/quests
 .request
-include::{snippets}/test/http-request.adoc[]
+include::{snippets}/quests/post/http-request.adoc[]
 .response
-include::{snippets}/test/http-response.adoc[]
+include::{snippets}/quests/post/http-response.adoc[]
 .response
-include::{snippets}/test/response-body.adoc[]
+include::{snippets}/quests/post/response-body.adoc[]
 .response fields
-include::{snippets}/test/response-fields.adoc[]
+include::{snippets}/quests/post/response-fields.adoc[]
+

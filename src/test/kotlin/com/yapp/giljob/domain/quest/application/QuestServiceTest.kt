@@ -37,11 +37,11 @@ class QuestServiceTest {
 
         private lateinit var tagList: MutableList<Tag>
 
-        private val savedTagName = "tag1"
-        private val savedTag = Tag(1L, "tag1")
+        private val savedTag = EntityFactory.testSavedTag()
+        private val savedTagName = savedTag.name
 
-        private val newTagName = "tag2"
-        private val newTag = Tag(2L, "tag2")
+        private val newTag = EntityFactory.testNewTag()
+        private val newTagName = newTag.name
 
         @Test
         fun `이미 저장된 태그 저장되는지 테스트`() {

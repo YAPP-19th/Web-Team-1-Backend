@@ -34,7 +34,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
     private lateinit var tagMapper: TagMapper
 
     private val user = EntityFactory.testUser()
-    private val tag =  EntityFactory.testTag()
+    private val tag =  EntityFactory.testSavedTag()
     private val quest = EntityFactory.testQuestWithId()
 
     private val questRequest = DtoFactory.teatQuestRequest()
@@ -51,17 +51,17 @@ internal class QuestControllerTest : AbstractRestDocs() {
     fun saveQuest() {
         val jsonString = ObjectMapper().writeValueAsString(questRequest)
         val result = mockMvc.perform(
-            post("/api/quest")
+            post("/api/quests")
                 .header("Authorization", "Access Token")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonString)
         ).andDo(print())
 
         result
-            .andExpect(status().isOk)
+            .andExpect(status().isCreated)
             .andDo(
                 MockMvcRestDocumentation.document(
-                    "quest-save",
+                    "quests/post",
                     HeaderDocumentation.responseHeaders(),
                     HeaderDocumentation.responseHeaders(),
                     PayloadDocumentation.requestFields(
@@ -79,6 +79,14 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("썸네일 url"),
                         PayloadDocumentation.fieldWithPath("subQuestList[*].name")
                             .description("서브 퀘스트 이름")
+                    ),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("201"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("null")
                     )
                 )
             )

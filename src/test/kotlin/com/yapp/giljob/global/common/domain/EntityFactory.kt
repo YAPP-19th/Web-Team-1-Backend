@@ -37,7 +37,8 @@ class EntityFactory {
             detail = "test quest detail",
             subQuestList = mutableListOf(SubQuest(name = "sub quest 1"), SubQuest(name = "sub quest 2"))
         )
-        fun testTag() = Tag(1L, "tag")
-        fun testQuestTag() = QuestTag(QuestTagPK(testQuestWithId().id, testTag().id))
+        fun testSavedTag() = Tag(1L, "tag1")
+        fun testNewTag() = Tag(2L, "tag2")
+        fun testQuestTag() = QuestTag(QuestTagPK(testQuestWithId().id, testSavedTag().id))
     }
 }

@@ -17,8 +17,10 @@ class QuestMapperTest(
         // given
         val questRequest = DtoFactory.teatQuestRequest()
         val user = EntityFactory.testUser()
+
         // when
         val quest = questMapper.toEntity(questRequest, user)
+
         // then
         assertEquals(questRequest.detail, quest.detail)
         assertEquals(questRequest.difficulty, quest.difficulty)
