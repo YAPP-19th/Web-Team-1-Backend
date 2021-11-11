@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     val kotlinVersion = "1.5.31"
     id("org.springframework.boot") version "2.5.5"
@@ -8,6 +10,7 @@ plugins {
     kotlin("plugin.jpa") version kotlinVersion
     kotlin("plugin.allopen") version kotlinVersion
     kotlin("plugin.noarg") version kotlinVersion
+    kotlin("kapt") version kotlinVersion
 }
 
 group = "com.yapp"
@@ -55,6 +58,23 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
     implementation("com.github.consoleau:kassava:2.1.0")
+
+    implementation ("org.mapstruct:mapstruct:1.4.2.Final")
+    annotationProcessor ("org.mapstruct:mapstruct-processor:1.4.2.Final")
+
+    implementation("org.mapstruct:mapstruct:1.5.0.Beta1")
+    kapt("org.mapstruct:mapstruct-processor:1.5.0.Beta1")
+
+    testImplementation("com.nhaarman:mockito-kotlin:1.5.0")
+}
+
+kapt {
+    arguments {
+        // Set Mapstruct Configuration options here
+        // https://kotlinlang.org/docs/reference/kapt.html#annotation-processor-arguments
+        // https://mapstruct.org/documentation/stable/reference/html/#configuration-options
+        // arg("mapstruct.defaultComponentModel", "spring")
+    }
 }
 
 tasks {

@@ -1,6 +1,7 @@
 package com.yapp.giljob.global.config.security.jwt
 
 import com.yapp.giljob.global.error.ErrorCode
+import com.yapp.giljob.global.util.JwtUtil
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension
@@ -23,9 +24,6 @@ class WebSecurityConfigTest{
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-    @Autowired
-    private lateinit var jwtProvider: JwtProvider
-
     @Test
     fun `필터 통과 안하기 성공`() {
         mockMvc
@@ -36,7 +34,7 @@ class WebSecurityConfigTest{
 
     @Test
     fun `access token 으로 필터 통과하기 성공`() {
-        val accessToken = jwtProvider.createAccessToken("access token")
+        val accessToken = JwtUtil.createAccessToken(1L)
 
         mockMvc
             .perform(post("/pass-filter-with-token").header("Authorization", accessToken))
@@ -68,7 +66,7 @@ class WebSecurityConfigTest{
 
     @Test
     fun `expired access token 에러`() {
-        val accessToken: String = jwtProvider.createToken("expired access token", 1)
+        val accessToken: String = JwtUtil.createToken("expired access token", 1)
 
         mockMvc
             .perform(post("/expired-access-token").header("Authorization", accessToken))
