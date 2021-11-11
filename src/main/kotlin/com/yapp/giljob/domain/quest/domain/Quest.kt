@@ -3,6 +3,7 @@ package com.yapp.giljob.domain.quest.domain
 import au.com.console.kassava.kotlinEquals
 import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.dto.QuestRequest
 import com.yapp.giljob.domain.subquest.domain.SubQuest
 import com.yapp.giljob.domain.tag.domain.QuestTag
 import com.yapp.giljob.domain.user.domain.User
@@ -50,5 +51,16 @@ class Quest(
 
     companion object {
         private val equalsAndHashCodeProperties = arrayOf(Quest::id)
+
+        fun of(questRequest: QuestRequest, user: User): Quest {
+            return Quest(
+                user = user,
+                name = questRequest.name,
+                position = questRequest.position,
+                difficulty = questRequest.difficulty,
+                thumbnail = questRequest.thumbnail,
+                detail = questRequest.detail
+            )
+        }
     }
 }

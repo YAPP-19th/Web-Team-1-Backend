@@ -10,7 +10,7 @@ class DtoFactory {
         fun testQuestRequest() = QuestRequest(
             name = "test quest",
             position = Position.BACKEND,
-            tagList = listOf(TagRequest("tag1"), TagRequest("tag2")),
+            tagList = mutableListOf(testTagRequest()),
             difficulty = 1,
             thumbnail = "test.png",
             detail = "test quest detail",

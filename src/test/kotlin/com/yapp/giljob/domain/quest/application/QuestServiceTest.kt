@@ -1,8 +1,8 @@
 package com.yapp.giljob.domain.quest.application
 
 import com.yapp.giljob.domain.quest.dao.QuestRepository
-import com.yapp.giljob.domain.quest.mapper.QuestMapper
 import com.yapp.giljob.domain.tag.dao.TagRepository
+import com.yapp.giljob.domain.tag.domain.QuestTag
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
 import io.mockk.MockKAnnotations
@@ -23,19 +23,16 @@ class QuestServiceTest {
     @MockK
     private lateinit var tagRepository: TagRepository
 
-    @MockK
-    private lateinit var questMapper: QuestMapper
-
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        questService = QuestService(questRepository, tagRepository, questMapper)
+        questService = QuestService(questRepository, tagRepository)
     }
 
     @Nested
     inner class Tag {
         private val user = EntityFactory.testUser()
-        private val quest = EntityFactory.testQuest()
+        private var quest = EntityFactory.testQuest()
 
         private val questRequest = DtoFactory.testQuestRequest()
 
@@ -44,35 +41,33 @@ class QuestServiceTest {
         @Test
         fun `이미 저장된 태그 저장되는지 테스트`() {
             // given
+            quest.tagList = mutableListOf(QuestTag(quest = quest, tag = tag))
             every { tagRepository.findByName(any()) } returns tag
             every { questRepository.save(any()) } returns quest
-
-            every { questMapper.toEntity(any(), any()) } returns quest
 
             // when
             val savedQuest = questService.saveQuest(questRequest, user)
 
             // them
-            assertEquals(tag.id, savedQuest.tagList[0].id.tagId)
-            assertEquals(quest.id, savedQuest.tagList[0].id.questId)
+            assertEquals(tag, savedQuest.tagList[0].tag)
+            assertEquals(quest, savedQuest.tagList[0].quest)
             assertEquals(questRequest.tagList.size, savedQuest.tagList.size)
         }
 
         @Test
         fun `새로 저장된 태그 저장되는지 테스트`() {
             // given
+            quest.tagList = mutableListOf(QuestTag(quest = quest, tag = tag))
             every { tagRepository.findByName(any()) } returns null
             every { tagRepository.save(any()) } returns tag
             every { questRepository.save(any()) } returns quest
-
-            every { questMapper.toEntity(any(), any()) } returns quest
 
             // when
             val savedQuest = questService.saveQuest(questRequest, user)
 
             // then
-            assertEquals(tag.id, savedQuest.tagList[0].id.tagId)
-            assertEquals(quest.id, savedQuest.tagList[0].id.questId)
+            assertEquals(tag, savedQuest.tagList[0].tag)
+            assertEquals(quest, savedQuest.tagList[0].quest)
             assertEquals(questRequest.tagList.size, savedQuest.tagList.size)
         }
     }

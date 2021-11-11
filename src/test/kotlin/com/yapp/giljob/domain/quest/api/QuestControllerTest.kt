@@ -2,7 +2,6 @@ package com.yapp.giljob.domain.quest.api
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.yapp.giljob.domain.quest.application.QuestService
-import com.yapp.giljob.domain.quest.mapper.QuestMapper
 import com.yapp.giljob.domain.tag.mapper.TagMapper
 import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.domain.EntityFactory
@@ -28,13 +27,10 @@ internal class QuestControllerTest : AbstractRestDocs() {
     private lateinit var questService: QuestService
 
     @MockBean
-    private lateinit var questMapper: QuestMapper
-
-    @MockBean
     private lateinit var tagMapper: TagMapper
 
     private val user = EntityFactory.testUser()
-    private val tag =  EntityFactory.testTag()
+    private val tag = EntityFactory.testTag()
     private val quest = EntityFactory.testQuest()
 
     private val questRequest = DtoFactory.testQuestRequest()
@@ -42,7 +38,6 @@ internal class QuestControllerTest : AbstractRestDocs() {
 
     @BeforeEach
     fun setUp() {
-        given(questMapper.toEntity(questRequest, user)).willReturn(quest)
         given(tagMapper.toEntity(tagRequest)).willReturn(tag)
     }
 

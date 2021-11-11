@@ -5,11 +5,11 @@ import com.yapp.giljob.domain.subquest.dto.SubQuestRequest
 import com.yapp.giljob.domain.tag.dto.TagRequest
 
 class QuestRequest(
-    var name: String?,
-    var difficulty: Int?,
-    var position: Position?,
+    var name: String,
+    var difficulty: Int,
+    var position: Position,
     var tagList: List<TagRequest> = mutableListOf(),
-    var detail: String?,
-    var thumbnail: String?,
+    var detail: String,
+    var thumbnail: String,
     var subQuestList: List<SubQuestRequest> = mutableListOf()
 )

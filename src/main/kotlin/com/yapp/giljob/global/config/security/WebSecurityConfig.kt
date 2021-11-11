@@ -21,7 +21,7 @@ class WebSecurityConfig(
             "/sign-up",
             "/sign-in",
             "/don't-pass-filter",
-            "/api/quest/**"
+            "/api/quests/**"
         )
     }
 

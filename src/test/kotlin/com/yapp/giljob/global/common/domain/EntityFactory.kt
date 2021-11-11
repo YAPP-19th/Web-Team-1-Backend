@@ -3,8 +3,6 @@ package com.yapp.giljob.global.common.domain
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.subquest.domain.SubQuest
-import com.yapp.giljob.domain.tag.domain.QuestTag
-import com.yapp.giljob.domain.tag.domain.QuestTagPK
 import com.yapp.giljob.domain.tag.domain.Tag
 import com.yapp.giljob.domain.user.domain.User
 
