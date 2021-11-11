@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     val kotlinVersion = "1.5.31"
     id("org.springframework.boot") version "2.5.5"

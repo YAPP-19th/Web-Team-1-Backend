@@ -19,6 +19,11 @@ enum class ErrorCode(
     EXPIRED_TOKEN_ERROR(HttpStatus.FORBIDDEN, "T003", "Expired Token Error"),
 
     // Sign
-    CAN_NOT_GET_KAKAO_ID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "S001", "Can Not Get Kakao ID Error")
+    CAN_NOT_GET_KAKAO_ID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "S001", "Can Not Get Kakao ID Error"),
+    ALREADY_SIGN_UP_USER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "S002", "Already Sign Up User Error"),
+    NOT_SIGN_UP_USER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "S003", "Not Sign Up User Error"),
+
+    //Position
+    POSITION_DOES_NOT_EXIST(HttpStatus.INTERNAL_SERVER_ERROR, "P001", "Position Does Not Exist")
 
 }
