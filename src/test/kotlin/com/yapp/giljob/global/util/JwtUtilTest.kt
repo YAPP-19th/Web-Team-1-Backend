@@ -1,5 +1,6 @@
 package com.yapp.giljob.global.util
 
+import com.yapp.giljob.global.config.security.jwt.JwtUtil
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

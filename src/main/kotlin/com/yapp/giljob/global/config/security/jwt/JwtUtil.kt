@@ -1,5 +1,6 @@
-package com.yapp.giljob.global.util
+package com.yapp.giljob.global.config.security.jwt
 
+import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
@@ -7,14 +8,13 @@ import org.springframework.http.HttpHeaders
 import org.springframework.security.core.context.SecurityContextHolder
 import java.util.*
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 class JwtUtil {
     companion object {
         private val secretKey: String = Base64.getEncoder().encodeToString("secretKey".encodeToByteArray())
 
         @Value("\${spring.social.tokenTime}")
-        private val accessTokenValidTime: String = "100000"
+        private val accessTokenValidTime: String = "100000000"
 
         fun createAccessToken(id: Long?): String {
             val sub = id.toString()
@@ -32,22 +32,24 @@ class JwtUtil {
                 .compact()
         }
 
-        fun decodeToken(token: String): Long {
-            return Jwts.parser()
-                .setSigningKey(secretKey)
-                .parseClaimsJws(token)
-                .body
-                .subject
-                .toLong()
-        }
-
-        fun getTokenFromHeader(httpServletRequest: HttpServletRequest, httpServletResponse: HttpServletResponse): String {
+        fun getTokenFromHeader(httpServletRequest: HttpServletRequest): String {
             val token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION)
             return token.toString().replace("Bearer", "").trim()
         }
 
         fun getUserIdFromSecurityContextHolder(): Long {
             return SecurityContextHolder.getContext().authentication.principal.toString().toLong()
+        }
+
+        fun validateToken(token: String?): Boolean {
+            return try {
+                val claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
+                !claims.body.expiration.before(Date())
+            } catch (e: JwtException) {
+                false
+            } catch (e: IllegalArgumentException) {
+                false
+            }
         }
     }
 }
