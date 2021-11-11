@@ -9,7 +9,6 @@ import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.util.JwtUtil
 import com.yapp.giljob.global.util.KakaoUtil.Companion.getKakaoIdFromToken
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpHeaders
 import org.springframework.stereotype.Service
 import javax.servlet.http.HttpServletResponse
 
@@ -19,7 +18,7 @@ class SignService{
     @Autowired
     private lateinit var signRepository: SignRepository
 
-     fun signUp(signUpRequest: SignUpRequest, response: HttpServletResponse): User {
+     fun signUp(signUpRequest: SignUpRequest, response: HttpServletResponse): String {
 
          val kakaoId = getKakaoIdFromToken(signUpRequest.kakaoAccessToken)
 
@@ -28,17 +27,14 @@ class SignService{
          val user = User.of(signUpRequest, kakaoId)
          signRepository.save(user)
 
-         return user
+         return JwtUtil.createAccessToken(user.id)
      }
 
-    fun signIn(signInRequest: SignInRequest, response: HttpServletResponse): User {
+    fun signIn(signInRequest: SignInRequest, response: HttpServletResponse): String {
         val kakaoId = getKakaoIdFromToken(signInRequest.kakaoAccessToken)
 
-        return signRepository.findBySocialId(kakaoId) ?: throw BusinessException(ErrorCode.NOT_SIGN_UP_USER_ERROR)
-    }
+        val user = signRepository.findBySocialId(kakaoId) ?: throw BusinessException(ErrorCode.NOT_SIGN_UP_USER_ERROR)
 
-    fun setAccessTokenInHeader(response: HttpServletResponse, user: User) {
-        val accessToken: String = JwtUtil.createAccessToken(user.id)
-        response.setHeader(HttpHeaders.AUTHORIZATION , accessToken)
+        return JwtUtil.createAccessToken(user.id)
     }
 }
