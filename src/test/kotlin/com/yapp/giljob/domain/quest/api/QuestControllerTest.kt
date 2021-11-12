@@ -3,6 +3,7 @@ package com.yapp.giljob.domain.quest.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.yapp.giljob.domain.quest.application.QuestService
 import com.yapp.giljob.domain.tag.mapper.TagMapper
+import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
@@ -28,6 +29,9 @@ internal class QuestControllerTest : AbstractRestDocs() {
 
     @MockBean
     private lateinit var tagMapper: TagMapper
+
+    @MockBean
+    private lateinit var userRepository: UserRepository
 
     private val user = EntityFactory.testUser()
     private val tag = EntityFactory.testTag()

@@ -1,8 +1,10 @@
 package com.yapp.giljob.test
 
+import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.restdocs.headers.HeaderDocumentation
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
@@ -12,6 +14,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @WebMvcTest(TestController::class)
 class TestControllerTest : AbstractRestDocs() {
+
+    @MockBean
+    private lateinit var userRepository: UserRepository
+
     @Test
     fun getTest() {
         val result = mockMvc.perform(get("/api/test"))
