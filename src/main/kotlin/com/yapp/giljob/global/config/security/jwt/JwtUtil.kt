@@ -1,5 +1,6 @@
 package com.yapp.giljob.global.config.security.jwt
 
+import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
@@ -43,8 +44,10 @@ class JwtUtil {
 
         fun validateToken(token: String?): Boolean {
             return try {
-                val claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
-                !claims.body.expiration.before(Date())
+                Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
+                true
+            } catch (e: ExpiredJwtException) {
+                false
             } catch (e: JwtException) {
                 false
             } catch (e: IllegalArgumentException) {
