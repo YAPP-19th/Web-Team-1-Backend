@@ -13,7 +13,7 @@ class SubQuest (
     @Column(name = "sub_quest_id")
     val id: Long? = null,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quest_id")
     var quest: Quest? = null,
 
