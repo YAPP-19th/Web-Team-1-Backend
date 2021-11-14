@@ -6,7 +6,7 @@ import com.yapp.giljob.domain.sign.dto.request.SignInRequest
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import com.yapp.giljob.domain.sign.repository.SignRepository
 import com.yapp.giljob.domain.user.domain.User
-import com.yapp.giljob.global.util.JwtUtil
+import com.yapp.giljob.global.config.security.jwt.JwtUtil
 import com.yapp.giljob.global.util.KakaoUtil.Companion.getKakaoIdFromToken
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

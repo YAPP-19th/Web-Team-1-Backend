@@ -9,6 +9,7 @@ import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
@@ -63,20 +64,18 @@ class SignServiceTest {
     fun `회원가입 성공`() {
         given(signRepository.findBySocialId(anyString())).willReturn(null)
 
-        val user = signService.signUp(signUpRequest, response)
+        val accessToken = signService.signUp(signUpRequest, response)
 
-        assertEquals(user.socialId, "socialId")
-        assertEquals(user.nickname, signUpRequest.nickname)
-        assertEquals(user.position.name, signUpRequest.position)
+        assertNotNull(accessToken)
     }
 
     @Test
     fun `로그인 성공`() {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
 
-        val user = signService.signIn(signInRequest, response)
+        val accessToken = signService.signIn(signInRequest, response)
 
-        assertEquals(user.socialId, "socialId")
+        assertNotNull(accessToken)
     }
 
     @Test

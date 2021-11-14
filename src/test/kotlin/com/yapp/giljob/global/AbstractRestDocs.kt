@@ -2,6 +2,8 @@ package com.yapp.giljob.global
 
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext
 import org.springframework.restdocs.RestDocumentationContextProvider
 import org.springframework.restdocs.RestDocumentationExtension
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration
@@ -13,6 +15,7 @@ import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.filter.CharacterEncodingFilter
 
 @ExtendWith(RestDocumentationExtension::class)
+@MockBean(JpaMetamodelMappingContext::class)
 abstract class AbstractRestDocs {
     lateinit var mockMvc: MockMvc
 

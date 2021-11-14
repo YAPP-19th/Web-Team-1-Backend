@@ -1,6 +1,7 @@
 package com.yapp.giljob.global.config.security
 
 import com.yapp.giljob.global.config.security.jwt.JwtAuthenticationFilter
+import com.yapp.giljob.global.config.security.jwt.JwtResolver
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
@@ -10,7 +11,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 @ComponentScan
-class WebSecurityConfig: WebSecurityConfigurerAdapter() {
+class WebSecurityConfig(
+    private val jwtResolver: JwtResolver
+) : WebSecurityConfigurerAdapter() {
 
     override fun configure(web: WebSecurity) {
         web.ignoring().antMatchers(
@@ -26,7 +29,9 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
         http.cors().disable()
         http.csrf().disable()
         http.formLogin().disable()
-        http.addFilterBefore(JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)
+        http.authorizeRequests()
+            .antMatchers("/api/quests").authenticated()
+        http.addFilterBefore(JwtAuthenticationFilter(jwtResolver), UsernamePasswordAuthenticationFilter::class.java)
     }
 }
 

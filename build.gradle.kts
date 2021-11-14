@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     val kotlinVersion = "1.5.31"
     id("org.springframework.boot") version "2.5.5"
@@ -51,6 +49,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-test"){
         exclude (group = "com.vaadin.external.google", module = "android-json")
     }
+    testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("io.mockk:mockk:1.12.0")
+
     implementation("org.slf4j:slf4j-api:1.7.32")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     asciidoctorExtensions("org.springframework.restdocs:spring-restdocs-asciidoctor")
@@ -59,22 +60,8 @@ dependencies {
 
     implementation("com.github.consoleau:kassava:2.1.0")
 
-    implementation ("org.mapstruct:mapstruct:1.4.2.Final")
-    annotationProcessor ("org.mapstruct:mapstruct-processor:1.4.2.Final")
-
-    implementation("org.mapstruct:mapstruct:1.5.0.Beta1")
-    kapt("org.mapstruct:mapstruct-processor:1.5.0.Beta1")
-
-    testImplementation("com.nhaarman:mockito-kotlin:1.5.0")
-}
-
-kapt {
-    arguments {
-        // Set Mapstruct Configuration options here
-        // https://kotlinlang.org/docs/reference/kapt.html#annotation-processor-arguments
-        // https://mapstruct.org/documentation/stable/reference/html/#configuration-options
-        // arg("mapstruct.defaultComponentModel", "spring")
-    }
+    implementation("org.mapstruct:mapstruct:1.4.2.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
 }
 
 tasks {
