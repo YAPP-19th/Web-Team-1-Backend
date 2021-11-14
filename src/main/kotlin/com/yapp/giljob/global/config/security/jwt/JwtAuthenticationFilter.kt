@@ -4,7 +4,6 @@ import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.ErrorResponse
 import com.yapp.giljob.global.util.HandlerResponseUtil
 import io.jsonwebtoken.ExpiredJwtException
-import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
 import javax.servlet.FilterChain
@@ -19,10 +18,8 @@ class JwtAuthenticationFilter(
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         try {
             val token: String = JwtUtil.getTokenFromHeader(request as HttpServletRequest)
-            if (JwtUtil.validateToken(token)) {
-                val authentication: Authentication = jwtResolver.getAuthentication(token)
-                SecurityContextHolder.getContext().authentication = authentication
-            }
+            JwtUtil.parseToken(token)
+            SecurityContextHolder.getContext().authentication = jwtResolver.getAuthentication(token)
         } catch (e: ExpiredJwtException) {
             jwtFailureTask(response as HttpServletResponse, ErrorCode.EXPIRED_TOKEN_ERROR)
             return

@@ -1,7 +1,5 @@
 package com.yapp.giljob.global.config.security.jwt
 
-import io.jsonwebtoken.ExpiredJwtException
-import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
@@ -42,17 +40,8 @@ class JwtUtil {
             return SecurityContextHolder.getContext().authentication.principal.toString().toLong()
         }
 
-        fun validateToken(token: String?): Boolean {
-            return try {
-                Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
-                true
-            } catch (e: ExpiredJwtException) {
-                false
-            } catch (e: JwtException) {
-                false
-            } catch (e: IllegalArgumentException) {
-                false
-            }
+        fun parseToken(token: String?) {
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token)
         }
     }
 }
