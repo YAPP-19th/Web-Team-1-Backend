@@ -7,7 +7,6 @@ import com.yapp.giljob.domain.quest.dto.QuestResponse
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.tag.application.TagService
 import com.yapp.giljob.domain.user.domain.User
-import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -29,10 +28,8 @@ class QuestService(
     }
 
     @Transactional(readOnly = true)
-    fun getQuestList(questId: Long?, pageable: Pageable): List<QuestResponse> {
-        val questList = questId?.let {
-            questRepository.findByIdLessThanOrderByIdDesc(questId, pageable)
-        } ?: questRepository.findByOrderByIdDesc(pageable)
+    fun getQuestList(questId: Long?, size: Long): List<QuestResponse> {
+        val questList = questRepository.findByIdLessThanAndOrderByIdDesc(questId, size)
 
         return questList.map {
             questMapper.toDto(it)

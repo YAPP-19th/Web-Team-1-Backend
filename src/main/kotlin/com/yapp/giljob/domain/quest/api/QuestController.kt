@@ -6,8 +6,6 @@ import com.yapp.giljob.domain.quest.dto.QuestResponse
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
-import org.springframework.data.domain.Pageable
-import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus.*
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -29,10 +27,10 @@ class QuestController(
     @GetMapping
     fun getQuestList(
         @RequestParam(required = false) cursor: Long?,
-        @PageableDefault(size = 16) pageable: Pageable
+        @RequestParam(required = false, defaultValue = "16") size: Long
     ): ResponseEntity<BaseResponse<List<QuestResponse>>> {
         return ResponseEntity.ok(
-            BaseResponse.of(OK, "퀘스트 리스트 조회 성공입니다.", questService.getQuestList(cursor, pageable))
+            BaseResponse.of(OK, "퀘스트 리스트 조회 성공입니다.", questService.getQuestList(cursor, size))
         )
     }
 }
