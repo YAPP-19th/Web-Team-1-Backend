@@ -1,4 +1,4 @@
-package com.yapp.giljob.domain.sign.controller
+package com.yapp.giljob.domain.sign.application
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.yapp.giljob.domain.position.domain.Position
@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension::class, MockitoExtension::class)
 @Transactional
-class SignControllerTest @Autowired constructor(
+class SignControllerIntegrationTest @Autowired constructor(
     val mockMvc: MockMvc,
     val signRepository: SignRepository
 ) {
@@ -39,7 +39,7 @@ class SignControllerTest @Autowired constructor(
             kakaoAccessToken = "test",
             position = Position.BACKEND.name,
             nickname = "nickname")
-
+ㅜ
         val content = jacksonObjectMapper().writeValueAsString(signUpRequest)
 
         mockMvc
@@ -71,8 +71,6 @@ class SignControllerTest @Autowired constructor(
             .andExpect(status().isOk)
             .andExpect(header().exists(HttpHeaders.AUTHORIZATION))
             .andDo(print())
-
-        signRepository.delete(user)
     }
 
     @Test

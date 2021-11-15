@@ -1,6 +1,7 @@
-package com.yapp.giljob.domain.sign.repository
+package com.yapp.giljob.domain.sign.application
 
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.sign.repository.SignRepository
 import com.yapp.giljob.domain.user.domain.User
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull

@@ -18,3 +18,21 @@ include::{snippets}/quests/post/response-body.adoc[]
 .response fields
 include::{snippets}/quests/post/response-fields.adoc[]
 
+== Sign API
+=== POST /sign-up
+.request
+include::{snippets}/sign-up/post/http-request.adoc[]
+.response
+include::{snippets}/sign-up/post/http-response.adoc[]
+.response
+include::{snippets}/sign-up/post/response-headers.adoc[]
+
+=== POST /sign-in
+.request
+include::{snippets}/sign-in/post/http-request.adoc[]
+.response
+include::{snippets}/sign-in/post/http-response.adoc[]
+.response
+include::{snippets}/sign-in/post/response-headers.adoc[]
+
+

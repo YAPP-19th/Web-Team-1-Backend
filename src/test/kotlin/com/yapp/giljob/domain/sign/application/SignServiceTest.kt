@@ -1,9 +1,10 @@
-package com.yapp.giljob.domain.sign.service
+package com.yapp.giljob.domain.sign.application
 
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.sign.dto.request.SignInRequest
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import com.yapp.giljob.domain.sign.repository.SignRepository
+import com.yapp.giljob.domain.sign.service.SignService
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
@@ -61,7 +62,7 @@ class SignServiceTest {
     }
 
     @Test
-    fun `회원가입 성공`() {
+    fun `회원가입 서비스 성공`() {
         given(signRepository.findBySocialId(anyString())).willReturn(null)
 
         val accessToken = signService.signUp(signUpRequest, response)
@@ -70,7 +71,7 @@ class SignServiceTest {
     }
 
     @Test
-    fun `로그인 성공`() {
+    fun `로그인 서비스 성공`() {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
 
         val accessToken = signService.signIn(signInRequest, response)
@@ -79,7 +80,7 @@ class SignServiceTest {
     }
 
     @Test
-    fun `기가입자가 회원가입시 에러`() {
+    fun `기가입자가 회원가입시 서비스에서 에러`() {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
 
         val exception = Assertions.assertThrows(BusinessException::class.java) {
@@ -90,7 +91,7 @@ class SignServiceTest {
     }
 
     @Test
-    fun `미가입자가 로그인시 에러`() {
+    fun `미가입자가 로그인시 서비스에서 에러`() {
         given(signRepository.findBySocialId(anyString())).willReturn(null)
 
         val exception = Assertions.assertThrows(BusinessException::class.java) {
