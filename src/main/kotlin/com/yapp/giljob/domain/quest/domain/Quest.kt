@@ -14,6 +14,7 @@ import javax.persistence.*
 @Entity
 class Quest(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "quest_id")
     val id: Long? = null,
 
     @ManyToOne
@@ -39,10 +40,10 @@ class Quest(
     @Column(nullable = false)
     var detail: String,
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "quest")
     var subQuestList: MutableList<SubQuest> = mutableListOf(),
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "quest")
     var tagList: MutableList<QuestTag> = mutableListOf(),
 ) : BaseEntity() {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
