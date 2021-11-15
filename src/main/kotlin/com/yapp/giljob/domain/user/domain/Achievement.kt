@@ -8,7 +8,7 @@ import javax.persistence.*
 @Entity
 class Achievement(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ability_id")
+    @Column(name = "achievement_id")
     val id: Long? = null,
 
     @Column(nullable = false)

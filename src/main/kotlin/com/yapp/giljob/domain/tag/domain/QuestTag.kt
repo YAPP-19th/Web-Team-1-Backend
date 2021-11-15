@@ -9,6 +9,7 @@ import javax.persistence.*
 @Entity
 class QuestTag(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "quest_tag_id")
     val id: Long? = null,
 
     @ManyToOne
