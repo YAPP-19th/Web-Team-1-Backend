@@ -7,6 +7,8 @@ import com.yapp.giljob.domain.sign.dto.request.SignInRequest
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import com.yapp.giljob.domain.sign.repository.SignRepository
 import com.yapp.giljob.domain.user.domain.User
+import com.yapp.giljob.global.common.domain.EntityFactory
+import com.yapp.giljob.global.common.dto.DtoFactory
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.junit.jupiter.MockitoExtension
@@ -33,13 +35,13 @@ class SignControllerIntegrationTest @Autowired constructor(
     val signRepository: SignRepository
 ) {
 
+    private val user = EntityFactory.testUser()
+    private val signUpRequest = DtoFactory.testSignUpRequest()
+    private val signInRequest = DtoFactory.testSignInRequest()
+
     @Test
     fun `회원가입 성공`() {
-        val signUpRequest = SignUpRequest(
-            kakaoAccessToken = "test",
-            position = Position.BACKEND.name,
-            nickname = "nickname")
-ㅜ
+
         val content = jacksonObjectMapper().writeValueAsString(signUpRequest)
 
         mockMvc
@@ -53,14 +55,7 @@ class SignControllerIntegrationTest @Autowired constructor(
 
     @Test
     fun `로그인 성공`() {
-        val user = User(
-            socialId = "socialId",
-            nickname = "닉네임",
-            position = Position.BACKEND
-        )
         signRepository.save(user)
-
-        val signInRequest = SignInRequest(kakaoAccessToken = "test")
 
         val content = jacksonObjectMapper().writeValueAsString(signInRequest)
 
@@ -75,8 +70,9 @@ class SignControllerIntegrationTest @Autowired constructor(
 
     @Test
     fun `잘못된 카카오 access token으로 회원가입 시 에러`() {
+
         val signUpRequest = SignUpRequest(
-            kakaoAccessToken = "wrong access token",
+            kakaoAccessToken = "wrong.access.token",
             position = Position.BACKEND.name,
             nickname = "nickname")
 
@@ -96,8 +92,8 @@ class SignControllerIntegrationTest @Autowired constructor(
 
     @Test
     fun `잘못된 카카오 access token으로 로그인 시 에러`() {
-        val signInRequest = SignInRequest(
-            kakaoAccessToken = "wrong access token")
+
+        val signInRequest = SignInRequest(kakaoAccessToken = "wrong.access.token")
 
         val content = jacksonObjectMapper().writeValueAsString(signInRequest)
 

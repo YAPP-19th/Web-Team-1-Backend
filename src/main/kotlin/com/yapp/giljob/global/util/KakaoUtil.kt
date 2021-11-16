@@ -17,7 +17,7 @@ class KakaoUtil {
         private lateinit var kakaoUrl: String
 
         fun getKakaoIdFromToken(kakaoAccessToken: String): String {
-            if (kakaoAccessToken == "test") return "socialId"
+            if (kakaoAccessToken == "test") return "testSocialId"
 
             val content = getResponseFromKakao(kakaoAccessToken)
             return getIdFromKakaoResponse(content)

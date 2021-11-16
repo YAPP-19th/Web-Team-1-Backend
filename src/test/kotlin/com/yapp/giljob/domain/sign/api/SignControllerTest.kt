@@ -1,17 +1,12 @@
 package com.yapp.giljob.domain.sign.api
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.yapp.giljob.domain.position.domain.Position
-import com.yapp.giljob.domain.sign.controller.SignController
-import com.yapp.giljob.domain.sign.dto.request.SignInRequest
-import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import com.yapp.giljob.domain.sign.repository.SignRepository
-import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.AbstractRestDocs
+import com.yapp.giljob.global.common.domain.EntityFactory
+import com.yapp.giljob.global.common.dto.DtoFactory
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.*
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.HttpHeaders
@@ -32,13 +27,12 @@ internal class SignControllerTest : AbstractRestDocs() {
     @MockBean
     private lateinit var signRepository: SignRepository
 
+    private val user = EntityFactory.testUser()
+    private val signUpRequest = DtoFactory.testSignUpRequest()
+    private val signInRequest = DtoFactory.testSignInRequest()
+
     @Test
     fun signUp() {
-        val signUpRequest = SignUpRequest(
-            kakaoAccessToken = "test",
-            position = Position.BACKEND.name,
-            nickname = "nickname")
-
         val jsonString = ObjectMapper().writeValueAsString(signUpRequest)
 
         val result = mockMvc
@@ -73,14 +67,7 @@ internal class SignControllerTest : AbstractRestDocs() {
 
     @Test
     fun signIn() {
-        val user = User(
-            socialId = "socialId",
-            nickname = "닉네임",
-            position = Position.BACKEND
-        )
         given(signRepository.findBySocialId(anyString())).willReturn(user)
-
-        val signInRequest = SignInRequest(kakaoAccessToken = "test")
 
         val jsonString = ObjectMapper().writeValueAsString(signInRequest)
 

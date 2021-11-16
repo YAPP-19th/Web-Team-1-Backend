@@ -1,8 +1,7 @@
 package com.yapp.giljob.domain.sign.application
 
-import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.sign.repository.SignRepository
-import com.yapp.giljob.domain.user.domain.User
+import com.yapp.giljob.global.common.domain.EntityFactory
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
@@ -13,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 class SignRepositoryTest @Autowired constructor(
     val signRepository: SignRepository
 ){
+    private val user = EntityFactory.testUser()
 
     @Test
     fun `findBySocialId 성공`() {
@@ -23,31 +23,20 @@ class SignRepositoryTest @Autowired constructor(
     @Test
     fun `save user 성공`() {
 
-        val saveUser = User(
-            socialId = "kakaoId",
-            nickname = "닉네임",
-            position = Position.BACKEND
-        )
-
-        val user = signRepository.save(saveUser)
-        assertEquals(user.socialId, saveUser.socialId)
-        assertEquals(user.nickname, saveUser.nickname)
-        assertEquals(user.position, saveUser.position)
+        val userFromRepository = signRepository.save(user)
+        assertEquals(userFromRepository.socialId, user.socialId)
+        assertEquals(userFromRepository.nickname, user.nickname)
+        assertEquals(userFromRepository.position, user.position)
     }
 
     @Test
     fun `save user 후 findBySocialId 성공`() {
-        val saveUser = User(
-            socialId = "kakaoId",
-            nickname = "닉네임",
-            position = Position.BACKEND
-        )
 
-       signRepository.save(saveUser)
+       signRepository.save(user)
 
-        val userFromRepository = signRepository.findBySocialId("kakaoId")
-        assertEquals(userFromRepository!!.socialId, saveUser.socialId)
-        assertEquals(userFromRepository!!.position, saveUser.position)
-        assertEquals(userFromRepository!!.nickname, saveUser.nickname)
+        val userFromRepository = signRepository.findBySocialId("testSocialId")
+        assertEquals(userFromRepository!!.socialId, user.socialId)
+        assertEquals(userFromRepository!!.position, user.position)
+        assertEquals(userFromRepository!!.nickname, user.nickname)
     }
 }
