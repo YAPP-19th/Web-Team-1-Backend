@@ -5,6 +5,7 @@ import com.yapp.giljob.domain.quest.dto.QuestRequest
 import com.yapp.giljob.domain.quest.dto.QuestResponse
 import com.yapp.giljob.domain.subquest.dto.SubQuestRequest
 import com.yapp.giljob.domain.tag.dto.TagRequest
+import com.yapp.giljob.domain.user.dto.UserSubDto
 
 class DtoFactory {
     companion object {
@@ -25,11 +26,11 @@ class DtoFactory {
             position = Position.BACKEND,
             difficulty = 1,
             thumbnail = "test.png",
-            user = QuestResponse.UserDto(
+            user = UserSubDto(
                 id = 1L,
-                nickname = "testNickname"
-            ),
-            point = 100
+                nickname = "testNickname",
+                point = 100
+            )
         )
     }
 }

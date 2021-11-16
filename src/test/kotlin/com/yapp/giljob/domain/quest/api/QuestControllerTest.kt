@@ -123,10 +123,10 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 작성자 id"),
                         PayloadDocumentation.fieldWithPath("data[*].user.nickname")
                             .description("퀘스트 작성자 nickname"),
+                        PayloadDocumentation.fieldWithPath("data[*].user.point")
+                            .description("퀘스트 작성자 능력치"),
                         PayloadDocumentation.fieldWithPath("data[*].difficulty")
                             .description("퀘스트 난이도"),
-                        PayloadDocumentation.fieldWithPath("data[*].point")
-                            .description("퀘스트 작성자 능력치"),
                         PayloadDocumentation.fieldWithPath("data[*].thumbnail")
                             .description("퀘스트 썸네일 url"),
                     )
