@@ -25,7 +25,7 @@ class QuestSupportRepositoryImpl(
             )
         ).from(quest)
             .where(ltQuestId(id))
-            .leftJoin(ability).on(ability.position.eq(quest.user.position))
+            .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
             .orderBy(quest.id.desc())
             .limit(size)
             .fetch()

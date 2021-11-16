@@ -28,7 +28,8 @@ class DtoFactory {
             user = QuestResponse.UserDto(
                 id = 1L,
                 nickname = "testNickname"
-            )
+            ),
+            point = 100
         )
     }
 }

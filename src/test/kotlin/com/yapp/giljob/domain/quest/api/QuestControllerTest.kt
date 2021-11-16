@@ -80,7 +80,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
 
     @Test
     fun getQuestListTest() {
-        given(questService.getQuestList(10, PageRequest.of(0, 4))).willReturn(
+        given(questService.getQuestList(10, 4L)).willReturn(
             listOf(
                 DtoFactory.testQuestResponse().apply { this.id = 9L; this.name = "quest test 9" },
                 DtoFactory.testQuestResponse().apply { this.id = 8L; this.name = "quest test 8" },
@@ -125,6 +125,8 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 작성자 nickname"),
                         PayloadDocumentation.fieldWithPath("data[*].difficulty")
                             .description("퀘스트 난이도"),
+                        PayloadDocumentation.fieldWithPath("data[*].point")
+                            .description("퀘스트 작성자 능력치"),
                         PayloadDocumentation.fieldWithPath("data[*].thumbnail")
                             .description("퀘스트 썸네일 url"),
                     )

@@ -560,7 +560,7 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 900
+Content-Length: 976
 
 {
   "status" : 200,
@@ -574,6 +574,7 @@ Content-Length: 900
       "nickname" : "testNickname"
     },
     "difficulty" : 1,
+    "point" : 100,
     "thumbnail" : "test.png"
   }, {
     "id" : 8,
@@ -584,6 +585,7 @@ Content-Length: 900
       "nickname" : "testNickname"
     },
     "difficulty" : 1,
+    "point" : 100,
     "thumbnail" : "test.png"
   }, {
     "id" : 7,
@@ -594,6 +596,7 @@ Content-Length: 900
       "nickname" : "testNickname"
     },
     "difficulty" : 1,
+    "point" : 100,
     "thumbnail" : "test.png"
   }, {
     "id" : 6,
@@ -604,6 +607,7 @@ Content-Length: 900
       "nickname" : "testNickname"
     },
     "difficulty" : 1,
+    "point" : 100,
     "thumbnail" : "test.png"
   } ]
 }</code></pre>
@@ -668,6 +672,11 @@ Content-Length: 900
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].difficulty</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 난이도</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].thumbnail</code></p></td>
