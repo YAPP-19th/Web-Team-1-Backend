@@ -1,10 +1,13 @@
-package com.yapp.giljob.domain.sign.service
+package com.yapp.giljob.domain.sign.application
 
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.sign.dto.request.SignInRequest
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
 import com.yapp.giljob.domain.sign.repository.SignRepository
+import com.yapp.giljob.domain.sign.service.SignService
 import com.yapp.giljob.domain.user.domain.User
+import com.yapp.giljob.global.common.domain.EntityFactory
+import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import org.junit.jupiter.api.*
@@ -34,34 +37,19 @@ class SignServiceTest {
     @InjectMocks
     lateinit var signService: SignService
 
-    var user: User by Delegates.notNull()
-    var signUpRequest: SignUpRequest by Delegates.notNull()
-    var signInRequest: SignInRequest by Delegates.notNull()
+    private val user = EntityFactory.testUser()
+    private val signUpRequest = DtoFactory.testSignUpRequest()
+    private val signInRequest = DtoFactory.testSignInRequest()
+
     var response: HttpServletResponse by Delegates.notNull()
 
     @BeforeAll
     fun setUp() {
-        user = User(
-            socialId = "socialId",
-            nickname = "닉네임",
-            position = Position.BACKEND
-        )
-
-        signUpRequest = SignUpRequest(
-            kakaoAccessToken = "test",
-            position = Position.BACKEND.toString(),
-            nickname = "닉네임"
-        )
-
-        signInRequest = SignInRequest(
-            kakaoAccessToken = "test"
-        )
-
         response = mock(HttpServletResponse::class.java)
     }
 
     @Test
-    fun `회원가입 성공`() {
+    fun `회원가입 서비스 성공`() {
         given(signRepository.findBySocialId(anyString())).willReturn(null)
 
         val accessToken = signService.signUp(signUpRequest, response)
@@ -70,7 +58,7 @@ class SignServiceTest {
     }
 
     @Test
-    fun `로그인 성공`() {
+    fun `로그인 서비스 성공`() {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
 
         val accessToken = signService.signIn(signInRequest, response)
@@ -79,7 +67,7 @@ class SignServiceTest {
     }
 
     @Test
-    fun `기가입자가 회원가입시 에러`() {
+    fun `기가입자가 회원가입시 서비스에서 에러`() {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
 
         val exception = Assertions.assertThrows(BusinessException::class.java) {
@@ -90,7 +78,7 @@ class SignServiceTest {
     }
 
     @Test
-    fun `미가입자가 로그인시 에러`() {
+    fun `미가입자가 로그인시 서비스에서 에러`() {
         given(signRepository.findBySocialId(anyString())).willReturn(null)
 
         val exception = Assertions.assertThrows(BusinessException::class.java) {

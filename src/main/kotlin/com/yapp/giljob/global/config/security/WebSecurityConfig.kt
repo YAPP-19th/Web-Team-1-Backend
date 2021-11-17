@@ -20,7 +20,8 @@ class WebSecurityConfig(
             "/h2-console/**",
             "/sign-up",
             "/sign-in",
-            "/don't-pass-filter"
+            "/don't-pass-filter",
+            "/docs/index.html"
         )
     }
 
