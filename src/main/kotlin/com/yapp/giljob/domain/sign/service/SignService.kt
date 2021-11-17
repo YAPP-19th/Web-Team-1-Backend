@@ -2,8 +2,8 @@ package com.yapp.giljob.domain.sign.service
 
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
-import com.yapp.giljob.domain.sign.dto.request.SignInRequest
-import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
+import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
+import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
 import com.yapp.giljob.domain.sign.repository.SignRepository
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.config.security.jwt.JwtUtil
@@ -18,20 +18,20 @@ class SignService{
     @Autowired
     private lateinit var signRepository: SignRepository
 
-     fun signUp(signUpRequest: SignUpRequest, response: HttpServletResponse): String {
+     fun signUp(signUpRequestDto: SignUpRequestDto, response: HttpServletResponse): String {
 
-         val kakaoId = getKakaoIdFromToken(signUpRequest.kakaoAccessToken)
+         val kakaoId = getKakaoIdFromToken(signUpRequestDto.kakaoAccessToken)
 
          signRepository.findBySocialId(kakaoId)?.let { throw BusinessException(ErrorCode.ALREADY_SIGN_UP_USER_ERROR) }
 
-         val user = User.of(signUpRequest, kakaoId)
+         val user = User.of(signUpRequestDto, kakaoId)
          signRepository.save(user)
 
          return JwtUtil.createAccessToken(user.id)
      }
 
-    fun signIn(signInRequest: SignInRequest, response: HttpServletResponse): String {
-        val kakaoId = getKakaoIdFromToken(signInRequest.kakaoAccessToken)
+    fun signIn(signInRequestDto: SignInRequestDto, response: HttpServletResponse): String {
+        val kakaoId = getKakaoIdFromToken(signInRequestDto.kakaoAccessToken)
 
         val user = signRepository.findBySocialId(kakaoId) ?: throw BusinessException(ErrorCode.NOT_SIGN_UP_USER_ERROR)
 

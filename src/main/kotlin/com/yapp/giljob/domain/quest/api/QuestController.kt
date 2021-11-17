@@ -1,7 +1,7 @@
 package com.yapp.giljob.domain.quest.api
 
 import com.yapp.giljob.domain.quest.application.QuestService
-import com.yapp.giljob.domain.quest.dto.QuestRequest
+import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
@@ -18,8 +18,8 @@ class QuestController(
     private val questService: QuestService
 ) {
     @PostMapping
-    fun saveQuest(@RequestBody questRequest: QuestRequest, @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
-        questService.saveQuest(questRequest, user)
+    fun saveQuest(@RequestBody questSaveRequestDto: QuestSaveRequestDto, @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
+        questService.saveQuest(questSaveRequestDto, user)
         return ResponseEntity(BaseResponse.of(HttpStatus.CREATED, "퀘스트 생성 성공입니다."), HttpStatus.CREATED)
     }
 }

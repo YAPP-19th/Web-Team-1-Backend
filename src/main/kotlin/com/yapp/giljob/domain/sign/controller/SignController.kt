@@ -1,7 +1,7 @@
 package com.yapp.giljob.domain.sign.controller
 
-import com.yapp.giljob.domain.sign.dto.request.SignInRequest
-import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
+import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
+import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
 import com.yapp.giljob.domain.sign.service.SignService
 import org.springframework.http.HttpHeaders
 import org.springframework.validation.annotation.Validated
@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServletResponse
 class SignController (private val signService: SignService){
 
     @PostMapping("/sign-up")
-    fun signUp(@Validated @RequestBody signUpRequest: SignUpRequest, response: HttpServletResponse) {
-        val accessToken = signService.signUp(signUpRequest, response)
+    fun signUp(@Validated @RequestBody signUpRequestDto: SignUpRequestDto, response: HttpServletResponse) {
+        val accessToken = signService.signUp(signUpRequestDto, response)
         response.setHeader(HttpHeaders.AUTHORIZATION , accessToken)
     }
 
     @PostMapping("/sign-in")
-    fun signIn(@Validated @RequestBody signInRequest: SignInRequest, response: HttpServletResponse) {
-        val accessToken = signService.signIn(signInRequest, response)
+    fun signIn(@Validated @RequestBody signInRequestDto: SignInRequestDto, response: HttpServletResponse) {
+        val accessToken = signService.signIn(signInRequestDto, response)
         response.setHeader(HttpHeaders.AUTHORIZATION , accessToken)
     }
 }

@@ -3,10 +3,9 @@ package com.yapp.giljob.domain.sign.application
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.global.error.ErrorCode
-import com.yapp.giljob.domain.sign.dto.request.SignInRequest
-import com.yapp.giljob.domain.sign.dto.request.SignUpRequest
+import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
+import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
 import com.yapp.giljob.domain.sign.repository.SignRepository
-import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
 import org.junit.jupiter.api.Test
@@ -71,7 +70,7 @@ class SignControllerIntegrationTest @Autowired constructor(
     @Test
     fun `잘못된 카카오 access token으로 회원가입 시 에러`() {
 
-        val signUpRequest = SignUpRequest(
+        val signUpRequest = SignUpRequestDto(
             kakaoAccessToken = "wrong.access.token",
             position = Position.BACKEND.name,
             nickname = "nickname")
@@ -93,7 +92,7 @@ class SignControllerIntegrationTest @Autowired constructor(
     @Test
     fun `잘못된 카카오 access token으로 로그인 시 에러`() {
 
-        val signInRequest = SignInRequest(kakaoAccessToken = "wrong.access.token")
+        val signInRequest = SignInRequestDto(kakaoAccessToken = "wrong.access.token")
 
         val content = jacksonObjectMapper().writeValueAsString(signInRequest)
 
