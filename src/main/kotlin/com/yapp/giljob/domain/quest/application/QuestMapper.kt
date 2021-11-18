@@ -1,7 +1,7 @@
 package com.yapp.giljob.domain.quest.application
 
 import com.yapp.giljob.domain.quest.dto.QuestResponse
-import com.yapp.giljob.domain.quest.dto.QuestSupportDto
+import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.user.dao.UserMapper
 import com.yapp.giljob.domain.user.dto.UserSubDto
 import org.mapstruct.Mapper
@@ -18,5 +18,5 @@ interface QuestMapper {
         Mapping(target = "thumbnail", source = "quest.thumbnail"),
         Mapping(target = "user", source = "user")
     )
-    fun toDto(quest: QuestSupportDto, user: UserSubDto): QuestResponse
+    fun toDto(quest: QuestSupportVo, user: UserSubDto): QuestResponse
 }

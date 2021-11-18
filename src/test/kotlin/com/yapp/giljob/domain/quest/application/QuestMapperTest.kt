@@ -1,7 +1,7 @@
 package com.yapp.giljob.domain.quest.application
 
 import com.yapp.giljob.domain.position.domain.Position
-import com.yapp.giljob.domain.quest.dto.QuestSupportDto
+import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.user.dao.UserMapper
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
@@ -19,7 +19,7 @@ class QuestMapperTest {
     @Test
     fun `toQuestResponse 테스트`() {
         // given
-        val testQuestSupportDto = QuestSupportDto(
+        val testQuestSupportDto = QuestSupportVo(
             id = 1L,
             name = "test quest",
             user = EntityFactory.testUser(),

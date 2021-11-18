@@ -6,15 +6,15 @@ import com.yapp.giljob.domain.user.domain.QAbility.ability
 
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.yapp.giljob.domain.quest.dto.QuestSupportDto
+import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 
 class QuestSupportRepositoryImpl(
     private val query: JPAQueryFactory
 ) : QuestSupportRepository {
-    override fun findByIdLessThanAndOrderByIdDesc(id: Long?, size: Long): List<QuestSupportDto> {
+    override fun findByIdLessThanAndOrderByIdDesc(id: Long?, size: Long): List<QuestSupportVo> {
         return query.select(
             Projections.constructor(
-                QuestSupportDto::class.java,
+                QuestSupportVo::class.java,
                 quest.id,
                 quest.name,
                 quest.position,
