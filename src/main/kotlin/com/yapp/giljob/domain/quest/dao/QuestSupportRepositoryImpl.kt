@@ -6,12 +6,13 @@ import com.yapp.giljob.domain.user.domain.QAbility.ability
 
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
+import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 
 class QuestSupportRepositoryImpl(
     private val query: JPAQueryFactory
 ) : QuestSupportRepository {
-    override fun findByIdLessThanAndOrderByIdDesc(id: Long?, size: Long): List<QuestSupportVo> {
+    override fun findByIdLessThanAndOrderByIdDesc(id: Long?, position: Position, size: Long): List<QuestSupportVo> {
         return query.select(
             Projections.constructor(
                 QuestSupportVo::class.java,
@@ -24,7 +25,7 @@ class QuestSupportRepositoryImpl(
                 quest.thumbnail
             )
         ).from(quest)
-            .where(ltQuestId(id))
+            .where(ltQuestId(id)?.and(eqPosition(position)))
             .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
             .orderBy(quest.id.desc())
             .limit(size)
@@ -33,5 +34,8 @@ class QuestSupportRepositoryImpl(
 
     private fun ltQuestId(questId: Long?): BooleanExpression? {
         return questId?.let { quest.id.lt(questId) }
+    }
+    private fun eqPosition(position: Position): BooleanExpression? {
+        return if (position == Position.ALL) null else quest.position.eq(position)
     }
 }

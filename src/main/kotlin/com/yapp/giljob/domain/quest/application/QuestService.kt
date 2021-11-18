@@ -1,5 +1,6 @@
 package com.yapp.giljob.domain.quest.application
 
+import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
@@ -32,8 +33,8 @@ class QuestService(
     }
 
     @Transactional(readOnly = true)
-    fun getQuestList(questId: Long?, size: Long): List<QuestResponseDto> {
-        val questList = questRepository.findByIdLessThanAndOrderByIdDesc(questId, size)
+    fun getQuestList(questId: Long?, position: Position, size: Long): List<QuestResponseDto> {
+        val questList = questRepository.findByIdLessThanAndOrderByIdDesc(questId, position, size)
 
         return questList.map {
             questMapper.toDto(it, userMapper.toDto(it.user, it.point))

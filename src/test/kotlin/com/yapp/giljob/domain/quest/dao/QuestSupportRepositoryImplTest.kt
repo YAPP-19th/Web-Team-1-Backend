@@ -70,7 +70,7 @@ class QuestSupportRepositoryImplTest {
         val lastQuestId = questSaveList[questSaveList.size - 1].id!!
 
         // when
-        val questList = questSupportRepository.findByIdLessThanAndOrderByIdDesc(cursorId, questSaveSize)
+        val questList = questSupportRepository.findByIdLessThanAndOrderByIdDesc(cursorId, Position.ALL, questSaveSize)
 
         // then
         assertEquals(questSaveSize, questList.size.toLong())
@@ -86,7 +86,7 @@ class QuestSupportRepositoryImplTest {
         val size = 3L
 
         // when
-        val questList = questSupportRepository.findByIdLessThanAndOrderByIdDesc(cursorId, size)
+        val questList = questSupportRepository.findByIdLessThanAndOrderByIdDesc(cursorId, Position.ALL, size)
 
         // then
         assertEquals(size, questList.size.toLong())
@@ -104,6 +104,7 @@ class QuestSupportRepositoryImplTest {
         // when
         val questList = questSupportRepository.findByIdLessThanAndOrderByIdDesc(
             lastQuestId + 1L,
+            Position.ALL,
             size
         )
 
@@ -120,7 +121,11 @@ class QuestSupportRepositoryImplTest {
 
         // when
         val questList =
-            questSupportRepository.findByIdLessThanAndOrderByIdDesc(questSaveList[questSaveList.size - 1].id, size)
+            questSupportRepository.findByIdLessThanAndOrderByIdDesc(
+                questSaveList[questSaveList.size - 1].id,
+                Position.ALL,
+                size
+            )
 
         // then
         assertEquals(point, questList[0].point)
@@ -133,7 +138,11 @@ class QuestSupportRepositoryImplTest {
 
         // when
         val questList =
-            questSupportRepository.findByIdLessThanAndOrderByIdDesc(questSaveList[questSaveList.size - 1].id, size)
+            questSupportRepository.findByIdLessThanAndOrderByIdDesc(
+                questSaveList[questSaveList.size - 1].id,
+                Position.ALL,
+                size
+            )
 
         // then
         assertEquals(0, questList[0].point)

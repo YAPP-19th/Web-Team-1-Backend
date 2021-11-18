@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.quest.api
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
@@ -80,7 +81,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
 
     @Test
     fun getQuestListTest() {
-        given(questService.getQuestList(10, 4L)).willReturn(
+        given(questService.getQuestList(10, Position.ALL, 4L)).willReturn(
             listOf(
                 DtoFactory.testQuestResponse().apply { this.id = 9L; this.name = "quest test 9" },
                 DtoFactory.testQuestResponse().apply { this.id = 8L; this.name = "quest test 8" },

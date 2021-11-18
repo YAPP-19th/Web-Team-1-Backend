@@ -1,5 +1,6 @@
 package com.yapp.giljob.domain.quest.api
 
+import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
@@ -25,10 +26,11 @@ class QuestController(
     @GetMapping
     fun getQuestList(
         @RequestParam(required = false) cursor: Long?,
+        @RequestParam(required = false, defaultValue = "ALL") position: Position,
         @RequestParam(required = false, defaultValue = "16") size: Long
     ): ResponseEntity<BaseResponse<List<QuestResponseDto>>> {
         return ResponseEntity.ok(
-            BaseResponse.of(HttpStatus.OK, "퀘스트 리스트 조회 성공입니다.", questService.getQuestList(cursor, size))
+            BaseResponse.of(HttpStatus.OK, "퀘스트 리스트 조회 성공입니다.", questService.getQuestList(cursor, position, size))
         )
     }
 }
