@@ -10,8 +10,9 @@ enum class ErrorCode(
     // Common
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "C001", "Internal Server Error"),
     INVALID_INPUT_VALUE(HttpStatus.BAD_REQUEST, "C002", "Invalid Input Value"),
-    METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "C003", "Method Not Allowed"),
-    ENTITY_NOT_FOUND(HttpStatus.NOT_FOUND, "C004", "Entity Not Found"),
+    INVALID_TYPE_VALUE(HttpStatus.BAD_REQUEST, "C003", "Invalid Type Value"),
+    METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "C004", "Method Not Allowed"),
+    ENTITY_NOT_FOUND(HttpStatus.NOT_FOUND, "C005", "Entity Not Found"),
 
     // Token
     NO_TOKEN_ERROR(HttpStatus.FORBIDDEN, "T001", "No Token Error"),
