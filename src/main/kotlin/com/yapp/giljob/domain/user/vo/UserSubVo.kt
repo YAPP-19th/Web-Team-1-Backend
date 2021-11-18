@@ -1,6 +1,6 @@
-package com.yapp.giljob.domain.user.dto
+package com.yapp.giljob.domain.user.vo
 
-class UserSubDto(
+class UserSubVo(
     var id: Long,
     var nickname: String,
     var point: Int
