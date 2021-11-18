@@ -2,7 +2,7 @@ package com.yapp.giljob.domain.quest.application
 
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
-import com.yapp.giljob.domain.quest.dto.QuestRequest
+import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.tag.application.TagService
 import com.yapp.giljob.domain.user.domain.User
@@ -16,11 +16,11 @@ class QuestService(
     private val tagService: TagService
 ) {
     @Transactional
-    fun saveQuest(questRequest: QuestRequest, user: User) : Quest {
-        val quest = Quest.of(questRequest, user)
+    fun saveQuest(questSaveRequestDto: QuestSaveRequestDto, user: User) : Quest {
+        val quest = Quest.of(questSaveRequestDto, user)
 
-        quest.subQuestList.addAll(subQuestService.convertToSubQuestList(quest, questRequest.subQuestList))
-        quest.tagList.addAll(tagService.convertToQuestTagList(quest, questRequest.tagList))
+        quest.subQuestList.addAll(subQuestService.convertToSubQuestList(quest, questSaveRequestDto.subQuestList))
+        quest.tagList.addAll(tagService.convertToQuestTagList(quest, questSaveRequestDto.tagList))
 
         return questRepository.save(quest)
     }
