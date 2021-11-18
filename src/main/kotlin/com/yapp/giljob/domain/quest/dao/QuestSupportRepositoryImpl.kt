@@ -25,7 +25,7 @@ class QuestSupportRepositoryImpl(
                 quest.thumbnail
             )
         ).from(quest)
-            .where(ltQuestId(id)?.and(eqPosition(position)))
+            .where(eqPosition(position)?.and(ltQuestId(id)) ?: ltQuestId(id))
             .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
             .orderBy(quest.id.desc())
             .limit(size)
