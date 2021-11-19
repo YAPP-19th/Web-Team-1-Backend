@@ -6,7 +6,7 @@ import java.io.Serializable
 import javax.persistence.Embeddable
 
 @Embeddable
-class QuestParticipatedPK(
+class QuestParticipationPK(
     var participantId: Long,
     var questId: Long
 ) : Serializable {
@@ -16,6 +16,6 @@ class QuestParticipatedPK(
 
     companion object {
         private val equalsAndHashCodeProperties =
-            arrayOf(QuestParticipatedPK::participantId, QuestParticipatedPK::questId)
+            arrayOf(QuestParticipationPK::participantId, QuestParticipationPK::questId)
     }
 }

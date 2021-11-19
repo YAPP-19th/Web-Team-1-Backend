@@ -1,10 +1,10 @@
 package com.yapp.giljob.domain.quest.application
 
-import com.yapp.giljob.domain.quest.dao.QuestParticipatedRepository
+import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
-import com.yapp.giljob.domain.quest.domain.QuestParticipated
-import com.yapp.giljob.domain.quest.domain.QuestParticipatedPK
+import com.yapp.giljob.domain.quest.domain.QuestParticipation
+import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
@@ -14,16 +14,16 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class QuestParticipationService(
     private val questRepository: QuestRepository,
-    private val questParticipatedRepository: QuestParticipatedRepository
+    private val questParticipationRepository: QuestParticipationRepository
 ) {
     @Transactional
     fun participateQuest(questId: Long, user: User) {
         val quest = validateQuest(questId, user)
 
-        val questParticipatedPK = QuestParticipatedPK(user.id!!, questId)
-        if (questParticipatedRepository.existsById(questParticipatedPK)) throw BusinessException(ErrorCode.ALREADY_PARTICIPATED_QUEST)
+        val questParticipationPK = QuestParticipationPK(user.id!!, questId)
+        if (questParticipationRepository.existsById(questParticipationPK)) throw BusinessException(ErrorCode.ALREADY_PARTICIPATED_QUEST)
 
-        questParticipatedRepository.save(QuestParticipated(questParticipatedPK, quest, user))
+        questParticipationRepository.save(QuestParticipation(questParticipationPK, quest, user))
     }
 
     private fun validateQuest(questId: Long, user: User): Quest {

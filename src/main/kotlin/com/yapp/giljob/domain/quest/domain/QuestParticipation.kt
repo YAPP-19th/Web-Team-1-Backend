@@ -6,11 +6,11 @@ import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
 
-@Table(name = "quest_participated")
+@Table(name = "quest_participation")
 @Entity
-class QuestParticipated(
+class QuestParticipation(
     @EmbeddedId
-    val id: QuestParticipatedPK,
+    val id: QuestParticipationPK,
 
     @MapsId("questId")
     @ManyToOne
@@ -30,6 +30,6 @@ class QuestParticipated(
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
 
     companion object {
-        private val equalsAndHashCodeProperties = arrayOf(QuestParticipated::id)
+        private val equalsAndHashCodeProperties = arrayOf(QuestParticipation::id)
     }
 }
