@@ -18,6 +18,14 @@ include::{snippets}/quests/post/response-body.adoc[]
 .response fields
 include::{snippets}/quests/post/response-fields.adoc[]
 
+=== GET /api/quests
+.request
+include::{snippets}/quests/get/http-request.adoc[]
+.response
+include::{snippets}/quests/get/http-response.adoc[]
+.response fields
+include::{snippets}/quests/get/response-fields.adoc[]
+
 == Sign API
 === POST /sign-up
 .request
@@ -34,5 +42,3 @@ include::{snippets}/sign-in/post/http-request.adoc[]
 include::{snippets}/sign-in/post/http-response.adoc[]
 .response
 include::{snippets}/sign-in/post/response-headers.adoc[]
-
-

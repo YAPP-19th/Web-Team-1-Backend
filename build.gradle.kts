@@ -62,6 +62,11 @@ dependencies {
 
     implementation("org.mapstruct:mapstruct:1.4.2.Final")
     kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
+
+    val querydslVersion = "4.4.0"
+    implementation("com.querydsl:querydsl-jpa:$querydslVersion")
+    kapt("com.querydsl:querydsl-apt:$querydslVersion:jpa")
+
 }
 
 tasks {
