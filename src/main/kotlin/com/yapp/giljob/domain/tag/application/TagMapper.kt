@@ -1,4 +1,4 @@
-package com.yapp.giljob.domain.tag.mapper
+package com.yapp.giljob.domain.tag.application
 
 import com.yapp.giljob.domain.tag.domain.Tag
 import com.yapp.giljob.domain.tag.dto.request.TagRequestDto

@@ -54,6 +54,7 @@ class SignControllerIntegrationTest @Autowired constructor(
 
     @Test
     fun `로그인 성공`() {
+
         signRepository.save(user)
 
         val content = jacksonObjectMapper().writeValueAsString(signInRequest)

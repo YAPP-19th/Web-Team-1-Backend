@@ -12,11 +12,11 @@ class QuestTag(
     @Column(name = "quest_tag_id")
     val id: Long? = null,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quest_id")
     val quest: Quest,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
     val tag: Tag
 ) {
