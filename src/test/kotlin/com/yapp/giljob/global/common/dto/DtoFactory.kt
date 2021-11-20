@@ -8,6 +8,7 @@ import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
 import com.yapp.giljob.domain.subquest.dto.SubQuestRequest
 import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
 import com.yapp.giljob.domain.user.vo.UserSubVo
+import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
 class DtoFactory {
     companion object {
@@ -40,6 +41,12 @@ class DtoFactory {
             kakaoAccessToken = "test",
             position = Position.BACKEND.name,
             nickname = "nickname")
+
         fun testSignInRequest() = SignInRequestDto(kakaoAccessToken = "test")
+
+        fun testS3UploadResponse() = S3UploadResponseDto(
+            fileUrl = "https://giljob.s3.us-east-2.amazonaws.com/0f792d8f-8fc0-49c6-ba39-b77d39024239test.jpeg"
+        )
+
     }
 }
