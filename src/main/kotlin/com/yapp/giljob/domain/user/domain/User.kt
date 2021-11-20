@@ -20,8 +20,8 @@ class User (
     @Column(nullable = false)
     var nickname: String,
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "position_id")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "position")
     var position: Position,
 
     val authority: String = "ROLE_USER"

@@ -45,7 +45,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
         ).andDo(print())
 
         result
-            .andExpect(status().isCreated)
+            .andExpect(status().isOk)
             .andDo(
                 MockMvcRestDocumentation.document(
                     "quests/post",
@@ -69,7 +69,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
                     ),
                     PayloadDocumentation.responseFields(
                         PayloadDocumentation.fieldWithPath("status")
-                            .description("201"),
+                            .description("200"),
                         PayloadDocumentation.fieldWithPath("message")
                             .description("성공 메세지"),
                         PayloadDocumentation.fieldWithPath("data")

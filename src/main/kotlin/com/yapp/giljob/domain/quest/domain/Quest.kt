@@ -21,8 +21,8 @@ class Quest(
     @JoinColumn(name = "register_user_id")
     var user: User,
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "position_id")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "position")
     var position: Position,
 
     @Column(nullable = false)
