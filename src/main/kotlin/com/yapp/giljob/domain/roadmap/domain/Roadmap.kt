@@ -18,8 +18,8 @@ class Roadmap(
     @JoinColumn(name = "register_user_id")
     val user: User,
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "position_id")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "position")
     val position: Position,
 
     @Column(nullable = false)

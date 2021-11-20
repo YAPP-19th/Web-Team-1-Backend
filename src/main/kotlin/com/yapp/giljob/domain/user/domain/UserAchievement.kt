@@ -13,7 +13,7 @@ class UserAchievement(
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    val user:User,
+    val user: User,
 
     @ManyToOne
     @JoinColumn(name = "achievement_id")
