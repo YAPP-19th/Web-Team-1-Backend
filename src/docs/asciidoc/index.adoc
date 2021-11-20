@@ -26,6 +26,16 @@ include::{snippets}/quests/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/get/response-fields.adoc[]
 
+=== POST /api/quests/{questId}/participation
+.request
+include::{snippets}/quests/participation/post/http-request.adoc[]
+.response
+include::{snippets}/quests/participation/post/http-response.adoc[]
+.request fields
+include::{snippets}/quests/participation/post/path-parameters.adoc[]
+.response fields
+include::{snippets}/quests/participation/post/response-fields.adoc[]
+
 == Sign API
 === POST /sign-up
 .request
