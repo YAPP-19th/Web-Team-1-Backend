@@ -37,7 +37,7 @@ class QuestController(
     @GetMapping("/count")
     fun getAllQuestCount(): ResponseEntity<BaseResponse<QuestCountDto>> {
         return ResponseEntity.ok(
-            BaseResponse.of(HttpStatus.OK, "퀘스트 리스트 조회 성공입니다.", questService.getAllQuestCount())
+            BaseResponse.of(HttpStatus.OK, "전체 퀘스트 수 조회 성공입니다.", questService.getAllQuestCount())
         )
     }
 }

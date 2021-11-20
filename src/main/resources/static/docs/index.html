@@ -452,6 +452,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_post_apiquests">POST /api/quests</a></li>
 <li><a href="#_get_apiquests">GET /api/quests</a></li>
+<li><a href="#_get_apiquestscount">GET /api/quests/count</a></li>
 <li><a href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a></li>
 </ul>
 </li>
@@ -499,12 +500,12 @@ Host: docs.api.com:8080
 <div class="listingblock">
 <div class="title">response</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 Content-Length: 88
 
 {
-  "status" : 201,
+  "status" : 200,
   "message" : "퀘스트 생성 성공입니다.",
   "data" : null
 }</code></pre>
@@ -514,7 +515,7 @@ Content-Length: 88
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "status" : 201,
+  "status" : 200,
   "message" : "퀘스트 생성 성공입니다.",
   "data" : null
 }</code></pre>
@@ -538,7 +539,7 @@ Content-Length: 88
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">201</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
@@ -694,6 +695,69 @@ Content-Length: 984
 </table>
 </div>
 <div class="sect2">
+<h3 id="_get_apiquestscount"><a class="link" href="#_get_apiquestscount">GET /api/quests/count</a></h3>
+<div class="listingblock">
+<div class="title">request</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/quests/count HTTP/1.1
+Host: docs.api.com:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 117
+
+{
+  "status" : 200,
+  "message" : "전체 퀘스트 수 조회 성공입니다.",
+  "data" : {
+    "count" : 73
+  }
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. response fields</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.count</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">전체 퀘스트 수</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
 <h3 id="_post_apiquestsquestidparticipation"><a class="link" href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a></h3>
 <div class="listingblock">
 <div class="title">request</div>
@@ -706,19 +770,19 @@ Host: docs.api.com:8080</code></pre>
 <div class="listingblock">
 <div class="title">response</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 Content-Length: 88
 
 {
-  "status" : 201,
+  "status" : 200,
   "message" : "퀘스트 참여 성공입니다.",
   "data" : null
 }</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. /api/quests/{questId}/participation</caption>
+<caption class="title">Table 4. /api/quests/{questId}/participation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -737,7 +801,7 @@ Content-Length: 88
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. response fields</caption>
+<caption class="title">Table 5. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -754,7 +818,7 @@ Content-Length: 88
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">201</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
@@ -795,11 +859,11 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM3Mzc5ODc5LCJleHAiOjE2Mzc0Nzk4Nzl9.Qmg6ks5V0GNa1IqF64XA1MVhlaBYQ18434Z-refP818</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM3NDA2ODIyLCJleHAiOjE2Mzc1MDY4MjJ9.BWLecwr5z37YLUFENZzbDepmbUl6BaW7qfqibaUpBvU</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. response</caption>
+<caption class="title">Table 6. response</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -837,11 +901,11 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3Mzc5ODc4LCJleHAiOjE2Mzc0Nzk4Nzh9.-cEqUXujSX4QmeXNxoptN-q-_OnE9L-H8N92x4AkJfs</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3NDA2ODIyLCJleHAiOjE2Mzc1MDY4MjJ9.8h8FOx6lHpsag9LMWfqMPdlkVT2HDeyxka4Z7VXRyrU</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. response</caption>
+<caption class="title">Table 7. response</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -866,7 +930,7 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3Mzc5ODc4LCJleHAi
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-11-20 12:44:04 +0900
+Last updated 2021-11-20 20:10:52 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
