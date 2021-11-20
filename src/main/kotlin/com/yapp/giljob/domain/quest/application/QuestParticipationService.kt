@@ -18,7 +18,7 @@ class QuestParticipationService(
 ) {
     @Transactional
     fun participateQuest(questId: Long, user: User) {
-        val quest = validateQuest(questId, user)
+        val quest = validateAndGetQuest(questId, user)
 
         val questParticipationPK = QuestParticipationPK(user.id!!, questId)
         if (questParticipationRepository.existsById(questParticipationPK)) throw BusinessException(ErrorCode.ALREADY_PARTICIPATED_QUEST)
@@ -26,7 +26,7 @@ class QuestParticipationService(
         questParticipationRepository.save(QuestParticipation(questParticipationPK, quest, user))
     }
 
-    private fun validateQuest(questId: Long, user: User): Quest {
+    private fun validateAndGetQuest(questId: Long, user: User): Quest {
         val quest = QuestHelper.getQuestById(questRepository, questId)
         if (quest.user == user) throw BusinessException(ErrorCode.CANNOT_PARTICIPATE_MY_QUEST)
         return quest
