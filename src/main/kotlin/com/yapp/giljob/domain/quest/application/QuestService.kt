@@ -4,6 +4,7 @@ import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
+import com.yapp.giljob.domain.quest.dto.response.QuestCountDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.tag.application.TagService
@@ -40,4 +41,7 @@ class QuestService(
             questMapper.toDto(it, userMapper.toDto(it.user, it.point))
         }
     }
+
+    @Transactional(readOnly = true)
+    fun getAllQuestCount() = QuestCountDto(questRepository.count())
 }
