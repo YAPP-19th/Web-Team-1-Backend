@@ -19,7 +19,7 @@ class QuestController(
     @PostMapping
     fun saveQuest(@RequestBody questSaveRequestDto: QuestSaveRequestDto, @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
         questService.saveQuest(questSaveRequestDto, user)
-        return ResponseEntity(BaseResponse.of(HttpStatus.CREATED, "퀘스트 생성 성공입니다."), HttpStatus.CREATED)
+        return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "퀘스트 생성 성공입니다."))
     }
 
 

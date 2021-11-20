@@ -16,6 +16,6 @@ class QuestParticipationController(
     @PostMapping("/participation")
     fun participateQuest(@PathVariable questId: Long, @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
         questParticipationService.participateQuest(questId, user)
-        return ResponseEntity(BaseResponse.of(HttpStatus.CREATED, "퀘스트 참여 성공입니다."), HttpStatus.CREATED)
+        return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "퀘스트 참여 성공입니다."))
     }
 }

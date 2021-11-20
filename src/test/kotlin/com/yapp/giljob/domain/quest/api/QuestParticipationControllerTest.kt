@@ -37,7 +37,7 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
         ).andDo(MockMvcResultHandlers.print())
 
         result
-            .andExpect(MockMvcResultMatchers.status().isCreated)
+            .andExpect(MockMvcResultMatchers.status().isOk)
             .andDo(
                 MockMvcRestDocumentation.document(
                     "quests/participation/post",
@@ -48,7 +48,7 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
                     HeaderDocumentation.responseHeaders(),
                     PayloadDocumentation.responseFields(
                         PayloadDocumentation.fieldWithPath("status")
-                            .description("201"),
+                            .description("200"),
                         PayloadDocumentation.fieldWithPath("message")
                             .description("성공 메세지"),
                         PayloadDocumentation.fieldWithPath("data")
