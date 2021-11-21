@@ -32,9 +32,31 @@ class QuestSupportRepositoryImpl(
             .fetch()
     }
 
+
+    override fun findByUserIdAndIdLessThanAndOrderByIdDesc(userId: Long, id: Long?, position: Position, size: Long): List<QuestSupportVo> {
+        return query.select(
+            Projections.constructor(
+                QuestSupportVo::class.java,
+                quest.id,
+                quest.name,
+                quest.position,
+                quest.user,
+                quest.difficulty,
+                ability.point,
+                quest.thumbnail
+            )
+        ).from(quest)
+            .where(quest.user.id.eq(userId).and(eqPosition(position)?.and(ltQuestId(id)) ?: ltQuestId(id)))
+            .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
+            .orderBy(quest.id.desc())
+            .limit(size)
+            .fetch()
+    }
+
     private fun ltQuestId(questId: Long?): BooleanExpression? {
         return questId?.let { quest.id.lt(questId) }
     }
+
     private fun eqPosition(position: Position): BooleanExpression? {
         return if (position == Position.ALL) null else quest.position.eq(position)
     }
