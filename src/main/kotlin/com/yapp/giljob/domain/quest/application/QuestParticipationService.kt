@@ -36,7 +36,7 @@ class QuestParticipationService(
 
     private fun getOnProgressQuestCount() = questParticipationRepository.countByQuest()
 
-    private fun getQuestParticipantCount() = questParticipationRepository.countByUser()
+    private fun getQuestParticipantCount() = questParticipationRepository.countByParticipant()
 
     private fun validateAndGetQuest(questId: Long, user: User): Quest {
         val quest = QuestHelper.getQuestById(questRepository, questId)

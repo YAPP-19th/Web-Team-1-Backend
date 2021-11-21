@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query
 
 interface QuestParticipationRepository: JpaRepository<QuestParticipation, QuestParticipationPK> {
     @Query("select count(distinct id.participantId) from QuestParticipation")
-    fun countByUser(): Long
+    fun countByParticipant(): Long
 
     @Query("select count(distinct id.questId) from QuestParticipation")
     fun countByQuest(): Long
