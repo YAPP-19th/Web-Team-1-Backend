@@ -3,7 +3,7 @@ package com.yapp.giljob.domain.quest.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
-import com.yapp.giljob.domain.quest.dto.response.QuestCountDto
+import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.dto.DtoFactory
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
 import org.springframework.restdocs.headers.HeaderDocumentation
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
@@ -131,33 +130,6 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 난이도"),
                         PayloadDocumentation.fieldWithPath("data[*].thumbnail")
                             .description("퀘스트 썸네일 url"),
-                    )
-                )
-            )
-    }
-
-    @Test
-    fun getAllQuestCountTest() {
-        given(questService.getAllQuestCount()).willReturn(QuestCountDto(73L))
-
-        val result = mockMvc.perform(get("/api/quests/count")).andDo(print())
-
-        result
-            .andExpect(status().isOk)
-            .andDo(
-                MockMvcRestDocumentation.document(
-                    "quests/count/get",
-                    HeaderDocumentation.responseHeaders(),
-                    HeaderDocumentation.responseHeaders(),
-                    PayloadDocumentation.responseFields(
-                        PayloadDocumentation.fieldWithPath("status")
-                            .description("200"),
-                        PayloadDocumentation.fieldWithPath("message")
-                            .description("성공 메세지"),
-                        PayloadDocumentation.fieldWithPath("data")
-                            .description("응답 데이터"),
-                        PayloadDocumentation.fieldWithPath("data.count")
-                            .description("전체 퀘스트 수")
                     )
                 )
             )

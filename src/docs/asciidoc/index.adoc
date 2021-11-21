@@ -27,6 +27,8 @@ include::{snippets}/quests/get/http-response.adoc[]
 include::{snippets}/quests/get/response-fields.adoc[]
 
 === GET /api/quests/count
+랜딩 페이지 퀘스트 수 조회
+
 .request
 include::{snippets}/quests/count/get/http-request.adoc[]
 .response
