@@ -1,5 +1,6 @@
 package com.yapp.giljob.domain.quest.dao
 
+import com.querydsl.core.BooleanBuilder
 import com.querydsl.core.types.Projections
 import com.yapp.giljob.domain.quest.domain.QQuest.quest
 import com.yapp.giljob.domain.user.domain.QAbility.ability
@@ -18,6 +19,13 @@ class QuestSupportRepositoryImpl(
         userId: Long?,
         size: Long
     ): List<QuestSupportVo> {
+        val builder = BooleanBuilder()
+
+        if (userId == null){
+            builder.and(eqPosition(position)).and(ltQuestId(questId))
+        }
+        else builder.and(eqUserId(userId)).and(eqPosition(position)).and(ltQuestId(questId))
+
         return query.select(
             Projections.constructor(
                 QuestSupportVo::class.java,
@@ -30,7 +38,7 @@ class QuestSupportRepositoryImpl(
                 quest.thumbnail
             )
         ).from(quest)
-            .where((eqPosition(position)?.and(ltQuestId(questId)) ?: ltQuestId(questId))?.and(eqUserId(userId)))
+            .where(builder)
             .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
             .orderBy(quest.id.desc())
             .limit(size)
@@ -45,7 +53,7 @@ class QuestSupportRepositoryImpl(
         return if (position == Position.ALL) null else quest.position.eq(position)
     }
 
-    private fun eqUserId(userId: Long?): BooleanExpression? {
-        return userId?.let { quest.user.id.lt(userId) }
+    private fun eqUserId(userId: Long): BooleanExpression {
+        return quest.user.id.eq(userId)
     }
 }
