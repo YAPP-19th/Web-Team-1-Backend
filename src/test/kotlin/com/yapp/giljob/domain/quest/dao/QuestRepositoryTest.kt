@@ -31,7 +31,7 @@ class QuestRepositoryTest @Autowired constructor(
 
     @BeforeEach
     fun setUp() {
-        for (i in 1..5L) {
+        repeat(5) {
             userList.add(
                 userRepository.save(
                     User(socialId = "testSocialId", nickname = "testNickname", position = Position.BACKEND)
@@ -40,7 +40,7 @@ class QuestRepositoryTest @Autowired constructor(
 
         }
         // 첫 번째 유저가 퀘스트들을 생성한다.
-        for (i in 1..5L) {
+        repeat(5) {
             questList.add(
                 questRepository.save(
                     Quest(name = "test quest", user = userList[0], position = Position.BACKEND, tagList = mutableListOf(), difficulty = 1, thumbnail = "test.png", detail = "test quest detail", subQuestList = mutableListOf(SubQuest(name = "sub quest 1"), SubQuest(name = "sub quest 2")))

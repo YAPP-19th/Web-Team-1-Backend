@@ -31,7 +31,7 @@ class QuestSupportRepositoryImplTest {
     @Autowired
     private lateinit var abilityRepository: AbilityRepository
 
-    private val questSaveSize = 5L
+    private val questSaveSize = 5
 
     private lateinit var user: User
 
@@ -42,11 +42,11 @@ class QuestSupportRepositoryImplTest {
         questSaveList = mutableListOf()
         user = userRepository.save(EntityFactory.testUser())
 
-        for (i in 1..questSaveSize) {
+        repeat(questSaveSize) {
             questSaveList.add(
                 questRepository.save(
                     Quest(
-                        name = "test quest $i",
+                        name = "test quest",
                         user = user,
                         position = Position.BACKEND,
                         difficulty = 1,
@@ -68,10 +68,10 @@ class QuestSupportRepositoryImplTest {
 
             // when
             val questList =
-                questSupportRepository.findByIdLessThanAndOrderByIdDesc(cursorId, Position.ALL, questSaveSize)
+                questSupportRepository.findByIdLessThanAndOrderByIdDesc(cursorId, Position.ALL, questSaveSize.toLong())
 
             // then
-            assertEquals(questSaveSize, questList.size.toLong())
+            assertEquals(questSaveSize, questList.size)
             assertEquals(lastQuestId, questList[0].id)
             assertEquals(lastQuestId - 1L, questList[1].id)
             assertEquals(lastQuestId - 2L, questList[2].id)

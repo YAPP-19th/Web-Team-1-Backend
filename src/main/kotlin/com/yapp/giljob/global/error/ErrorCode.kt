@@ -25,7 +25,5 @@ enum class ErrorCode(
     NOT_SIGN_UP_USER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "S003", "Not Sign Up User Error"),
 
     // Quest
-    CANNOT_PARTICIPATE_MY_QUEST(HttpStatus.BAD_REQUEST, "Q001", "Cannot Participate My Quest"),
     ALREADY_PARTICIPATED_QUEST(HttpStatus.BAD_REQUEST, "Q002", "Already Participated Quest"),
-
 }
