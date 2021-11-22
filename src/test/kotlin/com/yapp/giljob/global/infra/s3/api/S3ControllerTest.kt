@@ -39,7 +39,7 @@ class S3ControllerTest : AbstractRestDocs() {
             FileInputStream("/Users/we/Web-Team-1-Backend/src/main/resources/img/test.png")
         )
 
-        given(s3Service.fileUplaod(any())).willReturn(DtoFactory.testS3UploadResponse())
+        given(s3Service.fileUpload(any())).willReturn(DtoFactory.testS3UploadResponse())
 
         val result = mockMvc.perform(
             MockMvcRequestBuilders
@@ -64,7 +64,7 @@ class S3ControllerTest : AbstractRestDocs() {
                         PayloadDocumentation.fieldWithPath("message")
                             .description("성공 메세지"),
                         PayloadDocumentation.fieldWithPath("data")
-                            .description("업로드한 사진 url"),
+                            .description("응답 데이터"),
                         PayloadDocumentation.fieldWithPath("data.fileUrl")
                             .description("업로드한 사진 url"),
                     )

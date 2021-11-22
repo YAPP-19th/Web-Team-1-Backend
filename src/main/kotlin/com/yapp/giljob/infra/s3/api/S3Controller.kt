@@ -17,7 +17,7 @@ class S3Controller(
     @PostMapping
     fun upload(@RequestParam("file") file: MultipartFile): ResponseEntity<BaseResponse<S3UploadResponseDto>>{
         return ResponseEntity.ok(
-            BaseResponse.of(HttpStatus.OK, "썸네일 업로드 성공입니다.", s3Service.fileUplaod(file))
+            BaseResponse.of(HttpStatus.OK, "썸네일 업로드 성공입니다.", s3Service.fileUpload(file))
         )
     }
 

@@ -12,20 +12,21 @@ import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
 @Service
-class S3Service @Autowired constructor(
-    private var amazonS3: AmazonS3
+class S3Service(
+    private val amazonS3: AmazonS3
 ){
     @Value("\${cloud.aws.s3.bucket}")
     private lateinit var bucketName: String
 
-    fun fileUplaod(file: MultipartFile): S3UploadResponseDto {
+    fun fileUpload(file: MultipartFile): S3UploadResponseDto {
         val fileName: String
 
         try {
-            fileName = UUID.randomUUID().toString() + file!!.originalFilename
-            val metadata = ObjectMetadata()
-            metadata.contentLength = file!!.size
-            amazonS3.putObject(bucketName, fileName, file!!.inputStream, metadata)
+            val metadata = ObjectMetadata().apply {
+                contentLength = file.size
+            }
+            fileName = UUID.randomUUID().toString() + file.originalFilename
+            amazonS3.putObject(bucketName, fileName, file.inputStream, metadata)
         } catch (e: Exception) {
             throw BusinessException(ErrorCode.FILE_UPLOAD_ERROR)
         }
