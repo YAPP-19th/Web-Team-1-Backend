@@ -12,7 +12,12 @@ import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 class QuestSupportRepositoryImpl(
     private val query: JPAQueryFactory
 ) : QuestSupportRepository {
-    override fun findByIdLessThanAndOrderByIdDesc(id: Long?, position: Position, size: Long): List<QuestSupportVo> {
+    override fun findByIdLessThanAndOrderByIdDesc(
+        questId: Long?,
+        position: Position,
+        userId: Long?,
+        size: Long
+    ): List<QuestSupportVo> {
         return query.select(
             Projections.constructor(
                 QuestSupportVo::class.java,
@@ -25,28 +30,7 @@ class QuestSupportRepositoryImpl(
                 quest.thumbnail
             )
         ).from(quest)
-            .where(eqPosition(position)?.and(ltQuestId(id)) ?: ltQuestId(id))
-            .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
-            .orderBy(quest.id.desc())
-            .limit(size)
-            .fetch()
-    }
-
-
-    override fun findByUserIdAndIdLessThanAndOrderByIdDesc(userId: Long, id: Long?, position: Position, size: Long): List<QuestSupportVo> {
-        return query.select(
-            Projections.constructor(
-                QuestSupportVo::class.java,
-                quest.id,
-                quest.name,
-                quest.position,
-                quest.user,
-                quest.difficulty,
-                ability.point,
-                quest.thumbnail
-            )
-        ).from(quest)
-            .where(quest.user.id.eq(userId).and(eqPosition(position)?.and(ltQuestId(id)) ?: ltQuestId(id)))
+            .where((eqPosition(position)?.and(ltQuestId(questId)) ?: ltQuestId(questId))?.and(eqUserId(userId)))
             .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
             .orderBy(quest.id.desc())
             .limit(size)
@@ -59,5 +43,9 @@ class QuestSupportRepositoryImpl(
 
     private fun eqPosition(position: Position): BooleanExpression? {
         return if (position == Position.ALL) null else quest.position.eq(position)
+    }
+
+    private fun eqUserId(userId: Long?): BooleanExpression? {
+        return userId?.let { quest.user.id.lt(userId) }
     }
 }

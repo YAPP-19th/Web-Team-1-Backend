@@ -17,7 +17,7 @@ class UserQuestService(
 ) {
     @Transactional(readOnly = true)
     fun getQuestListByUser(userId: Long, questId: Long?, position: Position, size: Long): List<QuestResponseDto> {
-        val questList = questRepository.findByUserIdAndIdLessThanAndOrderByIdDesc(userId, questId, position, size)
+        val questList = questRepository.findByIdLessThanAndOrderByIdDesc(questId, position, userId, size)
 
         return questList.map {
             questMapper.toDto(it, userMapper.toDto(it.user, it.point))

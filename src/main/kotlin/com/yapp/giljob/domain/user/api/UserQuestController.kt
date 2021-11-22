@@ -22,7 +22,7 @@ class UserQuestController(
     ): ResponseEntity<BaseResponse<List<QuestResponseDto>>> {
         return ResponseEntity.ok(
             BaseResponse.of(
-                HttpStatus.OK, "퀘스트 리스트 조회 성공입니다.",
+                HttpStatus.OK, "유저가 생성한 퀘스트 리스트 조회 성공입니다.",
                 userQuestService.getQuestListByUser(userId, cursor, position, size)
             )
         )
