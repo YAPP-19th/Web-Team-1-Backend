@@ -11,5 +11,7 @@ class QuestHelper {
             questRepository.findByIdOrNull(questId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
 
         fun findQuestById(questRepository: QuestRepository, questId: Long) = questRepository.findByIdOrNull(questId)
+
+        fun totalCount(questRepository: QuestRepository) = questRepository.count()
     }
 }

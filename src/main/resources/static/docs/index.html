@@ -452,6 +452,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_post_apiquests">POST /api/quests</a></li>
 <li><a href="#_get_apiquests">GET /api/quests</a></li>
+<li><a href="#_get_apiquestscount">GET /api/quests/count</a></li>
 <li><a href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a></li>
 </ul>
 </li>
@@ -661,7 +662,7 @@ Content-Length: 984
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리스트</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터(퀘스트 리스트)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].id</code></p></td>
@@ -707,6 +708,84 @@ Content-Length: 984
 </table>
 </div>
 <div class="sect2">
+<h3 id="_get_apiquestscount"><a class="link" href="#_get_apiquestscount">GET /api/quests/count</a></h3>
+<div class="paragraph">
+<p>랜딩 페이지 퀘스트 수 조회</p>
+</div>
+<div class="listingblock">
+<div class="title">request</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/quests/count HTTP/1.1
+Host: docs.api.com:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 188
+
+{
+  "status" : 200,
+  "message" : "퀘스트 수 조회 성공입니다.",
+  "data" : {
+    "totalQuestCount" : 124,
+    "onProgressQuestCount" : 27,
+    "totalParticipantCount" : 52
+  }
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. response fields</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.totalQuestCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">전체 퀘스트 수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.onProgressQuestCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">진행 중 퀘스트 수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.totalParticipantCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
 <h3 id="_post_apiquestsquestidparticipation"><a class="link" href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a></h3>
 <div class="paragraph">
 <p>퀘스트 참여</p>
@@ -734,7 +813,7 @@ Content-Length: 88
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. /api/quests/{questId}/participation</caption>
+<caption class="title">Table 4. /api/quests/{questId}/participation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -753,7 +832,7 @@ Content-Length: 88
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. response fields</caption>
+<caption class="title">Table 5. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">

@@ -22,6 +22,7 @@ class WebSecurityConfig(
             "/h2-console/**",
             "/sign-up",
             "/sign-in",
+            "/api/quests/count",
             "/api/users/**/quests",
             "/don't-pass-filter",
             "/docs/index.html",

@@ -20,7 +20,7 @@ class QuestParticipation(
     @MapsId("participantId")
     @ManyToOne
     @JoinColumn(name = "participant_id")
-    val user: User,
+    val participant: User,
 
     @Column(name = "is_completed", nullable = false)
     var isCompleted: Boolean = false

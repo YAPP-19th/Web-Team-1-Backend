@@ -2,9 +2,9 @@ package com.yapp.giljob.domain.quest.application
 
 import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
-import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.domain.QuestParticipation
 import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
+import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
@@ -18,7 +18,7 @@ class QuestParticipationService(
 ) {
     @Transactional
     fun participateQuest(questId: Long, user: User) {
-        val quest = validateAndGetQuest(questId, user)
+        val quest = QuestHelper.getQuestById(questRepository, questId)
 
         val questParticipationPK = QuestParticipationPK(user.id!!, questId)
         if (questParticipationRepository.existsById(questParticipationPK)) throw BusinessException(ErrorCode.ALREADY_PARTICIPATED_QUEST)
@@ -26,9 +26,14 @@ class QuestParticipationService(
         questParticipationRepository.save(QuestParticipation(questParticipationPK, quest, user))
     }
 
-    private fun validateAndGetQuest(questId: Long, user: User): Quest {
-        val quest = QuestHelper.getQuestById(questRepository, questId)
-        if (quest.user == user) throw BusinessException(ErrorCode.CANNOT_PARTICIPATE_MY_QUEST)
-        return quest
-    }
+    @Transactional(readOnly = true)
+    fun getAllQuestCount() = QuestCountResponseDto(
+        totalQuestCount = QuestHelper.totalCount(questRepository),
+        onProgressQuestCount = getOnProgressQuestCount(),
+        totalParticipantCount = getQuestParticipantCount()
+    )
+
+    private fun getOnProgressQuestCount() = questParticipationRepository.countQuests()
+
+    private fun getQuestParticipantCount() = questParticipationRepository.countParticipants()
 }

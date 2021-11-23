@@ -52,21 +52,6 @@ class QuestParticipationServiceTest {
     }
 
     @Test
-    fun `자신이 생성한 퀘스트에 참여하면 예외가 발생한다`() {
-        // given
-        every { questRepository.findByIdOrNull(any()) } returns quest
-
-        // when
-        val exception =
-            assertThrows(BusinessException::class.java) {
-                questParticipationService.participateQuest(questId, quest.user)
-            }
-
-        // then
-        assertEquals(ErrorCode.CANNOT_PARTICIPATE_MY_QUEST, exception.errorCode)
-    }
-
-    @Test
     fun `이미 참여한 퀘스트에 참여하면 예외가 발생한다`() {
         // given
         val user = User(

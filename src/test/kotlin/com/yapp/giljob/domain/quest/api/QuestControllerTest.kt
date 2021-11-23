@@ -3,6 +3,7 @@ package com.yapp.giljob.domain.quest.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
+import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.dto.DtoFactory
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.given
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
 import org.springframework.restdocs.headers.HeaderDocumentation
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
@@ -113,7 +113,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
                         PayloadDocumentation.fieldWithPath("message")
                             .description("성공 메세지"),
                         PayloadDocumentation.fieldWithPath("data")
-                            .description("퀘스트 리스트"),
+                            .description("응답 데이터(퀘스트 리스트)"),
                         PayloadDocumentation.fieldWithPath("data[*].id")
                             .description("퀘스트 id"),
                         PayloadDocumentation.fieldWithPath("data[*].name")
