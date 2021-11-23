@@ -466,6 +466,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_post_sign_in">POST /sign-in</a></li>
 </ul>
 </li>
+<li><a href="#_upload_api">Upload API</a>
+<ul class="sectlevel2">
+<li><a href="#_post_apiupload">POST /api/upload</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -802,11 +807,11 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 984
+Content-Length: 1004
 
 {
   "status" : 200,
-  "message" : "퀘스트 리스트 조회 성공입니다.",
+  "message" : "유저가 생성한 퀘스트 리스트 조회 성공입니다.",
   "data" : [ {
     "id" : 9,
     "name" : "quest test 9",
@@ -954,7 +959,7 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM3NDg2NzYzLCJleHAiOjE2Mzc1ODY3NjN9.WJWSQYRK3nOUXj9SFMda4SQh3LrL_A4lRKcAm0q0RZs</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM3NjczNDE1LCJleHAiOjE2Mzc3NzM0MTV9.d34dvNcr4eWxACvkC1P2raJAa_w9bEWk0JGmTKiamGA</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -996,7 +1001,7 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3NDg2NzYzLCJleHAiOjE2Mzc1ODY3NjN9.cH8SZGlWdwVVmlyEA81WjzW9zO1ubgea76ezR6aJNKc</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3NjczNDE0LCJleHAiOjE2Mzc3NzM0MTR9.ZmjOU7-2gqiH1V6GVHksmo-_d9Emg9-rSYkC66l_c4w</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -1021,11 +1026,103 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3NDg2NzYzLCJleHAi
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_upload_api"><a class="link" href="#_upload_api">Upload API</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_post_apiupload"><a class="link" href="#_post_apiupload">POST /api/upload</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 8. request</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>file</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업로드할 사진 파일</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 198
+
+{
+  "status" : 200,
+  "message" : "썸네일 업로드 성공입니다.",
+  "data" : {
+    "fileUrl" : "https://giljob.s3.us-east-2.amazonaws.com/0f792d8f-8fc0-49c6-ba39-b77d39024239test.jpeg"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "status" : 200,
+  "message" : "썸네일 업로드 성공입니다.",
+  "data" : {
+    "fileUrl" : "https://giljob.s3.us-east-2.amazonaws.com/0f792d8f-8fc0-49c6-ba39-b77d39024239test.jpeg"
+  }
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 9. response fields</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.fileUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업로드한 사진 url</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-11-21 18:25:20 +0900
+Last updated 2021-11-23 21:15:22 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
