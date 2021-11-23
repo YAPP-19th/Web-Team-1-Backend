@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Import
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(QuerydslTestConfig::class)
-class QuestRepositoryTest @Autowired constructor(
+class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
     private val questRepository: QuestRepository,
     private val questParticipationRepository: QuestParticipationRepository,
     private val userRepository: UserRepository
@@ -59,8 +59,8 @@ class QuestRepositoryTest @Autowired constructor(
         questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[1].id!!, questList[3].id!!), questList[3], userList[1]))
 
         // when
-        val totalParticipantCount = questParticipationRepository.countByParticipant()
-        val onProgressQuestCount = questParticipationRepository.countByQuest()
+        val totalParticipantCount = questParticipationRepository.countParticipants()
+        val onProgressQuestCount = questParticipationRepository.countQuests()
 
         assertEquals(1L, totalParticipantCount)
         assertEquals(4L, onProgressQuestCount)
@@ -75,8 +75,8 @@ class QuestRepositoryTest @Autowired constructor(
         questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[4].id!!, questList[0].id!!), questList[0], userList[4]))
 
         // when
-        val totalParticipantCount = questParticipationRepository.countByParticipant()
-        val onProgressQuestCount = questParticipationRepository.countByQuest()
+        val totalParticipantCount = questParticipationRepository.countParticipants()
+        val onProgressQuestCount = questParticipationRepository.countQuests()
 
         // then
         assertEquals(4L, totalParticipantCount)

@@ -33,7 +33,7 @@ class QuestParticipationService(
         totalParticipantCount = getQuestParticipantCount()
     )
 
-    private fun getOnProgressQuestCount() = questParticipationRepository.countByQuest()
+    private fun getOnProgressQuestCount() = questParticipationRepository.countQuests()
 
-    private fun getQuestParticipantCount() = questParticipationRepository.countByParticipant()
+    private fun getQuestParticipantCount() = questParticipationRepository.countParticipants()
 }
