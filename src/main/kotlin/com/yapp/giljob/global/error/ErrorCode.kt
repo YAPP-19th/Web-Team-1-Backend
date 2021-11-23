@@ -26,4 +26,10 @@ enum class ErrorCode(
 
     // Quest
     ALREADY_PARTICIPATED_QUEST(HttpStatus.BAD_REQUEST, "Q002", "Already Participated Quest"),
+
+    // Position
+    POSITION_NOT_FOUND(HttpStatus.NOT_FOUND, "P001", "Position Not Found"),
+
+    // File Upload
+    FILE_UPLOAD_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "F001", "File Upload Error")
 }

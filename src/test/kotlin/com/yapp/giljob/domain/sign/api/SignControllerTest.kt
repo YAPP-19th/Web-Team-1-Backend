@@ -5,8 +5,10 @@ import com.yapp.giljob.domain.sign.repository.SignRepository
 import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
+import com.yapp.giljob.infra.kakao.application.KakaoService
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito.*
+import org.mockito.Mock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.HttpHeaders
@@ -27,12 +29,17 @@ internal class SignControllerTest : AbstractRestDocs() {
     @MockBean
     private lateinit var signRepository: SignRepository
 
+    @MockBean
+    private lateinit var kakaoService: KakaoService
+
     private val user = EntityFactory.testUser()
     private val signUpRequest = DtoFactory.testSignUpRequest()
     private val signInRequest = DtoFactory.testSignInRequest()
 
     @Test
     fun signUp() {
+        given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
+
         val jsonString = ObjectMapper().writeValueAsString(signUpRequest)
 
         val result = mockMvc
@@ -68,6 +75,7 @@ internal class SignControllerTest : AbstractRestDocs() {
     @Test
     fun signIn() {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
+        given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
 
         val jsonString = ObjectMapper().writeValueAsString(signInRequest)
 

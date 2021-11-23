@@ -1,11 +1,11 @@
 package com.yapp.giljob.domain.sign.application
 
 import com.yapp.giljob.domain.sign.repository.SignRepository
-import com.yapp.giljob.domain.sign.service.SignService
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
+import com.yapp.giljob.infra.kakao.application.KakaoService
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
@@ -25,6 +25,9 @@ import kotlin.properties.Delegates
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension::class, MockitoExtension::class)
 class SignServiceTest {
+
+    @Mock
+    lateinit var kakaoService: KakaoService
 
     @Mock
     lateinit var signRepository: SignRepository
@@ -47,6 +50,7 @@ class SignServiceTest {
     @Test
     fun `회원가입 서비스 성공`() {
         given(signRepository.findBySocialId(anyString())).willReturn(null)
+        given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
 
         val accessToken = signService.signUp(signUpRequest, response)
 
@@ -56,6 +60,7 @@ class SignServiceTest {
     @Test
     fun `로그인 서비스 성공`() {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
+        given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
 
         val accessToken = signService.signIn(signInRequest, response)
 
@@ -65,6 +70,7 @@ class SignServiceTest {
     @Test
     fun `기가입자가 회원가입시 서비스에서 에러`() {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
+        given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
 
         val exception = Assertions.assertThrows(BusinessException::class.java) {
             signService.signUp(signUpRequest, response)
@@ -76,6 +82,7 @@ class SignServiceTest {
     @Test
     fun `미가입자가 로그인시 서비스에서 에러`() {
         given(signRepository.findBySocialId(anyString())).willReturn(null)
+        given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
 
         val exception = Assertions.assertThrows(BusinessException::class.java) {
             signService.signIn(signInRequest, response)
