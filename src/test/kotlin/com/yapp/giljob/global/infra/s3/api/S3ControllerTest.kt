@@ -7,8 +7,8 @@ import com.yapp.giljob.global.config.security.GiljobTestUser
 import com.yapp.giljob.infra.s3.api.S3Controller
 import com.yapp.giljob.infra.s3.application.S3Service
 import org.junit.jupiter.api.Test
-import org.mockito.ArgumentMatchers.any
 import org.mockito.BDDMockito.given
+import org.mockito.Mockito
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.mock.web.MockMultipartFile
@@ -18,10 +18,14 @@ import org.springframework.restdocs.payload.PayloadDocumentation
 import org.springframework.restdocs.request.RequestDocumentation.*
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import java.io.FileInputStream
 
 @WebMvcTest(S3Controller::class)
 class S3ControllerTest : AbstractRestDocs() {
+    private fun <T> any(): T {
+        Mockito.any<T>()
+        return uninitialized()
+    }
+    private fun <T> uninitialized(): T = null as T
 
     @MockBean
     private lateinit var s3Service: S3Service
@@ -36,7 +40,7 @@ class S3ControllerTest : AbstractRestDocs() {
             "image",
             "test.png",
             "image/png",
-            FileInputStream("/Users/we/Web-Team-1-Backend/src/main/resources/img/test.png")
+            "<<png data>>".byteInputStream()
         )
 
         given(s3Service.fileUpload(any())).willReturn(DtoFactory.testS3UploadResponse())

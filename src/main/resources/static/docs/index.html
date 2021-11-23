@@ -455,6 +455,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a></li>
 </ul>
 </li>
+<li><a href="#_sign_api">Sign API</a>
+<ul class="sectlevel2">
+<li><a href="#_post_sign_up">POST /sign-up</a></li>
+<li><a href="#_post_sign_in">POST /sign-in</a></li>
+</ul>
+</li>
+<li><a href="#_upload_api">Upload API</a>
+<ul class="sectlevel2">
+<li><a href="#_post_apiupload">POST /api/upload</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -493,12 +504,12 @@ Host: docs.api.com:8080
 <div class="listingblock">
 <div class="title">response</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 Content-Length: 88
 
 {
-  "status" : 201,
+  "status" : 200,
   "message" : "퀘스트 생성 성공입니다.",
   "data" : null
 }</code></pre>
@@ -508,7 +519,7 @@ Content-Length: 88
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "status" : 201,
+  "status" : 200,
   "message" : "퀘스트 생성 성공입니다.",
   "data" : null
 }</code></pre>
@@ -532,7 +543,7 @@ Content-Length: 88
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">201</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
@@ -686,14 +697,7 @@ Content-Length: 984
 </tr>
 </tbody>
 </table>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p>== Sign API
-=== POST /sign-up
-.request</p>
 </div>
-<<<<<<< HEAD
 <div class="sect2">
 <h3 id="_post_apiquestsquestidparticipation"><a class="link" href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a></h3>
 <div class="listingblock">
@@ -707,12 +711,12 @@ Host: docs.api.com:8080</code></pre>
 <div class="listingblock">
 <div class="title">response</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 Content-Length: 88
 
 {
-  "status" : 201,
+  "status" : 200,
   "message" : "퀘스트 참여 성공입니다.",
   "data" : null
 }</code></pre>
@@ -755,7 +759,7 @@ Content-Length: 88
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">201</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
@@ -777,9 +781,8 @@ Content-Length: 88
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_post_sign_up"><a class="link" href="#_post_sign_up">POST /sign-up</a></h3>
-=======
->>>>>>> 6ad5173 ([GILJOB-58] 사진 업로드 api 구현)
 <div class="listingblock">
+<div class="title">request</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /sign-up HTTP/1.1
 Content-Type: application/json;charset=UTF-8
@@ -797,11 +800,7 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-<<<<<<< HEAD
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM3Mzc5ODc5LCJleHAiOjE2Mzc0Nzk4Nzl9.Qmg6ks5V0GNa1IqF64XA1MVhlaBYQ18434Z-refP818</code></pre>
-=======
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM3Mzg2OTExLCJleHAiOjE2Mzc0ODY5MTF9.IZfWWmOxamlmha4qmTN7eiAxm9MPFxKOY8GAzAGEQ_Q</code></pre>
->>>>>>> 6ad5173 ([GILJOB-58] 사진 업로드 api 구현)
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM3NjUyMjAzLCJleHAiOjE2Mzc3NTIyMDN9.6CK72d4N3xuytW5c6kdJUaxL52WQDql8csjoXDxSo5Q</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -823,11 +822,11 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM3Mzg2OTExLCJl
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>=== POST /sign-in
-.request</p>
 </div>
+<div class="sect2">
+<h3 id="_post_sign_in"><a class="link" href="#_post_sign_in">POST /sign-in</a></h3>
 <div class="listingblock">
+<div class="title">request</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /sign-in HTTP/1.1
 Content-Type: application/json;charset=UTF-8
@@ -843,11 +842,7 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-<<<<<<< HEAD
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3Mzc5ODc4LCJleHAiOjE2Mzc0Nzk4Nzh9.-cEqUXujSX4QmeXNxoptN-q-_OnE9L-H8N92x4AkJfs</code></pre>
-=======
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3Mzg2OTExLCJleHAiOjE2Mzc0ODY5MTF9.WPmRYX3lcZf5ua3OKDHFEdn6ZTdB7TAEqElmiZ3p8Tw</code></pre>
->>>>>>> 6ad5173 ([GILJOB-58] 사진 업로드 api 구현)
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3NjUyMjAzLCJleHAiOjE2Mzc3NTIyMDN9.ClDK1pQzUzzJAD4rJNceZ1LdJppwO-7l89fhQlMng_U</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -869,29 +864,46 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3Mzg2OTExLCJleHAi
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 </div>
 </div>
 </div>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p>== Upload API
-=== POST /api/upload
-.request
-.response</p>
-</div>
+<div class="sect1">
+<h2 id="_upload_api"><a class="link" href="#_upload_api">Upload API</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_post_apiupload"><a class="link" href="#_post_apiupload">POST /api/upload</a></h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 7. request</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>file</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업로드할 사진 파일</p></td>
+</tr>
+</tbody>
+</table>
 <div class="listingblock">
+<div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 91
+Content-Length: 198
 
 {
   "status" : 200,
   "message" : "썸네일 업로드 성공입니다.",
-  "data" : null
+  "data" : {
+    "fileUrl" : "https://giljob.s3.us-east-2.amazonaws.com/0f792d8f-8fc0-49c6-ba39-b77d39024239test.jpeg"
+  }
 }</code></pre>
 </div>
 </div>
@@ -901,12 +913,14 @@ Content-Length: 91
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "status" : 200,
   "message" : "썸네일 업로드 성공입니다.",
-  "data" : null
+  "data" : {
+    "fileUrl" : "https://giljob.s3.us-east-2.amazonaws.com/0f792d8f-8fc0-49c6-ba39-b77d39024239test.jpeg"
+  }
 }</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. response fields</caption>
+<caption class="title">Table 8. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -932,8 +946,13 @@ Content-Length: 91
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.fileUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업로드한 사진 url</p></td>
 </tr>
 </tbody>
 </table>
@@ -941,16 +960,10 @@ Content-Length: 91
 </div>
 </div>
 </div>
-</div>
-</div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-<<<<<<< HEAD
-Last updated 2021-11-20 12:44:04 +0900
-=======
-Last updated 2021-11-20 14:35:23 +0900
->>>>>>> 6ad5173 ([GILJOB-58] 사진 업로드 api 구현)
+Last updated 2021-11-23 11:43:58 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
