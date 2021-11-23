@@ -52,3 +52,14 @@ include::{snippets}/sign-in/post/http-request.adoc[]
 include::{snippets}/sign-in/post/http-response.adoc[]
 .response
 include::{snippets}/sign-in/post/response-headers.adoc[]
+
+== Upload API
+=== POST /api/upload
+.request
+include::{snippets}/upload/post/request-parameters.adoc[]
+.response
+include::{snippets}/upload/post/http-response.adoc[]
+.response
+include::{snippets}/upload/post/response-body.adoc[]
+.response fields
+include::{snippets}/upload/post/response-fields.adoc[]

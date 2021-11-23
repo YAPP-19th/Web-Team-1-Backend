@@ -23,7 +23,8 @@ class WebSecurityConfig(
             "/sign-up",
             "/sign-in",
             "/don't-pass-filter",
-            "/docs/index.html"
+            "/docs/index.html",
+            "/api/upload"
         )
         web.ignoring().antMatchers(HttpMethod.GET, "/api/quests")
     }

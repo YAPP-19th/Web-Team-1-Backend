@@ -39,36 +39,6 @@ class SignControllerIntegrationTest @Autowired constructor(
     private val signInRequest = DtoFactory.testSignInRequest()
 
     @Test
-    fun `회원가입 성공`() {
-
-        val content = jacksonObjectMapper().writeValueAsString(signUpRequest)
-
-        mockMvc
-            .perform(MockMvcRequestBuilders.post("/sign-up")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(content))
-            .andExpect(status().isOk)
-            .andExpect(header().exists(HttpHeaders.AUTHORIZATION))
-            .andDo(print())
-    }
-
-    @Test
-    fun `로그인 성공`() {
-
-        signRepository.save(user)
-
-        val content = jacksonObjectMapper().writeValueAsString(signInRequest)
-
-        mockMvc
-            .perform(MockMvcRequestBuilders.post("/sign-in")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(content))
-            .andExpect(status().isOk)
-            .andExpect(header().exists(HttpHeaders.AUTHORIZATION))
-            .andDo(print())
-    }
-
-    @Test
     fun `잘못된 카카오 access token으로 회원가입 시 에러`() {
 
         val signUpRequest = SignUpRequestDto(
