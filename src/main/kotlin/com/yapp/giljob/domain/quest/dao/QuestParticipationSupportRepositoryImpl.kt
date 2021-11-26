@@ -5,8 +5,8 @@ import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
-import com.yapp.giljob.domain.user.domain.QAbility.ability
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
+import com.yapp.giljob.domain.user.domain.QAbility.ability
 
 class QuestParticipationSupportRepositoryImpl(
     private val query: JPAQueryFactory
@@ -35,13 +35,8 @@ class QuestParticipationSupportRepositoryImpl(
             .select(
                 Projections.constructor(
                     QuestSupportVo::class.java,
-                    questParticipation.quest.id,
-                    questParticipation.quest.name,
-                    questParticipation.quest.position,
-                    questParticipation.quest.user,
-                    questParticipation.quest.difficulty,
-                    ability.point,
-                    questParticipation.quest.thumbnail
+                    questParticipation.quest,
+                    ability.point
                 )
             ).from(questParticipation)
             .where(
@@ -51,7 +46,7 @@ class QuestParticipationSupportRepositoryImpl(
                 ability.position.eq(questParticipation.quest.user.position)
                     .and(ability.user.id.eq(questParticipation.quest.user.id))
             )
-            .orderBy(questParticipation.quest.id.desc())
+        .orderBy(questParticipation.quest.id.desc())
             .limit(size)
             .fetch()
     }

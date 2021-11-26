@@ -6,7 +6,7 @@ import java.io.Serializable
 import javax.persistence.Embeddable
 
 @Embeddable
-class SubQuestParticipatedPK(
+class SubQuestParticipationPK(
     var participantId: Long,
     var subQuestId: Long
 ) : Serializable {
@@ -15,6 +15,6 @@ class SubQuestParticipatedPK(
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
 
     companion object {
-        private val equalsAndHashCodeProperties = arrayOf(SubQuestParticipatedPK::participantId, SubQuestParticipatedPK::subQuestId)
+        private val equalsAndHashCodeProperties = arrayOf(SubQuestParticipationPK::participantId, SubQuestParticipationPK::subQuestId)
     }
 }

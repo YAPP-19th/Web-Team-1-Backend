@@ -38,7 +38,7 @@ class QuestService(
             questRepository.findByIdLessThanAndOrderByIdDesc(questId = questId, position = position, size = size)
 
         return questList.map {
-            questMapper.toDto(it, userMapper.toDto(it.user, it.point))
+            questMapper.toDto(it, userMapper.toDto(it.quest.user, it.point))
         }
     }
 }

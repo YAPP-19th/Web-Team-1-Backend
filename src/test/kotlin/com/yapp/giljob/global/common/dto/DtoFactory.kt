@@ -7,7 +7,7 @@ import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
 import com.yapp.giljob.domain.subquest.dto.SubQuestRequest
 import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
-import com.yapp.giljob.domain.user.vo.UserSubVo
+import com.yapp.giljob.domain.user.vo.UserSubDto
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
 class DtoFactory {
@@ -28,7 +28,7 @@ class DtoFactory {
             position = Position.BACKEND,
             difficulty = 1,
             thumbnail = "test.png",
-            user = UserSubVo(
+            user = UserSubDto(
                 id = 1L,
                 nickname = "testNickname",
                 point = 100
