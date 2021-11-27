@@ -3,6 +3,7 @@ package com.yapp.giljob.global.common.dto
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
+import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
 import com.yapp.giljob.domain.subquest.dto.SubQuestRequest
@@ -33,6 +34,20 @@ class DtoFactory {
                 nickname = "testNickname",
                 point = 100
             )
+        )
+
+        fun testQuestByParticipantResponse() = QuestByParticipantResponseDto(
+            id = 1L,
+            name = "test quest",
+            position = Position.BACKEND,
+            difficulty = 1,
+            thumbnail = "test.png",
+            user = UserSubDto(
+                id = 1L,
+                nickname = "testNickname",
+                point = 100
+            ),
+            progress = 33
         )
 
         fun testTagRequest() = TagRequestDto("tag1")

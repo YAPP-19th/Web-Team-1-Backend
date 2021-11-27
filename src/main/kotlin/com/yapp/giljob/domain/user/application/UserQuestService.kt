@@ -44,10 +44,11 @@ class UserQuestService(
         return questList.map {
             questMapper.toDto(
                 it, userMapper.toDto(it.quest.user, it.point),
-                ((subQuestCompletedCountList[it.quest.id]?.count?.div(it.quest.subQuestList.size.toDouble())))?.times(
-                    100
-                )?.toInt() ?: 0
+                calculateProgress(it.quest.subQuestList.size, subQuestCompletedCountList[it.quest.id]?.count ?: 0L)
             )
         }
     }
+
+    fun calculateProgress(totalSubQuestCount: Int, subQuestCompletedCount: Long) =
+        subQuestCompletedCount.toDouble().div(totalSubQuestCount).times(100).toInt()
 }

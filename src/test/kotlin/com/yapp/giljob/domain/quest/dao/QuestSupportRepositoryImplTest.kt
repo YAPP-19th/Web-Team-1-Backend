@@ -73,9 +73,9 @@ class QuestSupportRepositoryImplTest {
 
             // then
             assertEquals(questSaveSize, questList.size)
-            assertEquals(lastQuestId, questList[0].id)
-            assertEquals(lastQuestId - 1L, questList[1].id)
-            assertEquals(lastQuestId - 2L, questList[2].id)
+            assertEquals(lastQuestId, questList[0].quest.id)
+            assertEquals(lastQuestId - 1L, questList[1].quest.id)
+            assertEquals(lastQuestId - 2L, questList[2].quest.id)
         }
 
         @Test
@@ -93,9 +93,9 @@ class QuestSupportRepositoryImplTest {
 
             // then
             assertEquals(size, questList.size.toLong())
-            assertEquals(cursorId - 1L, questList[0].id)
-            assertEquals(cursorId - 2L, questList[1].id)
-            assertEquals(cursorId - 3L, questList[2].id)
+            assertEquals(cursorId - 1L, questList[0].quest.id)
+            assertEquals(cursorId - 2L, questList[1].quest.id)
+            assertEquals(cursorId - 3L, questList[2].quest.id)
         }
 
         @Test

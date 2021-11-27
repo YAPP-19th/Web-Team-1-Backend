@@ -60,6 +60,17 @@ include::{snippets}/users/{userId}/quests/get/http-request.adoc[]
 include::{snippets}/users/{userId}/quests/get/http-response.adoc[]
 .response fields
 include::{snippets}/users/{userId}/quests/get/response-fields.adoc[]
+
+=== GET /api/users/{userId}/quests/participation
+유저가 참여한 퀘스트 리스트 조회
+
+.request
+include::{snippets}/users/{userId}/quests/participation/get/http-request.adoc[]
+.response
+include::{snippets}/users/{userId}/quests/participation/get/http-response.adoc[]
+.response fields
+include::{snippets}/users/{userId}/quests/participation/get/response-fields.adoc[]
+
 == Sign API
 === POST /sign-up
 .request

@@ -459,6 +459,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_user_quest_api">User Quest API</a>
 <ul class="sectlevel2">
 <li><a href="#_get_apiusersuseridquests">GET /api/users/{userId}/quests</a></li>
+<li><a href="#_get_apiusersuseridquestsparticipation">GET /api/users/{userId}/quests/participation</a></li>
 </ul>
 </li>
 <li><a href="#_sign_api">Sign API</a>
@@ -940,7 +941,7 @@ Content-Length: 1004
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. response fields</caption>
+<caption class="title">Table 6. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1012,6 +1013,158 @@ Content-Length: 1004
 </tbody>
 </table>
 </div>
+<div class="sect2">
+<h3 id="_get_apiusersuseridquestsparticipation"><a class="link" href="#_get_apiusersuseridquestsparticipation">GET /api/users/{userId}/quests/participation</a></h3>
+<div class="paragraph">
+<p>유저가 참여한 퀘스트 리스트 조회</p>
+</div>
+<div class="listingblock">
+<div class="title">request</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/1/quests/participation?cursor=10&amp;size=4 HTTP/1.1
+Host: docs.api.com:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 1088
+
+{
+  "status" : 200,
+  "message" : "유저가 참여한 퀘스트 리스트 조회 성공입니다.",
+  "data" : [ {
+    "id" : 9,
+    "name" : "quest test 9",
+    "position" : "BACKEND",
+    "user" : {
+      "id" : 1,
+      "nickname" : "testNickname",
+      "point" : 100
+    },
+    "difficulty" : 1,
+    "progress" : 90,
+    "thumbnail" : "test.png"
+  }, {
+    "id" : 7,
+    "name" : "quest test 7",
+    "position" : "BACKEND",
+    "user" : {
+      "id" : 1,
+      "nickname" : "testNickname",
+      "point" : 100
+    },
+    "difficulty" : 1,
+    "progress" : 70,
+    "thumbnail" : "test.png"
+  }, {
+    "id" : 6,
+    "name" : "quest test 6",
+    "position" : "BACKEND",
+    "user" : {
+      "id" : 1,
+      "nickname" : "testNickname",
+      "point" : 100
+    },
+    "difficulty" : 1,
+    "progress" : 33,
+    "thumbnail" : "test.png"
+  }, {
+    "id" : 3,
+    "name" : "quest test 3",
+    "position" : "BACKEND",
+    "user" : {
+      "id" : 1,
+      "nickname" : "testNickname",
+      "point" : 100
+    },
+    "difficulty" : 1,
+    "progress" : 50,
+    "thumbnail" : "test.png"
+  } ]
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 7. response fields</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리스트</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 이름</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].difficulty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 난이도</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].progress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 진행률(퍼센트 단위/Int)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].thumbnail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 썸네일 url</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1038,11 +1191,11 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM3NjczNDE1LCJleHAiOjE2Mzc3NzM0MTV9.d34dvNcr4eWxACvkC1P2raJAa_w9bEWk0JGmTKiamGA</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM3OTc2NTY5LCJleHAiOjE2MzgwNzY1Njl9.rv0I5idBVxIXH0q4ZXZ6P6eZnogaMRg12QVC5hh4Fe4</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. response</caption>
+<caption class="title">Table 8. response</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1080,11 +1233,11 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3NjczNDE0LCJleHAiOjE2Mzc3NzM0MTR9.ZmjOU7-2gqiH1V6GVHksmo-_d9Emg9-rSYkC66l_c4w</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3OTc2NTY4LCJleHAiOjE2MzgwNzY1Njh9.F-5uNiY8ZRp5UpU37x7ArNjnRbM8AvJCzFdb5gRy0iI</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. response</caption>
+<caption class="title">Table 9. response</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1111,7 +1264,7 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3NjczNDE0LCJleHAi
 <div class="sect2">
 <h3 id="_post_apiupload"><a class="link" href="#_post_apiupload">POST /api/upload</a></h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. request</caption>
+<caption class="title">Table 10. request</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1158,7 +1311,7 @@ Content-Length: 198
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. response fields</caption>
+<caption class="title">Table 11. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1201,7 +1354,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-11-23 21:15:22 +0900
+Last updated 2021-11-27 10:28:38 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
