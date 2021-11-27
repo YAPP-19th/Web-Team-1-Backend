@@ -9,6 +9,7 @@ import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.global.config.security.GiljobTestUser
 import org.junit.jupiter.api.Test
+import org.mockito.BDDMockito.anyLong
 import org.mockito.BDDMockito.given
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -18,8 +19,7 @@ import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
 import org.springframework.restdocs.payload.PayloadDocumentation
-import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
-import org.springframework.restdocs.request.RequestDocumentation.requestParameters
+import org.springframework.restdocs.request.RequestDocumentation.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
@@ -130,6 +130,45 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 난이도"),
                         PayloadDocumentation.fieldWithPath("data[*].thumbnail")
                             .description("퀘스트 썸네일 url"),
+                    )
+                )
+            )
+    }
+
+    @Test
+    fun `getQuestDetailCommon 성공`() {
+        given(questService.getQuestDetailCommon(anyLong())).willReturn(DtoFactory.testQuestDetailCommonResponse())
+
+        val result = mockMvc.perform(
+            get("/api/quests/{questId}/common", 1L)
+        ).andDo(print())
+
+        result
+            .andExpect(status().isOk)
+            .andDo(MockMvcRestDocumentation.document(
+                "quests/common/get",
+                    pathParameters(
+                        parameterWithName("questId").description("퀘스트 id")
+                    ),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("응답 데이터"),
+                        PayloadDocumentation.fieldWithPath("data.name")
+                            .description("퀘스트 이름"),
+                        PayloadDocumentation.fieldWithPath("data.difficulty")
+                            .description("퀘스트 난이도"),
+                        PayloadDocumentation.fieldWithPath("data.position")
+                            .description("퀘스트 카테고리(position)"),
+                        PayloadDocumentation.fieldWithPath("data.participantCnt")
+                            .description("퀘스트 참여자 수"),
+                        PayloadDocumentation.fieldWithPath("data.tagList")
+                            .description("퀘스트 tag list"),
+                        PayloadDocumentation.fieldWithPath(("data.tagList[*].name"))
+                            .description("퀘스트 tag 이름")
                     )
                 )
             )
