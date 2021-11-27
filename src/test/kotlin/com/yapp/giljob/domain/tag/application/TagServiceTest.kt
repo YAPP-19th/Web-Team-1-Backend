@@ -32,7 +32,7 @@ internal class TagServiceTest {
         every { tagRepository.save(any()) } returns EntityFactory.testTag()
 
         // when
-        val tagList = tagService.convertToQuestTagList(quest, listOf(DtoFactory.testTagRequest()))
+        val tagList = tagService.convertToQuestTagList(quest, listOf(DtoFactory.testTagResponse()))
 
         // then
         assertEquals(EntityFactory.testTag(), tagList[0].tag)
@@ -45,7 +45,7 @@ internal class TagServiceTest {
         every { tagRepository.findByName(any()) } returns EntityFactory.testTag()
 
         // when
-        val tagList = tagService.convertToQuestTagList(quest, listOf(DtoFactory.testTagRequest()))
+        val tagList = tagService.convertToQuestTagList(quest, listOf(DtoFactory.testTagResponse()))
 
         // then
         assertEquals(EntityFactory.testTag(), tagList[0].tag)

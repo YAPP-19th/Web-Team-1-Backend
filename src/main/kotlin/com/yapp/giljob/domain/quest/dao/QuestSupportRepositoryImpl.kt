@@ -8,6 +8,7 @@ import com.yapp.giljob.domain.user.domain.QAbility.ability
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 
 class QuestSupportRepositoryImpl(
@@ -55,5 +56,12 @@ class QuestSupportRepositoryImpl(
 
     private fun eqUserId(userId: Long): BooleanExpression {
         return quest.user.id.eq(userId)
+    }
+
+    override fun countParticipantsByQuestId(questId: Long): Long {
+        return query.from(questParticipation)
+            .select(questParticipation.id.count())
+            .where(questParticipation.quest.id.eq(questId))
+            .fetchCount()
     }
 }
