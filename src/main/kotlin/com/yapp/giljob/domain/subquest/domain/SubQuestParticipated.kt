@@ -22,7 +22,7 @@ class SubQuestParticipated(
     val user: User,
 
     @Column(name = "is_completed", nullable = false)
-    var isCompleted: Boolean = false
+    var isCompleted: Boolean = true
 ) {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
