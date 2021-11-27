@@ -30,13 +30,8 @@ class QuestSupportRepositoryImpl(
         return query.select(
             Projections.constructor(
                 QuestSupportVo::class.java,
-                quest.id,
-                quest.name,
-                quest.position,
-                quest.user,
-                quest.difficulty,
+                quest,
                 ability.point,
-                quest.thumbnail
             )
         ).from(quest)
             .where(builder)

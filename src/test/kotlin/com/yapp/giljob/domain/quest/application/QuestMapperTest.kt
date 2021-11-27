@@ -1,6 +1,5 @@
 package com.yapp.giljob.domain.quest.application
 
-import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.user.dao.UserMapper
 import com.yapp.giljob.global.common.domain.EntityFactory
@@ -20,18 +19,13 @@ class QuestMapperTest {
     fun `toQuestResponse 테스트`() {
         // given
         val testQuestSupportDto = QuestSupportVo(
-            id = 1L,
-            name = "test quest",
-            user = EntityFactory.testUser(),
-            position = Position.BACKEND,
-            difficulty = 1,
-            thumbnail = "test.png",
+            quest = EntityFactory.testQuest(),
             point = 100
         )
         val expectedQuestResponse = DtoFactory.testQuestResponse()
 
         // when
-        val questResponse = questMapper.toDto(testQuestSupportDto, userMapper.toDto(testQuestSupportDto.user, testQuestSupportDto.point))
+        val questResponse = questMapper.toDto(testQuestSupportDto, userMapper.toDto(testQuestSupportDto.quest.user, testQuestSupportDto.point))
 
         // then
         assertEquals(expectedQuestResponse.id, questResponse.id)
