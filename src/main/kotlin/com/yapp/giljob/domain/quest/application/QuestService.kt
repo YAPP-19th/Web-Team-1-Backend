@@ -4,6 +4,7 @@ import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.tag.application.TagService
@@ -40,5 +41,12 @@ class QuestService(
         return questList.map {
             questMapper.toDto(it, userMapper.toDto(it.quest.user, it.point))
         }
+    }
+
+    fun getQuestDetailCommon(questId: Long): QuestDetailCommonResponseDto {
+        val participantCnt = questRepository.countParticipantsByQuestId(questId)
+
+        val quest = questRepository.getById(questId)
+        return QuestDetailCommonResponseDto.of(quest, participantCnt)
     }
 }

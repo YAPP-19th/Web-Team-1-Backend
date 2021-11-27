@@ -41,7 +41,7 @@ class SignRepositoryTest @Autowired constructor(
 
         val userFromRepository = signRepository.findBySocialId("testSocialId")
         assertEquals(userFromRepository!!.socialId, user.socialId)
-        assertEquals(userFromRepository!!.position, user.position)
-        assertEquals(userFromRepository!!.nickname, user.nickname)
+        assertEquals(userFromRepository.position, user.position)
+        assertEquals(userFromRepository.nickname, user.nickname)
     }
 }

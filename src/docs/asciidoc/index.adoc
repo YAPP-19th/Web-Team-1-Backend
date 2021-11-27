@@ -28,6 +28,7 @@ include::{snippets}/quests/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/get/response-fields.adoc[]
 
+<<<<<<< HEAD
 === GET /api/quests/count
 랜딩 페이지 퀘스트 수 조회
 
@@ -37,6 +38,15 @@ include::{snippets}/quests/count/get/http-request.adoc[]
 include::{snippets}/quests/count/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/count/get/response-fields.adoc[]
+=======
+=== GET /api/quests/{questId}/common/
+.request
+include::{snippets}/quests/common/get/path-parameters.adoc[]
+.response
+include::{snippets}/quests/common/get/http-response.adoc[]
+.response fields
+include::{snippets}/quests/common/get/response-fields.adoc[]
+>>>>>>> 3fa7a12 ([GILJOB-56] 퀘스트 조회시 공통 정보 api)
 
 === POST /api/quests/{questId}/participation
 퀘스트 참여
@@ -98,3 +108,4 @@ include::{snippets}/upload/post/http-response.adoc[]
 include::{snippets}/upload/post/response-body.adoc[]
 .response fields
 include::{snippets}/upload/post/response-fields.adoc[]
+=======

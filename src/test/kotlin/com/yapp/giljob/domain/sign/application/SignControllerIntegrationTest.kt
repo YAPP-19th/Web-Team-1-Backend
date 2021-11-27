@@ -30,21 +30,14 @@ import org.springframework.transaction.annotation.Transactional
 @ExtendWith(SpringExtension::class, MockitoExtension::class)
 @Transactional
 class SignControllerIntegrationTest @Autowired constructor(
-    val mockMvc: MockMvc,
-    val signRepository: SignRepository
+    val mockMvc: MockMvc
 ) {
 
-    private val user = EntityFactory.testUser()
     private val signUpRequest = DtoFactory.testSignUpRequest()
     private val signInRequest = DtoFactory.testSignInRequest()
 
     @Test
     fun `잘못된 카카오 access token으로 회원가입 시 에러`() {
-
-        val signUpRequest = SignUpRequestDto(
-            kakaoAccessToken = "wrong.access.token",
-            position = Position.BACKEND.name,
-            nickname = "nickname")
 
         val content = jacksonObjectMapper().writeValueAsString(signUpRequest)
 
@@ -62,8 +55,6 @@ class SignControllerIntegrationTest @Autowired constructor(
 
     @Test
     fun `잘못된 카카오 access token으로 로그인 시 에러`() {
-
-        val signInRequest = SignInRequestDto(kakaoAccessToken = "wrong.access.token")
 
         val content = jacksonObjectMapper().writeValueAsString(signInRequest)
 
