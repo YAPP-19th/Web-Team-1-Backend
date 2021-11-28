@@ -84,4 +84,63 @@ class UserQuestControllerTest : AbstractRestDocs() {
                 )
             )
     }
+
+    @Test
+    fun getQuestListByParticipantTest() {
+        BDDMockito.given(userQuestService.getQuestListByParticipant(userId, 10, Position.ALL, 4L)).willReturn(
+            listOf(
+                DtoFactory.testQuestByParticipantResponse().apply { this.id = 9L; this.name = "quest test 9"; this.progress = 90},
+                DtoFactory.testQuestByParticipantResponse().apply { this.id = 7L; this.name = "quest test 7"; this.progress = 70 },
+                DtoFactory.testQuestByParticipantResponse().apply { this.id = 6L; this.name = "quest test 6"; this.progress = 33 },
+                DtoFactory.testQuestByParticipantResponse().apply { this.id = 3L; this.name = "quest test 3"; this.progress = 50 },
+            )
+        )
+
+        val result = mockMvc.perform(
+            RestDocumentationRequestBuilders.get("/api/users/{userId}/quests/participation", userId)
+                .param("cursor", "10")
+                .param("size", "4")
+        ).andDo(MockMvcResultHandlers.print())
+
+        result
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "users/{userId}/quests/participation/get",
+                    HeaderDocumentation.responseHeaders(),
+                    HeaderDocumentation.responseHeaders(),
+                    RequestDocumentation.requestParameters(
+                        RequestDocumentation.parameterWithName("cursor")
+                            .description("마지막으로 조회된 퀘스트 id, 해당 퀘스트보다 오래된 퀘스트 리스트가 조회됩니다."),
+                        RequestDocumentation.parameterWithName("size").description("조회할 퀘스트 개수")
+                    ),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("퀘스트 리스트"),
+                        PayloadDocumentation.fieldWithPath("data[*].id")
+                            .description("퀘스트 id"),
+                        PayloadDocumentation.fieldWithPath("data[*].name")
+                            .description("퀘스트 이름"),
+                        PayloadDocumentation.fieldWithPath("data[*].position")
+                            .description("퀘스트 카테고리(position)"),
+                        PayloadDocumentation.fieldWithPath("data[*].user.id")
+                            .description("퀘스트 작성자 id"),
+                        PayloadDocumentation.fieldWithPath("data[*].user.nickname")
+                            .description("퀘스트 작성자 nickname"),
+                        PayloadDocumentation.fieldWithPath("data[*].user.point")
+                            .description("퀘스트 작성자 능력치"),
+                        PayloadDocumentation.fieldWithPath("data[*].difficulty")
+                            .description("퀘스트 난이도"),
+                        PayloadDocumentation.fieldWithPath("data[*].progress")
+                            .description("퀘스트 진행률(퍼센트 단위/Int)"),
+                        PayloadDocumentation.fieldWithPath("data[*].thumbnail")
+                            .description("퀘스트 썸네일 url"),
+                    )
+                )
+            )
+    }
 }

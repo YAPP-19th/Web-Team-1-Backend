@@ -15,7 +15,7 @@ class SubQuest (
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quest_id")
-    var quest: Quest? = null,
+    var quest: Quest,
 
     @Column(nullable = false)
     var name: String

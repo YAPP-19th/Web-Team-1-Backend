@@ -43,7 +43,7 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
         repeat(5) {
             questList.add(
                 questRepository.save(
-                    Quest(name = "test quest", user = userList[0], position = Position.BACKEND, tagList = mutableListOf(), difficulty = 1, thumbnail = "test.png", detail = "test quest detail", subQuestList = mutableListOf(SubQuest(name = "sub quest 1"), SubQuest(name = "sub quest 2")))
+                    Quest(name = "test quest", user = userList[0], position = Position.BACKEND, tagList = mutableListOf(), difficulty = 1, thumbnail = "test.png", detail = "test quest detail", subQuestList = mutableListOf())
                 )
             )
         }

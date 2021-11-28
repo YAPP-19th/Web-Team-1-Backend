@@ -5,6 +5,8 @@ import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.domain.QuestParticipation
 import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
 import com.yapp.giljob.domain.subquest.domain.SubQuest
+import com.yapp.giljob.domain.subquest.domain.SubQuestParticipation
+import com.yapp.giljob.domain.subquest.domain.SubQuestParticipationPK
 import com.yapp.giljob.domain.tag.domain.Tag
 import com.yapp.giljob.domain.user.domain.User
 
@@ -25,13 +27,25 @@ class EntityFactory {
             difficulty = 1,
             thumbnail = "test.png",
             detail = "test quest detail",
-            subQuestList = mutableListOf(SubQuest(name = "sub quest 1"), SubQuest(name = "sub quest 2"))
+            subQuestList = mutableListOf()
         )
         fun testTag() = Tag(1L, "tag1")
         fun testQuestParticipation() = QuestParticipation(
             QuestParticipationPK(testUser().id!!, testQuest().id!!),
             testQuest(),
             testUser()
+        )
+        fun testSubQuest() = SubQuest(
+            id = 1L,
+            quest = testQuest(),
+            name = "sub quest name"
+        )
+        fun testSubQuestParticipation() = SubQuestParticipation(
+            SubQuestParticipationPK(testUser().id!!, testSubQuest().id!!),
+            subQuest = testSubQuest(),
+            participant = testUser(),
+            isCompleted = true,
+            quest = testQuest()
         )
     }
 }

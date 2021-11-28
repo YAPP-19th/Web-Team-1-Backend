@@ -1,7 +1,12 @@
 package com.yapp.giljob.domain.quest.dao
 
+import com.querydsl.core.types.Projections
+import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
+import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
+import com.yapp.giljob.domain.quest.vo.QuestSupportVo
+import com.yapp.giljob.domain.user.domain.QAbility.ability
 
 class QuestParticipationSupportRepositoryImpl(
     private val query: JPAQueryFactory
@@ -18,5 +23,40 @@ class QuestParticipationSupportRepositoryImpl(
             .select(questParticipation.id.questId)
             .distinct()
             .fetchCount()
+    }
+
+    override fun findByParticipantId(
+        questId: Long?,
+        participantId: Long,
+        position: Position,
+        size: Long
+    ): List<QuestSupportVo> {
+        return query
+            .select(
+                Projections.constructor(
+                    QuestSupportVo::class.java,
+                    questParticipation.quest,
+                    ability.point
+                )
+            ).from(questParticipation)
+            .where(
+                (questParticipation.participant.id.eq(participantId)).and(eqPosition(position)).and(ltQuestId(questId))
+            )
+            .leftJoin(ability).on(
+                ability.position.eq(questParticipation.quest.user.position)
+                    .and(ability.user.id.eq(questParticipation.quest.user.id))
+            )
+        .orderBy(questParticipation.quest.id.desc())
+            .limit(size)
+            .fetch()
+    }
+
+
+    private fun ltQuestId(questId: Long?): BooleanExpression? {
+        return questId?.let { questParticipation.quest.id.lt(questId) }
+    }
+
+    private fun eqPosition(position: Position): BooleanExpression? {
+        return if (position == Position.ALL) null else questParticipation.quest.position.eq(position)
     }
 }

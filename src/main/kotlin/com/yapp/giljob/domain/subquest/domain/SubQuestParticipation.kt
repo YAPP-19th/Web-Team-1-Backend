@@ -2,14 +2,15 @@ package com.yapp.giljob.domain.subquest.domain
 
 import au.com.console.kassava.kotlinEquals
 import au.com.console.kassava.kotlinHashCode
+import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.user.domain.User
 import javax.persistence.*
 
-@Table(name = "sub_quest_participated")
+@Table(name = "sub_quest_participation")
 @Entity
-class SubQuestParticipated(
+class SubQuestParticipation(
     @EmbeddedId
-    val id: SubQuestParticipatedPK,
+    val id: SubQuestParticipationPK,
 
     @MapsId("subQuestId")
     @ManyToOne
@@ -19,7 +20,11 @@ class SubQuestParticipated(
     @MapsId("participantId")
     @ManyToOne
     @JoinColumn(name = "participant_id")
-    val user: User,
+    val participant: User,
+
+    @ManyToOne
+    @JoinColumn(name = "quest_id")
+    val quest: Quest,
 
     @Column(name = "is_completed", nullable = false)
     var isCompleted: Boolean = true
@@ -29,6 +34,6 @@ class SubQuestParticipated(
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
 
     companion object {
-        private val equalsAndHashCodeProperties = arrayOf(SubQuestParticipated::id)
+        private val equalsAndHashCodeProperties = arrayOf(SubQuestParticipation::id)
     }
 }

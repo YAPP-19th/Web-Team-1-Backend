@@ -3,12 +3,14 @@ package com.yapp.giljob.global.common.dto
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
-import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
-import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
+import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
 import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
-import com.yapp.giljob.domain.user.vo.UserSubVo
+import com.yapp.giljob.domain.user.vo.UserSubDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
+import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
 class DtoFactory {
@@ -16,7 +18,7 @@ class DtoFactory {
         fun testQuestRequest() = QuestSaveRequestDto(
             name = "test quest",
             position = Position.BACKEND,
-            tagList = mutableListOf(testTagResponse()),
+            tagList = mutableListOf(testTagRequest()),
             difficulty = 1,
             thumbnail = "test.png",
             detail = "test quest detail",
@@ -29,12 +31,30 @@ class DtoFactory {
             position = Position.BACKEND,
             difficulty = 1,
             thumbnail = "test.png",
-            user = UserSubVo(
+            user = UserSubDto(
                 id = 1L,
                 nickname = "testNickname",
                 point = 100
             )
         )
+
+        fun testQuestByParticipantResponse() = QuestByParticipantResponseDto(
+            id = 1L,
+            name = "test quest",
+            position = Position.BACKEND,
+            difficulty = 1,
+            thumbnail = "test.png",
+            user = UserSubDto(
+                id = 1L,
+                nickname = "testNickname",
+                point = 100
+            ),
+            progress = 33
+        )
+
+        fun testTagRequest() = TagRequestDto("tag1")
+
+        fun testTagResponse() = TagResponseDto("tag1")
 
         fun testQuestDetailCommonResponse() = QuestDetailCommonResponseDto(
             name = "test quest",
@@ -44,7 +64,6 @@ class DtoFactory {
             tagList = mutableListOf(testTagResponse())
         )
 
-        fun testTagResponse() = TagResponseDto("tag1")
 
         fun testSignUpRequest() = SignUpRequestDto(
             kakaoAccessToken = "test",
