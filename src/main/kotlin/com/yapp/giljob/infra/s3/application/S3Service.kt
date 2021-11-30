@@ -19,15 +19,14 @@ class S3Service(
     private lateinit var bucketName: String
 
     fun fileUpload(file: MultipartFile): S3UploadResponseDto {
-        val fileName: String
 
-        try {
-            val metadata = ObjectMetadata().apply {
-                contentLength = file.size
-            }
-            fileName = UUID.randomUUID().toString() + file.originalFilename
+        val fileName = UUID.randomUUID().toString() + file.originalFilename ?: ""
+        val metadata = ObjectMetadata()
+        metadata.contentLength = file.size
+
+        runCatching {
             amazonS3.putObject(bucketName, fileName, file.inputStream, metadata)
-        } catch (e: Exception) {
+        }.onFailure {
             throw BusinessException(ErrorCode.FILE_UPLOAD_ERROR)
         }
 

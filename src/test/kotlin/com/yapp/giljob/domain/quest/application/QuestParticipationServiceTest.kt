@@ -16,7 +16,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.data.repository.findByIdOrNull
 
-class QuestParticipationServiceTest {
+class sQuestParticipationServiceTest {
 
     private lateinit var questParticipationService: QuestParticipationService
 
