@@ -6,7 +6,6 @@ import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
-import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
 import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
 import com.yapp.giljob.domain.user.vo.UserSubDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
@@ -52,8 +51,6 @@ class DtoFactory {
             progress = 33
         )
 
-        fun testTagRequest() = TagRequestDto("tag1")
-        
         fun testQuestDetailCommonResponse() = QuestDetailCommonResponseDto(
             name = "test quest",
             difficulty = 1,
