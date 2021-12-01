@@ -9,5 +9,6 @@ class QuestResponseDto(
     var position: Position,
     var user: UserSubDto,
     var difficulty: Int,
-    var thumbnail: String
+    var thumbnail: String,
+    var participantCount: Long
 )
