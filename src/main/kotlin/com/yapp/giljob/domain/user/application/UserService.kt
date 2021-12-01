@@ -17,6 +17,7 @@ class UserService(
     fun getAuthenticatedUserInfo(user: User) =
         UserInfoResponseDto(user.id!!, getUserAbility(user.id!!, user.position).point)
 
-    private fun getUserAbility(userId: Long, position: Position)
-        = abilityRepository.findByUserIdAndPosition(userId, position) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+    private fun getUserAbility(userId: Long, position: Position) =
+        abilityRepository.findByUserIdAndPosition(userId, position)
+            ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
 }
