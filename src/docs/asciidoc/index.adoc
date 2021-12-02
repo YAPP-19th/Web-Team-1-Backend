@@ -28,8 +28,6 @@ include::{snippets}/quests/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/get/response-fields.adoc[]
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 === GET /api/quests/count
 랜딩 페이지 퀘스트 수 조회
 
@@ -50,10 +48,6 @@ include::{snippets}/quests/common/get/path-parameters.adoc[]
 include::{snippets}/quests/common/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/common/get/response-fields.adoc[]
-<<<<<<< HEAD
->>>>>>> 3fa7a12 ([GILJOB-56] 퀘스트 조회시 공통 정보 api)
-=======
->>>>>>> a557b2e ([GILJOB-64] 퀘스트 참여자 수 함수 quest helper에 추가)
 
 === POST /api/quests/{questId}/participation
 퀘스트 참여
