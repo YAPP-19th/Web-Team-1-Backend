@@ -20,7 +20,8 @@ class QuestMapperTest {
         // given
         val testQuestSupportDto = QuestSupportVo(
             quest = EntityFactory.testQuest(),
-            point = 100
+            point = 100,
+            participantCount = 100
         )
         val expectedQuestResponse = DtoFactory.testQuestResponse()
 
@@ -33,6 +34,7 @@ class QuestMapperTest {
         assertEquals(expectedQuestResponse.position, questResponse.position)
         assertEquals(expectedQuestResponse.difficulty, questResponse.difficulty)
         assertEquals(expectedQuestResponse.thumbnail, questResponse.thumbnail)
+        assertEquals(expectedQuestResponse.participantCount, questResponse.participantCount)
         assertEquals(expectedQuestResponse.user.point, questResponse.user.point)
         assertEquals(expectedQuestResponse.user.id, questResponse.user.id)
         assertEquals(expectedQuestResponse.user.nickname, questResponse.user.nickname)
