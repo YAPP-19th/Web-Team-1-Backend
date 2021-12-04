@@ -588,7 +588,7 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 984
+Content-Length: 1104
 
 {
   "status" : 200,
@@ -603,7 +603,8 @@ Content-Length: 984
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 8,
     "name" : "quest test 8",
@@ -614,7 +615,8 @@ Content-Length: 984
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 7,
     "name" : "quest test 7",
@@ -625,7 +627,8 @@ Content-Length: 984
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 6,
     "name" : "quest test 6",
@@ -636,7 +639,8 @@ Content-Length: 984
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   } ]
 }</code></pre>
 </div>
@@ -685,6 +689,11 @@ Content-Length: 984
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].participantCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
@@ -1002,7 +1011,7 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1004
+Content-Length: 1124
 
 {
   "status" : 200,
@@ -1017,7 +1026,8 @@ Content-Length: 1004
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 7,
     "name" : "quest test 7",
@@ -1028,7 +1038,8 @@ Content-Length: 1004
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 6,
     "name" : "quest test 6",
@@ -1039,7 +1050,8 @@ Content-Length: 1004
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 3,
     "name" : "quest test 3",
@@ -1050,7 +1062,8 @@ Content-Length: 1004
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   } ]
 }</code></pre>
 </div>
@@ -1101,6 +1114,11 @@ Content-Length: 1004
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].participantCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
@@ -1145,7 +1163,7 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1088
+Content-Length: 1208
 
 {
   "status" : 200,
@@ -1161,7 +1179,8 @@ Content-Length: 1088
     },
     "difficulty" : 1,
     "progress" : 90,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 7,
     "name" : "quest test 7",
@@ -1173,7 +1192,8 @@ Content-Length: 1088
     },
     "difficulty" : 1,
     "progress" : 70,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 6,
     "name" : "quest test 6",
@@ -1185,7 +1205,8 @@ Content-Length: 1088
     },
     "difficulty" : 1,
     "progress" : 33,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 3,
     "name" : "quest test 3",
@@ -1197,7 +1218,8 @@ Content-Length: 1088
     },
     "difficulty" : 1,
     "progress" : 50,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   } ]
 }</code></pre>
 </div>
@@ -1246,6 +1268,11 @@ Content-Length: 1088
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].participantCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>

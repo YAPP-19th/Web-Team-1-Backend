@@ -30,6 +30,7 @@ class DtoFactory {
             position = Position.BACKEND,
             difficulty = 1,
             thumbnail = "test.png",
+            participantCount = 100,
             user = UserSubDto(
                 id = 1L,
                 nickname = "testNickname",
@@ -43,6 +44,7 @@ class DtoFactory {
             position = Position.BACKEND,
             difficulty = 1,
             thumbnail = "test.png",
+            participantCount = 100,
             user = UserSubDto(
                 id = 1L,
                 nickname = "testNickname",
