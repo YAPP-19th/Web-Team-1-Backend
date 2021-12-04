@@ -2,10 +2,8 @@ package com.yapp.giljob.domain.subquest.application
 
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
-import com.yapp.giljob.domain.subquest.dao.SubQuestRepository
 import com.yapp.giljob.domain.subquest.domain.SubQuest
 import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
-import com.yapp.giljob.domain.user.domain.User
 import org.springframework.stereotype.Service
 
 @Service
