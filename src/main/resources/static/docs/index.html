@@ -453,7 +453,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_post_apiquests">POST /api/quests</a></li>
 <li><a href="#_get_apiquests">GET /api/quests</a></li>
 <li><a href="#_get_apiquestscount">GET /api/quests/count</a></li>
-<li><a href="#_get_apiquestscommonquestid">GET /api/quests/common/{questId}</a></li>
+<li><a href="#_get_apiquestsquestidcommon">GET /api/quests/{questId}/common/</a></li>
 <li><a href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a></li>
 </ul>
 </li>
@@ -467,6 +467,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_post_sign_up">POST /sign-up</a></li>
 <li><a href="#_post_sign_in">POST /sign-in</a></li>
+</ul>
+</li>
+<li><a href="#_user_api">User API</a>
+<ul class="sectlevel2">
+<li><a href="#_get_apiusersme">GET /api/users/me</a></li>
 </ul>
 </li>
 <li><a href="#_upload_api">Upload API</a>
@@ -795,22 +800,14 @@ Content-Length: 188
 </tr>
 </tbody>
 </table>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p>=== GET /api/quests/{questId}/common/</p>
-</div>
-</div>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_get_apiquestscommonquestid"><a class="link" href="#_get_apiquestscommonquestid">GET /api/quests/common/{questId}</a></h3>
+<h3 id="_get_apiquestsquestidcommon"><a class="link" href="#_get_apiquestsquestidcommon">GET /api/quests/{questId}/common/</a></h3>
 <div class="paragraph">
-<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt; a557b2e ([GILJOB-64] 퀘스트 참여자 수 함수 quest helper에 추가)
-.request
-./api/quests/{questId}/common</p>
+<p>퀘스트 상세 페이지 공통 정보 조회</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. /api/quests/{questId}/common</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -851,7 +848,7 @@ Content-Length: 263
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. response fields</caption>
+<caption class="title">Table 5. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -941,7 +938,7 @@ Content-Length: 88
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. /api/quests/{questId}/participation</caption>
+<caption class="title">Table 6. /api/quests/{questId}/participation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -960,7 +957,7 @@ Content-Length: 88
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. response fields</caption>
+<caption class="title">Table 7. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1072,7 +1069,7 @@ Content-Length: 1124
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. response fields</caption>
+<caption class="title">Table 8. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1228,7 +1225,7 @@ Content-Length: 1208
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. response fields</caption>
+<caption class="title">Table 9. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1336,11 +1333,11 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM4NDM3ODYwLCJleHAiOjE2Mzg1Mzc4NjB9.TdgcE0vVkpJX_Ou-tuzvRJWJ1Tpqfl3a5lulGoMzbwk</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM4MzczMzU4LCJleHAiOjE2Mzg0NzMzNTh9.LPIxxDFcXRGLs-pYFt8WtW7PK1JTE39N1jx71yUZliM</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. response</caption>
+<caption class="title">Table 10. response</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1378,11 +1375,11 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM4NDM3ODU5LCJleHAiOjE2Mzg1Mzc4NTl9.gGadObdDmuWi3Yid_yInJNLwCVwbjKiZV0ZZZg18Qek</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM4MzczMzU4LCJleHAiOjE2Mzg0NzMzNTh9.VPV7v0R80oZRHMfcOrulx1fls1UZUWPv9RAuZiMpQuM</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. response</caption>
+<caption class="title">Table 11. response</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1404,12 +1401,89 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM4NDM3ODU5LCJleHAi
 </div>
 </div>
 <div class="sect1">
+<h2 id="_user_api"><a class="link" href="#_user_api">User API</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_get_apiusersme"><a class="link" href="#_get_apiusersme">GET /api/users/me</a></h3>
+<div class="paragraph">
+<p>인증된 유저 정보 조회(액세스 토큰으로 인증된 유저 확인)</p>
+</div>
+<div class="listingblock">
+<div class="title">request</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/me HTTP/1.1
+Host: docs.api.com:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 140
+
+{
+  "status" : 200,
+  "message" : "인증된 유저 정보 조회 성공입니다.",
+  "data" : {
+    "userId" : 1,
+    "point" : 1000
+  }
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 12. response fields</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.userId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">현재 유저 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저 능력치 포인트(레벨 결정)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_upload_api"><a class="link" href="#_upload_api">Upload API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_post_apiupload"><a class="link" href="#_post_apiupload">POST /api/upload</a></h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. request</caption>
+<caption class="title">Table 13. request</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1456,7 +1530,7 @@ Content-Length: 198
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. response fields</caption>
+<caption class="title">Table 14. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1492,11 +1566,6 @@ Content-Length: 198
 </tr>
 </tbody>
 </table>
-<div class="exampleblock">
-<div class="content">
-
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -1504,7 +1573,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-12-02 18:36:47 +0900
+Last updated 2021-12-01 22:21:17 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
