@@ -29,6 +29,9 @@ enum class ErrorCode(
     ALREADY_COMPLETED_QUEST(HttpStatus.BAD_REQUEST, "Q002", "Already Completed Quest"),
     NOT_COMPLETED_QUEST(HttpStatus.BAD_REQUEST, "Q003", "Not Completed Quest"),
 
+    // SubQuest
+    ALREADY_COMPLETED_SUBQUEST(HttpStatus.BAD_REQUEST, "SQ001", "Already Completed SubQuest"),
+
     // Position
     POSITION_NOT_FOUND(HttpStatus.NOT_FOUND, "P001", "Position Not Found"),
 

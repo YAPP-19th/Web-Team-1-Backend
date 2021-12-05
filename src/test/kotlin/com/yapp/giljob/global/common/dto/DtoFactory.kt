@@ -17,7 +17,7 @@ class DtoFactory {
         fun testQuestRequest() = QuestSaveRequestDto(
             name = "test quest",
             position = Position.BACKEND,
-            tagList = mutableListOf(testTagResponse()),
+            tagList = mutableListOf(testTagRequest()),
             difficulty = 1,
             thumbnail = "test.png",
             detail = "test quest detail",
@@ -53,6 +53,10 @@ class DtoFactory {
             progress = 33
         )
 
+        fun testTagRequest() = TagRequestDto("tag1")
+
+        fun testTagResponse() = TagResponseDto("tag1")
+
         fun testQuestDetailCommonResponse() = QuestDetailCommonResponseDto(
             name = "test quest",
             difficulty = 1,
@@ -60,8 +64,6 @@ class DtoFactory {
             participantCnt = 1L,
             tagList = mutableListOf(testTagResponse())
         )
-
-        fun testTagResponse() = TagResponseDto("tag1")
 
         fun testSignUpRequest() = SignUpRequestDto(
             kakaoAccessToken = "test",

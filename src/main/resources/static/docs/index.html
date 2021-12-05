@@ -464,6 +464,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_get_apiusersuseridquestsparticipation">GET /api/users/{userId}/quests/participation</a></li>
 </ul>
 </li>
+<li><a href="#_subquest_api">SubQuest API</a>
+<ul class="sectlevel2">
+<li><a href="#_post_apisubquestssubquestid">POST /api/subquests/{subQuestId}</a></li>
+</ul>
+</li>
 <li><a href="#_sign_api">Sign API</a>
 <ul class="sectlevel2">
 <li><a href="#_post_sign_up">POST /sign-up</a></li>
@@ -1383,6 +1388,81 @@ Content-Length: 1208
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].thumbnail</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 썸네일 url</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_subquest_api"><a class="link" href="#_subquest_api">SubQuest API</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_post_apisubquestssubquestid"><a class="link" href="#_post_apisubquestssubquestid">POST /api/subquests/{subQuestId}</a></h3>
+<div class="paragraph">
+<p>서브퀘스트 완료</p>
+</div>
+<div class="listingblock">
+<div class="title">request</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/subquests/1 HTTP/1.1
+Authorization: Access Token
+Host: docs.api.com:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 94
+
+{
+  "status" : 200,
+  "message" : "서브퀘스트 완료 성공입니다.",
+  "data" : null
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "status" : 200,
+  "message" : "서브퀘스트 완료 성공입니다.",
+  "data" : null
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 10. response fields</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
 </tr>
 </tbody>
 </table>

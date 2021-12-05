@@ -94,6 +94,19 @@ include::{snippets}/users/{userId}/quests/participation/get/http-response.adoc[]
 .response fields
 include::{snippets}/users/{userId}/quests/participation/get/response-fields.adoc[]
 
+== SubQuest API
+=== POST /api/subquests/{subQuestId}
+서브퀘스트 완료
+
+.request
+include::{snippets}/subquests/post/http-request.adoc[]
+.response
+include::{snippets}/subquests/post/http-response.adoc[]
+.response
+include::{snippets}/subquests/post/response-body.adoc[]
+.response fields
+include::{snippets}/subquests/post/response-fields.adoc[]
+
 == Sign API
 === POST /sign-up
 .request
