@@ -6,6 +6,7 @@ import com.yapp.giljob.domain.quest.domain.QuestParticipation
 import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
 import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.subquest.application.SubQuestService
+import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional
 class QuestParticipationService(
     private val questRepository: QuestRepository,
     private val questParticipationRepository: QuestParticipationRepository,
+    private val abilityRepository: AbilityRepository,
 
     private val subQuestService: SubQuestService
 ) {
@@ -44,7 +46,10 @@ class QuestParticipationService(
             ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
         validateCompletedQuest(questParticipation, questId, user.id!!)
         questParticipation.isCompleted = true
-        // TODO 유저 경험치 획득
+
+        val quest = questParticipation.quest
+        val ability = abilityRepository.findByUserIdAndPosition(user.id!!, quest.position) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        ability.point += quest.difficulty * 100L
     }
 
     private fun validateCompletedQuest(questParticipation: QuestParticipation, questId: Long, userId: Long) {

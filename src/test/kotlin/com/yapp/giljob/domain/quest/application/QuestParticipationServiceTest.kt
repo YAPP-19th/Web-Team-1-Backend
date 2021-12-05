@@ -4,6 +4,7 @@ import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.subquest.application.SubQuestService
+import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.error.ErrorCode
@@ -29,12 +30,15 @@ class QuestParticipationServiceTest {
     private lateinit var questParticipationRepository: QuestParticipationRepository
 
     @MockK
+    private lateinit var abilityRepository: AbilityRepository
+
+    @MockK
     private lateinit var subQuestService: SubQuestService
 
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        questParticipationService = QuestParticipationService(questRepository, questParticipationRepository, subQuestService)
+        questParticipationService = QuestParticipationService(questRepository, questParticipationRepository, abilityRepository, subQuestService)
     }
 
     private val questId = 1L
