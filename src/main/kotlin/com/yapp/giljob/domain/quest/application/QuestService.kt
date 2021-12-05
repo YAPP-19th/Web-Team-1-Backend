@@ -1,7 +1,6 @@
 package com.yapp.giljob.domain.quest.application
 
 import com.yapp.giljob.domain.position.domain.Position
-import com.yapp.giljob.domain.quest.application.QuestHelper.Companion.countParticipantsByQuestId
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
@@ -46,7 +45,7 @@ class QuestService(
 
     fun getQuestDetailCommon(questId: Long): QuestDetailCommonResponseDto {
         val participantCnt = questRepository.countParticipantsByQuestId(questId)
-        val quest = questRepository.getById(questId)
+        val quest = QuestHelper.getQuestById(questRepository, questId)
         return QuestDetailCommonResponseDto.of(quest, participantCnt)
     }
 }

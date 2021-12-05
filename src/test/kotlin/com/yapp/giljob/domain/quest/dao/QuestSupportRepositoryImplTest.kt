@@ -123,7 +123,7 @@ class QuestSupportRepositoryImplTest {
         fun `능력치가 존재하면 해당 point를 가져온다`() {
             // given
             val size = 1L
-            val point = 100
+            val point = 100L
             abilityRepository.save(Ability(user = user, position = Position.BACKEND, point = point))
 
             // when
