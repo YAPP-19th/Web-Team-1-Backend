@@ -20,7 +20,8 @@ class QuestMapperTest {
         // given
         val testQuestSupportDto = QuestSupportVo(
             quest = EntityFactory.testQuest(),
-            point = 100
+            point = 100,
+            participantCount = 1L
         )
         val expectedQuestResponse = DtoFactory.testQuestResponse()
 

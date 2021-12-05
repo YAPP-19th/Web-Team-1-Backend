@@ -38,7 +38,7 @@ class Quest(
     var thumbnail: String,
 
     @Lob
-    @Column(nullable = false, columnDefinition = "BLOB")
+    @Column(nullable = false, columnDefinition = "CLOB")
     var detail: String,
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "quest")
