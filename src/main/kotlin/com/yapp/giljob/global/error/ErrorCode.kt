@@ -25,7 +25,9 @@ enum class ErrorCode(
     NOT_SIGN_UP_USER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "S003", "Not Sign Up User Error"),
 
     // Quest
-    ALREADY_PARTICIPATED_QUEST(HttpStatus.BAD_REQUEST, "Q002", "Already Participated Quest"),
+    ALREADY_PARTICIPATED_QUEST(HttpStatus.BAD_REQUEST, "Q001", "Already Participated Quest"),
+    ALREADY_COMPLETED_QUEST(HttpStatus.BAD_REQUEST, "Q002", "Already Completed Quest"),
+    NOT_COMPLETED_QUEST(HttpStatus.BAD_REQUEST, "Q003", "Not Completed Quest"),
 
     // SubQuest
     ALREADY_COMPLETED_SUBQUEST(HttpStatus.BAD_REQUEST, "SQ001", "Already Completed SubQuest"),

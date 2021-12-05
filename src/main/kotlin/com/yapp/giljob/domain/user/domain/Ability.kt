@@ -21,7 +21,7 @@ class Ability(
     val position: Position,
 
     @Column(nullable = false)
-    var point: Int
+    var point: Long = 0L
 ) {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 

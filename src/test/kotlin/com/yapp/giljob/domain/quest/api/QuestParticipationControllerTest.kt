@@ -5,11 +5,13 @@ import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
+import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.config.security.GiljobTestUser
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.http.MediaType
 import org.springframework.restdocs.headers.HeaderDocumentation
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
@@ -42,7 +44,7 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andDo(
                 MockMvcRestDocumentation.document(
-                    "quests/participation/post",
+                    "quests/{questId}/participation/post",
                     RequestDocumentation.pathParameters(
                         RequestDocumentation.parameterWithName("questId").description("참여할 퀘스트 id")
                     ),
@@ -88,6 +90,35 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
                             .description("진행 중 퀘스트 수"),
                         PayloadDocumentation.fieldWithPath("data.totalParticipantCount")
                             .description("퀘스트 참여자 수"),
+                    )
+                )
+            )
+    }
+
+    @GiljobTestUser
+    @Test
+    fun completeQuestTest() {
+        val result = mockMvc.perform(
+            RestDocumentationRequestBuilders.patch("/api/quests/{questId}/complete", 1L)
+                .header("Authorization", "Access Token")
+        ).andDo(
+            MockMvcResultHandlers.print()
+        )
+
+        result
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "quests/{questId}/complete/patch",
+                    HeaderDocumentation.responseHeaders(),
+                    HeaderDocumentation.responseHeaders(),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("null")
                     )
                 )
             )

@@ -6,5 +6,5 @@ import org.mapstruct.Mapper
 
 @Mapper(componentModel = "spring")
 interface UserMapper {
-    fun toDto(user: User, point: Int): UserSubDto
+    fun toDto(user: User, point: Long): UserSubDto
 }

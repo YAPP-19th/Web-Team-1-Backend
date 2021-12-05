@@ -6,6 +6,7 @@ import com.yapp.giljob.domain.quest.domain.QQuest.quest
 import com.yapp.giljob.domain.user.domain.QAbility.ability
 
 import com.querydsl.core.types.dsl.BooleanExpression
+import com.querydsl.jpa.JPAExpressions
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
@@ -22,16 +23,17 @@ class QuestSupportRepositoryImpl(
     ): List<QuestSupportVo> {
         val builder = BooleanBuilder()
 
-        if (userId == null){
+        if (userId == null) {
             builder.and(eqPosition(position)).and(ltQuestId(questId))
-        }
-        else builder.and(eqUserId(userId)).and(eqPosition(position)).and(ltQuestId(questId))
+        } else builder.and(eqUserId(userId)).and(eqPosition(position)).and(ltQuestId(questId))
 
         return query.select(
             Projections.constructor(
                 QuestSupportVo::class.java,
                 quest,
                 ability.point,
+                JPAExpressions.select(questParticipation.count()).from(questParticipation)
+                    .where(questParticipation.quest.eq(quest))
             )
         ).from(quest)
             .where(builder)

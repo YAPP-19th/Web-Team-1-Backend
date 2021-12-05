@@ -5,5 +5,6 @@ import com.yapp.giljob.domain.quest.domain.Quest
 
 class QuestSupportVo @QueryProjection constructor(
     val quest: Quest,
-    val point: Int,
+    val point: Long,
+    val participantCount: Long
 )

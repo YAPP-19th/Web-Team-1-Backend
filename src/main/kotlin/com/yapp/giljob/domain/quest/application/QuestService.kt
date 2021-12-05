@@ -45,8 +45,7 @@ class QuestService(
 
     fun getQuestDetailCommon(questId: Long): QuestDetailCommonResponseDto {
         val participantCnt = questRepository.countParticipantsByQuestId(questId)
-
-        val quest = questRepository.getById(questId)
+        val quest = QuestHelper.getQuestById(questRepository, questId)
         return QuestDetailCommonResponseDto.of(quest, participantCnt)
     }
 }

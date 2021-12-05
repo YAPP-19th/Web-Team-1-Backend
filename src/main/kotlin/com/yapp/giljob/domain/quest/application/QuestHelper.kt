@@ -13,5 +13,8 @@ class QuestHelper {
         fun findQuestById(questRepository: QuestRepository, questId: Long) = questRepository.findByIdOrNull(questId)
 
         fun totalCount(questRepository: QuestRepository) = questRepository.count()
+
+        fun countParticipantsByQuestId(questRepository: QuestRepository, questId: Long) =
+            questRepository.countParticipantsByQuestId(questId)
     }
 }

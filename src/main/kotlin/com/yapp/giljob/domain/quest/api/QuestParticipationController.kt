@@ -30,4 +30,12 @@ class QuestParticipationController(
             )
         )
     }
+
+    @PatchMapping("/{questId}/complete")
+    fun completeQuest(@PathVariable questId: Long, @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
+        questParticipationService.completeQuest(questId, user)
+        return ResponseEntity.ok(
+            BaseResponse.of(HttpStatus.OK, "퀘스트 완료 성공입니다.")
+        )
+    }
 }

@@ -6,7 +6,6 @@ import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
-import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
 import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
 import com.yapp.giljob.domain.user.vo.UserSubDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
@@ -31,6 +30,7 @@ class DtoFactory {
             position = Position.BACKEND,
             difficulty = 1,
             thumbnail = "test.png",
+            participantCount = 100,
             user = UserSubDto(
                 id = 1L,
                 nickname = "testNickname",
@@ -44,6 +44,7 @@ class DtoFactory {
             position = Position.BACKEND,
             difficulty = 1,
             thumbnail = "test.png",
+            participantCount = 100,
             user = UserSubDto(
                 id = 1L,
                 nickname = "testNickname",
@@ -63,7 +64,6 @@ class DtoFactory {
             participantCnt = 1L,
             tagList = mutableListOf(testTagResponse())
         )
-
 
         fun testSignUpRequest() = SignUpRequestDto(
             kakaoAccessToken = "test",

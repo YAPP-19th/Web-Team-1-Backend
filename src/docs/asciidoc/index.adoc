@@ -39,6 +39,8 @@ include::{snippets}/quests/count/get/http-response.adoc[]
 include::{snippets}/quests/count/get/response-fields.adoc[]
 
 === GET /api/quests/{questId}/common/
+퀘스트 상세 페이지 공통 정보 조회
+
 .request
 include::{snippets}/quests/common/get/path-parameters.adoc[]
 .response
@@ -57,6 +59,19 @@ include::{snippets}/quests/participation/post/http-response.adoc[]
 include::{snippets}/quests/participation/post/path-parameters.adoc[]
 .response fields
 include::{snippets}/quests/participation/post/response-fields.adoc[]
+
+=== Patch /api/quests/{questId}/complete
+퀘스트 완료
+
+.request
+include::{snippets}/quests/{questId}/complete/patch/http-request.adoc[]
+.response
+include::{snippets}/quests/{questId}/complete/patch/http-response.adoc[]
+.request fields
+include::{snippets}/quests/{questId}/participation/post/path-parameters.adoc[]
+.response fields
+include::{snippets}/quests/{questId}/complete/patch/response-fields.adoc[]
+
 
 == User Quest API
 === GET /api/users/{userId}/quests
@@ -109,6 +124,18 @@ include::{snippets}/sign-in/post/http-response.adoc[]
 .response
 include::{snippets}/sign-in/post/response-headers.adoc[]
 
+== User API
+
+=== GET /api/users/me
+인증된 유저 정보 조회(액세스 토큰으로 인증된 유저 확인)
+
+.request
+include::{snippets}/users/me/get/http-request.adoc[]
+.response
+include::{snippets}/users/me/get/http-response.adoc[]
+.response fields
+include::{snippets}/users/me/get/response-fields.adoc[]
+
 == Upload API
 === POST /api/upload
 .request
@@ -119,4 +146,3 @@ include::{snippets}/upload/post/http-response.adoc[]
 include::{snippets}/upload/post/response-body.adoc[]
 .response fields
 include::{snippets}/upload/post/response-fields.adoc[]
-=======

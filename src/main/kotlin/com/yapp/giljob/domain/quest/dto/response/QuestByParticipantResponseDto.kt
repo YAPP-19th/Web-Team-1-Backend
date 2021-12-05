@@ -10,5 +10,6 @@ class QuestByParticipantResponseDto(
     var user: UserSubDto,
     var difficulty: Int,
     var progress: Int,
-    var thumbnail: String
+    var thumbnail: String,
+    var participantCount: Long
 )
