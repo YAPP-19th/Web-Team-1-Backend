@@ -470,6 +470,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_post_sign_in">POST /sign-in</a></li>
 </ul>
 </li>
+<li><a href="#_user_api">User API</a>
+<ul class="sectlevel2">
+<li><a href="#_get_apiusersme">GET /api/users/me</a></li>
+</ul>
+</li>
 <li><a href="#_upload_api">Upload API</a>
 <ul class="sectlevel2">
 <li><a href="#_post_apiupload">POST /api/upload</a></li>
@@ -584,7 +589,7 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 984
+Content-Length: 1104
 
 {
   "status" : 200,
@@ -599,7 +604,8 @@ Content-Length: 984
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 8,
     "name" : "quest test 8",
@@ -610,7 +616,8 @@ Content-Length: 984
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 7,
     "name" : "quest test 7",
@@ -621,7 +628,8 @@ Content-Length: 984
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 6,
     "name" : "quest test 6",
@@ -632,7 +640,8 @@ Content-Length: 984
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   } ]
 }</code></pre>
 </div>
@@ -681,6 +690,11 @@ Content-Length: 984
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].participantCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
@@ -790,6 +804,9 @@ Content-Length: 188
 </div>
 <div class="sect2">
 <h3 id="_get_apiquestsquestidcommon"><a class="link" href="#_get_apiquestsquestidcommon">GET /api/quests/{questId}/common/</a></h3>
+<div class="paragraph">
+<p>퀘스트 상세 페이지 공통 정보 조회</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 4. /api/quests/{questId}/common</caption>
 <colgroup>
@@ -1074,7 +1091,7 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1004
+Content-Length: 1124
 
 {
   "status" : 200,
@@ -1089,7 +1106,8 @@ Content-Length: 1004
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 7,
     "name" : "quest test 7",
@@ -1100,7 +1118,8 @@ Content-Length: 1004
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 6,
     "name" : "quest test 6",
@@ -1111,7 +1130,8 @@ Content-Length: 1004
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 3,
     "name" : "quest test 3",
@@ -1122,7 +1142,8 @@ Content-Length: 1004
       "point" : 100
     },
     "difficulty" : 1,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   } ]
 }</code></pre>
 </div>
@@ -1173,6 +1194,11 @@ Content-Length: 1004
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].participantCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
@@ -1217,7 +1243,7 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1088
+Content-Length: 1208
 
 {
   "status" : 200,
@@ -1233,7 +1259,8 @@ Content-Length: 1088
     },
     "difficulty" : 1,
     "progress" : 90,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 7,
     "name" : "quest test 7",
@@ -1245,7 +1272,8 @@ Content-Length: 1088
     },
     "difficulty" : 1,
     "progress" : 70,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 6,
     "name" : "quest test 6",
@@ -1257,7 +1285,8 @@ Content-Length: 1088
     },
     "difficulty" : 1,
     "progress" : 33,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   }, {
     "id" : 3,
     "name" : "quest test 3",
@@ -1269,7 +1298,8 @@ Content-Length: 1088
     },
     "difficulty" : 1,
     "progress" : 50,
-    "thumbnail" : "test.png"
+    "thumbnail" : "test.png",
+    "participantCount" : 100
   } ]
 }</code></pre>
 </div>
@@ -1318,6 +1348,11 @@ Content-Length: 1088
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].participantCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
@@ -1378,7 +1413,7 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM4NDU4MzQ0LCJleHAiOjE2Mzg1NTgzNDR9.c45ryiQAS2pDN3Fo-kyG_pWs9utsiWn2F4qAuXMRP8g</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM4Njc3OTQ1LCJleHAiOjI2Mzg2Nzc5NDV9.4jDWXyRFwKUm-25yQUeAR9tV8NkS3NEQPODGgMfLk1E</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -1420,7 +1455,7 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM4NDU4MzQ0LCJleHAiOjE2Mzg1NTgzNDR9.FSf5n7EqExSf_s1V1ks7V_cDKN3BoX0nS1V3AfP4VRc</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM4Njc3OTQzLCJleHAiOjI2Mzg2Nzc5NDN9.RmhNFY3lLGFLPnvIoVpV0xLlFXftABmIKPRv960Mqfk</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -1446,12 +1481,89 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM4NDU4MzQ0LCJleHAi
 </div>
 </div>
 <div class="sect1">
+<h2 id="_user_api"><a class="link" href="#_user_api">User API</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_get_apiusersme"><a class="link" href="#_get_apiusersme">GET /api/users/me</a></h3>
+<div class="paragraph">
+<p>인증된 유저 정보 조회(액세스 토큰으로 인증된 유저 확인)</p>
+</div>
+<div class="listingblock">
+<div class="title">request</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/me HTTP/1.1
+Host: docs.api.com:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 140
+
+{
+  "status" : 200,
+  "message" : "인증된 유저 정보 조회 성공입니다.",
+  "data" : {
+    "userId" : 1,
+    "point" : 1000
+  }
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 14. response fields</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.userId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">현재 유저 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저 능력치 포인트(레벨 결정)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_upload_api"><a class="link" href="#_upload_api">Upload API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_post_apiupload"><a class="link" href="#_post_apiupload">POST /api/upload</a></h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 14. request</caption>
+<caption class="title">Table 15. request</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1498,7 +1610,7 @@ Content-Length: 198
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 15. response fields</caption>
+<caption class="title">Table 16. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1541,7 +1653,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-12-03 00:17:10 +0900
+Last updated 2021-12-05 12:23:14 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

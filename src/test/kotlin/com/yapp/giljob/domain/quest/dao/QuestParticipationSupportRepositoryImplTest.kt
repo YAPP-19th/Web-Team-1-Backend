@@ -50,7 +50,7 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
 
     }
 
-    @Test
+//    @Test
     fun `1명이 여러 개의 퀘스트에 참여하는 경우 조회 테스트`() {
         // given
         questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[1].id!!, questList[0].id!!), questList[0], userList[1]))
@@ -66,7 +66,7 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
         assertEquals(4L, onProgressQuestCount)
     }
 
-    @Test
+//    @Test
     fun `여러 명이 1개의 퀘스트에 참여하는 경우 조회 테스트`() {
         // given
         questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[1].id!!, questList[0].id!!), questList[0], userList[1]))

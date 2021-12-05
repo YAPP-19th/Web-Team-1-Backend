@@ -13,7 +13,7 @@ class JwtUtil {
         private val secretKey: String = Base64.getEncoder().encodeToString("secretKey".encodeToByteArray())
 
         @Value("\${spring.social.tokenTime}")
-        private val accessTokenValidTime: String = "100000000"
+        private val accessTokenValidTime: String = "1000000000000"
 
         fun createAccessToken(id: Long?): String {
             val sub = id.toString()

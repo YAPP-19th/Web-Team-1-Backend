@@ -120,6 +120,8 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 이름"),
                         PayloadDocumentation.fieldWithPath("data[*].position")
                             .description("퀘스트 카테고리(position)"),
+                        PayloadDocumentation.fieldWithPath("data[*].participantCount")
+                            .description("퀘스트 참여자 수"),
                         PayloadDocumentation.fieldWithPath("data[*].user.id")
                             .description("퀘스트 작성자 id"),
                         PayloadDocumentation.fieldWithPath("data[*].user.nickname")

@@ -7,6 +7,7 @@ import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
 import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.user.dao.AbilityRepository
+import com.yapp.giljob.domain.user.domain.Ability
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
@@ -48,7 +49,7 @@ class QuestParticipationService(
         questParticipation.isCompleted = true
 
         val quest = questParticipation.quest
-        val ability = abilityRepository.findByUserIdAndPosition(user.id!!, quest.position) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        val ability = abilityRepository.findByUserIdAndPosition(user.id!!, quest.position) ?: abilityRepository.save(Ability(user = user, position = quest.position))
         ability.point += quest.difficulty * 100L
     }
 
