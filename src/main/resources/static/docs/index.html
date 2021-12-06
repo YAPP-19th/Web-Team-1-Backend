@@ -1435,7 +1435,7 @@ Content-Length: 94
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. response fields</caption>
+<caption class="title">Table 12. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1479,13 +1479,14 @@ Content-Length: 94
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /sign-up HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 86
+Content-Length: 115
 Host: docs.api.com:8080
 
 {
   "kakaoAccessToken" : "test",
   "position" : "BACKEND",
-  "nickname" : "nickname"
+  "nickname" : "nickname",
+  "profile" : "testProfile"
 }</code></pre>
 </div>
 </div>
@@ -1493,11 +1494,20 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM4Njc3OTQ1LCJleHAiOjI2Mzg2Nzc5NDV9.4jDWXyRFwKUm-25yQUeAR9tV8NkS3NEQPODGgMfLk1E</code></pre>
+Content-Type: application/json;charset=UTF-8
+Content-Length: 238
+
+{
+  "status" : 200,
+  "message" : "회원 가입 성공입니다.",
+  "data" : {
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM4ODMxMzQyLCJleHAiOjI2Mzg4MzEzNDJ9.T3PKlgMD3i3K4ONMKp8pry7H5aSl1vPP2s7R_kAN4-M"
+  }
+}</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. response</caption>
+<caption class="title">Table 13. response</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1535,11 +1545,21 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM4Njc3OTQzLCJleHAiOjI2Mzg2Nzc5NDN9.RmhNFY3lLGFLPnvIoVpV0xLlFXftABmIKPRv960Mqfk</code></pre>
+Content-Type: application/json;charset=UTF-8
+Content-Length: 266
+
+{
+  "status" : 200,
+  "message" : "로그인 및 조회 성공입니다.",
+  "data" : {
+    "isSignedUp" : true,
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM4ODMxMzQyLCJleHAiOjI2Mzg4MzEzNDJ9.wXssE7-iyL2Qw2ikNjWT6ZwM0zLqR86SQAUF_jn5d2M"
+  }
+}</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. response</caption>
+<caption class="title">Table 14. response</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1593,7 +1613,7 @@ Content-Length: 140
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 14. response fields</caption>
+<caption class="title">Table 15. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1643,7 +1663,7 @@ Content-Length: 140
 <div class="sect2">
 <h3 id="_post_apiupload"><a class="link" href="#_post_apiupload">POST /api/upload</a></h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 15. request</caption>
+<caption class="title">Table 16. request</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1690,7 +1710,7 @@ Content-Length: 198
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 16. response fields</caption>
+<caption class="title">Table 17. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1733,7 +1753,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-12-05 12:23:14 +0900
+Last updated 2021-12-06 13:39:54 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

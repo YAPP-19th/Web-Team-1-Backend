@@ -20,7 +20,8 @@ class User (
     @Column(nullable = false)
     var nickname: String,
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "BLOB")
     var profile: String,
 
     @Enumerated(EnumType.STRING)

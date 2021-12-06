@@ -22,7 +22,6 @@ enum class ErrorCode(
     // Sign
     CAN_NOT_GET_KAKAO_ID_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "S001", "Can Not Get Kakao ID Error"),
     ALREADY_SIGN_UP_USER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "S002", "Already Sign Up User Error"),
-    NOT_SIGN_UP_USER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "S003", "Not Sign Up User Error"),
 
     // Quest
     ALREADY_PARTICIPATED_QUEST(HttpStatus.BAD_REQUEST, "Q001", "Already Participated Quest"),
