@@ -20,7 +20,7 @@ class S3Service(
 
     fun fileUpload(file: MultipartFile): S3UploadResponseDto {
 
-        val fileName = UUID.randomUUID().toString() + file.originalFilename ?: ""
+        val fileName = UUID.randomUUID().toString() + file.originalFilename
         val metadata = ObjectMetadata()
         metadata.contentLength = file.size
 

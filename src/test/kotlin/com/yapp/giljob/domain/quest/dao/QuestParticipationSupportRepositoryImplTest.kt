@@ -10,6 +10,7 @@ import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.config.QuerydslTestConfig
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -34,7 +35,10 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
         repeat(5) {
             userList.add(
                 userRepository.save(
-                    User(socialId = "testSocialId", nickname = "testNickname", position = Position.BACKEND)
+                    User(socialId = "testSocialId",
+                        nickname = "testNickname",
+                        intro = "testIntro",
+                        position = Position.BACKEND)
                 )
             )
 
@@ -43,14 +47,22 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
         repeat(5) {
             questList.add(
                 questRepository.save(
-                    Quest(name = "test quest", user = userList[0], position = Position.BACKEND, tagList = mutableListOf(), difficulty = 1, thumbnail = "test.png", detail = "test quest detail", subQuestList = mutableListOf())
+                    Quest(name = "test quest",
+                        user = userList[0],
+                        position = Position.BACKEND,
+                        tagList = mutableListOf(),
+                        difficulty = 1,
+                        thumbnail = "test.png",
+                        detail = "test quest detail",
+                        subQuestList = mutableListOf())
                 )
             )
         }
 
     }
 
-//    @Test
+    @Disabled
+    @Test
     fun `1명이 여러 개의 퀘스트에 참여하는 경우 조회 테스트`() {
         // given
         questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[1].id!!, questList[0].id!!), questList[0], userList[1]))
@@ -66,7 +78,8 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
         assertEquals(4L, onProgressQuestCount)
     }
 
-//    @Test
+    @Disabled
+    @Test
     fun `여러 명이 1개의 퀘스트에 참여하는 경우 조회 테스트`() {
         // given
         questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[1].id!!, questList[0].id!!), questList[0], userList[1]))

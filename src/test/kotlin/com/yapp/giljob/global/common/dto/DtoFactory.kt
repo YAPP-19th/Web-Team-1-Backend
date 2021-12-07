@@ -10,6 +10,7 @@ import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
 import com.yapp.giljob.domain.user.vo.UserSubDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
 import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
+import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
 class DtoFactory {
@@ -68,6 +69,7 @@ class DtoFactory {
         fun testSignUpRequest() = SignUpRequestDto(
             kakaoAccessToken = "test",
             position = Position.BACKEND.name,
+            intro = "testIntro",
             nickname = "nickname")
 
         fun testSignInRequest() = SignInRequestDto(kakaoAccessToken = "test")

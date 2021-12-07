@@ -70,6 +70,7 @@ class QuestParticipationServiceTest {
                 id = quest.user.id!! + 1,
                 socialId = "testSocialId",
                 nickname = "testNickname",
+                intro = "testIntro",
                 position = Position.BACKEND
             )
             every { questRepository.findByIdOrNull(any()) } returns quest
@@ -93,6 +94,7 @@ class QuestParticipationServiceTest {
                 id = quest.user.id!! + 1,
                 socialId = "testSocialId",
                 nickname = "testNickname",
+                intro = "testIntro",
                 position = Position.BACKEND
             )
             every { questRepository.findByIdOrNull(any()) } returns quest

@@ -7,16 +7,16 @@ import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.domain.user.domain.Ability
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.EntityFactory
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.transaction.annotation.Transactional
 
+@Disabled
 @SpringBootTest
 @Transactional
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class QuestSupportRepositoryImplTest {
 
     @Autowired
@@ -34,12 +34,15 @@ class QuestSupportRepositoryImplTest {
 
     private lateinit var questSaveList: MutableList<Quest>
 
-    @BeforeEach
+    private var lastQuestId: Long = 0
+
+    @BeforeAll
     fun setUp() {
         questSaveList = mutableListOf()
         user = userRepository.save(EntityFactory.testUser())
 
-        repeat(questSaveSize) {
+        // 백엔드 저장
+        repeat(questSaveSize - 1) {
             questSaveList.add(
                 questRepository.save(
                     Quest(
@@ -53,6 +56,30 @@ class QuestSupportRepositoryImplTest {
                 )
             )
         }
+
+        // 프론트엔드 저장
+        questSaveList.add(
+            questRepository.save(
+                Quest(
+                    name = "test quest",
+                    user = user,
+                    position = Position.FRONTEND,
+                    difficulty = 1,
+                    thumbnail = "test.png",
+                    detail = "test quest detail"
+                )
+            )
+        )
+    }
+
+    @AfterAll
+    fun tearDown() {
+        questRepository.deleteAll()
+    }
+
+    @Test
+    fun name() {
+
     }
 
     @Nested
@@ -61,7 +88,7 @@ class QuestSupportRepositoryImplTest {
         fun `cursorId가 null인 경우 최신순으로 전체 리스트를 불러온다`() {
             // given
             val cursorId = null
-            val lastQuestId = questSaveList[questSaveList.size - 1].id!!
+            lastQuestId = questSaveList[questSaveList.size - 1].id!!
 
             // when
             val questList =
@@ -102,7 +129,7 @@ class QuestSupportRepositoryImplTest {
         fun `주어진 퀘스트 리스트 사이즈보다 더 큰 사이즈를 요구하면 리스트 사이즈만큼 가져온다`() {
             // given
             val size = questSaveList.size + 1L
-            val lastQuestId = questSaveList[questSaveList.size - 1].id!!
+            lastQuestId = questSaveList[questSaveList.size - 1].id!!
 
             // when
             val questList = questRepository.findByIdLessThanAndOrderByIdDesc(
@@ -158,44 +185,15 @@ class QuestSupportRepositoryImplTest {
 
     @Nested
     inner class PositionTest {
-        private var lastQuestId: Long = 0L
-
-        @BeforeEach
-        fun `FRONTEND 포지션 추가로 저장`() {
-            questSaveList.add(
-                questRepository.save(
-                    Quest(
-                        name = "test quest",
-                        user = user,
-                        position = Position.FRONTEND,
-                        difficulty = 1,
-                        thumbnail = "test.png",
-                        detail = "test quest detail"
-                    )
-                )
-            )
-            lastQuestId = questSaveList[questSaveList.size - 1].id!!
-        }
 
         @Test
         fun `ALL 포지션 조회`() {
             // when
+            lastQuestId = questSaveList[questSaveList.size - 1].id!!
+
             val questList = questRepository.findByIdLessThanAndOrderByIdDesc(
                 questId = lastQuestId + 1L,
                 position = Position.ALL,
-                size = questSaveList.size.toLong()
-            )
-
-            // then
-            assertEquals(6, questList.size)
-        }
-
-        @Test
-        fun `BACKEND 포지션 조회`() {
-            // when
-            val questList = questRepository.findByIdLessThanAndOrderByIdDesc(
-                questId = lastQuestId + 1L,
-                position = Position.BACKEND,
                 size = questSaveList.size.toLong()
             )
 
@@ -204,8 +202,27 @@ class QuestSupportRepositoryImplTest {
         }
 
         @Test
+        fun `BACKEND 포지션 조회`() {
+            // when
+            lastQuestId = questSaveList[questSaveList.size - 1].id!!
+
+            println(lastQuestId)
+
+            val questList = questRepository.findByIdLessThanAndOrderByIdDesc(
+                questId = lastQuestId + 1L,
+                position = Position.BACKEND,
+                size = questSaveList.size.toLong()
+            )
+
+            // then
+            assertEquals(4, questList.size)
+        }
+
+        @Test
         fun `FRONTEND 포지션 조회`() {
             // when
+            lastQuestId = questSaveList[questSaveList.size - 1].id!!
+
             val questList = questRepository.findByIdLessThanAndOrderByIdDesc(
                 questId = lastQuestId + 1L,
                 position = Position.FRONTEND,

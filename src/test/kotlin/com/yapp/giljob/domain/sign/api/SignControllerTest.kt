@@ -48,7 +48,6 @@ internal class SignControllerTest : AbstractRestDocs() {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonString))
             .andExpect(MockMvcResultMatchers.status().isOk)
-            .andExpect(MockMvcResultMatchers.header().exists(HttpHeaders.AUTHORIZATION))
             .andDo(MockMvcResultHandlers.print())
 
         result
@@ -56,15 +55,23 @@ internal class SignControllerTest : AbstractRestDocs() {
             .andDo(
                 MockMvcRestDocumentation.document(
                     "sign-up/post",
-                    HeaderDocumentation.responseHeaders(
-                        headerWithName(HttpHeaders.AUTHORIZATION)
-                            .description("어플리케이션 access token")
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("응답 데이터(퀘스트 리스트)"),
+                        PayloadDocumentation.fieldWithPath("data.accessToken")
+                            .description("애플리케이션 access token")
                     ),
                     PayloadDocumentation.requestFields(
                         PayloadDocumentation.fieldWithPath("kakaoAccessToken")
                             .description("카카오 access token"),
                         PayloadDocumentation.fieldWithPath("position")
                             .description("카테고리(직군)"),
+                        PayloadDocumentation.fieldWithPath("intro")
+                            .description("자기 소개"),
                         PayloadDocumentation.fieldWithPath("nickname")
                             .description("닉네임")
                     )
@@ -85,7 +92,6 @@ internal class SignControllerTest : AbstractRestDocs() {
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonString))
             .andExpect(MockMvcResultMatchers.status().isOk)
-            .andExpect(MockMvcResultMatchers.header().exists(HttpHeaders.AUTHORIZATION))
             .andDo(MockMvcResultHandlers.print())
 
         result
@@ -93,9 +99,17 @@ internal class SignControllerTest : AbstractRestDocs() {
             .andDo(
                 MockMvcRestDocumentation.document(
                     "sign-in/post",
-                    HeaderDocumentation.responseHeaders(
-                        headerWithName(HttpHeaders.AUTHORIZATION)
-                            .description("어플리케이션 access token")
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("응답 데이터(퀘스트 리스트)"),
+                        PayloadDocumentation.fieldWithPath("data.isSignedUp")
+                            .description("회원 가입한 회원인지 여부, false이면 회원 가입 진행"),
+                        PayloadDocumentation.fieldWithPath("data.accessToken")
+                            .description("애플리케이션 access token")
                     ),
                     PayloadDocumentation.requestFields(
                         PayloadDocumentation.fieldWithPath("kakaoAccessToken")

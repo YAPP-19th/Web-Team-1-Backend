@@ -1,12 +1,7 @@
 package com.yapp.giljob.domain.sign.application
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.global.error.ErrorCode
-import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
-import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
-import com.yapp.giljob.domain.sign.repository.SignRepository
-import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -14,14 +9,12 @@ import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.header
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.transaction.annotation.Transactional
 

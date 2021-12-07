@@ -7,8 +7,7 @@ import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import com.yapp.giljob.infra.kakao.application.KakaoService
 import org.junit.jupiter.api.*
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
@@ -52,9 +51,9 @@ class SignServiceTest {
         given(signRepository.findBySocialId(anyString())).willReturn(null)
         given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
 
-        val accessToken = signService.signUp(signUpRequest, response)
+        val signUpResponseDto = signService.signUp(signUpRequest)
 
-        assertNotNull(accessToken)
+        assertNotNull(signUpResponseDto.accessToken)
     }
 
     @Test
@@ -62,9 +61,10 @@ class SignServiceTest {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
         given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
 
-        val accessToken = signService.signIn(signInRequest, response)
+        val signInResponseDto = signService.signIn(signInRequest)
 
-        assertNotNull(accessToken)
+        assertNotNull(signInResponseDto.accessToken)
+        assertEquals(true, signInResponseDto.isSignedUp)
     }
 
     @Test
@@ -73,21 +73,20 @@ class SignServiceTest {
         given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
 
         val exception = Assertions.assertThrows(BusinessException::class.java) {
-            signService.signUp(signUpRequest, response)
+            signService.signUp(signUpRequest)
         }
 
         assertEquals(exception.errorCode, ErrorCode.ALREADY_SIGN_UP_USER_ERROR)
     }
 
     @Test
-    fun `미가입자가 로그인시 서비스에서 에러`() {
+    fun `미가입자가 로그인시 isSignedUp이 false로 리턴`() {
         given(signRepository.findBySocialId(anyString())).willReturn(null)
         given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
 
-        val exception = Assertions.assertThrows(BusinessException::class.java) {
-            signService.signIn(signInRequest, response)
-        }
+        val signInResponseDto = signService.signIn(signInRequest)
 
-        assertEquals(exception.errorCode, ErrorCode.NOT_SIGN_UP_USER_ERROR)
+        assertEquals(false, signInResponseDto.isSignedUp)
+        assertNull(signInResponseDto.accessToken)
     }
 }
