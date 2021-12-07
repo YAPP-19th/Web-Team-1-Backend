@@ -16,7 +16,7 @@ class EntityFactory {
             id = 1L,
             socialId = "testSocialId",
             nickname = "testNickname",
-            profile = "testProfile",
+            intro = "testIntro",
             position = Position.BACKEND
         )
         fun testQuest() = Quest(

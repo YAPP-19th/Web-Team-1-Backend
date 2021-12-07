@@ -69,7 +69,7 @@ class DtoFactory {
         fun testSignUpRequest() = SignUpRequestDto(
             kakaoAccessToken = "test",
             position = Position.BACKEND.name,
-            profile = "testProfile",
+            intro = "testIntro",
             nickname = "nickname")
 
         fun testSignInRequest() = SignInRequestDto(kakaoAccessToken = "test")

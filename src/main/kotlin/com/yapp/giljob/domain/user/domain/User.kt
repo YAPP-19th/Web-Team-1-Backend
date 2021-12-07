@@ -20,9 +20,8 @@ class User (
     @Column(nullable = false)
     var nickname: String,
 
-    @Lob
-    @Column(nullable = false, columnDefinition = "BLOB")
-    var profile: String,
+    @Column(nullable = false)
+    var intro: String,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "position")
@@ -41,7 +40,7 @@ class User (
             return User(
                 socialId = kakaoId,
                 nickname = signUpRequestDto.nickname,
-                profile = signUpRequestDto.profile,
+                intro = signUpRequestDto.intro,
                 position = Position.valueOf(signUpRequestDto.position)
             )
         }

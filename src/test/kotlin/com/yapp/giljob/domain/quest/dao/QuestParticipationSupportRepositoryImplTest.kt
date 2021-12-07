@@ -37,7 +37,7 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
                 userRepository.save(
                     User(socialId = "testSocialId",
                         nickname = "testNickname",
-                        profile = "testProfile",
+                        intro = "testIntro",
                         position = Position.BACKEND)
                 )
             )

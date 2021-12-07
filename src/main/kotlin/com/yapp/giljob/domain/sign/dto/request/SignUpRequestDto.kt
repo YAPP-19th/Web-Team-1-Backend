@@ -4,5 +4,5 @@ data class SignUpRequestDto (
     val kakaoAccessToken: String,
     val position: String,
     val nickname: String,
-    val profile: String
+    val intro: String
     )

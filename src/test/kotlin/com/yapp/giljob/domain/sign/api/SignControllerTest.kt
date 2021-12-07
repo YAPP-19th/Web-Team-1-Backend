@@ -70,7 +70,7 @@ internal class SignControllerTest : AbstractRestDocs() {
                             .description("카카오 access token"),
                         PayloadDocumentation.fieldWithPath("position")
                             .description("카테고리(직군)"),
-                        PayloadDocumentation.fieldWithPath("profile")
+                        PayloadDocumentation.fieldWithPath("intro")
                             .description("자기 소개"),
                         PayloadDocumentation.fieldWithPath("nickname")
                             .description("닉네임")
