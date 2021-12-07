@@ -3,7 +3,7 @@ package com.yapp.giljob.domain.quest.application
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
-import com.yapp.giljob.domain.user.dao.UserMapper
+import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.vo.UserSubDto
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping

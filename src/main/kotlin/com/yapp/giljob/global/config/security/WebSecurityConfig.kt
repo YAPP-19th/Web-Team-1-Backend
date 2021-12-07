@@ -23,6 +23,7 @@ class WebSecurityConfig(
             "/sign-in",
             "/api/quests/count",
             "/api/users/**/quests/**",
+            "/api/users/**/profile",
             "/don't-pass-filter",
             "/docs/index.html",
             "api/quests/common/**"
