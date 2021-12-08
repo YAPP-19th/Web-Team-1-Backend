@@ -11,6 +11,8 @@ import com.yapp.giljob.domain.user.vo.UserSubDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
 import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
 import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
+import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
+import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
 class DtoFactory {
@@ -78,5 +80,13 @@ class DtoFactory {
             fileUrl = "https://giljob.s3.us-east-2.amazonaws.com/0f792d8f-8fc0-49c6-ba39-b77d39024239test.jpeg"
         )
 
+        fun testUserInfoRequest() = UserInfoUpdateRequestDto(
+            nickname = "testNickname",
+            position = Position.BACKEND
+        )
+
+        fun testUserIntroRequest() = UserIntroUpdateRequestDto(
+            intro = "test introduce"
+        )
     }
 }
