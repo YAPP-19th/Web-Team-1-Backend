@@ -3,6 +3,7 @@ package com.yapp.giljob.domain.user.api
 import com.yapp.giljob.domain.user.application.UserService
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
+import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
 import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
@@ -26,11 +27,27 @@ class UserController(
     }
 
     @PatchMapping("/me/info")
-    fun updateUserInfo(@CurrentUser user: User, @RequestBody requestDto: UserInfoUpdateRequestDto): ResponseEntity<BaseResponse<Unit>> {
+    fun updateUserInfo(
+        @CurrentUser user: User,
+        @RequestBody requestDto: UserInfoUpdateRequestDto
+    ): ResponseEntity<BaseResponse<Unit>> {
         userService.updateUserInfo(user.id!!, requestDto)
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK, "유저 정보 업데이트 성공입니다."
+            )
+        )
+    }
+
+    @PatchMapping("/me/intro")
+    fun updateUserIntro(
+        @CurrentUser user: User,
+        @RequestBody requestDto: UserIntroUpdateRequestDto
+    ): ResponseEntity<BaseResponse<Unit>> {
+        userService.updateUserIntro(user.id!!, requestDto.intro)
+        return ResponseEntity.ok(
+            BaseResponse.of(
+                HttpStatus.OK, "유저 자기소개 업데이트 성공입니다."
             )
         )
     }

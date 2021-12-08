@@ -28,7 +28,12 @@ class UserService(
     @Transactional
     fun updateUserInfo(userId: Long, requestDto: UserInfoUpdateRequestDto) {
         val user = userRepository.findByIdOrNull(userId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
-        user.nickname = requestDto.nickname
-        user.position = requestDto.position
+        user.updateInfo(requestDto.nickname, requestDto.position)
+    }
+
+    @Transactional
+    fun updateUserIntro(userId: Long, intro: String) {
+        val user = userRepository.findByIdOrNull(userId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        user.updateIntro(intro)
     }
 }
