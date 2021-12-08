@@ -23,22 +23,36 @@ class UserService(
     @Transactional(readOnly = true)
     fun getUserInfo(user: User): UserInfoResponseDto {
         val ability = getUserAbility(user.id!!, user.position)
-        return UserInfoResponseDto(userId = user.id!!, nickname = user.nickname, position = user.position, point = ability.point)
+        return makeUserInfo(user, ability)
     }
 
     @Transactional(readOnly = true)
     fun getUserProfile(userId: Long): UserProfileResponseDto {
         val user = userRepository.findByIdOrNull(userId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        val abilityList = getAbilityListByUserId(userId)
+        val ability = abilityList.find { it.position == user.position } ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+
         return UserProfileResponseDto(
-            userInfo = getUserInfo(user),
+            userInfo = makeUserInfo(user, ability),
             intro = user.intro,
-            abilityList = getAbilityListByUserId(userId)
+            abilityList = abilityList
         )
     }
 
+    private fun makeUserInfo(user: User, ability: AbilityResponseDto) =
+        UserInfoResponseDto(
+            userId = user.id!!,
+            nickname = user.nickname,
+            position = ability.position,
+            point = ability.point
+        )
+
     private fun getUserAbility(userId: Long, position: Position) =
-        abilityRepository.findByUserIdAndPosition(userId, position)
-            ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        userMapper.toDto(
+            abilityRepository.findByUserIdAndPosition(userId, position) ?: throw BusinessException(
+                ErrorCode.ENTITY_NOT_FOUND
+            )
+        )
 
     private fun getAbilityListByUserId(userId: Long): List<AbilityResponseDto> {
         val abilityList = abilityRepository.findByUserId(userId)
