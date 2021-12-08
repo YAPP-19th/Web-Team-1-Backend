@@ -11,8 +11,8 @@ Andy Wilkinson;
 === POST /api/quests
 .request
 include::{snippets}/quests/post/http-request.adoc[]
-.response
-include::{snippets}/quests/post/http-response.adoc[]
+.request
+include::{snippets}/quests/post/request-fields.adoc[]
 .response
 include::{snippets}/quests/post/response-body.adoc[]
 .response fields
@@ -53,22 +53,22 @@ include::{snippets}/quests/common/get/response-fields.adoc[]
 
 .request
 include::{snippets}/quests/participation/post/http-request.adoc[]
-.response
-include::{snippets}/quests/participation/post/http-response.adoc[]
 .request fields
 include::{snippets}/quests/participation/post/path-parameters.adoc[]
+.response
+include::{snippets}/quests/participation/post/http-response.adoc[]
 .response fields
 include::{snippets}/quests/participation/post/response-fields.adoc[]
 
-=== Patch /api/quests/{questId}/complete
+=== PATCH /api/quests/{questId}/complete
 퀘스트 완료
 
 .request
 include::{snippets}/quests/{questId}/complete/patch/http-request.adoc[]
-.response
-include::{snippets}/quests/{questId}/complete/patch/http-response.adoc[]
 .request fields
 include::{snippets}/quests/{questId}/participation/post/path-parameters.adoc[]
+.response
+include::{snippets}/quests/{questId}/complete/patch/http-response.adoc[]
 .response fields
 include::{snippets}/quests/{questId}/complete/patch/response-fields.adoc[]
 
@@ -100,8 +100,8 @@ include::{snippets}/users/{userId}/quests/participation/get/response-fields.adoc
 
 .request
 include::{snippets}/subquests/post/http-request.adoc[]
-.response
-include::{snippets}/subquests/post/http-response.adoc[]
+.request
+include::{snippets}/subquests/post/path-parameters.adoc[]
 .response
 include::{snippets}/subquests/post/response-body.adoc[]
 .response fields
