@@ -9,7 +9,7 @@ import javax.persistence.*
 
 @Table(name = "user")
 @Entity
-class User (
+class User(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     val id: Long? = null,
@@ -33,10 +33,19 @@ class User (
 
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
 
+    fun updateInfo(nickname: String, position: Position) {
+        this.nickname = nickname
+        this.position = position
+    }
+
+    fun updateIntro(intro: String) {
+        this.intro = intro
+    }
+
     companion object {
         private val equalsAndHashCodeProperties = arrayOf(User::id)
 
-        fun of (signUpRequestDto: SignUpRequestDto, kakaoId: String): User {
+        fun of(signUpRequestDto: SignUpRequestDto, kakaoId: String): User {
             return User(
                 socialId = kakaoId,
                 nickname = signUpRequestDto.nickname,
