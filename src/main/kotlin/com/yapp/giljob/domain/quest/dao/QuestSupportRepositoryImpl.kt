@@ -27,22 +27,35 @@ class QuestSupportRepositoryImpl(
             builder.and(eqPosition(position)).and(ltQuestId(questId))
         } else builder.and(eqUserId(userId)).and(eqPosition(position)).and(ltQuestId(questId))
 
-        return query.select(
-            Projections.constructor(
-                QuestSupportVo::class.java,
-                quest,
-                ability.point,
-                JPAExpressions.select(questParticipation.count()).from(questParticipation)
-                    .where(questParticipation.quest.eq(quest))
-            )
-        ).distinct()
-            .from(quest)
-            .where(builder)
-            .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
-            .orderBy(quest.id.desc())
-            .limit(size)
-            .fetch()
+        return selectQuestList(builder, size)
     }
+
+    override fun search(keyword: String, position: Position, size: Long, questId: Long?): List<QuestSupportVo> {
+        val builder = BooleanBuilder()
+
+        builder
+            .and(eqPosition(position))
+            .and(ltQuestId(questId))
+            .and(quest.name.containsIgnoreCase(keyword))
+
+        return selectQuestList(builder, size)
+    }
+
+    private fun selectQuestList(builder: BooleanBuilder, size: Long) = query.select(
+        Projections.constructor(
+            QuestSupportVo::class.java,
+            quest,
+            ability.point,
+            JPAExpressions.select(questParticipation.count()).from(questParticipation)
+                .where(questParticipation.quest.eq(quest))
+        )
+    ).distinct()
+        .from(quest)
+        .where(builder)
+        .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
+        .orderBy(quest.id.desc())
+        .limit(size)
+        .fetch()
 
     private fun ltQuestId(questId: Long?): BooleanExpression? {
         return questId?.let { quest.id.lt(questId) }

@@ -25,7 +25,8 @@ class WebSecurityConfig(
             "/api/users/**/quests/**",
             "/don't-pass-filter",
             "/docs/index.html",
-            "api/quests/common/**"
+            "api/quests/common/**",
+            "/api/quests/search"
         )
         web.ignoring().antMatchers(HttpMethod.GET, "/api/quests")
     }
