@@ -26,7 +26,7 @@ class UserController(
         )
     }
 
-    @PatchMapping("/me/info")
+    @PatchMapping("/me")
     fun updateUserInfo(
         @CurrentUser user: User,
         @RequestBody requestDto: UserInfoUpdateRequestDto

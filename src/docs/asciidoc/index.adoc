@@ -136,17 +136,17 @@ include::{snippets}/users/me/get/http-response.adoc[]
 .response fields
 include::{snippets}/users/me/get/response-fields.adoc[]
 
-=== PATCH /api/users/me/info
+=== PATCH /api/users/me
 유저 정보 수정
 
 .request
-include::{snippets}/users/me/info/patch/http-request.adoc[]
+include::{snippets}/users/me/patch/http-request.adoc[]
 .request
-include::{snippets}/users/me/info/patch/request-fields.adoc[]
+include::{snippets}/users/me/patch/request-fields.adoc[]
 .response
-include::{snippets}/users/me/info/patch/response-body.adoc[]
+include::{snippets}/users/me/patch/response-body.adoc[]
 .response fields
-include::{snippets}/users/me/info/patch/response-fields.adoc[]
+include::{snippets}/users/me/patch/response-fields.adoc[]
 
 === PATCH /api/users/me/intro
 유저 자기소개 수정

@@ -73,7 +73,7 @@ class UserControllerTest : AbstractRestDocs() {
         val request = DtoFactory.testUserInfoRequest()
         val jsonString = ObjectMapper().writeValueAsString(request)
         val result = mockMvc.perform(
-            RestDocumentationRequestBuilders.patch("/api/users/me/info")
+            RestDocumentationRequestBuilders.patch("/api/users/me")
                 .header("Authorization", "Access Token")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonString)
@@ -83,7 +83,7 @@ class UserControllerTest : AbstractRestDocs() {
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andDo(
                 MockMvcRestDocumentation.document(
-                    "users/me/info/patch",
+                    "users/me/patch",
                     HeaderDocumentation.responseHeaders(),
                     HeaderDocumentation.responseHeaders(),
                     PayloadDocumentation.requestFields(
