@@ -6,5 +6,6 @@ class UserInfoResponseDto(
     var userId: Long,
     var nickname: String,
     var position: Position,
-    var point: Long
+    var point: Long,
+    var intro: String
 )

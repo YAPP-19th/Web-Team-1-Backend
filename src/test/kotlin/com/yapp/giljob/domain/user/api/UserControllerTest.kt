@@ -62,7 +62,9 @@ class UserControllerTest : AbstractRestDocs() {
                         PayloadDocumentation.fieldWithPath("data.position")
                             .description("유저가 설정한 직군(포지션)"),
                         PayloadDocumentation.fieldWithPath("data.point")
-                            .description("유저가 설정한 직군에 대한 능력치 포인트(레벨 결정)")
+                            .description("유저가 설정한 직군에 대한 능력치 포인트(레벨 결정)"),
+                        PayloadDocumentation.fieldWithPath("data.intro")
+                            .description("유저 자기소개")
                     )
                 )
             )
@@ -103,7 +105,7 @@ class UserControllerTest : AbstractRestDocs() {
                             .description("유저가 설정한 직군(포지션)"),
                         PayloadDocumentation.fieldWithPath("data.userInfo.point")
                             .description("유저가 설정한 직군에 대한 능력치 포인트"),
-                        PayloadDocumentation.fieldWithPath("data.intro")
+                        PayloadDocumentation.fieldWithPath("data.userInfo.intro")
                             .description("유저 자기소개"),
                         PayloadDocumentation.fieldWithPath("data.abilityList")
                             .description("유저 능력치 리스트"),

@@ -1502,7 +1502,7 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM4OTY3ODc3LCJleHAiOjI2Mzg5Njc4Nzd9.UUrtLBudz6N54ZxLyAZB-DzqjwUE8ZK9t4ji_hwm5q0"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM5MDU1MjA0LCJleHAiOjI2MzkwNTUyMDR9.NhMwlR8-F1nNEW-f-pfQsMSDdlEv-OR7XjDLOwvhifc"
   }
 }</code></pre>
 </div>
@@ -1572,7 +1572,7 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM4OTY3ODc2LCJleHAiOjI2Mzg5Njc4NzZ9.v67FT3dtB-jJzSbdb4ZF6nVd0L0PjhnQTHZKAKhSePE"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM5MDU1MjAzLCJleHAiOjI2MzkwNTUyMDN9.GUTEDAv2ALqemKStiJbel_z9fUPBAMpjBtGUNrJXknA"
   }
 }</code></pre>
 </div>
@@ -1642,7 +1642,7 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 197
+Content-Length: 229
 
 {
   "status" : 200,
@@ -1651,7 +1651,8 @@ Content-Length: 197
     "userId" : 1,
     "nickname" : "nickname",
     "position" : "BACKEND",
-    "point" : 1000
+    "point" : 1000,
+    "intro" : "test introduce"
   }
 }</code></pre>
 </div>
@@ -1706,6 +1707,11 @@ Content-Length: 197
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">유저가 설정한 직군에 대한 능력치 포인트(레벨 결정)</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저 자기소개</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1726,7 +1732,7 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 398
+Content-Length: 401
 
 {
   "status" : 200,
@@ -1736,9 +1742,9 @@ Content-Length: 398
       "userId" : 1,
       "nickname" : "nickname",
       "position" : "BACKEND",
-      "point" : 1000
+      "point" : 1000,
+      "intro" : "test introduce"
     },
-    "intro" : "test introduce",
     "abilityList" : [ {
       "position" : "BACKEND",
       "point" : 1000
@@ -1806,7 +1812,7 @@ Content-Length: 398
 <td class="tableblock halign-left valign-top"><p class="tableblock">유저가 설정한 직군에 대한 능력치 포인트</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.userInfo.intro</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">유저 자기소개</p></td>
 </tr>
@@ -1926,7 +1932,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-12-08 21:50:19 +0900
+Last updated 2021-12-09 21:02:53 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

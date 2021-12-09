@@ -23,29 +23,18 @@ class UserService(
     @Transactional(readOnly = true)
     fun getUserInfo(user: User): UserInfoResponseDto {
         val ability = getUserAbility(user.id!!, user.position)
-        return makeUserInfo(user, ability)
+        return userMapper.toDto(user, ability)
     }
 
     @Transactional(readOnly = true)
     fun getUserProfile(userId: Long): UserProfileResponseDto {
         val user = userRepository.findByIdOrNull(userId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
         val abilityList = getAbilityListByUserId(userId)
-        val ability = abilityList.find { it.position == user.position } ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        val ability =
+            abilityList.find { it.position == user.position } ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
 
-        return UserProfileResponseDto(
-            userInfo = makeUserInfo(user, ability),
-            intro = user.intro,
-            abilityList = abilityList
-        )
+        return UserProfileResponseDto(userInfo = userMapper.toDto(user, ability), abilityList = abilityList)
     }
-
-    private fun makeUserInfo(user: User, ability: AbilityResponseDto) =
-        UserInfoResponseDto(
-            userId = user.id!!,
-            nickname = user.nickname,
-            position = ability.position,
-            point = ability.point
-        )
 
     private fun getUserAbility(userId: Long, position: Position) =
         userMapper.toDto(

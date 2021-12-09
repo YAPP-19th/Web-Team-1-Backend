@@ -86,12 +86,12 @@ class DtoFactory {
             userId = 1L,
             nickname = "nickname",
             position = Position.BACKEND,
-            point = 1000L
+            point = 1000L,
+            intro = "test introduce"
         )
 
         fun testUserProfileResponse() = UserProfileResponseDto(
             userInfo = testUserInfoResponse(),
-            intro = "test introduce",
             abilityList = mutableListOf(
                 AbilityResponseDto(Position.BACKEND, 1000L),
                 AbilityResponseDto(Position.FRONTEND, 400L)
