@@ -28,6 +28,18 @@ include::{snippets}/quests/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/get/response-fields.adoc[]
 
+=== GET /api/quests/search
+퀘스트 검색
+
+.request
+include::{snippets}/quests/search/get/http-request.adoc[]
+.request fields
+include::{snippets}/quests/search/get/request-parameters.adoc[]
+.response
+include::{snippets}/quests/search/get/http-response.adoc[]
+.response fields
+include::{snippets}/quests/search/get/response-fields.adoc[]
+
 === GET /api/quests/count
 랜딩 페이지 퀘스트 수 조회
 
