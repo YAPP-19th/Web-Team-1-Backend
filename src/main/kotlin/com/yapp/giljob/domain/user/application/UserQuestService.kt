@@ -7,7 +7,6 @@ import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
-import com.yapp.giljob.domain.user.dao.UserMapper
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

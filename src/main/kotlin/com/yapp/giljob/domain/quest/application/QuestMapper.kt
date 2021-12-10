@@ -3,8 +3,8 @@ package com.yapp.giljob.domain.quest.application
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
-import com.yapp.giljob.domain.user.dao.UserMapper
-import com.yapp.giljob.domain.user.vo.UserSubDto
+import com.yapp.giljob.domain.user.application.UserMapper
+import com.yapp.giljob.domain.user.dto.response.UserSubResponseDto
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.Mappings
@@ -20,7 +20,7 @@ interface QuestMapper {
         Mapping(target = "participantCount", source = "questSupportVo.participantCount"),
         Mapping(target = "user", source = "user")
     )
-    fun toDto(questSupportVo: QuestSupportVo, user: UserSubDto): QuestResponseDto
+    fun toDto(questSupportVo: QuestSupportVo, user: UserSubResponseDto): QuestResponseDto
 
     @Mappings(
         Mapping(target = "id", source = "questSupportVo.quest.id"),
@@ -32,5 +32,5 @@ interface QuestMapper {
         Mapping(target = "user", source = "user"),
         Mapping(target = "progress", source = "progress"),
     )
-    fun toDto(questSupportVo: QuestSupportVo, user: UserSubDto, progress: Int): QuestByParticipantResponseDto
+    fun toDto(questSupportVo: QuestSupportVo, user: UserSubResponseDto, progress: Int): QuestByParticipantResponseDto
 }

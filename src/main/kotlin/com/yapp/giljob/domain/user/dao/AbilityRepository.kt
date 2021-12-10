@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface AbilityRepository: JpaRepository<Ability, Long> {
     fun findByUserIdAndPosition(userId: Long, position: Position): Ability?
+    fun findByUserId(userId: Long): List<Ability>
 }

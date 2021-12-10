@@ -7,10 +7,13 @@ import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
 import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
-import com.yapp.giljob.domain.user.vo.UserSubDto
+import com.yapp.giljob.domain.user.dto.response.UserSubResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
 import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
 import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
+import com.yapp.giljob.domain.user.dto.response.AbilityResponseDto
+import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
+import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
@@ -34,7 +37,7 @@ class DtoFactory {
             difficulty = 1,
             thumbnail = "test.png",
             participantCount = 100,
-            user = UserSubDto(
+            user = UserSubResponseDto(
                 id = 1L,
                 nickname = "testNickname",
                 point = 100
@@ -48,7 +51,7 @@ class DtoFactory {
             difficulty = 1,
             thumbnail = "test.png",
             participantCount = 100,
-            user = UserSubDto(
+            user = UserSubResponseDto(
                 id = 1L,
                 nickname = "testNickname",
                 point = 100
@@ -72,7 +75,8 @@ class DtoFactory {
             kakaoAccessToken = "test",
             position = Position.BACKEND.name,
             intro = "testIntro",
-            nickname = "nickname")
+            nickname = "nickname"
+        )
 
         fun testSignInRequest() = SignInRequestDto(kakaoAccessToken = "test")
 
@@ -80,6 +84,22 @@ class DtoFactory {
             fileUrl = "https://giljob.s3.us-east-2.amazonaws.com/0f792d8f-8fc0-49c6-ba39-b77d39024239test.jpeg"
         )
 
+        fun testUserInfoResponse() = UserInfoResponseDto(
+            userId = 1L,
+            nickname = "nickname",
+            position = Position.BACKEND,
+            point = 1000L,
+            intro = "test introduce"
+        )
+
+        fun testUserProfileResponse() = UserProfileResponseDto(
+            userInfo = testUserInfoResponse(),
+            abilityList = mutableListOf(
+                AbilityResponseDto(Position.BACKEND, 1000L),
+                AbilityResponseDto(Position.FRONTEND, 400L)
+            )
+        )
+        
         fun testUserInfoRequest() = UserInfoUpdateRequestDto(
             nickname = "testNickname",
             position = Position.BACKEND

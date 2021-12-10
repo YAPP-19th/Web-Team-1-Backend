@@ -5,6 +5,7 @@ import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
+import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
 import org.springframework.http.HttpStatus
@@ -21,7 +22,17 @@ class UserController(
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK, "인증된 유저 정보 조회 성공입니다.",
-                userService.getAuthenticatedUserInfo(user)
+                userService.getUserInfo(user)
+            )
+        )
+    }
+
+    @GetMapping("/{userId}/profile")
+    fun getUserProfile(@PathVariable userId: Long): ResponseEntity<BaseResponse<UserProfileResponseDto>> {
+        return ResponseEntity.ok(
+            BaseResponse.of(
+                HttpStatus.OK, "유저 프로필 조회 성공입니다.",
+                userService.getUserProfile(userId)
             )
         )
     }

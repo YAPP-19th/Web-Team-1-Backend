@@ -148,6 +148,16 @@ include::{snippets}/users/me/get/http-response.adoc[]
 .response fields
 include::{snippets}/users/me/get/response-fields.adoc[]
 
+=== GET /api/users/{userId}/profile
+유저 프로필 조회
+
+.request
+include::{snippets}/users/{userid}/profile/get/http-request.adoc[]
+.response
+include::{snippets}/users/{userid}/profile/get/http-response.adoc[]
+.response fields
+include::{snippets}/users/{userid}/profile/get/response-fields.adoc[]
+
 === PATCH /api/users/me
 유저 정보 수정
 

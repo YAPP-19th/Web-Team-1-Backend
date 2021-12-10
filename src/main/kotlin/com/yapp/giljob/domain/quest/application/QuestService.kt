@@ -8,7 +8,7 @@ import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.tag.application.TagService
-import com.yapp.giljob.domain.user.dao.UserMapper
+import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.domain.User
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

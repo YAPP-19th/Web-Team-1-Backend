@@ -4,7 +4,7 @@ import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.tag.application.TagService
 import com.yapp.giljob.domain.tag.domain.QuestTag
-import com.yapp.giljob.domain.user.dao.UserMapper
+import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
 import io.mockk.MockKAnnotations
