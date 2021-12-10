@@ -14,6 +14,8 @@ import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
 import com.yapp.giljob.domain.user.dto.response.AbilityResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
+import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
+import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
 class DtoFactory {
@@ -97,6 +99,14 @@ class DtoFactory {
                 AbilityResponseDto(Position.FRONTEND, 400L)
             )
         )
+        
+        fun testUserInfoRequest() = UserInfoUpdateRequestDto(
+            nickname = "testNickname",
+            position = Position.BACKEND
+        )
 
+        fun testUserIntroRequest() = UserIntroUpdateRequestDto(
+            intro = "test introduce"
+        )
     }
 }

@@ -5,6 +5,7 @@ import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.domain.user.dto.response.AbilityResponseDto
+import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.global.error.ErrorCode
@@ -48,5 +49,17 @@ class UserService(
         return abilityList.map {
             userMapper.toDto(it)
         }
+    }
+
+    @Transactional
+    fun updateUserInfo(userId: Long, requestDto: UserInfoUpdateRequestDto) {
+        val user = userRepository.findByIdOrNull(userId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        user.updateInfo(requestDto.nickname, requestDto.position)
+    }
+
+    @Transactional
+    fun updateUserIntro(userId: Long, intro: String) {
+        val user = userRepository.findByIdOrNull(userId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        user.updateIntro(intro)
     }
 }

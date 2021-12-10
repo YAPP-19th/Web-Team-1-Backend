@@ -11,8 +11,8 @@ Andy Wilkinson;
 === POST /api/quests
 .request
 include::{snippets}/quests/post/http-request.adoc[]
-.response
-include::{snippets}/quests/post/http-response.adoc[]
+.request
+include::{snippets}/quests/post/request-fields.adoc[]
 .response
 include::{snippets}/quests/post/response-body.adoc[]
 .response fields
@@ -27,6 +27,18 @@ include::{snippets}/quests/get/http-request.adoc[]
 include::{snippets}/quests/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/get/response-fields.adoc[]
+
+=== GET /api/quests/search
+퀘스트 검색
+
+.request
+include::{snippets}/quests/search/get/http-request.adoc[]
+.request fields
+include::{snippets}/quests/search/get/request-parameters.adoc[]
+.response
+include::{snippets}/quests/search/get/http-response.adoc[]
+.response fields
+include::{snippets}/quests/search/get/response-fields.adoc[]
 
 === GET /api/quests/count
 랜딩 페이지 퀘스트 수 조회
@@ -53,22 +65,22 @@ include::{snippets}/quests/common/get/response-fields.adoc[]
 
 .request
 include::{snippets}/quests/participation/post/http-request.adoc[]
-.response
-include::{snippets}/quests/participation/post/http-response.adoc[]
 .request fields
 include::{snippets}/quests/participation/post/path-parameters.adoc[]
+.response
+include::{snippets}/quests/participation/post/http-response.adoc[]
 .response fields
 include::{snippets}/quests/participation/post/response-fields.adoc[]
 
-=== Patch /api/quests/{questId}/complete
+=== PATCH /api/quests/{questId}/complete
 퀘스트 완료
 
 .request
 include::{snippets}/quests/{questId}/complete/patch/http-request.adoc[]
-.response
-include::{snippets}/quests/{questId}/complete/patch/http-response.adoc[]
 .request fields
 include::{snippets}/quests/{questId}/participation/post/path-parameters.adoc[]
+.response
+include::{snippets}/quests/{questId}/complete/patch/http-response.adoc[]
 .response fields
 include::{snippets}/quests/{questId}/complete/patch/response-fields.adoc[]
 
@@ -100,8 +112,8 @@ include::{snippets}/users/{userId}/quests/participation/get/response-fields.adoc
 
 .request
 include::{snippets}/subquests/post/http-request.adoc[]
-.response
-include::{snippets}/subquests/post/http-response.adoc[]
+.request
+include::{snippets}/subquests/post/path-parameters.adoc[]
 .response
 include::{snippets}/subquests/post/response-body.adoc[]
 .response fields
@@ -145,6 +157,30 @@ include::{snippets}/users/{userid}/profile/get/http-request.adoc[]
 include::{snippets}/users/{userid}/profile/get/http-response.adoc[]
 .response fields
 include::{snippets}/users/{userid}/profile/get/response-fields.adoc[]
+
+=== PATCH /api/users/me
+유저 정보 수정
+
+.request
+include::{snippets}/users/me/patch/http-request.adoc[]
+.request
+include::{snippets}/users/me/patch/request-fields.adoc[]
+.response
+include::{snippets}/users/me/patch/response-body.adoc[]
+.response fields
+include::{snippets}/users/me/patch/response-fields.adoc[]
+
+=== PATCH /api/users/me/intro
+유저 자기소개 수정
+
+.request
+include::{snippets}/users/me/intro/patch/http-request.adoc[]
+.request
+include::{snippets}/users/me/intro/patch/request-fields.adoc[]
+.response
+include::{snippets}/users/me/intro/patch/response-body.adoc[]
+.response fields
+include::{snippets}/users/me/intro/patch/response-fields.adoc[]
 
 == Upload API
 === POST /api/upload
