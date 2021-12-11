@@ -101,6 +101,8 @@ include::{snippets}/users/{userId}/quests/get/response-fields.adoc[]
 
 .request
 include::{snippets}/users/{userId}/quests/participation/get/http-request.adoc[]
+.request fields
+include::{snippets}//users/{userId}/quests/participation/get/request-parameters.adoc[]
 .response
 include::{snippets}/users/{userId}/quests/participation/get/http-response.adoc[]
 .response fields
