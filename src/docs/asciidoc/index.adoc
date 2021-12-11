@@ -50,15 +50,15 @@ include::{snippets}/quests/count/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/count/get/response-fields.adoc[]
 
-=== GET /api/quests/{questId}/common/
-퀘스트 상세 페이지 공통 정보 조회
+=== GET /api/quests/{questId}/info/
+퀘스트 상세 페이지 정보 조회
 
 .request
-include::{snippets}/quests/common/get/path-parameters.adoc[]
+include::{snippets}/quests/info/get/path-parameters.adoc[]
 .response
-include::{snippets}/quests/common/get/http-response.adoc[]
+include::{snippets}/quests/info/get/http-response.adoc[]
 .response fields
-include::{snippets}/quests/common/get/response-fields.adoc[]
+include::{snippets}/quests/info/get/response-fields.adoc[]
 
 === POST /api/quests/{questId}/participation
 퀘스트 참여

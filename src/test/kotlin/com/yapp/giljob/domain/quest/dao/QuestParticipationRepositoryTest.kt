@@ -6,6 +6,7 @@ import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.config.QuerydslTestConfig
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -25,6 +26,7 @@ class QuestParticipationRepositoryTest @Autowired constructor(
     private val quest = EntityFactory.testQuest()
 
     @Test
+    @Disabled
     fun `getQuestParticipationByQuestIdAndParticipantId 성공`() {
         val savedQuest = questRepository.save(quest)
         val savedUser = userRepository.save(user)

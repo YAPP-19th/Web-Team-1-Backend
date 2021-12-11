@@ -9,7 +9,6 @@ import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
 import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserSubResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
 import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
 import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
 import com.yapp.giljob.domain.user.dto.response.AbilityResponseDto
@@ -17,6 +16,8 @@ import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
+
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
 class DtoFactory {
@@ -64,11 +65,18 @@ class DtoFactory {
 
         fun testTagResponse() = TagResponseDto("tag1")
 
-        fun testQuestDetailCommonResponse() = QuestDetailCommonResponseDto(
+        fun testQuestDetailInfoResponse() = QuestDetailInfoResponseDto(
+            id = 1L,
             name = "test quest",
             difficulty = 1,
             position = Position.BACKEND,
             participantCnt = 1L,
+            detail = "test detail",
+            writer = UserSubResponseDto(
+                id = 1L,
+                nickname = "testNickname",
+                point = 100
+            ),
             tagList = mutableListOf(testTagResponse())
         )
 

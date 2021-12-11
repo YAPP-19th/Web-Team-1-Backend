@@ -7,16 +7,19 @@ import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.domain.user.domain.Ability
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.EntityFactory
+import com.yapp.giljob.global.config.QuerydslTestConfig
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
 import org.springframework.transaction.annotation.Transactional
 
-@Disabled
-@SpringBootTest
-@Transactional
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import(QuerydslTestConfig::class)
 class QuestSupportRepositoryImplTest {
 
     @Autowired
@@ -36,13 +39,13 @@ class QuestSupportRepositoryImplTest {
 
     private var lastQuestId: Long = 0
 
-    @BeforeAll
+    @BeforeEach
     fun setUp() {
         questSaveList = mutableListOf()
         user = userRepository.save(EntityFactory.testUser())
 
         // 백엔드 저장
-        repeat(questSaveSize - 1) {
+        repeat(questSaveSize) {
             questSaveList.add(
                 questRepository.save(
                     Quest(
@@ -56,30 +59,6 @@ class QuestSupportRepositoryImplTest {
                 )
             )
         }
-
-        // 프론트엔드 저장
-        questSaveList.add(
-            questRepository.save(
-                Quest(
-                    name = "test quest",
-                    user = user,
-                    position = Position.FRONTEND,
-                    difficulty = 1,
-                    thumbnail = "test.png",
-                    detail = "test quest detail"
-                )
-            )
-        )
-    }
-
-    @AfterAll
-    fun tearDown() {
-        questRepository.deleteAll()
-    }
-
-    @Test
-    fun name() {
-
     }
 
     @Nested
@@ -186,6 +165,22 @@ class QuestSupportRepositoryImplTest {
     @Nested
     inner class PositionTest {
 
+        @BeforeEach
+        fun setUp() {
+            questSaveList.add(
+                questRepository.save(
+                    Quest(
+                        name = "test quest",
+                        user = user,
+                        position = Position.FRONTEND,
+                        difficulty = 1,
+                        thumbnail = "test.png",
+                        detail = "test quest detail"
+                    )
+                )
+            )
+        }
+
         @Test
         fun `ALL 포지션 조회`() {
             // when
@@ -198,7 +193,7 @@ class QuestSupportRepositoryImplTest {
             )
 
             // then
-            assertEquals(5, questList.size)
+            assertEquals(6, questList.size)
         }
 
         @Test
@@ -215,7 +210,7 @@ class QuestSupportRepositoryImplTest {
             )
 
             // then
-            assertEquals(4, questList.size)
+            assertEquals(5, questList.size)
         }
 
         @Test
@@ -231,6 +226,26 @@ class QuestSupportRepositoryImplTest {
 
             // then
             assertEquals(1, questList.size)
+        }
+    }
+
+    @Nested
+    inner class questDetailTest {
+
+        @Test
+        fun `questDetailInfo 성공`() {
+            lastQuestId = questSaveList[questSaveList.size - 1].id!!
+
+            val questSupportVo = questRepository.findByQuestId(lastQuestId)
+
+            assertEquals(questSupportVo!!.quest.id, lastQuestId)
+        }
+
+        @Test
+        fun `존재하지 않는 퀘스트 상세 조회시 null 리턴`() {
+            val questSupportVo = questRepository.findByQuestId(lastQuestId)
+
+            assertNull(questSupportVo)
         }
     }
 }
