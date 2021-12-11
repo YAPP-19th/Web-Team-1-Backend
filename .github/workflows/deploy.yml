@@ -30,3 +30,20 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
         shell: bash
+        
+      - name: Make zip file
+        run: zip -qq -r ./$GITHUB_SHA.zip .
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: $
+          aws-secret-access-key: $
+          aws-region: $
+
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://isntyet-deploy/$PROJECT_NAME/$GITHUB_SHA.zip
+
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name testapp --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name dev --s3-location bucket=isntyet-deploy,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
