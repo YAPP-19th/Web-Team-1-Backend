@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - develop
+  workflow_dispatch:
 
 name: Deploy String boot to Amazon EC2
 env:
