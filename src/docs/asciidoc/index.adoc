@@ -107,6 +107,20 @@ include::{snippets}/subquests/post/response-body.adoc[]
 .response fields
 include::{snippets}/subquests/post/response-fields.adoc[]
 
+== Roadmap API
+=== POST /api/roadmaps/{roadmapId}/scrap
+==== 퀘스트 참여
+
+.request
+include::{snippets}/roadmaps/{roadmapId}/scrap/post/http-request.adoc[]
+.request fields
+include::{snippets}/roadmaps/{roadmapId}/scrap/post/path-parameters.adoc[]
+.response
+include::{snippets}/roadmaps/{roadmapId}/scrap/post/http-response.adoc[]
+.response fields
+include::{snippets}/roadmaps/{roadmapId}/scrap/post/response-fields.adoc[]
+
+
 == Sign API
 === POST /sign-up
 .request
