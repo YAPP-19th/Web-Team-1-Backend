@@ -1,6 +1,7 @@
 package com.yapp.giljob.global.common.dto
 
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.dto.request.QuestReviewCreateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
@@ -107,6 +108,10 @@ class DtoFactory {
 
         fun testUserIntroRequest() = UserIntroUpdateRequestDto(
             intro = "test introduce"
+        )
+
+        fun testQuestReviewCreateRequest() = QuestReviewCreateRequestDto(
+            review = "퀘스트 한줄 후기"
         )
     }
 }
