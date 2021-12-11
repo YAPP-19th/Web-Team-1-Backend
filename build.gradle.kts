@@ -51,6 +51,7 @@ dependencies {
     }
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("io.mockk:mockk:1.12.0")
+    testImplementation("com.h2database:h2:1.4.199")
 
     implementation("org.slf4j:slf4j-api:1.7.32")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")

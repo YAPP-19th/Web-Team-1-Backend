@@ -4,9 +4,9 @@ on:
       - develop
   workflow_dispatch:
 
-name: Deploy String boot to Amazon EC2
+name: Deploy Spring boot to Amazon EC2
 env:
-  PROJECT_NAME: action_codedeploy
+  PROJECT_NAME: giljob
 
 jobs:
   deploy:
@@ -30,7 +30,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
         shell: bash
-        
+
       - name: Make zip file
         run: zip -qq -r ./$GITHUB_SHA.zip .
         shell: bash
@@ -38,12 +38,12 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: $
-          aws-secret-access-key: $
-          aws-region: $
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://isntyet-deploy/$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://giljob-s3/$GITHUB_SHA.zip
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name testapp --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name dev --s3-location bucket=isntyet-deploy,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name GiljobCodeDeploy --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name GiljobDeployGroup --s3-location bucket=giljob-s3,bundleType=zip,key=$GITHUB_SHA.zip
