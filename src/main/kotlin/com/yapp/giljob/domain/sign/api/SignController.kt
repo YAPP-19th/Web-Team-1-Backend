@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse
 @RestController
 class SignController (private val signService: SignService){
 
-    @PostMapping("/sign-up")
+    @PostMapping("/api/sign-up")
     fun signUp(
         @Validated @RequestBody signUpRequestDto: SignUpRequestDto,
         response: HttpServletResponse
@@ -34,7 +34,7 @@ class SignController (private val signService: SignService){
 
     }
 
-    @PostMapping("/sign-in")
+    @PostMapping("/api/sign-in")
     fun signIn(
         @Validated @RequestBody signInRequestDto: SignInRequestDto,
         response: HttpServletResponse

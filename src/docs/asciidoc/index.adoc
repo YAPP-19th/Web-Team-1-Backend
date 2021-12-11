@@ -123,7 +123,7 @@ include::{snippets}/subquests/post/response-body.adoc[]
 include::{snippets}/subquests/post/response-fields.adoc[]
 
 == Sign API
-=== POST /sign-up 회원가입
+=== POST /api/sign-up 회원가입
 .request
 include::{snippets}/sign-up/post/http-request.adoc[]
 .response
@@ -131,7 +131,7 @@ include::{snippets}/sign-up/post/http-response.adoc[]
 .response
 include::{snippets}/sign-up/post/response-fields.adoc[]
 
-=== POST /sign-in 로그인
+=== POST /api/sign-in 로그인
 .request
 include::{snippets}/sign-in/post/http-request.adoc[]
 .response
@@ -187,8 +187,7 @@ include::{snippets}/users/me/intro/patch/response-body.adoc[]
 include::{snippets}/users/me/intro/patch/response-fields.adoc[]
 
 == Upload API
-=== POST /api/upload
-==== 업로드
+=== POST /api/upload 업로드
 .request
 include::{snippets}/upload/post/request-parameters.adoc[]
 .response
