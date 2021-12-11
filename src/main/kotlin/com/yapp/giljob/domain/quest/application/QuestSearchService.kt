@@ -3,7 +3,7 @@ package com.yapp.giljob.domain.quest.application
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
-import com.yapp.giljob.domain.user.dao.UserMapper
+import com.yapp.giljob.domain.user.application.UserMapper
 import org.springframework.stereotype.Service
 
 @Service

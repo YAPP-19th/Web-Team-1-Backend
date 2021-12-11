@@ -32,10 +32,10 @@ class UserQuestService(
     fun getQuestListByParticipant(
         participantId: Long,
         questId: Long?,
-        position: Position,
+        isCompleted: Boolean,
         size: Long
     ): List<QuestByParticipantResponseDto> {
-        val questList = questParticipationRepository.findByParticipantId(questId, participantId, position, size)
+        val questList = questParticipationRepository.findByParticipantId(questId, participantId, isCompleted, size)
         val subQuestCompletedCountList =
             subQuestParticipationRepository.countSubQuestCompletedByParticipantId(participantId)
                 .associateBy { it.questId }
