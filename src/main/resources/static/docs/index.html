@@ -450,43 +450,111 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#_quest_api">Quest API</a>
 <ul class="sectlevel2">
-<li><a href="#_post_apiquests">POST /api/quests</a></li>
-<li><a href="#_get_apiquests">GET /api/quests</a></li>
-<li><a href="#_get_apiquestssearch">GET /api/quests/search</a></li>
-<li><a href="#_get_apiquestscount">GET /api/quests/count</a></li>
-<li><a href="#_get_apiquestsquestidcommon">GET /api/quests/{questId}/common/</a></li>
-<li><a href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a></li>
-<li><a href="#_patch_apiquestsquestidcomplete">PATCH /api/quests/{questId}/complete</a></li>
+<li><a href="#_post_apiquests">POST /api/quests</a>
+<ul class="sectlevel3">
+<li><a href="#_퀘스트_등록">퀘스트 등록</a></li>
+</ul>
+</li>
+<li><a href="#_get_apiquests">GET /api/quests</a>
+<ul class="sectlevel3">
+<li><a href="#_전체_퀘스트_리스트_조회">전체 퀘스트 리스트 조회</a></li>
+</ul>
+</li>
+<li><a href="#_get_apiquestssearch">GET /api/quests/search</a>
+<ul class="sectlevel3">
+<li><a href="#_퀘스트_검색">퀘스트 검색</a></li>
+</ul>
+</li>
+<li><a href="#_get_apiquestscount">GET /api/quests/count</a>
+<ul class="sectlevel3">
+<li><a href="#_랜딩_페이지_퀘스트_수_조회">랜딩 페이지 퀘스트 수 조회</a></li>
+</ul>
+</li>
+<li><a href="#_get_apiquestsquestidcommon">GET /api/quests/{questId}/common</a>
+<ul class="sectlevel3">
+<li><a href="#_퀘스트_상세_페이지_공통_정보_조회">퀘스트 상세 페이지 공통 정보 조회</a></li>
+</ul>
+</li>
+<li><a href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a>
+<ul class="sectlevel3">
+<li><a href="#_퀘스트_참여">퀘스트 참여</a></li>
+</ul>
+</li>
+<li><a href="#_patch_apiquestsquestidcomplete">PATCH /api/quests/{questId}/complete</a>
+<ul class="sectlevel3">
+<li><a href="#_퀘스트_완료">퀘스트 완료</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_user_quest_api">User Quest API</a>
 <ul class="sectlevel2">
-<li><a href="#_get_apiusersuseridquests">GET /api/users/{userId}/quests</a></li>
-<li><a href="#_get_apiusersuseridquestsparticipation">GET /api/users/{userId}/quests/participation</a></li>
+<li><a href="#_get_apiusersuseridquests">GET /api/users/{userId}/quests</a>
+<ul class="sectlevel3">
+<li><a href="#_유저가_생성한_퀘스트_리스트_조회">유저가 생성한 퀘스트 리스트 조회</a></li>
+</ul>
+</li>
+<li><a href="#_get_apiusersuseridquestsparticipation">GET /api/users/{userId}/quests/participation</a>
+<ul class="sectlevel3">
+<li><a href="#_유저가_참여한_퀘스트_리스트_조회">유저가 참여한 퀘스트 리스트 조회</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_subquest_api">SubQuest API</a>
 <ul class="sectlevel2">
-<li><a href="#_post_apisubquestssubquestid">POST /api/subquests/{subQuestId}</a></li>
+<li><a href="#_post_apisubquestssubquestid">POST /api/subquests/{subQuestId}</a>
+<ul class="sectlevel3">
+<li><a href="#_서브퀘스트_완료">서브퀘스트 완료</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_sign_api">Sign API</a>
 <ul class="sectlevel2">
-<li><a href="#_post_sign_up">POST /sign-up</a></li>
-<li><a href="#_post_sign_in">POST /sign-in</a></li>
+<li><a href="#_post_sign_up">POST /sign-up</a>
+<ul class="sectlevel3">
+<li><a href="#_회원가입">회원가입</a></li>
+</ul>
+</li>
+<li><a href="#_post_sign_in">POST /sign-in</a>
+<ul class="sectlevel3">
+<li><a href="#_로그인">로그인</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_user_api">User API</a>
 <ul class="sectlevel2">
-<li><a href="#_get_apiusersme">GET /api/users/me</a></li>
-<li><a href="#_get_apiusersuseridprofile">GET /api/users/{userId}/profile</a></li>
-<li><a href="#_patch_apiusersme">PATCH /api/users/me</a></li>
-<li><a href="#_patch_apiusersmeintro">PATCH /api/users/me/intro</a></li>
+<li><a href="#_get_apiusersme">GET /api/users/me</a>
+<ul class="sectlevel3">
+<li><a href="#_인증된_유저_정보_조회">인증된 유저 정보 조회</a></li>
+</ul>
+</li>
+<li><a href="#_get_apiusersuseridprofile">GET /api/users/{userId}/profile</a>
+<ul class="sectlevel3">
+<li><a href="#_유저_프로필_조회">유저 프로필 조회</a></li>
+</ul>
+</li>
+<li><a href="#_patch_apiusersme">PATCH /api/users/me</a>
+<ul class="sectlevel3">
+<li><a href="#_유저_정보_수정">유저 정보 수정</a></li>
+</ul>
+</li>
+<li><a href="#_patch_apiusersmeintro">PATCH /api/users/me/intro</a>
+<ul class="sectlevel3">
+<li><a href="#_유저_자기소개_수정">유저 자기소개 수정</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_upload_api">Upload API</a>
 <ul class="sectlevel2">
-<li><a href="#_post_apiupload">POST /api/upload</a></li>
+<li><a href="#_post_apiupload">POST /api/upload</a>
+<ul class="sectlevel3">
+<li><a href="#_업로드">업로드</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -498,6 +566,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_post_apiquests"><a class="link" href="#_post_apiquests">POST /api/quests</a></h3>
+<div class="sect3">
+<h4 id="_퀘스트_등록"><a class="link" href="#_퀘스트_등록">퀘스트 등록</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -619,11 +689,11 @@ Host: docs.api.com:8080
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_get_apiquests"><a class="link" href="#_get_apiquests">GET /api/quests</a></h3>
-<div class="paragraph">
-<p>전체 퀘스트 리스트 조회</p>
-</div>
+<div class="sect3">
+<h4 id="_전체_퀘스트_리스트_조회"><a class="link" href="#_전체_퀘스트_리스트_조회">전체 퀘스트 리스트 조회</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -771,11 +841,11 @@ Content-Length: 1104
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_get_apiquestssearch"><a class="link" href="#_get_apiquestssearch">GET /api/quests/search</a></h3>
-<div class="paragraph">
-<p>퀘스트 검색</p>
-</div>
+<div class="sect3">
+<h4 id="_퀘스트_검색"><a class="link" href="#_퀘스트_검색">퀘스트 검색</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -954,11 +1024,11 @@ Content-Length: 1094
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_get_apiquestscount"><a class="link" href="#_get_apiquestscount">GET /api/quests/count</a></h3>
-<div class="paragraph">
-<p>랜딩 페이지 퀘스트 수 조회</p>
-</div>
+<div class="sect3">
+<h4 id="_랜딩_페이지_퀘스트_수_조회"><a class="link" href="#_랜딩_페이지_퀘스트_수_조회">랜딩 페이지 퀘스트 수 조회</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -1032,11 +1102,11 @@ Content-Length: 188
 </tbody>
 </table>
 </div>
-<div class="sect2">
-<h3 id="_get_apiquestsquestidcommon"><a class="link" href="#_get_apiquestsquestidcommon">GET /api/quests/{questId}/common/</a></h3>
-<div class="paragraph">
-<p>퀘스트 상세 페이지 공통 정보 조회</p>
 </div>
+<div class="sect2">
+<h3 id="_get_apiquestsquestidcommon"><a class="link" href="#_get_apiquestsquestidcommon">GET /api/quests/{questId}/common</a></h3>
+<div class="sect3">
+<h4 id="_퀘스트_상세_페이지_공통_정보_조회"><a class="link" href="#_퀘스트_상세_페이지_공통_정보_조회">퀘스트 상세 페이지 공통 정보 조회</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 7. /api/quests/{questId}/common</caption>
 <colgroup>
@@ -1141,11 +1211,11 @@ Content-Length: 263
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_post_apiquestsquestidparticipation"><a class="link" href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a></h3>
-<div class="paragraph">
-<p>퀘스트 참여</p>
-</div>
+<div class="sect3">
+<h4 id="_퀘스트_참여"><a class="link" href="#_퀘스트_참여">퀘스트 참여</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -1220,11 +1290,11 @@ Content-Length: 88
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_patch_apiquestsquestidcomplete"><a class="link" href="#_patch_apiquestsquestidcomplete">PATCH /api/quests/{questId}/complete</a></h3>
-<div class="paragraph">
-<p>퀘스트 완료</p>
-</div>
+<div class="sect3">
+<h4 id="_퀘스트_완료"><a class="link" href="#_퀘스트_완료">퀘스트 완료</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -1301,14 +1371,14 @@ Content-Length: 88
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_user_quest_api"><a class="link" href="#_user_quest_api">User Quest API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_get_apiusersuseridquests"><a class="link" href="#_get_apiusersuseridquests">GET /api/users/{userId}/quests</a></h3>
-<div class="paragraph">
-<p>유저가 생성한 퀘스트 리스트 조회</p>
-</div>
+<div class="sect3">
+<h4 id="_유저가_생성한_퀘스트_리스트_조회"><a class="link" href="#_유저가_생성한_퀘스트_리스트_조회">유저가 생성한 퀘스트 리스트 조회</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -1456,11 +1526,11 @@ Content-Length: 1124
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_get_apiusersuseridquestsparticipation"><a class="link" href="#_get_apiusersuseridquestsparticipation">GET /api/users/{userId}/quests/participation</a></h3>
-<div class="paragraph">
-<p>유저가 참여한 퀘스트 리스트 조회</p>
-</div>
+<div class="sect3">
+<h4 id="_유저가_참여한_퀘스트_리스트_조회"><a class="link" href="#_유저가_참여한_퀘스트_리스트_조회">유저가 참여한 퀘스트 리스트 조회</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -1646,14 +1716,14 @@ Content-Length: 1208
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_subquest_api"><a class="link" href="#_subquest_api">SubQuest API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_post_apisubquestssubquestid"><a class="link" href="#_post_apisubquestssubquestid">POST /api/subquests/{subQuestId}</a></h3>
-<div class="paragraph">
-<p>서브퀘스트 완료</p>
-</div>
+<div class="sect3">
+<h4 id="_서브퀘스트_완료"><a class="link" href="#_서브퀘스트_완료">서브퀘스트 완료</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -1726,11 +1796,14 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_sign_api"><a class="link" href="#_sign_api">Sign API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_post_sign_up"><a class="link" href="#_post_sign_up">POST /sign-up</a></h3>
+<div class="sect3">
+<h4 id="_회원가입"><a class="link" href="#_회원가입">회원가입</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -1758,7 +1831,7 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM5MjA4MzIwLCJleHAiOjI2MzkyMDgzMjB9.3TNs7VjXe9lOZZRGYH1O0DjQzdOMisiMv1_RXUxoxmk"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM5MjA4OTIyLCJleHAiOjI2MzkyMDg5MjJ9.tb8DXZJoxEYIy-rN8D7JSWaoXIMYqA0zBJhHde5uO-8"
   }
 }</code></pre>
 </div>
@@ -1801,8 +1874,11 @@ Content-Length: 238
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_post_sign_in"><a class="link" href="#_post_sign_in">POST /sign-in</a></h3>
+<div class="sect3">
+<h4 id="_로그인"><a class="link" href="#_로그인">로그인</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -1828,7 +1904,7 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM5MjA4MzE5LCJleHAiOjI2MzkyMDgzMTl9.RDeuIm2uLyOS44GjcQkj5sqZzupj4DbX3fFqSaec_So"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM5MjA4OTIxLCJleHAiOjI2MzkyMDg5MjF9.OpzPoLr2NUCj5T_YXcC75n-SlJev0jWxzaOGvr9ehPA"
   }
 }</code></pre>
 </div>
@@ -1878,13 +1954,16 @@ Content-Length: 266
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_user_api"><a class="link" href="#_user_api">User API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_get_apiusersme"><a class="link" href="#_get_apiusersme">GET /api/users/me</a></h3>
+<div class="sect3">
+<h4 id="_인증된_유저_정보_조회"><a class="link" href="#_인증된_유저_정보_조회">인증된 유저 정보 조회</a></h4>
 <div class="paragraph">
-<p>인증된 유저 정보 조회(액세스 토큰으로 인증된 유저 확인)</p>
+<p>액세스 토큰으로 인증된 유저를 확인한다.</p>
 </div>
 <div class="listingblock">
 <div class="title">request</div>
@@ -1971,11 +2050,11 @@ Content-Length: 229
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_get_apiusersuseridprofile"><a class="link" href="#_get_apiusersuseridprofile">GET /api/users/{userId}/profile</a></h3>
-<div class="paragraph">
-<p>유저 프로필 조회</p>
-</div>
+<div class="sect3">
+<h4 id="_유저_프로필_조회"><a class="link" href="#_유저_프로필_조회">유저 프로필 조회</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -2090,11 +2169,11 @@ Content-Length: 401
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_patch_apiusersme"><a class="link" href="#_patch_apiusersme">PATCH /api/users/me</a></h3>
-<div class="paragraph">
-<p>유저 정보 수정</p>
-</div>
+<div class="sect3">
+<h4 id="_유저_정보_수정"><a class="link" href="#_유저_정보_수정">유저 정보 수정</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -2180,11 +2259,11 @@ Host: docs.api.com:8080
 </tbody>
 </table>
 </div>
+</div>
 <div class="sect2">
 <h3 id="_patch_apiusersmeintro"><a class="link" href="#_patch_apiusersmeintro">PATCH /api/users/me/intro</a></h3>
-<div class="paragraph">
-<p>유저 자기소개 수정</p>
-</div>
+<div class="sect3">
+<h4 id="_유저_자기소개_수정"><a class="link" href="#_유저_자기소개_수정">유저 자기소개 수정</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
@@ -2266,11 +2345,14 @@ Host: docs.api.com:8080
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_upload_api"><a class="link" href="#_upload_api">Upload API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_post_apiupload"><a class="link" href="#_post_apiupload">POST /api/upload</a></h3>
+<div class="sect3">
+<h4 id="_업로드"><a class="link" href="#_업로드">업로드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 26. request</caption>
 <colgroup>
@@ -2359,10 +2441,11 @@ Content-Length: 198
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-12-11 16:37:35 +0900
+Last updated 2021-12-11 16:47:16 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
