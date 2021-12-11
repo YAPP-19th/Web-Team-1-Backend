@@ -7,6 +7,7 @@ import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.EntityFactory
+import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import io.mockk.MockKAnnotations
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.mockito.ArgumentMatchers.anyLong
 import org.springframework.data.repository.findByIdOrNull
 
 class QuestParticipationServiceTest {
@@ -44,6 +46,9 @@ class QuestParticipationServiceTest {
     private val questId = 1L
     private val user = EntityFactory.testUser()
     private val quest = EntityFactory.testQuest()
+    private val questParticipation = EntityFactory.testQuestParticipation()
+
+    private val questReviewCreateRequestDto = DtoFactory.testQuestReviewCreateRequest()
 
     @Nested
     inner class QuestParticipation {
@@ -174,5 +179,41 @@ class QuestParticipationServiceTest {
             // then
             assertEquals(ErrorCode.ALREADY_COMPLETED_QUEST, exception.errorCode)
         }
+    }
+
+    @Test
+    fun  `퀘스트 리뷰 작성 성공`() {
+        questParticipation.isCompleted = true
+        every { questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(any(), any()) } returns questParticipation
+        every { questParticipationRepository.save(any()) } returns questParticipation
+
+        questParticipationService.createQuestReview(1L, questReviewCreateRequestDto, user)
+
+        verify { questParticipationRepository.save(any()) }
+    }
+
+    @Test
+    fun `존재하지 않는 퀘스트에 리뷰 작성하면 에러`() {
+        every { questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(any(), any()) } returns null
+
+        val exception =
+            assertThrows(BusinessException::class.java) {
+                questParticipationService.createQuestReview(1L, questReviewCreateRequestDto, user)
+            }
+
+        assertEquals(ErrorCode.ENTITY_NOT_FOUND, exception.errorCode)
+    }
+
+    @Test
+    fun `완료하지 않은 퀘스트에 리뷰 작성하면 에러`() {
+        questParticipation.isCompleted = false
+        every { questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(any(), any()) } returns questParticipation
+
+        val exception =
+            assertThrows(BusinessException::class.java) {
+                questParticipationService.createQuestReview(1L, questReviewCreateRequestDto, user)
+            }
+
+        assertEquals(ErrorCode.CAN_NOT_CREATE_QUEST_REVIEW, exception.errorCode)
     }
 }
