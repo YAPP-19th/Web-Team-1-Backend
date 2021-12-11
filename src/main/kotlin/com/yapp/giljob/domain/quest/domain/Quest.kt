@@ -18,7 +18,7 @@ class Quest(
     val id: Long? = null,
 
     @ManyToOne
-    @JoinColumn(name = "register_user_id")
+    @JoinColumn(name = "writer_id")
     var user: User,
 
     @Enumerated(EnumType.STRING)

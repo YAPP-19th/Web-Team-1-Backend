@@ -31,6 +31,9 @@ enum class ErrorCode(
     // SubQuest
     ALREADY_COMPLETED_SUBQUEST(HttpStatus.BAD_REQUEST, "SQ001", "Already Completed SubQuest"),
 
+    // Roadmap
+    ALREADY_SCRAPED_ROADMAP(HttpStatus.BAD_REQUEST, "R001", "Already Scraped Quest"),
+
     // Position
     POSITION_NOT_FOUND(HttpStatus.NOT_FOUND, "P001", "Position Not Found"),
 
