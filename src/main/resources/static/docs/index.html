@@ -454,7 +454,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_get_apiquests">GET /api/quests</a></li>
 <li><a href="#_get_apiquestssearch">GET /api/quests/search</a></li>
 <li><a href="#_get_apiquestscount">GET /api/quests/count</a></li>
-<li><a href="#_get_apiquestsquestidcommon">GET /api/quests/{questId}/common/</a></li>
+<li><a href="#_get_apiquestsquestidinfo">GET /api/quests/{questId}/info/</a></li>
 <li><a href="#_post_apiquestsquestidparticipation">POST /api/quests/{questId}/participation</a></li>
 <li><a href="#_patch_apiquestsquestidcomplete">PATCH /api/quests/{questId}/complete</a></li>
 </ul>
@@ -1031,12 +1031,16 @@ Content-Length: 188
 </table>
 </div>
 <div class="sect2">
-<h3 id="_get_apiquestsquestidcommon"><a class="link" href="#_get_apiquestsquestidcommon">GET /api/quests/{questId}/common/</a></h3>
+<h3 id="_get_apiquestsquestidinfo"><a class="link" href="#_get_apiquestsquestidinfo">GET /api/quests/{questId}/info/</a></h3>
 <div class="paragraph">
-<p>퀘스트 상세 페이지 공통 정보 조회</p>
+<p>퀘스트 상세 페이지 정보 조회</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
+<<<<<<< HEAD
 <caption class="title">Table 7. /api/quests/{questId}/common</caption>
+=======
+<caption class="title">Table 4. /api/quests/{questId}/info</caption>
+>>>>>>> 165a565 (fafds)
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1059,19 +1063,26 @@ Content-Length: 188
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 263
+Content-Length: 395
 
 {
   "status" : 200,
-  "message" : "퀘스트 상세 공통 정보 조회 성공입니다.",
+  "message" : "퀘스트 상세 정보 조회 성공입니다.",
   "data" : {
+    "id" : 1,
     "name" : "test quest",
-    "difficulty" : 1,
     "position" : "BACKEND",
+    "difficulty" : 1,
     "tagList" : [ {
       "name" : "tag1"
     } ],
-    "participantCnt" : 1
+    "detail" : "test detail",
+    "participantCnt" : 1,
+    "writer" : {
+      "id" : 1,
+      "nickname" : "testNickname",
+      "point" : 100
+    }
   }
 }</code></pre>
 </div>
@@ -1107,6 +1118,11 @@ Content-Length: 263
 <td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 id</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 이름</p></td>
@@ -1122,9 +1138,29 @@ Content-Length: 263
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.detail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 상세 설명</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.participantCnt</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 point</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.tagList</code></p></td>
@@ -1729,7 +1765,11 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
+<<<<<<< HEAD
     "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM5MDY0OTU0LCJleHAiOjI2MzkwNjQ5NTR9.Ob56IAACGE1brk_dT9qQnKotykq29-4U9L1SPjzIXd0"
+=======
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM5MjA1MzczLCJleHAiOjI2MzkyMDUzNzN9.yycpkKXUsGWcRfFqEpZH7np94jz8xCISmaIe1EsLEOk"
+>>>>>>> 165a565 (fafds)
   }
 }</code></pre>
 </div>
@@ -1799,7 +1839,11 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
+<<<<<<< HEAD
     "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM5MDY0OTU0LCJleHAiOjI2MzkwNjQ5NTR9.mVc2bi6X6bf32A0PW2D2FbzKdn4FkHW60-oVx-nXDxI"
+=======
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM5MjA1MzcyLCJleHAiOjI2MzkyMDUzNzJ9.am7W6fji3aizXRxvuxInptQ5AuCmUH1f6ZspPwfkwUg"
+>>>>>>> 165a565 (fafds)
   }
 }</code></pre>
 </div>
@@ -2333,7 +2377,11 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
+<<<<<<< HEAD
 Last updated 2021-12-10 00:47:07 +0900
+=======
+Last updated 2021-12-11 15:38:01 +0900
+>>>>>>> 165a565 (fafds)
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

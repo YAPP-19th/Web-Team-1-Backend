@@ -138,17 +138,17 @@ internal class QuestControllerTest : AbstractRestDocs() {
     }
 
     @Test
-    fun `getQuestDetailCommon 성공`() {
-        given(questService.getQuestDetailCommon(anyLong())).willReturn(DtoFactory.testQuestDetailCommonResponse())
+    fun `getQuestDetailInfo 성공`() {
+        given(questService.getQuestDetailInfo(anyLong())).willReturn(DtoFactory.testQuestDetailInfoResponse())
 
         val result = mockMvc.perform(
-            get("/api/quests/{questId}/common", 1L)
+            get("/api/quests/{questId}/info", 1L)
         ).andDo(print())
 
         result
             .andExpect(status().isOk)
             .andDo(MockMvcRestDocumentation.document(
-                "quests/common/get",
+                "quests/info/get",
                     pathParameters(
                         parameterWithName("questId").description("퀘스트 id")
                     ),
@@ -159,14 +159,24 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("성공 메세지"),
                         PayloadDocumentation.fieldWithPath("data")
                             .description("응답 데이터"),
+                        PayloadDocumentation.fieldWithPath("data.id")
+                            .description("퀘스트 id"),
                         PayloadDocumentation.fieldWithPath("data.name")
                             .description("퀘스트 이름"),
                         PayloadDocumentation.fieldWithPath("data.difficulty")
                             .description("퀘스트 난이도"),
                         PayloadDocumentation.fieldWithPath("data.position")
                             .description("퀘스트 카테고리(position)"),
+                        PayloadDocumentation.fieldWithPath("data.detail")
+                            .description("퀘스트 상세 설명"),
                         PayloadDocumentation.fieldWithPath("data.participantCnt")
                             .description("퀘스트 참여자 수"),
+                        PayloadDocumentation.fieldWithPath("data.writer.id")
+                            .description("퀘스트 작성자 id"),
+                        PayloadDocumentation.fieldWithPath("data.writer.nickname")
+                            .description("퀘스트 작성자 nickname"),
+                        PayloadDocumentation.fieldWithPath("data.writer.point")
+                            .description("퀘스트 작성자 point"),
                         PayloadDocumentation.fieldWithPath("data.tagList")
                             .description("퀘스트 tag list"),
                         PayloadDocumentation.fieldWithPath(("data.tagList[*].name"))

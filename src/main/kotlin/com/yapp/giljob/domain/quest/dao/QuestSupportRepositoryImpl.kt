@@ -75,4 +75,20 @@ class QuestSupportRepositoryImpl(
             .where(questParticipation.quest.id.eq(questId))
             .fetchCount()
     }
+
+    override fun findByQuestId(questId: Long): QuestSupportVo? {
+        return query.select(
+            Projections.constructor(
+                QuestSupportVo::class.java,
+                quest,
+                ability.point,
+                JPAExpressions.select(questParticipation.count()).from(questParticipation)
+                    .where(questParticipation.quest.eq(quest))
+            )
+        ).distinct()
+            .from(quest)
+            .where(quest.id.eq(questId))
+            .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
+            .fetchOne()
+    }
 }
