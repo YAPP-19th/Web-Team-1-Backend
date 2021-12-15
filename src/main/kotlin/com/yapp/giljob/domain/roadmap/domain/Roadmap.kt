@@ -3,6 +3,7 @@ package com.yapp.giljob.domain.roadmap.domain
 import au.com.console.kassava.kotlinEquals
 import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
@@ -15,7 +16,7 @@ class Roadmap(
     val id: Long? = null,
 
     @ManyToOne
-    @JoinColumn(name = "register_user_id")
+    @JoinColumn(name = "writer_id")
     val user: User,
 
     @Enumerated(EnumType.STRING)
@@ -25,8 +26,8 @@ class Roadmap(
     @Column(nullable = false)
     var name: String,
 
-    @Column(nullable = false)
-    var thumbnail: String
+    @OneToMany
+    var questList: MutableList<Quest> = mutableListOf()
 ) : BaseEntity() {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 

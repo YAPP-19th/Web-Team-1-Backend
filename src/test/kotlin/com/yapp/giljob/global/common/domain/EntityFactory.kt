@@ -4,6 +4,9 @@ import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.domain.QuestParticipation
 import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
+import com.yapp.giljob.domain.roadmap.domain.Roadmap
+import com.yapp.giljob.domain.roadmap.domain.RoadmapScrap
+import com.yapp.giljob.domain.roadmap.domain.RoadmapScrapPK
 import com.yapp.giljob.domain.subquest.domain.SubQuest
 import com.yapp.giljob.domain.subquest.domain.SubQuestParticipation
 import com.yapp.giljob.domain.subquest.domain.SubQuestParticipationPK
@@ -19,6 +22,17 @@ class EntityFactory {
             nickname = "testNickname",
             intro = "testIntro",
             position = Position.BACKEND
+        )
+        fun testRoadmap() = Roadmap(
+            id = 1L,
+            name = "test roadmap",
+            user = testUser(),
+            position = Position.BACKEND
+        )
+        fun testRoadmapScrap() = RoadmapScrap(
+            id = RoadmapScrapPK(testUser().id!!, testRoadmap().id!!),
+            user = testUser(),
+            roadmap = testRoadmap()
         )
         fun testQuest() = Quest(
             id = 1L,

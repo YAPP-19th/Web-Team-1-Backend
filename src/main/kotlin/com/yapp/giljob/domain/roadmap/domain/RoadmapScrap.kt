@@ -5,30 +5,27 @@ import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.user.domain.User
 import javax.persistence.*
 
-@Table(name = "roadmap_participated")
+@Table(name = "roadmap_scrap")
 @Entity
-class RoadmapParticipated(
+class RoadmapScrap(
     @EmbeddedId
-    val id: RoadmapParticipatedPK,
+    val id: RoadmapScrapPK,
 
     @MapsId("roadmapId")
     @ManyToOne
     @JoinColumn(name = "roadmap_id")
     val roadmap: Roadmap,
 
-    @MapsId("participantId")
+    @MapsId("userId")
     @ManyToOne
-    @JoinColumn(name = "participant_id")
-    val user: User,
-
-    @Column(name = "is_completed", nullable = false)
-    var isCompleted: Boolean = false
+    @JoinColumn(name = "user_id")
+    val user: User
 ) {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
 
     companion object {
-        private val equalsAndHashCodeProperties = arrayOf(RoadmapParticipated::id)
+        private val equalsAndHashCodeProperties = arrayOf(RoadmapScrap::id)
     }
 }
