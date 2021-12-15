@@ -62,7 +62,7 @@ class QuestParticipationSupportRepositoryImpl(
         return questId?.let { questParticipation.quest.id.lt(questId) }
  }
 
-    private fun eqIsCompleted(isCompleted: Boolean): BooleanExpression? {
+    private fun eqIsCompleted(isCompleted: Boolean): BooleanExpression {
         return questParticipation.isCompleted.eq(isCompleted)
     }
 }
