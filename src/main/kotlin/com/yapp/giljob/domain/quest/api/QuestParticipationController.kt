@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.quest.api
 
 import com.yapp.giljob.domain.quest.application.QuestParticipationService
+import com.yapp.giljob.domain.quest.dto.request.QuestReviewCreateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.annotation.CurrentUser
@@ -37,5 +38,14 @@ class QuestParticipationController(
         return ResponseEntity.ok(
             BaseResponse.of(HttpStatus.OK, "퀘스트 완료 성공입니다.")
         )
+    }
+
+    @PatchMapping("/{questId}/review")
+    fun createQuestReview(
+        @PathVariable questId: Long,
+        @RequestBody questReviewCreateRequestDto: QuestReviewCreateRequestDto,
+        @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
+        questParticipationService.createQuestReview(questId, questReviewCreateRequestDto, user)
+        return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "퀘스트 리뷰 작성 성공입니다."))
     }
 }

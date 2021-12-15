@@ -3,7 +3,7 @@ package com.yapp.giljob.domain.quest.api
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
-import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.annotation.CurrentUser
@@ -37,10 +37,10 @@ class QuestController(
         )
     }
 
-    @GetMapping("/{questId}/common")
-    fun getQuestDetailCommon(@PathVariable("questId") questId: Long): ResponseEntity<BaseResponse<QuestDetailCommonResponseDto>> {
+    @GetMapping("/{questId}/info")
+    fun getQuestDetailCommon(@PathVariable("questId") questId: Long): ResponseEntity<BaseResponse<QuestDetailInfoResponseDto>> {
         return ResponseEntity.ok(
-            BaseResponse.of(HttpStatus.OK, "퀘스트 상세 공통 정보 조회 성공입니다.", questService.getQuestDetailCommon(questId))
+            BaseResponse.of(HttpStatus.OK, "퀘스트 상세 정보 조회 성공입니다.", questService.getQuestDetailInfo(questId))
         )
     }
 }
