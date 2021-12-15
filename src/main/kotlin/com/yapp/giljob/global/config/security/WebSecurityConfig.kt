@@ -19,8 +19,8 @@ class WebSecurityConfig(
     override fun configure(web: WebSecurity) {
         web.ignoring().antMatchers(
             "/h2-console/**",
-            "/sign-up",
-            "/sign-in",
+            "/api/sign-up",
+            "/api/sign-in",
             "/api/quests/count",
             "/api/users/**/quests/**",
             "/api/users/**/profile",

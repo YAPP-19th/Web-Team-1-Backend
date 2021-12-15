@@ -6,7 +6,9 @@ import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
+import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
+import com.yapp.giljob.domain.subquest.vo.SubQuestCompletedCountVo
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -32,21 +34,38 @@ class UserQuestService(
     fun getQuestListByParticipant(
         participantId: Long,
         questId: Long?,
-        position: Position,
+        isCompleted: Boolean,
         size: Long
     ): List<QuestByParticipantResponseDto> {
-        val questList = questParticipationRepository.findByParticipantId(questId, participantId, position, size)
+        val questList = questParticipationRepository.findByParticipantId(questId, participantId, isCompleted, size)
+        if (isCompleted) {
+            return getCompletedQuestListByParticipant(questList)
+        }
+
         val subQuestCompletedCountList =
             subQuestParticipationRepository.countSubQuestCompletedByParticipantId(participantId)
                 .associateBy { it.questId }
 
-        return questList.map {
+        return getNotCompletedQuestListByParticipant(questList, subQuestCompletedCountList)
+    }
+
+    private fun getCompletedQuestListByParticipant(questList: List<QuestSupportVo>) =
+        questList.map {
+            questMapper.toCompletedDto(
+                it, userMapper.toDto(it.quest.user, it.point)
+            )
+        }
+
+    private fun getNotCompletedQuestListByParticipant(
+        questList: List<QuestSupportVo>,
+        subQuestCompletedCountList: Map<Long, SubQuestCompletedCountVo>
+    ) =
+        questList.map {
             questMapper.toDto(
                 it, userMapper.toDto(it.quest.user, it.point),
                 calculateProgress(it.quest.subQuestList.size, subQuestCompletedCountList[it.quest.id]?.count ?: 0L)
             )
         }
-    }
 
     fun calculateProgress(totalSubQuestCount: Int, subQuestCompletedCount: Long) =
         subQuestCompletedCount.toDouble().div(totalSubQuestCount).times(100).toInt()

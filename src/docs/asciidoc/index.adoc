@@ -9,6 +9,7 @@ Andy Wilkinson;
 
 == Quest API
 === POST /api/quests
+==== 퀘스트 등록
 .request
 include::{snippets}/quests/post/http-request.adoc[]
 .request
@@ -19,7 +20,7 @@ include::{snippets}/quests/post/response-body.adoc[]
 include::{snippets}/quests/post/response-fields.adoc[]
 
 === GET /api/quests
-전체 퀘스트 리스트 조회
+==== 전체 퀘스트 리스트 조회
 
 .request
 include::{snippets}/quests/get/http-request.adoc[]
@@ -29,7 +30,7 @@ include::{snippets}/quests/get/http-response.adoc[]
 include::{snippets}/quests/get/response-fields.adoc[]
 
 === GET /api/quests/search
-퀘스트 검색
+==== 퀘스트 검색
 
 .request
 include::{snippets}/quests/search/get/http-request.adoc[]
@@ -41,7 +42,7 @@ include::{snippets}/quests/search/get/http-response.adoc[]
 include::{snippets}/quests/search/get/response-fields.adoc[]
 
 === GET /api/quests/count
-랜딩 페이지 퀘스트 수 조회
+==== 랜딩 페이지 퀘스트 수 조회
 
 .request
 include::{snippets}/quests/count/get/http-request.adoc[]
@@ -61,7 +62,7 @@ include::{snippets}/quests/info/get/http-response.adoc[]
 include::{snippets}/quests/info/get/response-fields.adoc[]
 
 === POST /api/quests/{questId}/participation
-퀘스트 참여
+==== 퀘스트 참여
 
 .request
 include::{snippets}/quests/participation/post/http-request.adoc[]
@@ -73,7 +74,7 @@ include::{snippets}/quests/participation/post/http-response.adoc[]
 include::{snippets}/quests/participation/post/response-fields.adoc[]
 
 === PATCH /api/quests/{questId}/complete
-퀘스트 완료
+==== 퀘스트 완료
 
 .request
 include::{snippets}/quests/{questId}/complete/patch/http-request.adoc[]
@@ -98,7 +99,7 @@ include::{snippets}/quests/review/post/response-fields.adoc[]
 
 == User Quest API
 === GET /api/users/{userId}/quests
-유저가 생성한 퀘스트 리스트 조회
+==== 유저가 생성한 퀘스트 리스트 조회
 
 .request
 include::{snippets}/users/{userId}/quests/get/http-request.adoc[]
@@ -108,10 +109,12 @@ include::{snippets}/users/{userId}/quests/get/http-response.adoc[]
 include::{snippets}/users/{userId}/quests/get/response-fields.adoc[]
 
 === GET /api/users/{userId}/quests/participation
-유저가 참여한 퀘스트 리스트 조회
+==== 유저가 참여한 퀘스트 리스트 조회
 
 .request
 include::{snippets}/users/{userId}/quests/participation/get/http-request.adoc[]
+.request fields
+include::{snippets}//users/{userId}/quests/participation/get/request-parameters.adoc[]
 .response
 include::{snippets}/users/{userId}/quests/participation/get/http-response.adoc[]
 .response fields
@@ -119,7 +122,7 @@ include::{snippets}/users/{userId}/quests/participation/get/response-fields.adoc
 
 == SubQuest API
 === POST /api/subquests/{subQuestId}
-서브퀘스트 완료
+==== 서브퀘스트 완료
 
 .request
 include::{snippets}/subquests/post/http-request.adoc[]
@@ -131,7 +134,7 @@ include::{snippets}/subquests/post/response-body.adoc[]
 include::{snippets}/subquests/post/response-fields.adoc[]
 
 == Sign API
-=== POST /sign-up
+=== POST /api/sign-up 회원가입
 .request
 include::{snippets}/sign-up/post/http-request.adoc[]
 .response
@@ -139,7 +142,7 @@ include::{snippets}/sign-up/post/http-response.adoc[]
 .response
 include::{snippets}/sign-up/post/response-fields.adoc[]
 
-=== POST /sign-in
+=== POST /api/sign-in 로그인
 .request
 include::{snippets}/sign-in/post/http-request.adoc[]
 .response
@@ -150,7 +153,8 @@ include::{snippets}/sign-in/post/response-fields.adoc[]
 == User API
 
 === GET /api/users/me
-인증된 유저 정보 조회(액세스 토큰으로 인증된 유저 확인)
+==== 인증된 유저 정보 조회
+액세스 토큰으로 인증된 유저를 확인한다.
 
 .request
 include::{snippets}/users/me/get/http-request.adoc[]
@@ -160,7 +164,7 @@ include::{snippets}/users/me/get/http-response.adoc[]
 include::{snippets}/users/me/get/response-fields.adoc[]
 
 === GET /api/users/{userId}/profile
-유저 프로필 조회
+==== 유저 프로필 조회
 
 .request
 include::{snippets}/users/{userid}/profile/get/http-request.adoc[]
@@ -170,7 +174,7 @@ include::{snippets}/users/{userid}/profile/get/http-response.adoc[]
 include::{snippets}/users/{userid}/profile/get/response-fields.adoc[]
 
 === PATCH /api/users/me
-유저 정보 수정
+==== 유저 정보 수정
 
 .request
 include::{snippets}/users/me/patch/http-request.adoc[]
@@ -182,7 +186,7 @@ include::{snippets}/users/me/patch/response-body.adoc[]
 include::{snippets}/users/me/patch/response-fields.adoc[]
 
 === PATCH /api/users/me/intro
-유저 자기소개 수정
+==== 유저 자기소개 수정
 
 .request
 include::{snippets}/users/me/intro/patch/http-request.adoc[]
@@ -194,7 +198,7 @@ include::{snippets}/users/me/intro/patch/response-body.adoc[]
 include::{snippets}/users/me/intro/patch/response-fields.adoc[]
 
 == Upload API
-=== POST /api/upload
+=== POST /api/upload 업로드
 .request
 include::{snippets}/upload/post/request-parameters.adoc[]
 .response

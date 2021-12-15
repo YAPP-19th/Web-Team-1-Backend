@@ -2,8 +2,9 @@ package com.yapp.giljob.domain.quest.dao
 
 import com.querydsl.core.types.Projections
 import com.querydsl.core.types.dsl.BooleanExpression
+import com.querydsl.jpa.JPAExpressions
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.domain.QQuestParticipation
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.user.domain.QAbility.ability
@@ -28,25 +29,30 @@ class QuestParticipationSupportRepositoryImpl(
     override fun findByParticipantId(
         questId: Long?,
         participantId: Long,
-        position: Position,
+        isCompleted: Boolean,
         size: Long
     ): List<QuestSupportVo> {
+        val quest = questParticipation.quest
+        val questParticipationCount = QQuestParticipation("questParticipationCount")
+
         return query
             .select(
                 Projections.constructor(
                     QuestSupportVo::class.java,
-                    questParticipation.quest,
-                    ability.point
+                    quest,
+                    ability.point,
+                    JPAExpressions.select(questParticipationCount.count()).from(questParticipationCount)
+                        .where(questParticipationCount.quest.eq(quest))
                 )
             ).from(questParticipation)
             .where(
-                (questParticipation.participant.id.eq(participantId)).and(eqPosition(position)).and(ltQuestId(questId))
+                (questParticipation.participant.id.eq(participantId)).and(eqIsCompleted(isCompleted)).and(ltQuestId(questId))
             )
             .leftJoin(ability).on(
-                ability.position.eq(questParticipation.quest.user.position)
-                    .and(ability.user.id.eq(questParticipation.quest.user.id))
+                ability.position.eq(quest.user.position)
+                    .and(ability.user.id.eq(quest.user.id))
             )
-        .orderBy(questParticipation.quest.id.desc())
+        .orderBy(quest.id.desc())
             .limit(size)
             .fetch()
     }
@@ -54,9 +60,9 @@ class QuestParticipationSupportRepositoryImpl(
 
     private fun ltQuestId(questId: Long?): BooleanExpression? {
         return questId?.let { questParticipation.quest.id.lt(questId) }
-    }
+ }
 
-    private fun eqPosition(position: Position): BooleanExpression? {
-        return if (position == Position.ALL) null else questParticipation.quest.position.eq(position)
+    private fun eqIsCompleted(isCompleted: Boolean): BooleanExpression {
+        return questParticipation.isCompleted.eq(isCompleted)
     }
 }

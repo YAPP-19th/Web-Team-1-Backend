@@ -44,7 +44,7 @@ internal class SignControllerTest : AbstractRestDocs() {
 
         val result = mockMvc
             .perform(
-                MockMvcRequestBuilders.post("/sign-up")
+                MockMvcRequestBuilders.post("/api/sign-up")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonString))
             .andExpect(MockMvcResultMatchers.status().isOk)
@@ -88,7 +88,7 @@ internal class SignControllerTest : AbstractRestDocs() {
 
         val result = mockMvc
             .perform(
-                MockMvcRequestBuilders.post("/sign-in")
+                MockMvcRequestBuilders.post("/api/sign-in")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(jsonString))
             .andExpect(MockMvcResultMatchers.status().isOk)
