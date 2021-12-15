@@ -19,13 +19,15 @@ class WebSecurityConfig(
     override fun configure(web: WebSecurity) {
         web.ignoring().antMatchers(
             "/h2-console/**",
-            "/sign-up",
-            "/sign-in",
+            "/api/sign-up",
+            "/api/sign-in",
             "/api/quests/count",
             "/api/users/**/quests/**",
+            "/api/users/**/profile",
             "/don't-pass-filter",
             "/docs/index.html",
-            "api/quests/common/**"
+            "api/quests/common/**",
+            "/api/quests/search"
         )
         web.ignoring().antMatchers(HttpMethod.GET, "/api/quests")
     }

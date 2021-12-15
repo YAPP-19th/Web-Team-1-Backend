@@ -89,7 +89,7 @@ class UserQuestControllerTest : AbstractRestDocs() {
 
     @Test
     fun getQuestListByParticipantTest() {
-        BDDMockito.given(userQuestService.getQuestListByParticipant(userId, 10, Position.ALL, 4L)).willReturn(
+        BDDMockito.given(userQuestService.getQuestListByParticipant(userId, 10, false, 4L)).willReturn(
             listOf(
                 DtoFactory.testQuestByParticipantResponse().apply { this.id = 9L; this.name = "quest test 9"; this.progress = 90},
                 DtoFactory.testQuestByParticipantResponse().apply { this.id = 7L; this.name = "quest test 7"; this.progress = 70 },
@@ -101,6 +101,7 @@ class UserQuestControllerTest : AbstractRestDocs() {
         val result = mockMvc.perform(
             RestDocumentationRequestBuilders.get("/api/users/{userId}/quests/participation", userId)
                 .param("cursor", "10")
+                .param("completed", "false")
                 .param("size", "4")
         ).andDo(MockMvcResultHandlers.print())
 
@@ -114,7 +115,8 @@ class UserQuestControllerTest : AbstractRestDocs() {
                     RequestDocumentation.requestParameters(
                         RequestDocumentation.parameterWithName("cursor")
                             .description("마지막으로 조회된 퀘스트 id, 해당 퀘스트보다 오래된 퀘스트 리스트가 조회됩니다."),
-                        RequestDocumentation.parameterWithName("size").description("조회할 퀘스트 개수")
+                        RequestDocumentation.parameterWithName("size").description("조회할 퀘스트 개수"),
+                        RequestDocumentation.parameterWithName("completed").description("완료 퀘스트 여부(기본값: false)")
                     ),
                     PayloadDocumentation.responseFields(
                         PayloadDocumentation.fieldWithPath("status")

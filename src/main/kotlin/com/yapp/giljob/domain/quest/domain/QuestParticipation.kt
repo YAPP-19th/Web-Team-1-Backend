@@ -4,6 +4,7 @@ import au.com.console.kassava.kotlinEquals
 import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.BaseEntity
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Table(name = "quest_participation")
@@ -23,7 +24,13 @@ class QuestParticipation(
     val participant: User,
 
     @Column(name = "is_completed", nullable = false)
-    var isCompleted: Boolean = false
+    var isCompleted: Boolean = false,
+
+    @Column(name = "review", nullable = true)
+    var review: String? = null,
+
+    @Column(name = "review_created_at", nullable = true)
+    var reviewCreatedAt: LocalDateTime? = null
 ) : BaseEntity() {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 

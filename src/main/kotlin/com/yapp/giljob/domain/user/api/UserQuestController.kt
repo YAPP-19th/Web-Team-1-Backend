@@ -33,13 +33,13 @@ class UserQuestController(
     fun getQuestListByParticipant(
         @PathVariable userId: Long,
         @RequestParam(required = false) cursor: Long?,
-        @RequestParam(required = false, defaultValue = "ALL") position: Position,
+        @RequestParam(required = false, defaultValue = "false", value = "completed") isCompleted: Boolean,
         @RequestParam(required = false, defaultValue = "6") size: Long
     ): ResponseEntity<BaseResponse<List<QuestByParticipantResponseDto>>> {
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK, "유저가 참여한 퀘스트 리스트 조회 성공입니다.",
-                userQuestService.getQuestListByParticipant(userId, cursor, position, size)
+                userQuestService.getQuestListByParticipant(userId, cursor, isCompleted, size)
             )
         )
     }

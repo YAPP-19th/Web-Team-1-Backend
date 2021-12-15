@@ -4,6 +4,7 @@ import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.QuestParticipation
 import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
+import com.yapp.giljob.domain.quest.dto.request.QuestReviewCreateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.user.dao.AbilityRepository
@@ -14,6 +15,7 @@ import com.yapp.giljob.global.error.exception.BusinessException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
 
 @Service
 class QuestParticipationService(
@@ -66,4 +68,22 @@ class QuestParticipationService(
     private fun getOnProgressQuestCount() = questParticipationRepository.countQuests()
 
     private fun getQuestParticipantCount() = questParticipationRepository.countParticipants()
+
+    @Transactional
+    fun createQuestReview(
+        questId: Long,
+        questReviewCreateRequestDto: QuestReviewCreateRequestDto,
+        user: User
+    ) {
+        var questParticipation: QuestParticipation =
+            questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(questId, user.id!!)
+                ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+
+        if (!questParticipation.isCompleted) {
+            throw BusinessException(ErrorCode.CAN_NOT_CREATE_QUEST_REVIEW)
+        }
+
+        questParticipation.review = questReviewCreateRequestDto.review
+        questParticipation.reviewCreatedAt = LocalDateTime.now()
+    }
 }

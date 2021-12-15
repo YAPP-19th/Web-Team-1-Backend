@@ -1,14 +1,16 @@
 package com.yapp.giljob.domain.quest.dto.response
 
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserSubResponseDto
 
-class QuestResponseDto(
+class QuestDetailInfoResponseDto(
     var id: Long,
     var name: String,
     var position: Position,
-    var user: UserSubResponseDto,
     var difficulty: Int,
-    var thumbnail: String,
-    var participantCount: Long
+    var tagList: List<TagResponseDto> = mutableListOf(),
+    var detail: String,
+    var participantCnt: Long,
+    var writer: UserSubResponseDto
 )

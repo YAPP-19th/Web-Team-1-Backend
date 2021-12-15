@@ -35,7 +35,7 @@ class SignControllerIntegrationTest @Autowired constructor(
         val content = jacksonObjectMapper().writeValueAsString(signUpRequest)
 
         mockMvc
-            .perform(MockMvcRequestBuilders.post("/sign-up")
+            .perform(MockMvcRequestBuilders.post("/api/sign-up")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content))
             .andExpect(status().isInternalServerError)
@@ -52,7 +52,7 @@ class SignControllerIntegrationTest @Autowired constructor(
         val content = jacksonObjectMapper().writeValueAsString(signInRequest)
 
         mockMvc
-            .perform(MockMvcRequestBuilders.post("/sign-in")
+            .perform(MockMvcRequestBuilders.post("/api/sign-in")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content))
             .andExpect(status().isInternalServerError)

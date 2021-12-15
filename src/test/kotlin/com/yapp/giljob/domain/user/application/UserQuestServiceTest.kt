@@ -4,7 +4,6 @@ import com.yapp.giljob.domain.quest.application.QuestMapper
 import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
-import com.yapp.giljob.domain.user.dao.UserMapper
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
 import org.junit.jupiter.api.Assertions.*

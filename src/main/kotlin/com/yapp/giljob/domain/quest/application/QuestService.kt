@@ -4,12 +4,14 @@ import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
-import com.yapp.giljob.domain.quest.dto.response.QuestDetailCommonResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.tag.application.TagService
-import com.yapp.giljob.domain.user.dao.UserMapper
+import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.domain.User
+import com.yapp.giljob.global.error.ErrorCode
+import com.yapp.giljob.global.error.exception.BusinessException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -43,9 +45,9 @@ class QuestService(
         }
     }
 
-    fun getQuestDetailCommon(questId: Long): QuestDetailCommonResponseDto {
-        val participantCnt = questRepository.countParticipantsByQuestId(questId)
-        val quest = QuestHelper.getQuestById(questRepository, questId)
-        return QuestDetailCommonResponseDto.of(quest, participantCnt)
+    @Transactional(readOnly = true)
+    fun getQuestDetailInfo(questId: Long): QuestDetailInfoResponseDto {
+        val questSupportVo = questRepository.findByQuestId(questId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        return questMapper.toQuestDetailInfoDto(questSupportVo, userMapper.toDto(questSupportVo.quest.user, questSupportVo.point))
     }
 }
