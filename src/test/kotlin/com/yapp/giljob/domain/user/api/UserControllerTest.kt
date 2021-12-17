@@ -109,6 +109,12 @@ class UserControllerTest : AbstractRestDocs() {
                             .description("유저가 설정한 직군에 대한 능력치 포인트"),
                         PayloadDocumentation.fieldWithPath("data.userInfo.intro")
                             .description("유저 자기소개"),
+                        PayloadDocumentation.fieldWithPath("data.achieve")
+                            .description("유저 대표 업적"),
+                        PayloadDocumentation.fieldWithPath("data.achieve.pointAchieve")
+                            .description("조타기 등급"),
+                        PayloadDocumentation.fieldWithPath("data.achieve.questAchieve")
+                            .description("항해사 등급"),
                         PayloadDocumentation.fieldWithPath("data.abilityList")
                             .description("유저 능력치 리스트"),
                         PayloadDocumentation.fieldWithPath("data.abilityList[*].position")
