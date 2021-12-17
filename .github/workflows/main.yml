@@ -39,7 +39,7 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ env.DOCKER_IMAGE }}:latest
+          tags: s2moon98/giljob:latest
 
   deploy:
     needs: build
@@ -54,5 +54,5 @@ jobs:
           password: ${{ secrets.GHCR_TOKEN }}
       - name: Docker run
         run: |
-          docker stop ${{ env.NAME }} && docker rm ${{ env.NAME }} && docker rmi ${{ env.DOCKER_IMAGE }}:latest
-          docker run -d -p 8080:5000 --name go_cicd --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker stop s2moon98/giljob && docker rm s2moon98/giljob && docker rmi s2moon98/giljob:latest
+          docker run -d -p 8080:5000 --name giljob_cicd --restart always s2moon98/giljob:latest

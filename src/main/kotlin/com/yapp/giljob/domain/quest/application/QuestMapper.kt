@@ -46,7 +46,12 @@ interface QuestMapper {
         Mapping(target = "progress", constant = "100")
     )
     fun toCompletedDto(questSupportVo: QuestSupportVo, user: UserSubResponseDto): QuestByParticipantResponseDto
- 
+
+    @Mappings(
+        Mapping(target = "id", source = "questSupportVo.quest.id"),
+        Mapping(target = "name", source = "questSupportVo.quest.name"),
+        Mapping(target = "position", source = "questSupportVo.quest.position"),
+        Mapping(target = "difficulty", source = "questSupportVo.quest.difficulty"),
         Mapping(target = "tagList", source = "questSupportVo.quest.tagList"),
         Mapping(target = "detail", source = "questSupportVo.quest.detail"),
         Mapping(target = "participantCnt", source = "questSupportVo.participantCount"),
