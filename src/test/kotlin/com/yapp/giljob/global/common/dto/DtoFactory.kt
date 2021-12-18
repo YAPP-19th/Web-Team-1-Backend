@@ -1,6 +1,7 @@
 package com.yapp.giljob.global.common.dto
 
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.dto.QuestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestReviewCreateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
@@ -17,6 +18,7 @@ import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
+import com.yapp.giljob.domain.roadmap.dto.response.RoadmapDetailResponseDto
 
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
@@ -120,6 +122,19 @@ class DtoFactory {
 
         fun testQuestReviewCreateRequest() = QuestReviewCreateRequestDto(
             review = "퀘스트 한줄 후기"
+        )
+
+        fun testRoadmapResponse() = RoadmapDetailResponseDto(
+            name = "로드맵 테스트",
+            user = testUserInfoResponse(),
+            position = Position.FRONTEND,
+            questList = listOf(
+                QuestDto(1L, "코딩 스터디", true),
+                QuestDto(2L, "OOO 자격증", false),
+                QuestDto(3L, "연합 동아리", false),
+                QuestDto(4L, "javascript 스터디", true),
+            ),
+            isScraped = false
         )
     }
 }
