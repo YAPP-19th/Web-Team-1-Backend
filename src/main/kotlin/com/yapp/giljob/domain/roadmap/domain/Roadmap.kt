@@ -26,8 +26,8 @@ class Roadmap(
     @Column(nullable = false)
     var name: String,
 
-    @OneToMany
-    var questList: MutableList<Quest> = mutableListOf()
+    @OneToMany(mappedBy = "roadmap")
+    var questList: MutableList<RoadmapQuest> = mutableListOf()
 ) : BaseEntity() {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 

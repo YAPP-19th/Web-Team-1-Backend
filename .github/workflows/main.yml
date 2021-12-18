@@ -1,58 +1,59 @@
-name: CI/CD Docker
-
 on:
   push:
-    branches: [ deploy ]
+    branches:
+      - develop
   workflow_dispatch:
 
-env:
-  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/web-team-1-backend
-  VERSION: ${{ github.sha }}
-  NAME: giljob_cicd
+name: Deploy Spring boot to Amazon EC2
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Check out source code
-        uses: actions/checkout@v2
-      - name: Set up docker buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Cache docker layers
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ env.VERSION }} # runner 설정에서 읽어들일거에요.
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-      - name: Login to ghcr
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          builder: ${{ steps.buildx.outputs.name }}
-          push: true
-          tags: s2moon98/giljob:latest
-
   deploy:
-    needs: build
-    name: Deploy
-    runs-on: [ self-hosted, label-development ]
+    name: DEPLOY
+    runs-on: ubuntu-18.04
+
     steps:
-      - name: Login to ghcr
-        uses: docker/login-action@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}
-      - name: Docker run
-        run: |
-          docker stop s2moon98/giljob && docker rm s2moon98/giljob && docker rmi s2moon98/giljob:latest
-          docker run -d -p 8080:5000 --name giljob_cicd --restart always s2moon98/giljob:latest
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        shell: bash
+
+      - name: Build with Gradle
+        run: ./gradlew build
+        shell: bash
+
+      - name: Make Directory for deliver
+        run: mkdir deploy
+
+      - name: Copy Jar
+        run: cp ./build/libs/*.jar ./deploy/
+        
+      - name: Copy shell script
+        run: cp deploy.sh ./deploy/
+
+      - name: Copy appspec
+        run: cp appspec.yml ./deploy/
+
+      - name: Make zip file
+        run: zip -qq -r ./$GITHUB_SHA.zip ./deploy
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://giljob-s3/$GITHUB_SHA.zip
+
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name Giljob --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name giljob-deploy-group --s3-location bucket=giljob-s3,bundleType=zip,key=$GITHUB_SHA.zip
