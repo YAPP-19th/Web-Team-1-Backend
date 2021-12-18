@@ -4,7 +4,7 @@ REPOSITORY=/home/ec2-user/giljob
 cd $REPOSITORY
 
 APP_NAME=giljob
-JAR_NAME=$(ls $REPOSITORY/ | grep '.jar' | tail -n 1)
+JAR_NAME=$(ls $REPOSITORY/ | grep '.jar' | grep -v 'plain')
 JAR_PATH=$REPOSITORY/$JAR_NAME
 
 echo "> build 파일명: $JAR_NAME" >> /home/ec2-user/deploy.log
