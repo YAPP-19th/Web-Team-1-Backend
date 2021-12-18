@@ -17,12 +17,12 @@ class RoadmapController(
     private val roadmapService: RoadmapService
 ) {
     @GetMapping("/{roadmapId}")
-    fun getRoadmap(@PathVariable roadmapId: Long, @CurrentUser user: User) =
+    fun getRoadmapDetail(@PathVariable roadmapId: Long, @CurrentUser user: User) =
         ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK,
                 "로드맵 조회 성공입니다.",
-                roadmapService.getRoadmap(roadmapId, user)
+                roadmapService.getRoadmapDetail(roadmapId, user)
             )
         )
 }

@@ -36,7 +36,7 @@ class RoadmapControllerTest : AbstractRestDocs() {
     @GiljobTestUser
     @Test
     fun getRoadmap() {
-        BDDMockito.given(roadmapService.getRoadmap(1L, EntityFactory.testUser())).willReturn(
+        BDDMockito.given(roadmapService.getRoadmapDetail(1L, EntityFactory.testUser())).willReturn(
             DtoFactory.testRoadmapResponse()
         )
 

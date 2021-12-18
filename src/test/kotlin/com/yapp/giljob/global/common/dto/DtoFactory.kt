@@ -18,7 +18,7 @@ import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
-import com.yapp.giljob.domain.roadmap.dto.response.RoadmapResponseDto
+import com.yapp.giljob.domain.roadmap.dto.response.RoadmapDetailResponseDto
 
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
@@ -124,7 +124,7 @@ class DtoFactory {
             review = "퀘스트 한줄 후기"
         )
 
-        fun testRoadmapResponse() = RoadmapResponseDto(
+        fun testRoadmapResponse() = RoadmapDetailResponseDto(
             name = "로드맵 테스트",
             user = testUserInfoResponse(),
             position = Position.FRONTEND,

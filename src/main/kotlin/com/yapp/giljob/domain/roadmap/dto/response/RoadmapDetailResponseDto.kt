@@ -4,7 +4,7 @@ import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dto.QuestDto
 import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
 
-class RoadmapResponseDto(
+class RoadmapDetailResponseDto(
     val name: String,
     val user: UserInfoResponseDto,
     val position: Position,
