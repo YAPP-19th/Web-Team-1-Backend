@@ -34,7 +34,7 @@ class WebSecurityConfig(
 
     override fun configure(http: HttpSecurity) {
         http.httpBasic().disable()
-        http.cors().disable()
+        http.cors()
         http.csrf().disable()
         http.formLogin().disable()
         http.addFilterBefore(JwtAuthenticationFilter(jwtResolver), UsernamePasswordAuthenticationFilter::class.java)

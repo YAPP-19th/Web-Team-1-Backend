@@ -3,14 +3,12 @@ package com.yapp.giljob.domain.quest.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
-import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.global.config.security.GiljobTestUser
 import org.junit.jupiter.api.Test
-import org.mockito.BDDMockito.anyLong
-import org.mockito.BDDMockito.given
+import org.mockito.BDDMockito.*
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
@@ -138,11 +136,13 @@ internal class QuestControllerTest : AbstractRestDocs() {
     }
 
     @Test
+    @GiljobTestUser
     fun `getQuestDetailInfo 성공`() {
-        given(questService.getQuestDetailInfo(anyLong())).willReturn(DtoFactory.testQuestDetailInfoResponse())
+        given(questService.getQuestDetailInfo(anyLong(), any())).willReturn(DtoFactory.testQuestDetailInfoResponse())
 
         val result = mockMvc.perform(
             get("/api/quests/{questId}/info", 1L)
+                .header("Authorization", "Access Token")
         ).andDo(print())
 
         result
@@ -171,6 +171,8 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 상세 설명"),
                         PayloadDocumentation.fieldWithPath("data.participantCnt")
                             .description("퀘스트 참여자 수"),
+                        PayloadDocumentation.fieldWithPath("data.userStatus")
+                            .description("퀘스트와 로그인 유저의 상태"),
                         PayloadDocumentation.fieldWithPath("data.writer.id")
                             .description("퀘스트 작성자 id"),
                         PayloadDocumentation.fieldWithPath("data.writer.nickname")

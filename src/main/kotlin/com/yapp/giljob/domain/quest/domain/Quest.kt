@@ -8,6 +8,7 @@ import com.yapp.giljob.domain.subquest.domain.SubQuest
 import com.yapp.giljob.domain.tag.domain.QuestTag
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.BaseEntity
+import org.hibernate.annotations.DynamicInsert
 import javax.persistence.*
 
 @Table(name = "quest")
@@ -25,7 +26,7 @@ class Quest(
     @Column(name = "position")
     var position: Position,
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition="tinyint(1) default 1")
     var isRealQuest: Boolean = true,
 
     @Column(nullable = false)
