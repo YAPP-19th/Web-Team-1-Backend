@@ -1,11 +1,16 @@
 package com.yapp.giljob.domain.user.application
 
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.application.QuestHelper
+import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
+import com.yapp.giljob.domain.user.application.AchieveCalculator.Companion.calculatePointAchieve
+import com.yapp.giljob.domain.user.application.AchieveCalculator.Companion.calculateQuestAchieve
 import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.domain.user.dto.response.AbilityResponseDto
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
+import com.yapp.giljob.domain.user.dto.response.AchieveResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.global.error.ErrorCode
@@ -18,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional
 class UserService(
     private val userRepository: UserRepository,
     private val abilityRepository: AbilityRepository,
+    private val questParticipantRepository: QuestParticipationRepository,
 
     private val userMapper: UserMapper
 ) {
@@ -33,8 +39,17 @@ class UserService(
         val abilityList = getAbilityListByUserId(userId)
         val ability =
             abilityList.find { it.position == user.position } ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        val completedQuestCount =
+            QuestHelper.countQuestsByParticipantIdAndCompleted(questParticipantRepository, userId)
 
-        return UserProfileResponseDto(userInfo = userMapper.toDto(user, ability), abilityList = abilityList)
+        val achieve =
+            AchieveResponseDto(calculatePointAchieve(ability.point), calculateQuestAchieve(completedQuestCount))
+
+        return UserProfileResponseDto(
+            userInfo = userMapper.toDto(user, ability),
+            abilityList = abilityList,
+            achieve = achieve
+        )
     }
 
     private fun getUserAbility(userId: Long, position: Position) =

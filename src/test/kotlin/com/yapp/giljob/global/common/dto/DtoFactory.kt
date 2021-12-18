@@ -9,16 +9,13 @@ import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
 import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
-import com.yapp.giljob.domain.user.dto.response.UserSubResponseDto
 import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
 import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
-import com.yapp.giljob.domain.user.dto.response.AbilityResponseDto
-import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
-import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
 import com.yapp.giljob.domain.roadmap.dto.response.RoadmapDetailResponseDto
+import com.yapp.giljob.domain.user.dto.response.*
 
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
@@ -108,9 +105,10 @@ class DtoFactory {
             abilityList = mutableListOf(
                 AbilityResponseDto(Position.BACKEND, 1000L),
                 AbilityResponseDto(Position.FRONTEND, 400L)
-            )
+            ),
+            achieve = AchieveResponseDto(5, 4)
         )
-        
+
         fun testUserInfoRequest() = UserInfoUpdateRequestDto(
             nickname = "testNickname",
             position = Position.BACKEND

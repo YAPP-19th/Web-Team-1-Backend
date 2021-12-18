@@ -1,5 +1,6 @@
 package com.yapp.giljob.domain.quest.application
 
+import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
@@ -16,5 +17,11 @@ class QuestHelper {
 
         fun countParticipantsByQuestId(questRepository: QuestRepository, questId: Long) =
             questRepository.countParticipantsByQuestId(questId)
+
+        fun countQuestsByParticipantIdAndCompleted(
+            questParticipationRepository: QuestParticipationRepository,
+            participantId: Long
+        ) =
+            questParticipationRepository.countByParticipantIdAndIsCompletedTrue(participantId)
     }
 }
