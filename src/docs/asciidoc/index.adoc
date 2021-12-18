@@ -52,7 +52,7 @@ include::{snippets}/quests/count/get/http-response.adoc[]
 include::{snippets}/quests/count/get/response-fields.adoc[]
 
 === GET /api/quests/{questId}/info/
-퀘스트 상세 페이지 정보 조회
+==== 퀘스트 상세 페이지 정보 조회
 
 .request
 include::{snippets}/quests/info/get/path-parameters.adoc[]
