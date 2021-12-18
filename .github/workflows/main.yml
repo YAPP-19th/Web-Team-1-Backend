@@ -34,6 +34,9 @@ jobs:
 
       - name: Copy Jar
         run: cp ./build/libs/*.jar ./deploy/
+        
+      - name: Copy shell script
+        run: cp deploy.sh ./deploy/
 
       - name: Copy appspec
         run: cp appspec.yml ./deploy/
@@ -53,4 +56,4 @@ jobs:
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://giljob-s3/$GITHUB_SHA.zip
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name GiljobCodeDeploy --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name GiljobDeployGroup --s3-location bucket=giljob-s3,bundleType=zip,key=$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name Giljob --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name giljob-deploy-group --s3-location bucket=giljob-s3,bundleType=zip,key=$GITHUB_SHA.zip
