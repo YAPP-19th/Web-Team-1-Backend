@@ -126,6 +126,7 @@ class DtoFactory {
 
         fun testRoadmapResponse() = RoadmapResponseDto(
             name = "로드맵 테스트",
+            user = testUserInfoResponse(),
             position = Position.FRONTEND,
             questList = listOf(
                 QuestDto(1L, "코딩 스터디", true),
