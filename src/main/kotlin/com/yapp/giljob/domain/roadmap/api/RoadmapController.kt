@@ -22,7 +22,7 @@ class RoadmapController(
             BaseResponse.of(
                 HttpStatus.OK,
                 "로드맵 조회 성공입니다.",
-                roadmapService.getRoadmap(roadmapId, user.id!!)
+                roadmapService.getRoadmap(roadmapId, user)
             )
         )
 }
