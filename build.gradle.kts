@@ -44,6 +44,9 @@ dependencies {
     implementation("org.springframework.security:spring-security-jwt:1.1.1.RELEASE")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("org.json:json:20210307")
+    // https://mvnrepository.com/artifact/com.h2database/h2
+    testImplementation("com.h2database:h2:1.4.199")
+
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
     implementation("org.springframework.boot:spring-boot-starter-test"){
