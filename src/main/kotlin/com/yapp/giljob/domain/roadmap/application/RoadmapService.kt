@@ -18,6 +18,10 @@ class RoadmapService(
 ) {
     fun getRoadmap(roadmapId: Long, userId: Long): RoadmapResponseDto {
         val roadmap = roadmapRepository.findByIdOrNull(roadmapId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
-        return roadmapMapper.toDto(roadmap, roadmap.questList.map { it.quest }, roadmapScrapRepository.existsById(RoadmapScrapPK(roadmapId, userId)))
+        return roadmapMapper.toDto(
+            roadmap,
+            roadmap.questList.map { it.quest },
+            roadmapScrapRepository.existsById(RoadmapScrapPK(roadmapId, userId))
+        )
     }
 }
