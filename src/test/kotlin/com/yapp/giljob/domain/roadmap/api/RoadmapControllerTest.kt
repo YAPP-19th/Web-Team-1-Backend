@@ -37,7 +37,7 @@ class RoadmapControllerTest : AbstractRestDocs() {
     @Test
     fun getRoadmap() {
         BDDMockito.given(roadmapService.getRoadmapDetail(1L, EntityFactory.testUser())).willReturn(
-            DtoFactory.testRoadmapResponse()
+            DtoFactory.testDetailRoadmapResponse()
         )
 
         val result = mockMvc.perform(
