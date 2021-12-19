@@ -2,12 +2,11 @@ package com.yapp.giljob.domain.roadmap.vo
 
 import com.querydsl.core.annotations.QueryProjection
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.roadmap.domain.Roadmap
+import com.yapp.giljob.domain.user.domain.User
 
 class RoadmapSupportVo @QueryProjection constructor(
-    val roadmapId: Long,
-    val name: String,
-    val position: Position,
-    val userId: Long,
-    val nickname: String,
+    val roadmap: Roadmap,
+    val user: User,
     val point: Long
 )

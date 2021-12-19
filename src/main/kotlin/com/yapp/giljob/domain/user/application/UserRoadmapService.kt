@@ -9,19 +9,14 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class UserRoadmapService(
     private val roadmapScrapRepository: RoadmapScrapRepository,
-    private val roadmapMapper: RoadmapMapper
+
+    private val roadmapMapper: RoadmapMapper,
+    private val userMapper: UserMapper,
 ) {
     @Transactional(readOnly = true)
     fun getScrapRoadmapListByUser(userId: Long, roadmapId: Long?, size: Long): List<RoadmapResponseDto> {
-         return roadmapScrapRepository.findByUserId(userId, roadmapId, size). map {
-             RoadmapResponseDto(
-                 id = it.roadmapId,
-                 name = it.name,
-                 position = it.position,
-                 userId = it.userId,
-                 nickname = it.nickname,
-                 point = it.point
-             )
+        return roadmapScrapRepository.findByUserId(userId, roadmapId, size).map {
+            roadmapMapper.toDto(it.roadmap, userMapper.toDto(it.user, it.point))
         }
     }
 }
