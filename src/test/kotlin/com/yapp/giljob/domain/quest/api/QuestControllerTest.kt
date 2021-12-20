@@ -137,14 +137,11 @@ internal class QuestControllerTest : AbstractRestDocs() {
     }
 
     @Test
-    @GiljobTestUser
-    @Disabled
     fun `getQuestDetailInfo 성공`() {
-        given(questService.getQuestDetailInfo(anyLong(), any())).willReturn(DtoFactory.testQuestDetailInfoResponse())
+        given(questService.getQuestDetailInfo(anyLong())).willReturn(DtoFactory.testQuestDetailInfoResponse())
 
         val result = mockMvc.perform(
             get("/api/quests/{questId}/info", 1L)
-                .header("Authorization", "Access Token")
         ).andDo(print())
 
         result
@@ -173,8 +170,6 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 상세 설명"),
                         PayloadDocumentation.fieldWithPath("data.participantCnt")
                             .description("퀘스트 참여자 수"),
-                        PayloadDocumentation.fieldWithPath("data.userStatus")
-                            .description("퀘스트와 로그인 유저의 상태"),
                         PayloadDocumentation.fieldWithPath("data.writer.id")
                             .description("퀘스트 작성자 id"),
                         PayloadDocumentation.fieldWithPath("data.writer.nickname")
@@ -185,6 +180,35 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 tag list"),
                         PayloadDocumentation.fieldWithPath(("data.tagList[*].name"))
                             .description("퀘스트 tag 이름")
+                    )
+                )
+            )
+    }
+
+    @Test
+    @GiljobTestUser
+    fun getUserQuestStatus() {
+        given(questService.getUserQuestStatus(anyLong(), any())).willReturn("아직 참여하지 않은 퀘스트입니다.")
+
+        val result = mockMvc.perform(
+            get("/api/quests/{questId}/user-quest-status", 1L)
+                .header("Authorization", "Access Token")
+        ).andDo(print())
+
+        result
+            .andExpect(status().isOk)
+            .andDo(MockMvcRestDocumentation.document(
+                    "quests/user-quest-status/get",
+                    pathParameters(
+                        parameterWithName("questId").description("퀘스트 id")
+                    ),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("현재 로그인한 유저와 퀘스트의 관계. 로그인 안되어 있으면 NO TOKEN ERROR 발생"),
                     )
                 )
             )

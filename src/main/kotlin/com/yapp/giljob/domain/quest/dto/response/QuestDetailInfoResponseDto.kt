@@ -12,6 +12,5 @@ class QuestDetailInfoResponseDto(
     var tagList: List<TagResponseDto> = mutableListOf(),
     var detail: String,
     var participantCnt: Long,
-    var writer: UserSubResponseDto,
-    var userStatus: String? = null
+    var writer: UserSubResponseDto
 )

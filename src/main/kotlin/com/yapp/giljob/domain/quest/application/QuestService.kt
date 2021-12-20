@@ -50,16 +50,21 @@ class QuestService(
     }
 
     @Transactional(readOnly = true)
-    fun getQuestDetailInfo(questId: Long, user: User): QuestDetailInfoResponseDto {
+    fun getQuestDetailInfo(questId: Long): QuestDetailInfoResponseDto {
         val questSupportVo = questRepository.findByQuestId(questId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
-        val userStatus = getUserQuestStatus(questId, user.id!!)
-        return questMapper.toQuestDetailInfoDto(questSupportVo, userMapper.toDto(questSupportVo.quest.user, questSupportVo.point), userStatus)
+        val tagResponseDtoList = tagService.convertToTagResponseDtoList(questSupportVo.quest)
+
+        return questMapper.toQuestDetailInfoDto(
+            questSupportVo,
+            userMapper.toDto(questSupportVo.quest.user, questSupportVo.point),
+            tagResponseDtoList)
     }
 
-    private fun getUserQuestStatus(questId: Long, participantId: Long): String {
+    fun getUserQuestStatus(questId: Long, user: User?): String {
+        user ?: return "로그인한 유저가 없습니다."
 
         val questParticipation
-        = questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(questId, participantId)
+        = questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(questId, user.id!!)
             ?: return "아직 참여하지 않은 퀘스트입니다."
 
         return when(questParticipation.isCompleted) {
