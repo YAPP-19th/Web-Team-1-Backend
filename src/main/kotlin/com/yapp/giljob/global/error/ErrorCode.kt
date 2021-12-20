@@ -31,6 +31,8 @@ enum class ErrorCode(
 
     // SubQuest
     ALREADY_COMPLETED_SUBQUEST(HttpStatus.BAD_REQUEST, "SQ001", "Already Completed SubQuest"),
+    ALREADY_NOT_COMPLETED_SUBQUEST(HttpStatus.BAD_REQUEST, "SQ002", "Already Not Completed SubQuest"),
+    SUBQUEST_PARTICIPATION_NOT_FOUND(HttpStatus.BAD_REQUEST, "SQ003", "SubQuest Participation Not Found"),
 
     // Roadmap
     ALREADY_SCRAPED_ROADMAP(HttpStatus.BAD_REQUEST, "R001", "Already Scraped Quest"),
