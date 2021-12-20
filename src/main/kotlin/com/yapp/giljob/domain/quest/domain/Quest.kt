@@ -34,8 +34,8 @@ class Quest(
     @Column(nullable = false)
     var difficulty: Int,
 
-    @Column(nullable = false)
-    var thumbnail: String,
+    @Column
+    var thumbnail: String? = null,
 
     @Lob
     @Column(nullable = false, columnDefinition = "BLOB")

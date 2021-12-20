@@ -31,8 +31,6 @@ class QuestService(
     fun saveQuest(questSaveRequestDto: QuestSaveRequestDto, user: User): Quest {
         val quest = Quest.of(questSaveRequestDto, user)
 
-        quest.isRealQuest = true
-
         quest.subQuestList.addAll(subQuestService.convertToSubQuestList(quest, questSaveRequestDto.subQuestList))
         quest.tagList.addAll(tagService.convertToQuestTagList(quest, questSaveRequestDto.tagList))
 
