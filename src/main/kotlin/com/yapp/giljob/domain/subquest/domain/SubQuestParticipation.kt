@@ -13,16 +13,16 @@ class SubQuestParticipation(
     val id: SubQuestParticipationPK,
 
     @MapsId("subQuestId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sub_quest_id")
     val subQuest: SubQuest,
 
     @MapsId("participantId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "participant_id")
     val participant: User,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quest_id")
     val quest: Quest,
 
