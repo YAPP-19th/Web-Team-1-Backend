@@ -170,8 +170,8 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
 
     @Test
     @GiljobTestUser
-    fun getUserQuestStatus() {
-        BDDMockito.given(questParticipationService.getUserQuestStatus(anyLong(), anyLong())).willReturn("아직 참여하지 않은 퀘스트입니다.")
+    fun getQuestParticipationStatusTest() {
+        BDDMockito.given(questParticipationService.getQuestParticipationStatus(anyLong(), anyLong())).willReturn("아직 참여하지 않은 퀘스트입니다.")
 
         val result = mockMvc.perform(
             RestDocumentationRequestBuilders.get("/api/quests/{questId}/participation/status?userId={userId}", 1, 1)
