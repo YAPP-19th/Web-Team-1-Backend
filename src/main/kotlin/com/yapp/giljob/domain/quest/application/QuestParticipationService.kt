@@ -86,4 +86,15 @@ class QuestParticipationService(
         questParticipation.review = questReviewCreateRequestDto.review
         questParticipation.reviewCreatedAt = LocalDateTime.now()
     }
+
+    fun getQuestParticipationStatus(questId: Long, userId: Long): String {
+        val questParticipation
+                = questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(questId, userId)
+            ?: return "아직 참여하지 않은 퀘스트입니다."
+
+        return when(questParticipation.isCompleted) {
+            false -> "참여중인 퀘스트입니다."
+            true -> "완료한 퀘스트입니다."
+        }
+    }
 }

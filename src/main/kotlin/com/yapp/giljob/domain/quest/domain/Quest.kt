@@ -25,7 +25,7 @@ class Quest(
     @Column(name = "position")
     var position: Position,
 
-    @Column(nullable = false)
+    @Column(name = "is_real_quest")
     var isRealQuest: Boolean = true,
 
     @Column(nullable = false)
@@ -34,8 +34,8 @@ class Quest(
     @Column(nullable = false)
     var difficulty: Int,
 
-    @Column(nullable = false)
-    var thumbnail: String,
+    @Column
+    var thumbnail: String? = null,
 
     @Lob
     @Column(nullable = false, columnDefinition = "BLOB")

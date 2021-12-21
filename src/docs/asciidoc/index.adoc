@@ -61,6 +61,19 @@ include::{snippets}/quests/info/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/info/get/response-fields.adoc[]
 
+=== GET /api/quests/{questId}/participation/status
+==== 로그인한 유저에 대한 퀘스트의 상태 정보 조회
+
+.request
+include::{snippets}/quests/participation/status/get/path-parameters.adoc[]
+.request
+include::{snippets}/quests/participation/status/get/http-request.adoc[]
+.response
+include::{snippets}/quests/participation/status/get/http-response.adoc[]
+.response fields
+include::{snippets}/quests/participation/status/get/response-fields.adoc[]
+
+
 === POST /api/quests/{questId}/participation
 ==== 퀘스트 참여
 
