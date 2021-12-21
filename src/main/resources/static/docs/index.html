@@ -485,7 +485,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_퀘스트_완료">퀘스트 완료</a></li>
 </ul>
 </li>
-<li><a href="#_post_apiquestsquestidreview">POST /api/quests/{questId}/review</a></li>
+<li><a href="#_post_apiquestsquestidreview">POST /api/quests/{questId}/review</a>
+<ul class="sectlevel3">
+<li><a href="#_퀘스트_한줄_후기_작성">퀘스트 한줄 후기 작성</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_user_quest_api">User Quest API</a>
@@ -521,6 +525,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_post_apiroadmapsroadmapidscrap">POST /api/roadmaps/{roadmapId}/scrap</a>
 <ul class="sectlevel3">
 <li><a href="#_로드맵_스크랩">로드맵 스크랩</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_user_roadmap_api">User Roadmap API</a>
+<ul class="sectlevel2">
+<li><a href="#_get_apiusersuseridroadmapsscrap">GET /api/users/{userId}/roadmaps/scrap</a>
+<ul class="sectlevel3">
+<li><a href="#_유저가_스크랩한_퀘스트_리스트_조회">유저가 스크랩한 퀘스트 리스트 조회</a></li>
 </ul>
 </li>
 </ul>
@@ -1359,9 +1372,8 @@ Content-Length: 88
 </div>
 <div class="sect2">
 <h3 id="_post_apiquestsquestidreview"><a class="link" href="#_post_apiquestsquestidreview">POST /api/quests/{questId}/review</a></h3>
-<div class="paragraph">
-<p>퀘스트 한줄 후기 작성</p>
-</div>
+<div class="sect3">
+<h4 id="_퀘스트_한줄_후기_작성"><a class="link" href="#_퀘스트_한줄_후기_작성">퀘스트 한줄 후기 작성</a></h4>
 <div class="paragraph">
 <div class="title">request</div>
 <p>Unresolved directive in index.adoc - include::/Users/ayoung/Dev/SpringBoot/yapp/giljob/build/generated-snippets/quests/review/post/http-request.adoc[]
@@ -1371,6 +1383,7 @@ Unresolved directive in index.adoc - include::/Users/ayoung/Dev/SpringBoot/yapp/
 Unresolved directive in index.adoc - include::/Users/ayoung/Dev/SpringBoot/yapp/giljob/build/generated-snippets/quests/review/post/response-fields.adoc[]
 .response fields
 Unresolved directive in index.adoc - include::/Users/ayoung/Dev/SpringBoot/yapp/giljob/build/generated-snippets/quests/review/post/response-fields.adoc[]</p>
+</div>
 </div>
 </div>
 </div>
@@ -2068,6 +2081,139 @@ Content-Length: 91
 </div>
 </div>
 <div class="sect1">
+<h2 id="_user_roadmap_api"><a class="link" href="#_user_roadmap_api">User Roadmap API</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_get_apiusersuseridroadmapsscrap"><a class="link" href="#_get_apiusersuseridroadmapsscrap">GET /api/users/{userId}/roadmaps/scrap</a></h3>
+<div class="sect3">
+<h4 id="_유저가_스크랩한_퀘스트_리스트_조회"><a class="link" href="#_유저가_스크랩한_퀘스트_리스트_조회">유저가 스크랩한 퀘스트 리스트 조회</a></h4>
+<div class="listingblock">
+<div class="title">request</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/1/roadmaps/scrap?cursor=7&amp;size=4 HTTP/1.1
+Host: docs.api.com:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json;charset=UTF-8
+Content-Length: 839
+
+{
+  "status" : 200,
+  "message" : "유저가 스크랩한 로드맵 리스트 조회 성공입니다.",
+  "data" : [ {
+    "id" : 6,
+    "name" : "로드맵 테스트 6",
+    "position" : "FRONTEND",
+    "user" : {
+      "id" : 1,
+      "nickname" : "testNickname",
+      "point" : 100
+    }
+  }, {
+    "id" : 5,
+    "name" : "로드맵 테스트 5",
+    "position" : "FRONTEND",
+    "user" : {
+      "id" : 1,
+      "nickname" : "testNickname",
+      "point" : 100
+    }
+  }, {
+    "id" : 4,
+    "name" : "로드맵 테스트 4",
+    "position" : "FRONTEND",
+    "user" : {
+      "id" : 1,
+      "nickname" : "testNickname",
+      "point" : 100
+    }
+  }, {
+    "id" : 3,
+    "name" : "로드맵 테스트 3",
+    "position" : "FRONTEND",
+    "user" : {
+      "id" : 1,
+      "nickname" : "testNickname",
+      "point" : 100
+    }
+  } ]
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 20. response fields</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 리스트</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 이름</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 카테고리(position)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 nickname</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 능력치</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_sign_api"><a class="link" href="#_sign_api">Sign API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
@@ -2102,13 +2248,13 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM5ODM3ODM2LCJleHAiOjI2Mzk4Mzc4MzZ9.D2MjJ1vX-Gt2OvfwsZzOZRwT75i_EfQed-UEvOAjNTA"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjM5OTM0MzY1LCJleHAiOjI2Mzk5MzQzNjV9.6zI0beX1FWrfDCx56_wQa5eeeOCARKsOXzMQ-JMDD7Q"
   }
 }</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 20. response</caption>
+<caption class="title">Table 21. response</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2175,13 +2321,13 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM5ODM3ODM0LCJleHAiOjI2Mzk4Mzc4MzR9.gtcinfvTHqMojlFNHnTELtDTuRI90BkMLdFlhXuAlJw"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM5OTM0MzY0LCJleHAiOjI2Mzk5MzQzNjR9.st4ELOK0_0JM1-aU3wHS-oFoaWwgZBNHbqimCC0DjZ0"
   }
 }</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 21. response</caption>
+<caption class="title">Table 22. response</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2266,7 +2412,7 @@ Content-Length: 229
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 22. response fields</caption>
+<caption class="title">Table 23. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2372,7 +2518,7 @@ Content-Length: 477
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 23. response fields</caption>
+<caption class="title">Table 24. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2485,7 +2631,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 24. request</caption>
+<caption class="title">Table 25. request</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2522,7 +2668,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 25. response fields</caption>
+<caption class="title">Table 26. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2574,7 +2720,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 26. request</caption>
+<caption class="title">Table 27. request</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2606,7 +2752,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 27. response fields</caption>
+<caption class="title">Table 28. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2647,7 +2793,7 @@ Host: docs.api.com:8080
 <div class="sect2">
 <h3 id="_post_apiupload_업로드"><a class="link" href="#_post_apiupload_업로드">POST /api/upload 업로드</a></h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 28. request</caption>
+<caption class="title">Table 29. request</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2697,7 +2843,7 @@ Content-Length: 198
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 29. response fields</caption>
+<caption class="title">Table 30. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2740,7 +2886,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-12-18 23:01:04 +0900
+Last updated 2021-12-20 02:13:20 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

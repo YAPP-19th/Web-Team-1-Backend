@@ -15,6 +15,7 @@ import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
 import com.yapp.giljob.domain.roadmap.dto.response.RoadmapDetailResponseDto
+import com.yapp.giljob.domain.roadmap.dto.response.RoadmapResponseDto
 import com.yapp.giljob.domain.user.dto.response.*
 
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
@@ -52,11 +53,7 @@ class DtoFactory {
             difficulty = 1,
             thumbnail = "test.png",
             participantCount = 100,
-            user = UserSubResponseDto(
-                id = 1L,
-                nickname = "testNickname",
-                point = 100
-            ),
+            user = testUserSubResponse(),
             progress = 33
         )
 
@@ -71,11 +68,7 @@ class DtoFactory {
             position = Position.BACKEND,
             participantCnt = 1L,
             detail = "test detail",
-            writer = UserSubResponseDto(
-                id = 1L,
-                nickname = "testNickname",
-                point = 100
-            ),
+            writer = testUserSubResponse(),
             tagList = mutableListOf(testTagResponse())
         )
 
@@ -100,6 +93,12 @@ class DtoFactory {
             intro = "test introduce"
         )
 
+        fun testUserSubResponse() = UserSubResponseDto(
+            id = 1L,
+            nickname = "testNickname",
+            point = 100
+        )
+
         fun testUserProfileResponse() = UserProfileResponseDto(
             userInfo = testUserInfoResponse(),
             abilityList = mutableListOf(
@@ -122,7 +121,7 @@ class DtoFactory {
             review = "퀘스트 한줄 후기"
         )
 
-        fun testRoadmapResponse() = RoadmapDetailResponseDto(
+        fun testDetailRoadmapResponse() = RoadmapDetailResponseDto(
             name = "로드맵 테스트",
             user = testUserInfoResponse(),
             position = Position.FRONTEND,
@@ -133,6 +132,13 @@ class DtoFactory {
                 QuestDto(4L, "javascript 스터디", true),
             ),
             isScraped = false
+        )
+
+        fun testRoadmapResponse() = RoadmapResponseDto(
+            id = 1L,
+            name = "로드맵 테스트",
+            user = testUserSubResponse(),
+            position = Position.FRONTEND
         )
     }
 }

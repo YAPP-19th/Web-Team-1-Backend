@@ -99,7 +99,7 @@ include::{snippets}/quests/{questId}/complete/patch/http-response.adoc[]
 include::{snippets}/quests/{questId}/complete/patch/response-fields.adoc[]
 
 === POST /api/quests/{questId}/review
-퀘스트 한줄 후기 작성
+==== 퀘스트 한줄 후기 작성
 
 .request
 include::{snippets}/quests/review/post/http-request.adoc[]
@@ -171,6 +171,16 @@ include::{snippets}/roadmaps/{roadmapId}/scrap/post/http-response.adoc[]
 .response fields
 include::{snippets}/roadmaps/{roadmapId}/scrap/post/response-fields.adoc[]
 
+== User Roadmap API
+=== GET /api/users/{userId}/roadmaps/scrap
+==== 유저가 스크랩한 퀘스트 리스트 조회
+
+.request
+include::{snippets}/users/{userId}/roadmaps/scrap/get/http-request.adoc[]
+.response
+include::{snippets}/users/{userId}/roadmaps/scrap/get/http-response.adoc[]
+.response fields
+include::{snippets}/users/{userId}/roadmaps/scrap/get/response-fields.adoc[]
 
 == Sign API
 === POST /api/sign-up 회원가입
