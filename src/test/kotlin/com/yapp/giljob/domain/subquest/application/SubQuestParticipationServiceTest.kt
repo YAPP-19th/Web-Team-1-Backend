@@ -78,4 +78,53 @@ class SubQuestParticipationServiceTest {
         verify { subQuestParticipationRepository.save(any()) }
     }
 
+
+    @Test
+    fun `존재하지 않은 서브 퀘스트를 취소하면 예외가 발생한다`() {
+        // given
+        every { subQuestRepository.findByIdOrNull(any()) } returns null
+
+        // when
+        val exception =
+            assertThrows(BusinessException::class.java) {
+                subQuestParticipationService.completeSubQuest(subQuestId, user)
+            }
+
+        // then
+        assertEquals(ErrorCode.ENTITY_NOT_FOUND, exception.errorCode)
+    }
+
+    @Test
+    fun `참여하지 않은 서브 퀘스트를 취소하면 예외가 발생한다`() {
+        // given
+        every { subQuestRepository.findByIdOrNull(any()) } returns EntityFactory.testSubQuest()
+        every { subQuestParticipationRepository.findByIdOrNull(any()) } returns null
+        every { subQuestParticipationRepository.save(any()) } returns EntityFactory.testSubQuestParticipation()
+
+        // when
+        val exception =
+            assertThrows(BusinessException::class.java) {
+                subQuestParticipationService.cancelSubQuest(subQuestId, user)
+            }
+
+        // then
+        assertEquals(ErrorCode.SUBQUEST_PARTICIPATION_NOT_FOUND, exception.errorCode)
+    }
+
+    @Test
+    fun `완료하지 않은 서브 퀘스트를 취소하면 예외가 발생한다`() {
+        // given
+        every { subQuestRepository.findByIdOrNull(any()) } returns EntityFactory.testSubQuest()
+        every { subQuestParticipationRepository.findByIdOrNull(any()) } returns EntityFactory.testSubQuestParticipation()
+            .also { it.isCompleted = false }
+
+        // when
+        val exception =
+            assertThrows(BusinessException::class.java) {
+                subQuestParticipationService.cancelSubQuest(subQuestId, user)
+            }
+
+        // then
+        assertEquals(ErrorCode.ALREADY_NOT_COMPLETED_SUBQUEST, exception.errorCode)
+    }
 }

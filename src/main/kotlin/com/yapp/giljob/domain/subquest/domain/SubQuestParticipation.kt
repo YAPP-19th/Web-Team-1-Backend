@@ -29,6 +29,14 @@ class SubQuestParticipation(
     @Column(name = "is_completed", nullable = false)
     var isCompleted: Boolean = true
 ) {
+    fun complete() {
+        this.isCompleted = true
+    }
+
+    fun cancel() {
+        this.isCompleted = false
+    }
+
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)

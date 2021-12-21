@@ -23,7 +23,7 @@ class SubQuestParticipationService(
         val subQuest = subQuestParticipationVo.subQuest
 
         subQuestParticipationVo.subQuestParticipation?.let {
-            if (!it.isCompleted) it.isCompleted = true
+            if (!it.isCompleted) it.complete()
             else throw BusinessException(ErrorCode.ALREADY_COMPLETED_SUBQUEST)
         } ?: subQuestParticipationRepository.save(
             SubQuestParticipation(
@@ -39,7 +39,7 @@ class SubQuestParticipationService(
     fun cancelSubQuest(subQuestId: Long, user: User) {
         val subQuestParticipation = getSubQuestParticipationVo(subQuestId, user).subQuestParticipation
         subQuestParticipation?.let {
-            if (it.isCompleted) it.isCompleted = false
+            if (it.isCompleted) it.cancel()
             else throw BusinessException(ErrorCode.ALREADY_NOT_COMPLETED_SUBQUEST)
         } ?: throw BusinessException(ErrorCode.SUBQUEST_PARTICIPATION_NOT_FOUND)
     }
