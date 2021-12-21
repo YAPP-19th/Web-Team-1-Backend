@@ -46,14 +46,4 @@ class QuestController(
             BaseResponse.of(HttpStatus.OK, "퀘스트 상세 정보 조회 성공입니다.", questService.getQuestDetailInfo(questId))
         )
     }
-
-    @GetMapping("/{questId}/user-quest-status")
-    fun getUserQuestStatus(
-        @PathVariable("questId") questId: Long,
-        @CurrentUser user: User
-    ): ResponseEntity<BaseResponse<String>>{
-        return ResponseEntity.ok(
-            BaseResponse.of(HttpStatus.OK, "유저의 퀘스트에 대한 정보 성공입니다.", questService.getUserQuestStatus(questId, user))
-        )
-    }
 }

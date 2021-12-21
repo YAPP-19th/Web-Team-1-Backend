@@ -57,17 +57,4 @@ class QuestService(
             userMapper.toDto(questSupportVo.quest.user, questSupportVo.point),
             tagResponseDtoList)
     }
-
-    fun getUserQuestStatus(questId: Long, user: User?): String {
-        user ?: return "로그인한 유저가 없습니다."
-
-        val questParticipation
-        = questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(questId, user.id!!)
-            ?: return "아직 참여하지 않은 퀘스트입니다."
-
-        return when(questParticipation.isCompleted) {
-            false -> "참여중인 퀘스트입니다."
-            true -> "완료한 퀘스트입니다."
-        }
-    }
 }

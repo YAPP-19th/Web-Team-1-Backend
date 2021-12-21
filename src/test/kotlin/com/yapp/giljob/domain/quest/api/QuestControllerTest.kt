@@ -184,33 +184,4 @@ internal class QuestControllerTest : AbstractRestDocs() {
                 )
             )
     }
-
-    @Test
-    @GiljobTestUser
-    fun getUserQuestStatus() {
-        given(questService.getUserQuestStatus(anyLong(), any())).willReturn("아직 참여하지 않은 퀘스트입니다.")
-
-        val result = mockMvc.perform(
-            get("/api/quests/{questId}/user-quest-status", 1L)
-                .header("Authorization", "Access Token")
-        ).andDo(print())
-
-        result
-            .andExpect(status().isOk)
-            .andDo(MockMvcRestDocumentation.document(
-                    "quests/user-quest-status/get",
-                    pathParameters(
-                        parameterWithName("questId").description("퀘스트 id")
-                    ),
-                    PayloadDocumentation.responseFields(
-                        PayloadDocumentation.fieldWithPath("status")
-                            .description("200"),
-                        PayloadDocumentation.fieldWithPath("message")
-                            .description("성공 메세지"),
-                        PayloadDocumentation.fieldWithPath("data")
-                            .description("현재 로그인한 유저와 퀘스트의 관계. 로그인 안되어 있으면 NO TOKEN ERROR 발생"),
-                    )
-                )
-            )
-    }
 }

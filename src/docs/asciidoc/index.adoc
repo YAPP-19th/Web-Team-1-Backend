@@ -61,16 +61,18 @@ include::{snippets}/quests/info/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/info/get/response-fields.adoc[]
 
-=== GET /api/quests/{questId}/user-quest-status/
+=== GET /api/quests/{questId}/participation/status
 ==== 로그인한 유저에 대한 퀘스트의 상태 정보 조회
-로그인을 안했을 경우 (전송한 토큰이 없을 경우) 403(No Token Error) 발생
 
 .request
-include::{snippets}/quests/user-quest-status/get/path-parameters.adoc[]
+include::{snippets}/quests/participation/status/get/path-parameters.adoc[]
+.request
+include::{snippets}/quests/participation/status/get/http-request.adoc[]
 .response
-include::{snippets}/quests/user-quest-status/get/http-response.adoc[]
+include::{snippets}/quests/participation/status/get/http-response.adoc[]
 .response fields
-include::{snippets}/quests/user-quest-status/get/response-fields.adoc[]
+include::{snippets}/quests/participation/status/get/response-fields.adoc[]
+
 
 === POST /api/quests/{questId}/participation
 ==== 퀘스트 참여
