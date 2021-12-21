@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.quest.application
 
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class QuestService(
     private val questRepository: QuestRepository,
+    private val questParticipationRepository: QuestParticipationRepository,
 
     private val subQuestService: SubQuestService,
     private val tagService: TagService,
@@ -48,6 +50,11 @@ class QuestService(
     @Transactional(readOnly = true)
     fun getQuestDetailInfo(questId: Long): QuestDetailInfoResponseDto {
         val questSupportVo = questRepository.findByQuestId(questId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
-        return questMapper.toQuestDetailInfoDto(questSupportVo, userMapper.toDto(questSupportVo.quest.user, questSupportVo.point))
+        val tagResponseDtoList = tagService.convertToTagResponseDtoList(questSupportVo.quest)
+
+        return questMapper.toQuestDetailInfoDto(
+            questSupportVo,
+            userMapper.toDto(questSupportVo.quest.user, questSupportVo.point),
+            tagResponseDtoList)
     }
 }

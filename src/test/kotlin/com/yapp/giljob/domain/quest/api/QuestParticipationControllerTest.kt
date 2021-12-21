@@ -167,4 +167,37 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
                 )
             )
     }
+
+    @Test
+    @GiljobTestUser
+    fun getQuestParticipationStatusTest() {
+        BDDMockito.given(questParticipationService.getQuestParticipationStatus(anyLong(), anyLong())).willReturn("아직 참여하지 않은 퀘스트입니다.")
+
+        val result = mockMvc.perform(
+            RestDocumentationRequestBuilders.get("/api/quests/{questId}/participation/status?userId={userId}", 1, 1)
+        ).andDo(MockMvcResultHandlers.print())
+
+        result
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andDo(
+                MockMvcRestDocumentation.document(
+                "quests/participation/status/get",
+                RequestDocumentation.pathParameters(
+                    RequestDocumentation.parameterWithName("questId").description("퀘스트 id")
+                ),
+                    RequestDocumentation.requestParameters(
+                        RequestDocumentation.parameterWithName("userId")
+                            .description("조회할 user id")
+                    ),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("퀘스트와 유저와의 관계 : 참여 전 / 참여중 / 참여 완료"),
+                    )
+                )
+            )
+    }
 }

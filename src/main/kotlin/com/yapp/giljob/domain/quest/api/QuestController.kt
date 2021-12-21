@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/quests")
 class QuestController(
@@ -38,7 +39,9 @@ class QuestController(
     }
 
     @GetMapping("/{questId}/info")
-    fun getQuestDetailCommon(@PathVariable("questId") questId: Long): ResponseEntity<BaseResponse<QuestDetailInfoResponseDto>> {
+    fun getQuestDetailInfo(
+        @PathVariable("questId") questId: Long
+    ): ResponseEntity<BaseResponse<QuestDetailInfoResponseDto>> {
         return ResponseEntity.ok(
             BaseResponse.of(HttpStatus.OK, "퀘스트 상세 정보 조회 성공입니다.", questService.getQuestDetailInfo(questId))
         )

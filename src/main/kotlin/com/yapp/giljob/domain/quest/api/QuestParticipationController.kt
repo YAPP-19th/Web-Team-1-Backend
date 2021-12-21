@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/quests")
 class QuestParticipationController(
@@ -47,5 +48,18 @@ class QuestParticipationController(
         @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
         questParticipationService.createQuestReview(questId, questReviewCreateRequestDto, user)
         return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "퀘스트 리뷰 작성 성공입니다."))
+    }
+
+    @GetMapping("/{questId}/participation/status")
+    fun getQuestParticipationStatus(
+        @PathVariable("questId") questId: Long,
+        @RequestParam(value = "userId") userId:Long
+    ): ResponseEntity<BaseResponse<String>>{
+        return ResponseEntity.ok(
+            BaseResponse.of(
+                HttpStatus.OK,
+                "유저의 퀘스트에 대한 정보 성공입니다.",
+                questParticipationService.getQuestParticipationStatus(questId, userId))
+        )
     }
 }

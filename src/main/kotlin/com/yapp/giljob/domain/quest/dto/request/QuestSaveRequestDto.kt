@@ -10,6 +10,6 @@ class QuestSaveRequestDto(
     var position: Position,
     var tagList: List<TagRequestDto> = mutableListOf(),
     var detail: String,
-    var thumbnail: String,
+    var thumbnail: String?,
     var subQuestList: List<SubQuestRequestDto> = mutableListOf()
 )

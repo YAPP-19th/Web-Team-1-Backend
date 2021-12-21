@@ -26,15 +26,16 @@ class WebSecurityConfig(
             "/api/users/**/profile",
             "/don't-pass-filter",
             "/docs/index.html",
-            "api/quests/common/**",
-            "/api/quests/search"
+            "/api/quests/**/info",
+            "/api/quests/search",
+            "/api/quests/**/participation/status"
         )
         web.ignoring().antMatchers(HttpMethod.GET, "/api/quests")
     }
 
     override fun configure(http: HttpSecurity) {
         http.httpBasic().disable()
-        http.cors().disable()
+        http.cors()
         http.csrf().disable()
         http.formLogin().disable()
         http.addFilterBefore(JwtAuthenticationFilter(jwtResolver), UsernamePasswordAuthenticationFilter::class.java)

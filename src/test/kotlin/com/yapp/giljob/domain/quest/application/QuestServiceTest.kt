@@ -1,5 +1,6 @@
 package com.yapp.giljob.domain.quest.application
 
+import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.tag.application.TagService
@@ -34,10 +35,13 @@ class QuestServiceTest {
     @MockK
     private lateinit var userMapper: UserMapper
 
+    @MockK
+    private lateinit var questParticipationRepository: QuestParticipationRepository
+
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        questService = QuestService(questRepository, subQuestService, tagService, questMapper, userMapper)
+        questService = QuestService(questRepository, questParticipationRepository, subQuestService, tagService, questMapper, userMapper)
     }
 
     private val user = EntityFactory.testUser()

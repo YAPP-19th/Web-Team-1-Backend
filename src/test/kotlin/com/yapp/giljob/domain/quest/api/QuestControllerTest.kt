@@ -3,14 +3,13 @@ package com.yapp.giljob.domain.quest.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
-import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.global.config.security.GiljobTestUser
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.mockito.BDDMockito.anyLong
-import org.mockito.BDDMockito.given
+import org.mockito.BDDMockito.*
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType

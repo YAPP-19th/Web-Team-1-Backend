@@ -6,11 +6,9 @@ import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/roadmaps")
 class RoadmapScrapController(
