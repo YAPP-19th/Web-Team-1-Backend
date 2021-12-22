@@ -39,10 +39,12 @@ class DtoFactory {
             difficulty = 1,
             thumbnail = "test.png",
             participantCount = 100,
-            user = UserSubResponseDto(
+            writer = UserInfoResponseDto(
                 id = 1L,
                 nickname = "testNickname",
-                point = 100
+                position = Position.BACKEND,
+                point = 100,
+                intro = "자기소개 테스트"
             )
         )
 
@@ -53,7 +55,7 @@ class DtoFactory {
             difficulty = 1,
             thumbnail = "test.png",
             participantCount = 100,
-            user = testUserSubResponse(),
+            writer = testUserInfoResponse(),
             progress = 33
         )
 
@@ -66,9 +68,9 @@ class DtoFactory {
             name = "test quest",
             difficulty = 1,
             position = Position.BACKEND,
-            participantCnt = 1L,
+            participantCount = 1L,
             detail = "test detail",
-            writer = testUserSubResponse(),
+            writer = testUserInfoResponse(),
             tagList = mutableListOf(testTagResponse())
         )
 
@@ -86,17 +88,11 @@ class DtoFactory {
         )
 
         fun testUserInfoResponse() = UserInfoResponseDto(
-            userId = 1L,
+            id = 1L,
             nickname = "nickname",
             position = Position.BACKEND,
             point = 1000L,
             intro = "test introduce"
-        )
-
-        fun testUserSubResponse() = UserSubResponseDto(
-            id = 1L,
-            nickname = "testNickname",
-            point = 100
         )
 
         fun testUserProfileResponse() = UserProfileResponseDto(
@@ -123,7 +119,7 @@ class DtoFactory {
 
         fun testDetailRoadmapResponse() = RoadmapDetailResponseDto(
             name = "로드맵 테스트",
-            user = testUserInfoResponse(),
+            writer = testUserInfoResponse(),
             position = Position.FRONTEND,
             questList = listOf(
                 QuestDto(1L, "코딩 스터디", true),
@@ -137,7 +133,7 @@ class DtoFactory {
         fun testRoadmapResponse() = RoadmapResponseDto(
             id = 1L,
             name = "로드맵 테스트",
-            user = testUserSubResponse(),
+            writer = testUserInfoResponse(),
             position = Position.FRONTEND
         )
     }

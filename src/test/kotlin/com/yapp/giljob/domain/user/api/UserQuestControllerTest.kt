@@ -72,12 +72,16 @@ class UserQuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 카테고리(position)"),
                         PayloadDocumentation.fieldWithPath("data[*].participantCount")
                             .description("퀘스트 참여자 수"),
-                        PayloadDocumentation.fieldWithPath("data[*].user.id")
+                        PayloadDocumentation.fieldWithPath("data[*].writer.id")
                             .description("퀘스트 작성자 id"),
-                        PayloadDocumentation.fieldWithPath("data[*].user.nickname")
+                        PayloadDocumentation.fieldWithPath("data[*].writer.nickname")
                             .description("퀘스트 작성자 nickname"),
-                        PayloadDocumentation.fieldWithPath("data[*].user.point")
+                        PayloadDocumentation.fieldWithPath("data[*].writer.position")
+                            .description("퀘스트 작성자 직군"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.point")
                             .description("퀘스트 작성자 능력치"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.intro")
+                            .description("퀘스트 작성자 자기소개"),
                         PayloadDocumentation.fieldWithPath("data[*].difficulty")
                             .description("퀘스트 난이도"),
                         PayloadDocumentation.fieldWithPath("data[*].thumbnail")
@@ -133,12 +137,16 @@ class UserQuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 카테고리(position)"),
                         PayloadDocumentation.fieldWithPath("data[*].participantCount")
                             .description("퀘스트 참여자 수"),
-                        PayloadDocumentation.fieldWithPath("data[*].user.id")
+                        PayloadDocumentation.fieldWithPath("data[*].writer.id")
                             .description("퀘스트 작성자 id"),
-                        PayloadDocumentation.fieldWithPath("data[*].user.nickname")
+                        PayloadDocumentation.fieldWithPath("data[*].writer.nickname")
                             .description("퀘스트 작성자 nickname"),
-                        PayloadDocumentation.fieldWithPath("data[*].user.point")
+                        PayloadDocumentation.fieldWithPath("data[*].writer.position")
+                            .description("퀘스트 작성자 직군"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.point")
                             .description("퀘스트 작성자 능력치"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.intro")
+                            .description("퀘스트 작성자 자기소개"),
                         PayloadDocumentation.fieldWithPath("data[*].difficulty")
                             .description("퀘스트 난이도"),
                         PayloadDocumentation.fieldWithPath("data[*].progress")

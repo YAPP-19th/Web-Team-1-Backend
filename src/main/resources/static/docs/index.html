@@ -730,7 +730,7 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1104
+Content-Length: 1400
 
 {
   "status" : 200,
@@ -739,10 +739,12 @@ Content-Length: 1104
     "id" : 9,
     "name" : "quest test 9",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -751,10 +753,12 @@ Content-Length: 1104
     "id" : 8,
     "name" : "quest test 8",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -763,10 +767,12 @@ Content-Length: 1104
     "id" : 7,
     "name" : "quest test 7",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -775,10 +781,12 @@ Content-Length: 1104
     "id" : 6,
     "name" : "quest test 6",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -838,19 +846,29 @@ Content-Length: 1104
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 직군</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 자기소개</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].difficulty</code></p></td>
@@ -916,7 +934,7 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1094
+Content-Length: 1390
 
 {
   "status" : 200,
@@ -925,10 +943,12 @@ Content-Length: 1094
     "id" : 9,
     "name" : "quest Test 9",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -937,10 +957,12 @@ Content-Length: 1094
     "id" : 8,
     "name" : "quest TEST 8",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -949,10 +971,12 @@ Content-Length: 1094
     "id" : 7,
     "name" : "quest test 7",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -961,10 +985,12 @@ Content-Length: 1094
     "id" : 6,
     "name" : "quest test 6",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -1024,19 +1050,29 @@ Content-Length: 1094
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 직군</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 자기소개</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].difficulty</code></p></td>
@@ -1164,7 +1200,7 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 395
+Content-Length: 458
 
 {
   "status" : 200,
@@ -1178,11 +1214,13 @@ Content-Length: 395
       "name" : "tag1"
     } ],
     "detail" : "test detail",
-    "participantCnt" : 1,
+    "participantCount" : 1,
     "writer" : {
       "id" : 1,
-      "nickname" : "testNickname",
-      "point" : 100
+      "nickname" : "nickname",
+      "position" : "BACKEND",
+      "point" : 1000,
+      "intro" : "test introduce"
     }
   }
 }</code></pre>
@@ -1244,7 +1282,7 @@ Content-Length: 395
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 상세 설명</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.participantCnt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.participantCount</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
@@ -1259,9 +1297,19 @@ Content-Length: 395
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 직군</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 point</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 자기소개</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.tagList</code></p></td>
@@ -1647,7 +1695,7 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1124
+Content-Length: 1420
 
 {
   "status" : 200,
@@ -1656,10 +1704,12 @@ Content-Length: 1124
     "id" : 9,
     "name" : "quest test 9",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -1668,10 +1718,12 @@ Content-Length: 1124
     "id" : 7,
     "name" : "quest test 7",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -1680,10 +1732,12 @@ Content-Length: 1124
     "id" : 6,
     "name" : "quest test 6",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -1692,10 +1746,12 @@ Content-Length: 1124
     "id" : 3,
     "name" : "quest test 3",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
       "nickname" : "testNickname",
-      "point" : 100
+      "position" : "BACKEND",
+      "point" : 100,
+      "intro" : "자기소개 테스트"
     },
     "difficulty" : 1,
     "thumbnail" : "test.png",
@@ -1755,19 +1811,29 @@ Content-Length: 1124
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 직군</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 자기소개</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].difficulty</code></p></td>
@@ -1829,7 +1895,7 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1208
+Content-Length: 1460
 
 {
   "status" : 200,
@@ -1838,10 +1904,12 @@ Content-Length: 1208
     "id" : 9,
     "name" : "quest test 9",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
-      "nickname" : "testNickname",
-      "point" : 100
+      "nickname" : "nickname",
+      "position" : "BACKEND",
+      "point" : 1000,
+      "intro" : "test introduce"
     },
     "difficulty" : 1,
     "progress" : 90,
@@ -1851,10 +1919,12 @@ Content-Length: 1208
     "id" : 7,
     "name" : "quest test 7",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
-      "nickname" : "testNickname",
-      "point" : 100
+      "nickname" : "nickname",
+      "position" : "BACKEND",
+      "point" : 1000,
+      "intro" : "test introduce"
     },
     "difficulty" : 1,
     "progress" : 70,
@@ -1864,10 +1934,12 @@ Content-Length: 1208
     "id" : 6,
     "name" : "quest test 6",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
-      "nickname" : "testNickname",
-      "point" : 100
+      "nickname" : "nickname",
+      "position" : "BACKEND",
+      "point" : 1000,
+      "intro" : "test introduce"
     },
     "difficulty" : 1,
     "progress" : 33,
@@ -1877,10 +1949,12 @@ Content-Length: 1208
     "id" : 3,
     "name" : "quest test 3",
     "position" : "BACKEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
-      "nickname" : "testNickname",
-      "point" : 100
+      "nickname" : "nickname",
+      "position" : "BACKEND",
+      "point" : 1000,
+      "intro" : "test introduce"
     },
     "difficulty" : 1,
     "progress" : 50,
@@ -1941,19 +2015,29 @@ Content-Length: 1208
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 직군</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 자기소개</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].difficulty</code></p></td>
@@ -2094,15 +2178,15 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 709
+Content-Length: 707
 
 {
   "status" : 200,
   "message" : "로드맵 조회 성공입니다.",
   "data" : {
     "name" : "로드맵 테스트",
-    "user" : {
-      "userId" : 1,
+    "writer" : {
+      "id" : 1,
       "nickname" : "nickname",
       "position" : "BACKEND",
       "point" : 1000,
@@ -2167,32 +2251,32 @@ Content-Length: 709
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 이름</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.user</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 정보</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.user.userId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.user.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 닉네임</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.user.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 직군(포지션)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.user.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 직군 능력치 포인트</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.user.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.writer.intro</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 자기소개</p></td>
 </tr>
@@ -2333,7 +2417,7 @@ Host: docs.api.com:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 839
+Content-Length: 1091
 
 {
   "status" : 200,
@@ -2342,37 +2426,45 @@ Content-Length: 839
     "id" : 6,
     "name" : "로드맵 테스트 6",
     "position" : "FRONTEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
-      "nickname" : "testNickname",
-      "point" : 100
+      "nickname" : "nickname",
+      "position" : "BACKEND",
+      "point" : 1000,
+      "intro" : "test introduce"
     }
   }, {
     "id" : 5,
     "name" : "로드맵 테스트 5",
     "position" : "FRONTEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
-      "nickname" : "testNickname",
-      "point" : 100
+      "nickname" : "nickname",
+      "position" : "BACKEND",
+      "point" : 1000,
+      "intro" : "test introduce"
     }
   }, {
     "id" : 4,
     "name" : "로드맵 테스트 4",
     "position" : "FRONTEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
-      "nickname" : "testNickname",
-      "point" : 100
+      "nickname" : "nickname",
+      "position" : "BACKEND",
+      "point" : 1000,
+      "intro" : "test introduce"
     }
   }, {
     "id" : 3,
     "name" : "로드맵 테스트 3",
     "position" : "FRONTEND",
-    "user" : {
+    "writer" : {
       "id" : 1,
-      "nickname" : "testNickname",
-      "point" : 100
+      "nickname" : "nickname",
+      "position" : "BACKEND",
+      "point" : 1000,
+      "intro" : "test introduce"
     }
   } ]
 }</code></pre>
@@ -2424,19 +2516,29 @@ Content-Length: 839
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 카테고리(position)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 nickname</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].user.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 직군</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 능력치</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 자기소개</p></td>
 </tr>
 </tbody>
 </table>
@@ -2479,7 +2581,7 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQwMDk3NzQ4LCJleHAiOjI2NDAwOTc3NDh9.S0zPoY-RgXw9mp91exH5pDzCy-UQhKTuvivPGfyYXwI"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQwMTc4NDAwLCJleHAiOjI2NDAxNzg0MDB9.WNH3deF0QJdn2IolHZXhi0H_gLaoAKPcI2b6wluTl2M"
   }
 }</code></pre>
 </div>
@@ -2552,7 +2654,7 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQwMDk3NzQ4LCJleHAiOjI2NDAwOTc3NDh9.iqxZkiXDREnytkak0apS7GPC3fFrc17_0T_QDZsFdgw"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQwMTc4Mzk4LCJleHAiOjI2NDAxNzgzOTh9.6bbO1i_nqfu6VR1lOxLt7eqyFo7jvA6xO3xxNWGrwCA"
   }
 }</code></pre>
 </div>
@@ -2627,13 +2729,13 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 229
+Content-Length: 225
 
 {
   "status" : 200,
   "message" : "인증된 유저 정보 조회 성공입니다.",
   "data" : {
-    "userId" : 1,
+    "id" : 1,
     "nickname" : "nickname",
     "position" : "BACKEND",
     "point" : 1000,
@@ -2673,7 +2775,7 @@ Content-Length: 229
 <td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.userId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">현재 유저 id</p></td>
 </tr>
@@ -2720,14 +2822,14 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 477
+Content-Length: 473
 
 {
   "status" : 200,
   "message" : "유저 프로필 조회 성공입니다.",
   "data" : {
     "userInfo" : {
-      "userId" : 1,
+      "id" : 1,
       "nickname" : "nickname",
       "position" : "BACKEND",
       "point" : 1000,
@@ -2784,7 +2886,7 @@ Content-Length: 477
 <td class="tableblock halign-left valign-top"><p class="tableblock">유저 정보 조회</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.userInfo.userId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.userInfo.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">유저 id</p></td>
 </tr>
@@ -3117,7 +3219,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-12-21 23:01:05 +0900
+Last updated 2021-12-22 00:24:15 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

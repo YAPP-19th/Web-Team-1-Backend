@@ -57,7 +57,7 @@ class UserControllerTest : AbstractRestDocs() {
                             .description("성공 메세지"),
                         PayloadDocumentation.fieldWithPath("data")
                             .description("응답 데이터"),
-                        PayloadDocumentation.fieldWithPath("data.userId")
+                        PayloadDocumentation.fieldWithPath("data.id")
                             .description("현재 유저 id"),
                         PayloadDocumentation.fieldWithPath("data.nickname")
                             .description("유저 닉네임"),
@@ -99,7 +99,7 @@ class UserControllerTest : AbstractRestDocs() {
                             .description("응답 데이터"),
                         PayloadDocumentation.fieldWithPath("data.userInfo")
                             .description("유저 정보 조회"),
-                        PayloadDocumentation.fieldWithPath("data.userInfo.userId")
+                        PayloadDocumentation.fieldWithPath("data.userInfo.id")
                             .description("유저 id"),
                         PayloadDocumentation.fieldWithPath("data.userInfo.nickname")
                             .description("유저 닉네임"),

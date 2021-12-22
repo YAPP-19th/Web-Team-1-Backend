@@ -20,7 +20,7 @@ interface QuestMapper {
         Mapping(target = "difficulty", source = "questSupportVo.quest.difficulty"),
         Mapping(target = "thumbnail", source = "questSupportVo.quest.thumbnail"),
         Mapping(target = "participantCount", source = "questSupportVo.participantCount"),
-        Mapping(target = "writer", source = "writer")
+        Mapping(target = "writer", source = "user")
     )
     fun toDto(questSupportVo: QuestSupportVo, user: UserInfoResponseDto): QuestResponseDto
 
@@ -55,8 +55,8 @@ interface QuestMapper {
         Mapping(target = "difficulty", source = "questSupportVo.quest.difficulty"),
         Mapping(target = "detail", source = "questSupportVo.quest.detail"),
         Mapping(target = "participantCount", source = "questSupportVo.participantCount"),
-        Mapping(target = "writer", source = "writer"),
+        Mapping(target = "writer", source = "user"),
         Mapping(target = "tagList", source = "tagResponseDtoList")
     )
-    fun toQuestDetailInfoDto(questSupportVo: QuestSupportVo, writer: UserInfoResponseDto, tagResponseDtoList: List<TagResponseDto>): QuestDetailInfoResponseDto
+    fun toQuestDetailInfoDto(questSupportVo: QuestSupportVo, user: UserInfoResponseDto, tagResponseDtoList: List<TagResponseDto>): QuestDetailInfoResponseDto
 }
