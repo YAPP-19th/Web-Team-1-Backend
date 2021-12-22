@@ -134,17 +134,29 @@ include::{snippets}/users/{userId}/quests/participation/get/http-response.adoc[]
 include::{snippets}/users/{userId}/quests/participation/get/response-fields.adoc[]
 
 == SubQuest API
-=== POST /api/subquests/{subQuestId}
+=== POST /api/subquests/{subQuestId}/complete
 ==== 서브퀘스트 완료
 
 .request
-include::{snippets}/subquests/post/http-request.adoc[]
+include::{snippets}/subquests/complete/post/http-request.adoc[]
 .request
-include::{snippets}/subquests/post/path-parameters.adoc[]
+include::{snippets}/subquests/complete/post/path-parameters.adoc[]
 .response
-include::{snippets}/subquests/post/response-body.adoc[]
+include::{snippets}/subquests/complete/post/response-body.adoc[]
 .response fields
-include::{snippets}/subquests/post/response-fields.adoc[]
+include::{snippets}/subquests/complete/post/response-fields.adoc[]
+
+=== PATCH /api/subquests/{subQuestId}/cancel
+==== 서브퀘스트 취소
+
+.request
+include::{snippets}/subquests/cancel/patch/http-request.adoc[]
+.request
+include::{snippets}/subquests/cancel/patch/path-parameters.adoc[]
+.response
+include::{snippets}/subquests/cancel/patch/response-body.adoc[]
+.response fields
+include::{snippets}/subquests/cancel/patch/response-fields.adoc[]
 
 == Roadmap API
 === GET /api/roadmaps/{roadmapId}

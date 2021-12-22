@@ -1,7 +1,6 @@
 package com.yapp.giljob.domain.quest.application
 
 import com.yapp.giljob.domain.position.domain.Position
-import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
@@ -19,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class QuestService(
     private val questRepository: QuestRepository,
-    private val questParticipationRepository: QuestParticipationRepository,
 
     private val subQuestService: SubQuestService,
     private val tagService: TagService,

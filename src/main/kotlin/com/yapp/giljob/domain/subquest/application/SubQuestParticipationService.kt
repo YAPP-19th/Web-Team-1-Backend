@@ -4,6 +4,7 @@ import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
 import com.yapp.giljob.domain.subquest.dao.SubQuestRepository
 import com.yapp.giljob.domain.subquest.domain.SubQuestParticipation
 import com.yapp.giljob.domain.subquest.domain.SubQuestParticipationPK
+import com.yapp.giljob.domain.subquest.vo.SubQuestParticipationVo
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
@@ -18,13 +19,40 @@ class SubQuestParticipationService(
 ) {
     @Transactional
     fun completeSubQuest(subQuestId: Long, user: User) {
+        val subQuestParticipationVo = getSubQuestParticipationVo(subQuestId, user)
+        val subQuest = subQuestParticipationVo.subQuest
+
+        subQuestParticipationVo.subQuestParticipation?.let {
+            if (!it.isCompleted) it.complete()
+            else throw BusinessException(ErrorCode.ALREADY_COMPLETED_SUBQUEST)
+        } ?: subQuestParticipationRepository.save(
+            SubQuestParticipation(
+                subQuestParticipationVo.subQuestParticipationPK,
+                subQuest,
+                user,
+                subQuest.quest
+            )
+        )
+    }
+
+    @Transactional
+    fun cancelSubQuest(subQuestId: Long, user: User) {
+        val subQuestParticipation = getSubQuestParticipationVo(subQuestId, user).subQuestParticipation
+        subQuestParticipation?.let {
+            if (it.isCompleted) it.cancel()
+            else throw BusinessException(ErrorCode.NOT_COMPLETED_SUBQUEST)
+        } ?: throw BusinessException(ErrorCode.SUBQUEST_PARTICIPATION_NOT_FOUND)
+    }
+
+    private fun getSubQuestParticipationVo(subQuestId: Long, user: User): SubQuestParticipationVo {
         val subQuest =
             subQuestRepository.findByIdOrNull(subQuestId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
-
         val subQuestParticipationPK = SubQuestParticipationPK(user.id!!, subQuestId)
-        subQuestParticipationRepository.findByIdOrNull(subQuestParticipationPK)?.let {
-            if (!it.isCompleted) it.isCompleted = true
-            else throw BusinessException(ErrorCode.ALREADY_COMPLETED_SUBQUEST)
-        } ?: subQuestParticipationRepository.save(SubQuestParticipation(subQuestParticipationPK, subQuest, user, subQuest.quest))
+        return SubQuestParticipationVo(
+            subQuest,
+            subQuestParticipationPK,
+            subQuestParticipationRepository.findByIdOrNull(subQuestParticipationPK)
+        )
     }
+
 }
