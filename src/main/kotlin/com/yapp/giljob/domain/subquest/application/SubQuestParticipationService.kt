@@ -54,5 +54,4 @@ class SubQuestParticipationService(
             subQuestParticipationRepository.findByIdOrNull(subQuestParticipationPK)
         )
     }
-
 }

@@ -11,8 +11,6 @@ import org.mapstruct.factory.Mappers
 class QuestMapperTest {
 
     private val questMapper = Mappers.getMapper(QuestMapper::class.java)
-
-    // TODO UserMapperTest 로 빼야 함
     private val userMapper = Mappers.getMapper(UserMapper::class.java)
 
     @Test
@@ -34,8 +32,8 @@ class QuestMapperTest {
         assertEquals(expectedQuestResponse.position, questResponse.position)
         assertEquals(expectedQuestResponse.difficulty, questResponse.difficulty)
         assertEquals(expectedQuestResponse.thumbnail, questResponse.thumbnail)
-        assertEquals(expectedQuestResponse.user.point, questResponse.user.point)
-        assertEquals(expectedQuestResponse.user.id, questResponse.user.id)
-        assertEquals(expectedQuestResponse.user.nickname, questResponse.user.nickname)
+        assertEquals(expectedQuestResponse.writer.point, questResponse.writer.point)
+        assertEquals(expectedQuestResponse.writer.id, questResponse.writer.id)
+        assertEquals(expectedQuestResponse.writer.nickname, questResponse.writer.nickname)
     }
 }

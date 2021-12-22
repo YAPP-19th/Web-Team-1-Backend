@@ -6,7 +6,7 @@ import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
 
 class RoadmapDetailResponseDto(
     val name: String,
-    val user: UserInfoResponseDto,
+    val writer: UserInfoResponseDto,
     val position: Position,
     val questList: List<QuestDto>,
     val isScraped: Boolean

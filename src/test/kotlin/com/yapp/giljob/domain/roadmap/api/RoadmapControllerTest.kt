@@ -61,17 +61,17 @@ class RoadmapControllerTest : AbstractRestDocs() {
                             .description("응답 데이터"),
                         PayloadDocumentation.fieldWithPath("data.name")
                             .description("로드맵 이름"),
-                        PayloadDocumentation.fieldWithPath("data.user")
+                        PayloadDocumentation.fieldWithPath("data.writer")
                             .description("로드맵 작성자 정보"),
-                        PayloadDocumentation.fieldWithPath("data.user.userId")
+                        PayloadDocumentation.fieldWithPath("data.writer.id")
                             .description("로드맵 작성자 id"),
-                        PayloadDocumentation.fieldWithPath("data.user.nickname")
+                        PayloadDocumentation.fieldWithPath("data.writer.nickname")
                             .description("로드맵 작성자 닉네임"),
-                        PayloadDocumentation.fieldWithPath("data.user.position")
+                        PayloadDocumentation.fieldWithPath("data.writer.position")
                             .description("로드맵 작성자 직군(포지션)"),
-                        PayloadDocumentation.fieldWithPath("data.user.point")
+                        PayloadDocumentation.fieldWithPath("data.writer.point")
                             .description("로드맵 작성자 직군 능력치 포인트"),
-                        PayloadDocumentation.fieldWithPath("data.user.intro")
+                        PayloadDocumentation.fieldWithPath("data.writer.intro")
                             .description("로드맵 작성자 자기소개"),
                         PayloadDocumentation.fieldWithPath("data.position")
                             .description("로드맵 카테고리(position)"),
