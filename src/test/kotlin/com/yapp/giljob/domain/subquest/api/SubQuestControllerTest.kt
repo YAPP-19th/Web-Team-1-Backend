@@ -37,7 +37,7 @@ class SubQuestControllerTest : AbstractRestDocs() {
     @Test
     fun completeSubQuest() {
         val result = mockMvc.perform(
-            RestDocumentationRequestBuilders.post("/api/subquests/{subQuestId}", 1L)
+            RestDocumentationRequestBuilders.post("/api/subquests/{subQuestId}/complete", 1L)
                 .header("Authorization", "Access Token")
         ).andDo(MockMvcResultHandlers.print())
 
@@ -45,9 +45,39 @@ class SubQuestControllerTest : AbstractRestDocs() {
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andDo(
                 MockMvcRestDocumentation.document(
-                    "subquests/post",
+                    "subquests/complete/post",
                     RequestDocumentation.pathParameters(
                         RequestDocumentation.parameterWithName("subQuestId").description("완료한 서브퀘스트 id")
+                    ),
+                    HeaderDocumentation.responseHeaders(),
+                    HeaderDocumentation.responseHeaders(),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("null")
+                    )
+                )
+            )
+    }
+
+    @GiljobTestUser
+    @Test
+    fun cancelSubQuest() {
+        val result = mockMvc.perform(
+            RestDocumentationRequestBuilders.patch("/api/subquests/{subQuestId}/cancel", 1L)
+                .header("Authorization", "Access Token")
+        ).andDo(MockMvcResultHandlers.print())
+
+        result
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "subquests/cancel/patch",
+                    RequestDocumentation.pathParameters(
+                        RequestDocumentation.parameterWithName("subQuestId").description("취소할 서브퀘스트 id")
                     ),
                     HeaderDocumentation.responseHeaders(),
                     HeaderDocumentation.responseHeaders(),

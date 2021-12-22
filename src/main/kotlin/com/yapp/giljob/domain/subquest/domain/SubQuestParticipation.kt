@@ -13,22 +13,30 @@ class SubQuestParticipation(
     val id: SubQuestParticipationPK,
 
     @MapsId("subQuestId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sub_quest_id")
     val subQuest: SubQuest,
 
     @MapsId("participantId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "participant_id")
     val participant: User,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quest_id")
     val quest: Quest,
 
     @Column(name = "is_completed", nullable = false)
     var isCompleted: Boolean = true
 ) {
+    fun complete() {
+        this.isCompleted = true
+    }
+
+    fun cancel() {
+        this.isCompleted = false
+    }
+
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)

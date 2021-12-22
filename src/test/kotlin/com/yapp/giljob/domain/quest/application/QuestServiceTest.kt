@@ -11,7 +11,6 @@ import com.yapp.giljob.global.common.dto.DtoFactory
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.impl.annotations.SpyK
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -35,13 +34,10 @@ class QuestServiceTest {
     @MockK
     private lateinit var userMapper: UserMapper
 
-    @MockK
-    private lateinit var questParticipationRepository: QuestParticipationRepository
-
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        questService = QuestService(questRepository, questParticipationRepository, subQuestService, tagService, questMapper, userMapper)
+        questService = QuestService(questRepository, subQuestService, tagService, questMapper, userMapper)
     }
 
     private val user = EntityFactory.testUser()

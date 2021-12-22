@@ -6,10 +6,7 @@ import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/roadmaps")
@@ -18,6 +15,16 @@ class RoadmapController(
 ) {
     @GetMapping("/{roadmapId}")
     fun getRoadmapDetail(@PathVariable roadmapId: Long, @CurrentUser user: User) =
+        ResponseEntity.ok(
+            BaseResponse.of(
+                HttpStatus.OK,
+                "로드맵 조회 성공입니다.",
+                roadmapService.getRoadmapDetail(roadmapId, user)
+            )
+        )
+
+    @DeleteMapping("/{roadmapId}")
+    fun deleteRoadmap(@PathVariable roadmapId: Long, @CurrentUser user: User) =
         ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK,
