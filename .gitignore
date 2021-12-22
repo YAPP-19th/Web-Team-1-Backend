@@ -26,4 +26,4 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
-main/resources/application.yml
+src/main/resources/application.yml
