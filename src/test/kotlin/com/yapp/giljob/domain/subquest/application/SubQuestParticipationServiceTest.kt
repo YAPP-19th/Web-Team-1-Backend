@@ -125,6 +125,6 @@ class SubQuestParticipationServiceTest {
             }
 
         // then
-        assertEquals(ErrorCode.ALREADY_NOT_COMPLETED_SUBQUEST, exception.errorCode)
+        assertEquals(ErrorCode.NOT_COMPLETED_SUBQUEST, exception.errorCode)
     }
 }

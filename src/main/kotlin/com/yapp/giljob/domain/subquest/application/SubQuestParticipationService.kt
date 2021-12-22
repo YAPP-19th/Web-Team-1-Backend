@@ -40,7 +40,7 @@ class SubQuestParticipationService(
         val subQuestParticipation = getSubQuestParticipationVo(subQuestId, user).subQuestParticipation
         subQuestParticipation?.let {
             if (it.isCompleted) it.cancel()
-            else throw BusinessException(ErrorCode.ALREADY_NOT_COMPLETED_SUBQUEST)
+            else throw BusinessException(ErrorCode.NOT_COMPLETED_SUBQUEST)
         } ?: throw BusinessException(ErrorCode.SUBQUEST_PARTICIPATION_NOT_FOUND)
     }
 
