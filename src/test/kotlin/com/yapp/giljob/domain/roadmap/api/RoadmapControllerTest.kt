@@ -90,4 +90,31 @@ class RoadmapControllerTest : AbstractRestDocs() {
             )
     }
 
+    @GiljobTestUser
+    @Test
+    fun deleteRoadmap() {
+        val result = mockMvc.perform(
+            RestDocumentationRequestBuilders.delete("/api/roadmaps/{roadmapId}", 1)
+        ).andDo(MockMvcResultHandlers.print())
+
+        result
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "roadmaps/{roadmapId}/delete",
+                    RequestDocumentation.pathParameters(
+                        RequestDocumentation.parameterWithName("roadmapId").description("삭제할 로드맵 id")
+                    ),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("null")
+                    )
+                )
+            )
+    }
+
 }
