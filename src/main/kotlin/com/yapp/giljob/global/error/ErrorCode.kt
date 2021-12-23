@@ -35,7 +35,8 @@ enum class ErrorCode(
     SUBQUEST_PARTICIPATION_NOT_FOUND(HttpStatus.BAD_REQUEST, "SQ003", "SubQuest Participation Not Found"),
 
     // Roadmap
-    ALREADY_SCRAPED_ROADMAP(HttpStatus.BAD_REQUEST, "R001", "Already Scraped Quest"),
+    ALREADY_SCRAPED_ROADMAP(HttpStatus.BAD_REQUEST, "R001", "Already Scraped Roadmap"),
+    CAN_NOT_DELETE_ROADMAP(HttpStatus.BAD_REQUEST, "R002", "Can Not Delete Roadmap"),
 
     // Position
     POSITION_NOT_FOUND(HttpStatus.NOT_FOUND, "P001", "Position Not Found"),

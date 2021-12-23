@@ -28,8 +28,8 @@ class RoadmapController(
         ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK,
-                "로드맵 조회 성공입니다.",
-                roadmapService.getRoadmapDetail(roadmapId, user)
+                "로드맵 삭제 성공입니다.",
+                roadmapService.delete(roadmapId, user)
             )
         )
 }

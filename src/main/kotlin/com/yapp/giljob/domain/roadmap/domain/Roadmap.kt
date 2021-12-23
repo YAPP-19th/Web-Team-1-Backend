@@ -7,9 +7,14 @@ import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.BaseEntity
 import javax.persistence.*
+import org.hibernate.annotations.SQLDelete
+import org.hibernate.annotations.Where
+import javax.persistence.*
 
 @Table(name = "roadmap")
 @Entity
+@SQLDelete(sql = "UPDATE roadmap SET deleted = true WHERE roadmap_id=?")
+@Where(clause = "deleted = false")
 class Roadmap(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "roadmap_id")
@@ -27,7 +32,10 @@ class Roadmap(
     var name: String,
 
     @OneToMany(mappedBy = "roadmap")
-    var questList: MutableList<RoadmapQuest> = mutableListOf()
+    var questList: MutableList<RoadmapQuest> = mutableListOf(),
+
+    @Column(nullable = false)
+    var deleted: Boolean = false
 ) : BaseEntity() {
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 

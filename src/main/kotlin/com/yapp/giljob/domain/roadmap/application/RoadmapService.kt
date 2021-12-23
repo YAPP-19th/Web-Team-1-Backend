@@ -10,6 +10,7 @@ import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class RoadmapService(
@@ -21,7 +22,7 @@ class RoadmapService(
     private val roadmapMapper: RoadmapMapper
 ) {
     fun getRoadmapDetail(roadmapId: Long, user: User): RoadmapDetailResponseDto {
-        val roadmap = roadmapRepository.findByIdOrNull(roadmapId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        val roadmap = getRoadmap(roadmapId)
 
         return roadmapMapper.toDto(
             roadmap,
@@ -30,4 +31,14 @@ class RoadmapService(
             roadmapScrapRepository.existsById(RoadmapScrapPK(roadmapId, user.id!!))
         )
     }
+
+    @Transactional
+    fun delete(roadmapId: Long, user: User) {
+        val roadmap = getRoadmap(roadmapId)
+        if (roadmap.user != user) throw BusinessException(ErrorCode.CAN_NOT_DELETE_ROADMAP)
+        roadmapRepository.delete(roadmap)
+    }
+
+    private fun getRoadmap(roadmapId: Long) =
+        roadmapRepository.findByIdOrNull(roadmapId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
 }

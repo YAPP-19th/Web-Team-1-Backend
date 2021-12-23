@@ -25,7 +25,7 @@ class RoadmapScrapSupportRepositoryImpl(
             .from(roadmapScrap)
             .leftJoin(roadmapScrap.user, user)
             .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))
-            .where(roadmapScrap.user.id.eq(userId).and(ltRoadmapId(roadmapId)))
+            .where(roadmapScrap.user.id.eq(userId).and(ltRoadmapId(roadmapId)).and(roadmap.deleted.eq(false)))
             .orderBy(roadmap.id.desc())
             .limit(size)
             .fetch()
