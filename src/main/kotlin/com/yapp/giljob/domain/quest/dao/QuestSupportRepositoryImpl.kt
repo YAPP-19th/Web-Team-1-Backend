@@ -11,6 +11,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
+import com.yapp.giljob.domain.user.domain.QUser.user
 
 class QuestSupportRepositoryImpl(
     private val query: JPAQueryFactory
@@ -53,6 +54,8 @@ class QuestSupportRepositoryImpl(
         .from(quest)
         .where(builder)
         .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
+        .leftJoin(quest.user, user)
+        .fetchJoin()
         .orderBy(quest.id.desc())
         .limit(size)
         .fetch()
