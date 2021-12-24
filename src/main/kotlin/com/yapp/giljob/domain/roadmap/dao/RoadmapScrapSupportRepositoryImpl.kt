@@ -14,6 +14,7 @@ class RoadmapScrapSupportRepositoryImpl(
     override fun findByUserId(userId: Long, roadmapId: Long?, size: Long): List<RoadmapSupportVo> {
 
         val roadmap = roadmapScrap.roadmap
+
         return query.select(
             Projections.constructor(
                 RoadmapSupportVo::class.java,
@@ -23,9 +24,9 @@ class RoadmapScrapSupportRepositoryImpl(
         )
             .from(roadmapScrap)
             .where(roadmapScrap.user.id.eq(userId).and(ltRoadmapId(roadmapId)))
-            .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))
             .leftJoin(roadmap.user, user)
             .fetchJoin()
+            .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))
             .orderBy(roadmap.id.desc())
             .limit(size)
             .fetch()

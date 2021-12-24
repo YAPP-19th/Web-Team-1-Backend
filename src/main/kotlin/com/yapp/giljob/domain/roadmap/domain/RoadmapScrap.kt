@@ -12,12 +12,12 @@ class RoadmapScrap(
     val id: RoadmapScrapPK,
 
     @MapsId("roadmapId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roadmap_id")
     val roadmap: Roadmap,
 
     @MapsId("userId")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     val user: User
 ) {
