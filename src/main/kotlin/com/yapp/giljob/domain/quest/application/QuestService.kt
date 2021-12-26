@@ -3,10 +3,14 @@ package com.yapp.giljob.domain.quest.application
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
+import com.yapp.giljob.domain.quest.dto.request.QuestRequestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
+import com.yapp.giljob.domain.roadmap.domain.Roadmap
+import com.yapp.giljob.domain.roadmap.domain.RoadmapQuest
 import com.yapp.giljob.domain.subquest.application.SubQuestService
+import com.yapp.giljob.domain.subquest.domain.SubQuest
 import com.yapp.giljob.domain.tag.application.TagService
 import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.domain.User
@@ -41,18 +45,38 @@ class QuestService(
             questRepository.findByIdLessThanAndOrderByIdDesc(questId = questId, position = position, size = size)
 
         return questList.map {
-            questMapper.toDto(it, userMapper.toDto(it.quest.user, it.point))
+            questMapper.toDto(it, userMapper.toDto(it.quest.user!!, it.point))
         }
     }
 
     @Transactional(readOnly = true)
     fun getQuestDetailInfo(questId: Long): QuestDetailInfoResponseDto {
         val questSupportVo = questRepository.findByQuestId(questId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
-        val tagResponseDtoList = tagService.convertToTagResponseDtoList(questSupportVo.quest)
+        return questMapper.toQuestDetailInfoDto(questSupportVo, userMapper.toDto(questSupportVo.quest.user!!, questSupportVo.point))
+    }
 
-        return questMapper.toQuestDetailInfoDto(
-            questSupportVo,
-            userMapper.toDto(questSupportVo.quest.user, questSupportVo.point),
-            tagResponseDtoList)
+    fun convertToQuestList(roadmap: Roadmap, questList: List<QuestRequestDto>) : List<RoadmapQuest> {
+        var roadmapQuestList: MutableList<RoadmapQuest> = mutableListOf()
+        for (quest in questList) {
+
+            val questToSave =
+                quest.questId?. let {
+                    QuestHelper.getQuestById(questRepository, quest.questId)
+                } ?: run {
+                    questRepository.save(
+                        Quest(
+                            user = roadmap.user,
+                            name = quest.name!!,
+                            isRealQuest = false)
+                    )
+                }
+
+            roadmapQuestList.add(RoadmapQuest(
+                roadmap = roadmap,
+                quest = questToSave
+            ))
+        }
+
+        return roadmapQuestList
     }
 }

@@ -8,8 +8,12 @@ import com.yapp.giljob.domain.user.application.UserService
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import com.yapp.giljob.domain.quest.application.QuestService
+import com.yapp.giljob.domain.roadmap.domain.Roadmap
+import com.yapp.giljob.domain.roadmap.dto.request.RoadmapSaveRequestDto
+import org.springframework.data.repository.findByIdOrNull
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class RoadmapService(
@@ -17,6 +21,7 @@ class RoadmapService(
     private val roadmapScrapRepository: RoadmapScrapRepository,
 
     private val userService: UserService,
+    private val questService: QuestService,
 
     private val roadmapMapper: RoadmapMapper
 ) {
@@ -29,5 +34,15 @@ class RoadmapService(
             roadmap.questList.map { it.quest },
             roadmapScrapRepository.existsById(RoadmapScrapPK(roadmapId, user.id!!))
         )
+    }
+
+    @Transactional
+    fun saveRoadmap(roadmapSaveRequestDto: RoadmapSaveRequestDto, user: User) {
+        val roadmap = Roadmap.of(roadmapSaveRequestDto, user)
+
+        val questList = questService.convertToQuestList(roadmap, roadmapSaveRequestDto.questList)
+        roadmap.questList.addAll(questList)
+
+        roadmapRepository.save(roadmap)
     }
 }

@@ -41,5 +41,6 @@ class WebSecurityConfig(
         http.formLogin().disable()
         http.addFilterBefore(JwtAuthenticationFilter(jwtResolver), UsernamePasswordAuthenticationFilter::class.java)
     }
+
 }
 

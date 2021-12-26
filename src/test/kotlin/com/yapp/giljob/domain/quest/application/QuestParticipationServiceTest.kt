@@ -72,7 +72,7 @@ class QuestParticipationServiceTest {
         fun `이미 참여한 퀘스트에 참여하면 예외가 발생한다`() {
             // given
             val user = User(
-                id = quest.user.id!! + 1,
+                id = quest.user!!.id!! + 1,
                 socialId = "testSocialId",
                 nickname = "testNickname",
                 intro = "testIntro",
@@ -96,7 +96,7 @@ class QuestParticipationServiceTest {
         fun `퀘스트에 참여한다`() {
             // given
             val user = User(
-                id = quest.user.id!! + 1,
+                id = quest.user!!.id!! + 1,
                 socialId = "testSocialId",
                 nickname = "testNickname",
                 intro = "testIntro",

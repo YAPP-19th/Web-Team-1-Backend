@@ -23,23 +23,23 @@ class Quest(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "position")
-    var position: Position,
+    var position: Position? = null,
 
-    @Column(name = "is_real_quest")
+    @Column
     var isRealQuest: Boolean = true,
 
-    @Column(nullable = false)
+    @Column
     var name: String,
 
-    @Column(nullable = false)
-    var difficulty: Int,
+    @Column
+    var difficulty: Int? = null,
 
     @Column
     var thumbnail: String? = null,
 
     @Lob
-    @Column(nullable = false, columnDefinition = "BLOB")
-    var detail: String,
+    @Column(columnDefinition = "BLOB")
+    var detail: String? = null,
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL], mappedBy = "quest")
     var subQuestList: MutableList<SubQuest> = mutableListOf(),

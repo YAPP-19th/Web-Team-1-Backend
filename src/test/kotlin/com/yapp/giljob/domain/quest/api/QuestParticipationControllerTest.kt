@@ -162,7 +162,6 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
                             .description("성공 메세지"),
                         PayloadDocumentation.fieldWithPath("data")
                             .description("null")
-                            .description("응답 데이터")
                     )
                 )
             )
