@@ -1,13 +1,16 @@
 package com.yapp.giljob.domain.subquest.application
 
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailSubQuestResponseDto
 import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
 import com.yapp.giljob.domain.subquest.dao.SubQuestRepository
 import com.yapp.giljob.domain.subquest.domain.SubQuestParticipation
 import com.yapp.giljob.domain.subquest.domain.SubQuestParticipationPK
+import com.yapp.giljob.domain.subquest.dto.response.SubQuestProgressResponseDto
 import com.yapp.giljob.domain.subquest.vo.SubQuestParticipationVo
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
+import com.yapp.giljob.global.util.SubQuestProgressCalculate.Companion.calculateProgress
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -52,6 +55,32 @@ class SubQuestParticipationService(
             subQuest,
             subQuestParticipationPK,
             subQuestParticipationRepository.findByIdOrNull(subQuestParticipationPK)
+        )
+    }
+
+    fun getQuestDetailSubQuest(questId: Long, user: User): QuestDetailSubQuestResponseDto {
+        val subQuestProgressList
+                = subQuestParticipationRepository.getSubQuestProgressByQuestIdAndParticipantId(questId, user.id!!)
+
+        if (subQuestProgressList.isEmpty()) return QuestDetailSubQuestResponseDto(
+            progress = 0,
+            subQuestProgressList = emptyList()
+        )
+
+        val totalSubQuestCount = subQuestProgressList.size
+        val subQuestCompletedCount = subQuestProgressList.count{ it.isCompleted }.toLong()
+
+        val progress = calculateProgress(totalSubQuestCount, subQuestCompletedCount)
+
+        return QuestDetailSubQuestResponseDto(
+            progress = progress,
+            subQuestProgressList = subQuestProgressList.map {
+                SubQuestProgressResponseDto(
+                    subQuestId = it.subQuestId,
+                    subQuestName = it.subQuestName,
+                    isCompleted = it.isCompleted
+                )
+            }
         )
     }
 }

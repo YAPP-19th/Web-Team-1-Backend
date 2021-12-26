@@ -11,7 +11,6 @@ import com.yapp.giljob.domain.subquest.domain.SubQuest
 import com.yapp.giljob.domain.subquest.domain.SubQuestParticipation
 import com.yapp.giljob.domain.subquest.domain.SubQuestParticipationPK
 import com.yapp.giljob.domain.tag.domain.Tag
-import com.yapp.giljob.domain.user.domain.Ability
 import com.yapp.giljob.domain.user.domain.User
 
 class EntityFactory {

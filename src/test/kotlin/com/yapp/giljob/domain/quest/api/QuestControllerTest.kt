@@ -3,13 +3,15 @@ package com.yapp.giljob.domain.quest.api
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
+import com.yapp.giljob.domain.subquest.application.SubQuestParticipationService
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.global.config.security.GiljobTestUser
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
-import org.mockito.BDDMockito.*
+import org.mockito.BDDMockito.anyLong
+import org.mockito.BDDMockito.given
+import org.mockito.Mockito
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
@@ -25,11 +27,20 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 @WebMvcTest(QuestController::class)
 internal class QuestControllerTest : AbstractRestDocs() {
 
+    private fun <T> any(): T {
+        Mockito.any<T>()
+        return uninitialized()
+    }
+    private fun <T> uninitialized(): T = null as T
+
     @MockBean
     private lateinit var questService: QuestService
 
     @MockBean
     private lateinit var userRepository: UserRepository
+
+    @MockBean
+    private lateinit var subQuestParticipationService: SubQuestParticipationService
 
     @GiljobTestUser
     @Test
@@ -188,6 +199,47 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 tag list"),
                         PayloadDocumentation.fieldWithPath(("data.tagList[*].name"))
                             .description("퀘스트 tag 이름")
+                    )
+                )
+            )
+    }
+
+    @Test
+    @GiljobTestUser
+    fun `getQuestDetailSubQuest 성공`() {
+        given(subQuestParticipationService.getQuestDetailSubQuest(anyLong(), any()))
+            .willReturn(DtoFactory.testQuestDetailSubQuestResponseDto())
+
+        val result = mockMvc.perform(
+            get("/api/quests/{questId}/subquest", 1)
+                .header("Authorization", "Access Token")
+        ).andDo(print())
+
+        result
+            .andExpect(status().isOk)
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "quests/subquest/get",
+                    pathParameters(
+                        parameterWithName("questId").description("퀘스트 id")
+                    ),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("응답 데이터"),
+                        PayloadDocumentation.fieldWithPath("data.progress")
+                            .description("서브 퀘스트 진행률"),
+                        PayloadDocumentation.fieldWithPath("data.subQuestProgressList")
+                            .description("서브 퀘스트 진행 리스트"),
+                        PayloadDocumentation.fieldWithPath("data.subQuestProgressList[*].subQuestId")
+                            .description("서브 퀘스트 아아디"),
+                        PayloadDocumentation.fieldWithPath("data.subQuestProgressList[*].subQuestName")
+                            .description("서브 퀘스트 이름"),
+                        PayloadDocumentation.fieldWithPath("data.subQuestProgressList[*].isCompleted")
+                            .description("서브 퀘스트 진행 여부"),
                     )
                 )
             )

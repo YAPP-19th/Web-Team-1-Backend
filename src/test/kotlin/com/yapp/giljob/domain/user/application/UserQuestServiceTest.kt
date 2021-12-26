@@ -4,6 +4,7 @@ import com.yapp.giljob.domain.quest.application.QuestMapper
 import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
+import com.yapp.giljob.global.util.SubQuestProgressCalculate.Companion.calculateProgress
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
 import org.junit.jupiter.api.Assertions.*
@@ -42,7 +43,7 @@ class UserQuestServiceTest {
         val subQuestCompletedCount = 3L
 
         // when
-        val progress = userQuestService.calculateProgress(totalSubQuestCount, subQuestCompletedCount)
+        val progress = calculateProgress(totalSubQuestCount, subQuestCompletedCount)
 
         // then
         assertEquals(33, progress)

@@ -4,6 +4,7 @@ import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.yapp.giljob.domain.subquest.vo.SubQuestCompletedCountVo
 import com.yapp.giljob.domain.subquest.domain.QSubQuestParticipation.subQuestParticipation
+import com.yapp.giljob.domain.subquest.vo.SubQuestProgressVo
 
 class SubQuestParticipationSupportRepositoryImpl(
     private val query: JPAQueryFactory
@@ -21,5 +22,24 @@ class SubQuestParticipationSupportRepositoryImpl(
             )
             .groupBy(subQuestParticipation.quest)
             .fetch()
+    }
+
+    override fun getSubQuestProgressByQuestIdAndParticipantId(
+        questId: Long,
+        participantId: Long
+    ): List<SubQuestProgressVo> {
+        return query.select(
+            Projections.constructor(
+                SubQuestProgressVo::class.java,
+                subQuestParticipation.subQuest.id,
+                subQuestParticipation.subQuest.name,
+                subQuestParticipation.isCompleted
+            )
+        ).from(subQuestParticipation)
+                .where(
+                    subQuestParticipation.quest.id.eq(questId)
+                        .and(subQuestParticipation.participant.id.eq(participantId))
+                )
+        .fetch()
     }
 }

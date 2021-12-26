@@ -4,7 +4,9 @@ import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailSubQuestResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
+import com.yapp.giljob.domain.subquest.application.SubQuestParticipationService
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
@@ -16,7 +18,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/quests")
 class QuestController(
-    private val questService: QuestService
+    private val questService: QuestService,
+    private val subQuestParticipationService: SubQuestParticipationService
 ) {
     @PostMapping
     fun saveQuest(
@@ -44,6 +47,19 @@ class QuestController(
     ): ResponseEntity<BaseResponse<QuestDetailInfoResponseDto>> {
         return ResponseEntity.ok(
             BaseResponse.of(HttpStatus.OK, "퀘스트 상세 정보 조회 성공입니다.", questService.getQuestDetailInfo(questId))
+        )
+    }
+
+    @GetMapping("/{questId}/subquest")
+    fun getQuestDetailSubQuest(
+        @PathVariable("questId") questId: Long,
+        @CurrentUser user: User): ResponseEntity<BaseResponse<QuestDetailSubQuestResponseDto>> {
+        return ResponseEntity.ok(
+            BaseResponse.of(
+                HttpStatus.OK,
+                "퀘스트 서브 퀘스트 진행 현황 조회 성공입니다.",
+                subQuestParticipationService.getQuestDetailSubQuest(questId, user)
+            )
         )
     }
 }
