@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.roadmap.api
 
 import com.yapp.giljob.domain.roadmap.application.RoadmapService
+import com.yapp.giljob.domain.roadmap.dto.request.RoadmapSaveRequestDto
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
@@ -32,4 +33,13 @@ class RoadmapController(
                 roadmapService.getRoadmapDetail(roadmapId, user)
             )
         )
+
+    @PostMapping
+    fun saveRoadmap(
+        @RequestBody roadmapSaveRequestDto: RoadmapSaveRequestDto,
+        @CurrentUser user: User
+    ): ResponseEntity<BaseResponse<Unit>> {
+        roadmapService.saveRoadmap(roadmapSaveRequestDto, user)
+        return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "로드맵 생성 성공입니다."))
+    }
 }

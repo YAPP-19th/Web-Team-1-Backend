@@ -2,22 +2,23 @@ package com.yapp.giljob.global.common.dto
 
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dto.QuestDto
+import com.yapp.giljob.domain.quest.dto.request.QuestRequestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestReviewCreateRequestDto
-import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
-import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
-import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
-import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
-import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
-import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
-import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
-import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
+import com.yapp.giljob.domain.roadmap.dto.request.RoadmapSaveRequestDto
 import com.yapp.giljob.domain.roadmap.dto.response.RoadmapDetailResponseDto
 import com.yapp.giljob.domain.roadmap.dto.response.RoadmapResponseDto
+import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
+import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
+import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
+import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
+import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
+import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
+import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.response.*
-
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
 
 class DtoFactory {
@@ -135,6 +136,21 @@ class DtoFactory {
             name = "로드맵 테스트",
             writer = testUserInfoResponse(),
             position = Position.FRONTEND
+        )
+
+        fun testRoadmapSaveRequest() = RoadmapSaveRequestDto(
+            name = "로드맵",
+            position = Position.BACKEND,
+            questList = mutableListOf(
+                QuestRequestDto(
+                    questId = 1L,
+                    name = "실제 퀘스트 인 경우 아이디만 입력합니다."
+                ),
+                QuestRequestDto(
+                    questId = 0L,
+                    name = "실제 퀘스트가 아닌 경우 이름만 입력합니다."
+                )
+            )
         )
     }
 }

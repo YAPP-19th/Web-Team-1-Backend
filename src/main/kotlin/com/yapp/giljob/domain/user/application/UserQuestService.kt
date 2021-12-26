@@ -26,7 +26,7 @@ class UserQuestService(
         val questList = questRepository.findByIdLessThanAndOrderByIdDesc(questId, position, userId, size)
 
         return questList.map {
-            questMapper.toDto(it, userMapper.toDto(it.quest.user, it.point))
+            questMapper.toDto(it, userMapper.toDto(it.quest.user!!, it.point))
         }
     }
 
@@ -52,7 +52,7 @@ class UserQuestService(
     private fun getCompletedQuestListByParticipant(questList: List<QuestSupportVo>) =
         questList.map {
             questMapper.toCompletedDto(
-                it, userMapper.toDto(it.quest.user, it.point)
+                it, userMapper.toDto(it.quest.user!!, it.point)
             )
         }
 
