@@ -65,7 +65,7 @@ class RoadmapServiceTest {
         // when
         val exception =
             assertThrows(BusinessException::class.java) {
-                roadmapService.delete(roadmapId, nonWriter)
+                roadmapService.deleteRoadmap(roadmapId, nonWriter)
             }
 
         // then
@@ -80,7 +80,7 @@ class RoadmapServiceTest {
         val writer = EntityFactory.testUser()
 
         // when
-        roadmapService.delete(roadmapId, writer)
+        roadmapService.deleteRoadmap(roadmapId, writer)
 
         // then
         verify { roadmapRepository.delete(any()) }
