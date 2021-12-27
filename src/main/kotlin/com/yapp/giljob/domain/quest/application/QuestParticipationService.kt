@@ -51,8 +51,8 @@ class QuestParticipationService(
         questParticipation.isCompleted = true
 
         val quest = questParticipation.quest
-        val ability = abilityRepository.findByUserIdAndPosition(user.id!!, quest.position) ?: abilityRepository.save(Ability(user = user, position = quest.position))
-        ability.point += quest.difficulty * 100L
+        val ability = abilityRepository.findByUserIdAndPosition(user.id!!, quest.position!!) ?: abilityRepository.save(Ability(user = user, position = quest.position!!))
+        ability.point += quest.difficulty!! * 100L
     }
 
     private fun validateCompletedQuest(questParticipation: QuestParticipation, questId: Long, userId: Long) {
@@ -75,7 +75,7 @@ class QuestParticipationService(
         questReviewCreateRequestDto: QuestReviewCreateRequestDto,
         user: User
     ) {
-        var questParticipation: QuestParticipation =
+        val questParticipation: QuestParticipation =
             questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(questId, user.id!!)
                 ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
 

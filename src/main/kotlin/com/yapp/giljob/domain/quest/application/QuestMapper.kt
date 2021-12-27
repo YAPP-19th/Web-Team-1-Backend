@@ -53,10 +53,10 @@ interface QuestMapper {
         Mapping(target = "name", source = "questSupportVo.quest.name"),
         Mapping(target = "position", source = "questSupportVo.quest.position"),
         Mapping(target = "difficulty", source = "questSupportVo.quest.difficulty"),
+        Mapping(target = "tagList", source = "questSupportVo.quest.tagList"),
         Mapping(target = "detail", source = "questSupportVo.quest.detail"),
         Mapping(target = "participantCount", source = "questSupportVo.participantCount"),
-        Mapping(target = "writer", source = "user"),
-        Mapping(target = "tagList", source = "tagResponseDtoList")
+        Mapping(target = "writer", source = "writer")
     )
-    fun toQuestDetailInfoDto(questSupportVo: QuestSupportVo, user: UserInfoResponseDto, tagResponseDtoList: List<TagResponseDto>): QuestDetailInfoResponseDto
+    fun toQuestDetailInfoDto(questSupportVo: QuestSupportVo, writer: UserInfoResponseDto): QuestDetailInfoResponseDto
 }

@@ -41,6 +41,7 @@ class UserControllerTest : AbstractRestDocs() {
 
         val result = mockMvc.perform(
             RestDocumentationRequestBuilders.get("/api/users/me")
+                .header("Authorization", "Access Token")
         ).andDo(MockMvcResultHandlers.print())
 
         result

@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.roadmap.api
 
 import com.yapp.giljob.domain.roadmap.application.RoadmapService
+import com.yapp.giljob.domain.roadmap.dto.request.RoadmapSaveRequestDto
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
@@ -25,7 +26,16 @@ class RoadmapController(
 
     @DeleteMapping("/{roadmapId}")
     fun deleteRoadmap(@PathVariable roadmapId: Long, @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
-        roadmapService.delete(roadmapId, user)
+        roadmapService.deleteRoadmap(roadmapId, user)
         return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "로드맵 삭제 성공입니다."))
+    }
+
+    @PostMapping
+    fun saveRoadmap(
+        @RequestBody roadmapSaveRequestDto: RoadmapSaveRequestDto,
+        @CurrentUser user: User
+    ): ResponseEntity<BaseResponse<Unit>> {
+        roadmapService.saveRoadmap(roadmapSaveRequestDto, user)
+        return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "로드맵 등록 성공입니다."))
     }
 }

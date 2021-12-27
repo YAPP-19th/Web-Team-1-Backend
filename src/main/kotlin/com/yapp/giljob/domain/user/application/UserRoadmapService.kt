@@ -16,7 +16,7 @@ class UserRoadmapService(
     @Transactional(readOnly = true)
     fun getScrapRoadmapListByUser(userId: Long, roadmapId: Long?, size: Long): List<RoadmapResponseDto> {
         return roadmapScrapRepository.findByUserId(userId, roadmapId, size).map {
-            roadmapMapper.toDto(it.roadmap, userMapper.toDto(it.user, it.point))
+            roadmapMapper.toDto(it.roadmap, userMapper.toDto(it.roadmap.user, it.point))
         }
     }
 }

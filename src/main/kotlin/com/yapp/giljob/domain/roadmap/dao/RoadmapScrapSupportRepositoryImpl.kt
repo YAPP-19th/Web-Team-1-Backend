@@ -18,14 +18,14 @@ class RoadmapScrapSupportRepositoryImpl(
             Projections.constructor(
                 RoadmapSupportVo::class.java,
                 roadmap,
-                roadmap.user,
                 ability.point
             )
         )
             .from(roadmapScrap)
-            .leftJoin(roadmapScrap.user, user)
+            .where(roadmapScrap.user.id.eq(userId).and(ltRoadmapId(roadmapId)))
+            .leftJoin(roadmap.user, user)
+            .fetchJoin()
             .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))
-            .where(roadmapScrap.user.id.eq(userId).and(ltRoadmapId(roadmapId)).and(roadmap.deleted.eq(false)))
             .orderBy(roadmap.id.desc())
             .limit(size)
             .fetch()
