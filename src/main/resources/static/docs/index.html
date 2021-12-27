@@ -537,6 +537,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_로드맵_등록">로드맵 등록</a></li>
 </ul>
 </li>
+<li><a href="#_delete_apiroadmapsroadmapid">DELETE /api/roadmaps/{roadmapId}</a>
+<ul class="sectlevel3">
+<li><a href="#_로드맵_삭제">로드맵 삭제</a></li>
+</ul>
+</li>
 <li><a href="#_post_apiroadmapsroadmapidscrap">POST /api/roadmaps/{roadmapId}/scrap</a>
 <ul class="sectlevel3">
 <li><a href="#_로드맵_스크랩">로드맵 스크랩</a></li>
@@ -2516,6 +2521,85 @@ Content-Length: 88
 </div>
 </div>
 <div class="sect2">
+<h3 id="_delete_apiroadmapsroadmapid"><a class="link" href="#_delete_apiroadmapsroadmapid">DELETE /api/roadmaps/{roadmapId}</a></h3>
+<div class="sect3">
+<h4 id="_로드맵_삭제"><a class="link" href="#_로드맵_삭제">로드맵 삭제</a></h4>
+<div class="listingblock">
+<div class="title">request</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/roadmaps/1 HTTP/1.1
+Authorization: Access Token
+Host: docs.api.com:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 28. /api/roadmaps/{roadmapId}</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>roadmapId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">삭제할 로드맵 id</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 88
+
+{
+  "status" : 200,
+  "message" : "로드맵 삭제 성공입니다.",
+  "data" : null
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 29. response fields</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_post_apiroadmapsroadmapidscrap"><a class="link" href="#_post_apiroadmapsroadmapidscrap">POST /api/roadmaps/{roadmapId}/scrap</a></h3>
 <div class="sect3">
 <h4 id="_로드맵_스크랩"><a class="link" href="#_로드맵_스크랩">로드맵 스크랩</a></h4>
@@ -2528,7 +2612,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 28. /api/roadmaps/{roadmapId}/scrap</caption>
+<caption class="title">Table 30. /api/roadmaps/{roadmapId}/scrap</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2564,7 +2648,7 @@ Content-Length: 91
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 29. response fields</caption>
+<caption class="title">Table 31. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2672,7 +2756,7 @@ Content-Length: 1091
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 30. response fields</caption>
+<caption class="title">Table 32. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2782,13 +2866,13 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQwNTA0MDk4LCJleHAiOjI2NDA1MDQwOTh9.78eeSYttgLCDwrL_CDEsqZM81NaGs2Pibo3XEJr0EW0"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQwNTc0MjM3LCJleHAiOjI2NDA1NzQyMzd9.QZhg3hphkAd5b0yqJtcjZZCzxTZVopV6H2-pVMQ4Syg"
   }
 }</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 31. response</caption>
+<caption class="title">Table 33. response</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2855,13 +2939,13 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQwNTA0MDk3LCJleHAiOjI2NDA1MDQwOTd9.pvWqictsmZ2r6aXsVII7XSJKvrWiU0SrCeuOpXo_54U"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQwNTc0MjM2LCJleHAiOjI2NDA1NzQyMzZ9.L7gJCcSleB-W017eMBT9L7OrBKGZlFXl1jmXKBzXJN0"
   }
 }</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 32. response</caption>
+<caption class="title">Table 34. response</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2946,7 +3030,7 @@ Content-Length: 225
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 33. response fields</caption>
+<caption class="title">Table 35. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3052,7 +3136,7 @@ Content-Length: 473
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 34. response fields</caption>
+<caption class="title">Table 36. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3165,7 +3249,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 35. request</caption>
+<caption class="title">Table 37. request</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3202,7 +3286,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 36. response fields</caption>
+<caption class="title">Table 38. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3254,7 +3338,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 37. request</caption>
+<caption class="title">Table 39. request</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3286,7 +3370,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 38. response fields</caption>
+<caption class="title">Table 40. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3327,7 +3411,7 @@ Host: docs.api.com:8080
 <div class="sect2">
 <h3 id="_post_apiupload_업로드"><a class="link" href="#_post_apiupload_업로드">POST /api/upload 업로드</a></h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 39. request</caption>
+<caption class="title">Table 41. request</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3377,7 +3461,7 @@ Content-Length: 198
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 40. response fields</caption>
+<caption class="title">Table 42. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3420,7 +3504,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-12-26 16:08:33 +0900
+Last updated 2021-12-27 11:52:59 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

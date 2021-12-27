@@ -2,7 +2,6 @@ package com.yapp.giljob.domain.roadmap.api
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.yapp.giljob.domain.quest.application.QuestService
-import com.yapp.giljob.domain.roadmap.application.RoadmapScrapService
 import com.yapp.giljob.domain.roadmap.application.RoadmapService
 import com.yapp.giljob.domain.roadmap.dao.RoadmapRepository
 import com.yapp.giljob.domain.roadmap.dao.RoadmapScrapRepository
@@ -26,7 +25,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
 @WebMvcTest(RoadmapController::class)
 class RoadmapControllerTest : AbstractRestDocs() {
-
     @MockBean
     private lateinit var roadmapService: RoadmapService
 
@@ -38,9 +36,6 @@ class RoadmapControllerTest : AbstractRestDocs() {
 
     @MockBean
     private lateinit var questService: QuestService
-
-    @MockBean
-    private lateinit var roadmapScrapService: RoadmapScrapService
 
     @MockBean
     private lateinit var userRepository: UserRepository
@@ -97,6 +92,35 @@ class RoadmapControllerTest : AbstractRestDocs() {
                             .description("퀘스트 이름"),
                         PayloadDocumentation.fieldWithPath("data.questList[*].isRealQuest")
                             .description("실제 등록된 퀘스트인지 여부")
+                    )
+                )
+            )
+    }
+
+    @GiljobTestUser
+    @Test
+    fun deleteRoadmap() {
+        val result = mockMvc.perform(
+            RestDocumentationRequestBuilders
+                .delete("/api/roadmaps/{roadmapId}", 1)
+                .header("Authorization", "Access Token")
+        ).andDo(MockMvcResultHandlers.print())
+
+        result
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "roadmaps/{roadmapId}/delete",
+                    RequestDocumentation.pathParameters(
+                        RequestDocumentation.parameterWithName("roadmapId").description("삭제할 로드맵 id")
+                    ),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("null")
                     )
                 )
             )

@@ -16,7 +16,7 @@ class QuestSearchService(
     fun search(keyword: String, position: Position, size: Long, questId: Long?): List<QuestResponseDto> {
         val questList = questRepository.search(keyword, position, size, questId)
         return questList.map {
-            questMapper.toDto(it, userMapper.toDto(it.quest.user!!, it.point))
+            questMapper.toDto(it, userMapper.toDto(it.quest.user, it.point))
         }
     }
 }

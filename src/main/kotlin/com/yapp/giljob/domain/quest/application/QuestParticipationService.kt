@@ -75,7 +75,7 @@ class QuestParticipationService(
         questReviewCreateRequestDto: QuestReviewCreateRequestDto,
         user: User
     ) {
-        var questParticipation: QuestParticipation =
+        val questParticipation: QuestParticipation =
             questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(questId, user.id!!)
                 ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
 

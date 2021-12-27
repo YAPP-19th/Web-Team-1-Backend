@@ -183,6 +183,18 @@ include::{snippets}/roadmaps/post/http-response.adoc[]
 .response fields
 include::{snippets}/roadmaps/post/response-fields.adoc[]
 
+=== DELETE /api/roadmaps/{roadmapId}
+==== 로드맵 삭제
+
+.request
+include::{snippets}/roadmaps/{roadmapId}/delete/http-request.adoc[]
+.request fields
+include::{snippets}/roadmaps/{roadmapId}/delete/path-parameters.adoc[]
+.response
+include::{snippets}/roadmaps/{roadmapId}/delete/http-response.adoc[]
+.response fields
+include::{snippets}/roadmaps/{roadmapId}/delete/response-fields.adoc[]
+
 === POST /api/roadmaps/{roadmapId}/scrap
 ==== 로드맵 스크랩
 

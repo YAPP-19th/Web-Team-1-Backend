@@ -25,14 +25,10 @@ class RoadmapController(
         )
 
     @DeleteMapping("/{roadmapId}")
-    fun deleteRoadmap(@PathVariable roadmapId: Long, @CurrentUser user: User) =
-        ResponseEntity.ok(
-            BaseResponse.of(
-                HttpStatus.OK,
-                "로드맵 조회 성공입니다.",
-                roadmapService.getRoadmapDetail(roadmapId, user)
-            )
-        )
+    fun deleteRoadmap(@PathVariable roadmapId: Long, @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
+        roadmapService.deleteRoadmap(roadmapId, user)
+        return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "로드맵 삭제 성공입니다."))
+    }
 
     @PostMapping
     fun saveRoadmap(
@@ -40,6 +36,6 @@ class RoadmapController(
         @CurrentUser user: User
     ): ResponseEntity<BaseResponse<Unit>> {
         roadmapService.saveRoadmap(roadmapSaveRequestDto, user)
-        return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "로드맵 생성 성공입니다."))
+        return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "로드맵 등록 성공입니다."))
     }
 }

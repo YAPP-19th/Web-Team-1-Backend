@@ -14,7 +14,6 @@ class RoadmapScrapSupportRepositoryImpl(
     override fun findByUserId(userId: Long, roadmapId: Long?, size: Long): List<RoadmapSupportVo> {
 
         val roadmap = roadmapScrap.roadmap
-
         return query.select(
             Projections.constructor(
                 RoadmapSupportVo::class.java,
