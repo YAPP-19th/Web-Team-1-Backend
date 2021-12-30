@@ -45,7 +45,7 @@ class QuestServiceTest {
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        questService = QuestService(questRepository, subQuestParticipationRepository, subQuestService, tagService, userQuestService, questMapper, userMapper)
+        questService = QuestService(questRepository, subQuestService, tagService, questMapper, userMapper)
     }
 
     private val user = EntityFactory.testUser()

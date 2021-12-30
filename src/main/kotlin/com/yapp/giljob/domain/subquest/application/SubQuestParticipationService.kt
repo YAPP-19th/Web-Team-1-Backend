@@ -58,7 +58,7 @@ class SubQuestParticipationService(
         )
     }
 
-    fun getQuestDetailSubQuest(questId: Long, user: User): QuestDetailSubQuestResponseDto {
+    fun getQuestDetailSubQuestProgress(questId: Long, user: User): QuestDetailSubQuestResponseDto {
         val subQuestProgressList
                 = subQuestParticipationRepository.getSubQuestProgressByQuestIdAndParticipantId(questId, user.id!!)
 

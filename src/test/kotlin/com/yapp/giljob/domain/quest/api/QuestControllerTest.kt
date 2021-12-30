@@ -207,7 +207,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
     @Test
     @GiljobTestUser
     fun `getQuestDetailSubQuest 성공`() {
-        given(subQuestParticipationService.getQuestDetailSubQuest(anyLong(), any()))
+        given(subQuestParticipationService.getQuestDetailSubQuestProgress(anyLong(), any()))
             .willReturn(DtoFactory.testQuestDetailSubQuestResponseDto())
 
         val result = mockMvc.perform(

@@ -51,14 +51,14 @@ class QuestController(
     }
 
     @GetMapping("/{questId}/subquest")
-    fun getQuestDetailSubQuest(
+    fun getQuestDetailSubQuestProgress(
         @PathVariable("questId") questId: Long,
         @CurrentUser user: User): ResponseEntity<BaseResponse<QuestDetailSubQuestResponseDto>> {
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK,
                 "퀘스트 서브 퀘스트 진행 현황 조회 성공입니다.",
-                subQuestParticipationService.getQuestDetailSubQuest(questId, user)
+                subQuestParticipationService.getQuestDetailSubQuestProgress(questId, user)
             )
         )
     }

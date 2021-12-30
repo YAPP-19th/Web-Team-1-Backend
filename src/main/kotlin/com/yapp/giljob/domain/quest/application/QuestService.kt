@@ -6,16 +6,12 @@ import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.dto.request.QuestRequestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestDetailSubQuestResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.roadmap.domain.Roadmap
 import com.yapp.giljob.domain.roadmap.domain.RoadmapQuest
 import com.yapp.giljob.domain.subquest.application.SubQuestService
-import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
-import com.yapp.giljob.domain.subquest.dto.response.SubQuestProgressResponseDto
 import com.yapp.giljob.domain.tag.application.TagService
 import com.yapp.giljob.domain.user.application.UserMapper
-import com.yapp.giljob.domain.user.application.UserQuestService
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
@@ -25,11 +21,9 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class QuestService(
     private val questRepository: QuestRepository,
-    private val subQuestParticipationRepository: SubQuestParticipationRepository,
 
     private val subQuestService: SubQuestService,
     private val tagService: TagService,
-    private val userQuestService: UserQuestService,
 
     private val questMapper: QuestMapper,
     private val userMapper: UserMapper
