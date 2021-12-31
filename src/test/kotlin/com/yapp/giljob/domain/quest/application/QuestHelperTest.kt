@@ -3,7 +3,6 @@ package com.yapp.giljob.domain.quest.application
 import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.QuestParticipation
-import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.config.QuerydslTestConfig
@@ -40,8 +39,7 @@ class QuestHelperTest {
         val savedUser = userRepository.save(user)
         quest.user = savedUser
         val savedQuest = questRepository.save(quest)
-        val questParticipationPK = QuestParticipationPK(savedUser.id!!, savedQuest.id!!)
-        questParticipationRepository.save(QuestParticipation(questParticipationPK, savedQuest, savedUser))
+        questParticipationRepository.save(QuestParticipation(quest = savedQuest, participant =  savedUser))
 
         val cnt = QuestHelper.countParticipantsByQuestId(questRepository, savedQuest.id!!)
 

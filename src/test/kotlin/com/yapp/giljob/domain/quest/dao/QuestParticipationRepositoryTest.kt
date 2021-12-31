@@ -1,7 +1,6 @@
 package com.yapp.giljob.domain.quest.dao
 
 import com.yapp.giljob.domain.quest.domain.QuestParticipation
-import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.config.QuerydslTestConfig
@@ -29,11 +28,11 @@ class QuestParticipationRepositoryTest @Autowired constructor(
         val savedQuest = questRepository.save(quest)
         val savedUser = userRepository.save(user)
         questParticipationRepository.save(
-            QuestParticipation(QuestParticipationPK(savedQuest.id!!, savedUser.id!!), savedQuest, savedUser)
+            QuestParticipation(quest = savedQuest, participant = savedUser)
         )
 
         val questParticipation
-         = questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(savedQuest.id!!, savedUser.id!!)
+         = questParticipationRepository.findByQuestIdAndParticipantId(savedQuest.id!!, savedUser.id!!)
 
         assertNotNull(questParticipation)
     }
@@ -41,7 +40,7 @@ class QuestParticipationRepositoryTest @Autowired constructor(
     @Test
     fun `없는 퀘스트 찾으면 null 반환`() {
         val questParticipation
-                = questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(0L, 0L)
+                = questParticipationRepository.findByQuestIdAndParticipantId(0L, 0L)
 
         assertNull(questParticipation)
     }

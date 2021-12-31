@@ -3,16 +3,18 @@ package com.yapp.giljob.domain.quest.application
 import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.QuestParticipation
-import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
 import com.yapp.giljob.domain.quest.dto.request.QuestReviewCreateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestReviewResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestReviewWithTotalCountResponseDto
+import com.yapp.giljob.domain.quest.vo.QuestReviewVo
 import com.yapp.giljob.domain.subquest.application.SubQuestService
+import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.domain.Ability
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
@@ -23,16 +25,17 @@ class QuestParticipationService(
     private val questParticipationRepository: QuestParticipationRepository,
     private val abilityRepository: AbilityRepository,
 
-    private val subQuestService: SubQuestService
+    private val subQuestService: SubQuestService,
+
+    private val userMapper: UserMapper
 ) {
     @Transactional
     fun participateQuest(questId: Long, user: User) {
         val quest = QuestHelper.getQuestById(questRepository, questId)
 
-        val questParticipationPK = QuestParticipationPK(user.id!!, questId)
-        if (questParticipationRepository.existsById(questParticipationPK)) throw BusinessException(ErrorCode.ALREADY_PARTICIPATED_QUEST)
+        if (questParticipationRepository.existsByQuestIdAndParticipantId(user.id!!, questId)) throw BusinessException(ErrorCode.ALREADY_PARTICIPATED_QUEST)
 
-        questParticipationRepository.save(QuestParticipation(questParticipationPK, quest, user))
+        questParticipationRepository.save(QuestParticipation(quest = quest, participant = user))
     }
 
     @Transactional(readOnly = true)
@@ -45,8 +48,9 @@ class QuestParticipationService(
 
     @Transactional
     fun completeQuest(questId: Long, user: User) {
-        val questParticipation = questParticipationRepository.findByIdOrNull(QuestParticipationPK(user.id!!, questId))
+        val questParticipation = questParticipationRepository.findByQuestIdAndParticipantId(user.id!!, questId)
             ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+
         validateCompletedQuest(questParticipation, questId, user.id!!)
         questParticipation.isCompleted = true
 
@@ -75,8 +79,9 @@ class QuestParticipationService(
         questReviewCreateRequestDto: QuestReviewCreateRequestDto,
         user: User
     ) {
+
         val questParticipation: QuestParticipation =
-            questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(questId, user.id!!)
+            questParticipationRepository.findByQuestIdAndParticipantId(questId, user.id!!)
                 ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
 
         if (!questParticipation.isCompleted) {
@@ -89,12 +94,33 @@ class QuestParticipationService(
 
     fun getQuestParticipationStatus(questId: Long, userId: Long): String {
         val questParticipation
-                = questParticipationRepository.getQuestParticipationByQuestIdAndParticipantId(questId, userId)
+                = questParticipationRepository.findByQuestIdAndParticipantId(questId, userId)
             ?: return "아직 참여하지 않은 퀘스트입니다."
 
         return when(questParticipation.isCompleted) {
             false -> "참여중인 퀘스트입니다."
             true -> "완료한 퀘스트입니다."
+        }
+    }
+
+    @Transactional(readOnly = true)
+    fun getQuestReviewList(questId: Long, cursor: Long?, size: Long): QuestReviewWithTotalCountResponseDto {
+        val totalReviewCount = questParticipationRepository.countByQuestId(questId)
+        val reviewListVo = questParticipationRepository.getQuestReviewByQuestIdLessThanAndOrderByIdDesc(questId, cursor, size)
+
+        return QuestReviewWithTotalCountResponseDto(
+            totalReviewCount = totalReviewCount,
+            reviewList = toQuestReviewResponseDto(reviewListVo)
+        )
+    }
+
+    private fun toQuestReviewResponseDto(reviewListVo: List<QuestReviewVo>): List<QuestReviewResponseDto>{
+        return reviewListVo.map{
+            QuestReviewResponseDto(
+                review = it.review,
+                reviewCreatedAt = it.reviewCreatedAt,
+                reviewWriter = userMapper.toDto(it.reviewWriter, it.reviewWriterPoint)
+            )
         }
     }
 }

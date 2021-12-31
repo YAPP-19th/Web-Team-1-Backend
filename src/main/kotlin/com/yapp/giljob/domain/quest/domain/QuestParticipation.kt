@@ -10,15 +10,14 @@ import javax.persistence.*
 @Table(name = "quest_participation")
 @Entity
 class QuestParticipation(
-    @EmbeddedId
-    val id: QuestParticipationPK,
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "quest_participation_id")
+    val id: Long? = null,
 
-    @MapsId("questId")
     @ManyToOne
     @JoinColumn(name = "quest_id")
     val quest: Quest,
 
-    @MapsId("participantId")
     @ManyToOne
     @JoinColumn(name = "participant_id")
     val participant: User,

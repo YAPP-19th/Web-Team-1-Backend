@@ -54,10 +54,12 @@ include::{snippets}/quests/count/get/response-fields.adoc[]
 === GET /api/quests/{questId}/info
 ==== 퀘스트 상세 페이지 정보 조회
 
-.request
-include::{snippets}/quests/info/get/path-parameters.adoc[]
+.request fields
+include::{snippets}/quests/info/get/http-request.adoc[]
 .response
 include::{snippets}/quests/info/get/http-response.adoc[]
+.request
+include::{snippets}/quests/info/get/path-parameters.adoc[]
 .response fields
 include::{snippets}/quests/info/get/response-fields.adoc[]
 
@@ -115,9 +117,21 @@ include::{snippets}/quests/review/patch/http-request.adoc[]
 .response
 include::{snippets}/quests/review/patch/http-response.adoc[]
 .request fields
-include::{snippets}/quests/review/patch/response-fields.adoc[]
+include::{snippets}/quests/review/patch/request-fields.adoc[]
 .response fields
 include::{snippets}/quests/review/patch/response-fields.adoc[]
+
+=== GET /api/quests/{questId}/reviews
+==== 퀘스트 한줄 후기 리스트 조회
+
+.request
+include::{snippets}/quests/{questId}/reviews/http-request.adoc[]
+.response
+include::{snippets}/quests/{questId}/reviews/http-response.adoc[]
+.request fields
+include::{snippets}/quests/{questId}/reviews/request-parameters.adoc[]
+.response fields
+include::{snippets}/quests/{questId}/reviews/response-fields.adoc[]
 
 == User Quest API
 === GET /api/users/{userId}/quests

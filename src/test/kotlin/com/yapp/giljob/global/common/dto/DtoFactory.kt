@@ -5,10 +5,7 @@ import com.yapp.giljob.domain.quest.dto.QuestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestRequestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestReviewCreateRequestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
-import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestDetailSubQuestResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
+import com.yapp.giljob.domain.quest.dto.response.*
 import com.yapp.giljob.domain.roadmap.dto.request.RoadmapSaveRequestDto
 import com.yapp.giljob.domain.roadmap.dto.response.RoadmapDetailResponseDto
 import com.yapp.giljob.domain.roadmap.dto.response.RoadmapResponseDto
@@ -20,8 +17,12 @@ import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
 import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
 import com.yapp.giljob.domain.user.dto.request.UserIntroUpdateRequestDto
-import com.yapp.giljob.domain.user.dto.response.*
+import com.yapp.giljob.domain.user.dto.response.AbilityResponseDto
+import com.yapp.giljob.domain.user.dto.response.AchieveResponseDto
+import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
+import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
+import java.time.LocalDateTime
 
 class DtoFactory {
     companion object {
@@ -168,6 +169,17 @@ class DtoFactory {
                     subQuestName = "서브퀘스트2",
                     isCompleted = false
                 )
+            )
+        )
+
+        fun testQuestReviewWithTotalCountResponse() = QuestReviewWithTotalCountResponseDto(
+            totalReviewCount = 10,
+            reviewList = listOf(
+                QuestReviewResponseDto("리뷰 1", LocalDateTime.now(), testUserInfoResponse()),
+                QuestReviewResponseDto("리뷰 2", LocalDateTime.now(), testUserInfoResponse()),
+                QuestReviewResponseDto("리뷰 3", LocalDateTime.now(), testUserInfoResponse()),
+                QuestReviewResponseDto("리뷰 4", LocalDateTime.now(), testUserInfoResponse()),
+                QuestReviewResponseDto("리뷰 5", LocalDateTime.now(), testUserInfoResponse()),
             )
         )
     }
