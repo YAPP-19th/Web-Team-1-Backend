@@ -73,6 +73,15 @@ include::{snippets}/quests/participation/status/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/participation/status/get/response-fields.adoc[]
 
+=== GET /api/quests/{questId}/subquest
+==== 퀘스트의 서브 퀘스트 진행 현황 조회
+
+.request
+include::{snippets}/quests/subquest/get/path-parameters.adoc[]
+.response
+include::{snippets}/quests/subquest/get/http-response.adoc[]
+.response fields
+include::{snippets}/quests/subquest/get/response-fields.adoc[]
 
 === POST /api/quests/{questId}/participation
 ==== 퀘스트 참여

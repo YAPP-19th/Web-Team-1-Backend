@@ -3,9 +3,11 @@ package com.yapp.giljob.domain.quest.application
 import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.subquest.application.SubQuestService
+import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
 import com.yapp.giljob.domain.tag.application.TagService
 import com.yapp.giljob.domain.tag.domain.QuestTag
 import com.yapp.giljob.domain.user.application.UserMapper
+import com.yapp.giljob.domain.user.application.UserQuestService
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
 import io.mockk.MockKAnnotations
@@ -23,7 +25,13 @@ class QuestServiceTest {
     private lateinit var questRepository: QuestRepository
 
     @MockK
+    private lateinit var subQuestParticipationRepository: SubQuestParticipationRepository
+
+    @MockK
     private lateinit var subQuestService: SubQuestService
+
+    @MockK
+    private lateinit var userQuestService: UserQuestService
 
     @MockK
     private lateinit var tagService: TagService

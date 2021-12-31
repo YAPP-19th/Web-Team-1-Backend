@@ -10,7 +10,6 @@ import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.roadmap.domain.Roadmap
 import com.yapp.giljob.domain.roadmap.domain.RoadmapQuest
 import com.yapp.giljob.domain.subquest.application.SubQuestService
-import com.yapp.giljob.domain.subquest.domain.SubQuest
 import com.yapp.giljob.domain.tag.application.TagService
 import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.domain.User

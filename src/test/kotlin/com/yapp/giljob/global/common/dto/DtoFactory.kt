@@ -7,6 +7,7 @@ import com.yapp.giljob.domain.quest.dto.request.QuestReviewCreateRequestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailSubQuestResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.roadmap.dto.request.RoadmapSaveRequestDto
 import com.yapp.giljob.domain.roadmap.dto.response.RoadmapDetailResponseDto
@@ -14,6 +15,7 @@ import com.yapp.giljob.domain.roadmap.dto.response.RoadmapResponseDto
 import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
 import com.yapp.giljob.domain.subquest.dto.request.SubQuestRequestDto
+import com.yapp.giljob.domain.subquest.dto.response.SubQuestProgressResponseDto
 import com.yapp.giljob.domain.tag.dto.request.TagRequestDto
 import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
@@ -149,6 +151,22 @@ class DtoFactory {
                 QuestRequestDto(
                     questId = 0L,
                     name = "실제 퀘스트가 아닌 경우 이름만 입력합니다."
+                )
+            )
+        )
+
+        fun testQuestDetailSubQuestResponseDto() = QuestDetailSubQuestResponseDto(
+            progress = 50,
+            subQuestProgressList = mutableListOf(
+                SubQuestProgressResponseDto(
+                    subQuestId = 1,
+                    subQuestName = "서브퀘스트1",
+                    isCompleted = true
+                ),
+                SubQuestProgressResponseDto(
+                    subQuestId = 2,
+                    subQuestName = "서브퀘스트2",
+                    isCompleted = false
                 )
             )
         )

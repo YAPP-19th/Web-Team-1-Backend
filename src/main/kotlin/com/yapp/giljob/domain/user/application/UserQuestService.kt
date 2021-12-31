@@ -9,6 +9,7 @@ import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
 import com.yapp.giljob.domain.subquest.vo.SubQuestCompletedCountVo
+import com.yapp.giljob.global.util.SubQuestProgressCalculate.Companion.calculateProgress
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -66,7 +67,4 @@ class UserQuestService(
                 calculateProgress(it.quest.subQuestList.size, subQuestCompletedCountList[it.quest.id]?.count ?: 0L)
             )
         }
-
-    fun calculateProgress(totalSubQuestCount: Int, subQuestCompletedCount: Long) =
-        subQuestCompletedCount.toDouble().div(totalSubQuestCount).times(100).toInt()
 }
