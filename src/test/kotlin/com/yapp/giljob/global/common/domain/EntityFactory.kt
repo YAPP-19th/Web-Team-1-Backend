@@ -3,7 +3,6 @@ package com.yapp.giljob.global.common.domain
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.domain.QuestParticipation
-import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
 import com.yapp.giljob.domain.roadmap.domain.Roadmap
 import com.yapp.giljob.domain.roadmap.domain.RoadmapScrap
 import com.yapp.giljob.domain.roadmap.domain.RoadmapScrapPK
@@ -46,9 +45,8 @@ class EntityFactory {
         )
         fun testTag() = Tag(1L, "tag1")
         fun testQuestParticipation() = QuestParticipation(
-            QuestParticipationPK(testUser().id!!, testQuest().id!!),
-            testQuest(),
-            testUser()
+            quest = testQuest(),
+            participant = testUser()
         )
         fun testSubQuest() = SubQuest(
             id = 1L,

@@ -6,6 +6,8 @@ import com.querydsl.jpa.JPAExpressions
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
+import com.yapp.giljob.domain.quest.domain.QuestParticipation
+import com.yapp.giljob.domain.quest.vo.QuestReviewVo
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.user.domain.QAbility.ability
 
@@ -14,14 +16,14 @@ class QuestParticipationSupportRepositoryImpl(
 ) : QuestParticipationSupportRepository {
     override fun countParticipants(): Long {
         return query.from(questParticipation)
-            .select(questParticipation.id.participantId)
+            .select(questParticipation.participant)
             .distinct()
             .fetchCount()
     }
 
     override fun countQuests(): Long {
         return query.from(questParticipation)
-            .select(questParticipation.id.questId)
+            .select(questParticipation.quest)
             .distinct()
             .fetchCount()
     }
@@ -57,6 +59,30 @@ class QuestParticipationSupportRepositoryImpl(
             .fetch()
     }
 
+    override fun getQuestReviewByQuestIdLessThanAndOrderByIdDesc(questId: Long, cursor: Long?, size: Long): List<QuestReviewVo> {
+        return query
+            .select(
+                Projections.constructor(
+                    QuestReviewVo::class.java,
+                    questParticipation.review,
+                    questParticipation.reviewCreatedAt,
+                    questParticipation.participant,
+                    ability.point
+                )
+            ).from(questParticipation)
+            .where(
+                (questParticipation.quest.id.eq(questId))
+                    .and(ltQuestParticipationId(cursor))
+                    .and(questParticipation.review.isNotNull)
+            )
+            .leftJoin(ability).on(
+                ability.position.eq(questParticipation.participant.position)
+                    .and(ability.user.id.eq(questParticipation.participant.id))
+            )
+            .orderBy(questParticipation.reviewCreatedAt.desc())
+            .limit(size)
+            .fetch()
+    }
 
     private fun ltQuestId(questId: Long?): BooleanExpression? {
         return questId?.let { questParticipation.quest.id.lt(questId) }
@@ -65,4 +91,9 @@ class QuestParticipationSupportRepositoryImpl(
     private fun eqIsCompleted(isCompleted: Boolean): BooleanExpression {
         return questParticipation.isCompleted.eq(isCompleted)
     }
+
+    private fun ltQuestParticipationId(questParticipationId: Long?): BooleanExpression? {
+        return questParticipationId?.let { questParticipation.id.lt(questParticipationId) }
+    }
+
 }

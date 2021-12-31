@@ -3,8 +3,6 @@ package com.yapp.giljob.domain.quest.dao
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.domain.QuestParticipation
-import com.yapp.giljob.domain.quest.domain.QuestParticipationPK
-import com.yapp.giljob.domain.subquest.domain.SubQuest
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.config.QuerydslTestConfig
@@ -65,10 +63,10 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
     @Test
     fun `1명이 여러 개의 퀘스트에 참여하는 경우 조회 테스트`() {
         // given
-        questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[1].id!!, questList[0].id!!), questList[0], userList[1]))
-        questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[1].id!!, questList[1].id!!), questList[1], userList[1]))
-        questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[1].id!!, questList[2].id!!), questList[2], userList[1]))
-        questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[1].id!!, questList[3].id!!), questList[3], userList[1]))
+        questParticipationRepository.save(QuestParticipation(quest = questList[0], participant = userList[1]))
+        questParticipationRepository.save(QuestParticipation(quest = questList[1], participant = userList[1]))
+        questParticipationRepository.save(QuestParticipation(quest = questList[2], participant = userList[1]))
+        questParticipationRepository.save(QuestParticipation(quest = questList[3], participant = userList[1]))
 
         // when
         val totalParticipantCount = questParticipationRepository.countParticipants()
@@ -82,10 +80,10 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
     @Test
     fun `여러 명이 1개의 퀘스트에 참여하는 경우 조회 테스트`() {
         // given
-        questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[1].id!!, questList[0].id!!), questList[0], userList[1]))
-        questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[2].id!!, questList[0].id!!), questList[0], userList[2]))
-        questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[3].id!!, questList[0].id!!), questList[0], userList[3]))
-        questParticipationRepository.save(QuestParticipation(QuestParticipationPK(userList[4].id!!, questList[0].id!!), questList[0], userList[4]))
+        questParticipationRepository.save(QuestParticipation(quest = questList[0], participant = userList[1]))
+        questParticipationRepository.save(QuestParticipation(quest = questList[0], participant = userList[2]))
+        questParticipationRepository.save(QuestParticipation(quest = questList[0], participant = userList[3]))
+        questParticipationRepository.save(QuestParticipation(quest = questList[0], participant = userList[4]))
 
         // when
         val totalParticipantCount = questParticipationRepository.countParticipants()
