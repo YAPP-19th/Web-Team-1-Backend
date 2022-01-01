@@ -470,6 +470,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_랜딩_페이지_퀘스트_수_조회">랜딩 페이지 퀘스트 수 조회</a></li>
 </ul>
 </li>
+<li><a href="#_get_apiquestspositioncount">GET /api/quests/position/count</a>
+<ul class="sectlevel3">
+<li><a href="#_포지션_별_퀘스트_수_조회">포지션 별 퀘스트 수 조회</a></li>
+</ul>
+</li>
 <li><a href="#_get_apiquestsquestidinfo">GET /api/quests/{questId}/info</a>
 <ul class="sectlevel3">
 <li><a href="#_퀘스트_상세_페이지_정보_조회">퀘스트 상세 페이지 정보 조회</a></li>
@@ -1195,6 +1200,84 @@ Content-Length: 188
 </div>
 </div>
 <div class="sect2">
+<h3 id="_get_apiquestspositioncount"><a class="link" href="#_get_apiquestspositioncount">GET /api/quests/position/count</a></h3>
+<div class="sect3">
+<h4 id="_포지션_별_퀘스트_수_조회"><a class="link" href="#_포지션_별_퀘스트_수_조회">포지션 별 퀘스트 수 조회</a></h4>
+<div class="listingblock">
+<div class="title">request</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/quests/position/count HTTP/1.1
+Host: docs.api.com:8080</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">response</div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json;charset=UTF-8
+Content-Length: 222
+
+{
+  "status" : 200,
+  "message" : "포지션 별 퀘스트 개수 조회 성공입니다.",
+  "data" : [ {
+    "position" : "BACKEND",
+    "questCount" : 10
+  }, {
+    "position" : "FRONTEND",
+    "questCount" : 10
+  } ]
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 7. response fields</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 포지션</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].questCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 포지션별 개수</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_get_apiquestsquestidinfo"><a class="link" href="#_get_apiquestsquestidinfo">GET /api/quests/{questId}/info</a></h3>
 <div class="sect3">
 <h4 id="_퀘스트_상세_페이지_정보_조회"><a class="link" href="#_퀘스트_상세_페이지_정보_조회">퀘스트 상세 페이지 정보 조회</a></h4>
@@ -1240,7 +1323,7 @@ Content-Length: 458
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. /api/quests/{questId}/info</caption>
+<caption class="title">Table 8. /api/quests/{questId}/info</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1259,7 +1342,7 @@ Content-Length: 458
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. response fields</caption>
+<caption class="title">Table 9. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1362,7 +1445,7 @@ Content-Length: 458
 <div class="sect3">
 <h4 id="_로그인한_유저에_대한_퀘스트의_상태_정보_조회"><a class="link" href="#_로그인한_유저에_대한_퀘스트의_상태_정보_조회">로그인한 유저에 대한 퀘스트의 상태 정보 조회</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. /api/quests/{questId}/participation/status</caption>
+<caption class="title">Table 10. /api/quests/{questId}/participation/status</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1405,7 +1488,7 @@ Content-Length: 152
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. response fields</caption>
+<caption class="title">Table 11. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1443,7 +1526,7 @@ Content-Length: 152
 <div class="sect3">
 <h4 id="_퀘스트의_서브_퀘스트_진행_현황_조회"><a class="link" href="#_퀘스트의_서브_퀘스트_진행_현황_조회">퀘스트의 서브 퀘스트 진행 현황 조회</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. /api/quests/{questId}/subquest</caption>
+<caption class="title">Table 12. /api/quests/{questId}/subquest</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1490,7 +1573,7 @@ Content-Length: 380
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. response fields</caption>
+<caption class="title">Table 13. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1561,7 +1644,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. /api/quests/{questId}/participation</caption>
+<caption class="title">Table 14. /api/quests/{questId}/participation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1597,7 +1680,7 @@ Content-Length: 88
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 14. response fields</caption>
+<caption class="title">Table 15. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1643,7 +1726,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 15. /api/quests/{questId}/participation</caption>
+<caption class="title">Table 16. /api/quests/{questId}/participation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1679,7 +1762,7 @@ Content-Length: 88
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 16. response fields</caption>
+<caption class="title">Table 17. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1748,7 +1831,7 @@ Content-Length: 95
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 17. request fields</caption>
+<caption class="title">Table 18. request fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1770,7 +1853,7 @@ Content-Length: 95
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 18. response fields</caption>
+<caption class="title">Table 19. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1822,7 +1905,7 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1502
+Content-Length: 1501
 
 {
   "status" : 200,
@@ -1831,7 +1914,7 @@ Content-Length: 1502
     "totalReviewCount" : 10,
     "reviewList" : [ {
       "review" : "리뷰 1",
-      "reviewCreatedAt" : "2021-12-31T23:06:51.547544",
+      "reviewCreatedAt" : "2022-01-01T18:08:49.971173",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1841,7 +1924,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 2",
-      "reviewCreatedAt" : "2021-12-31T23:06:51.547625",
+      "reviewCreatedAt" : "2022-01-01T18:08:49.971214",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1851,7 +1934,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 3",
-      "reviewCreatedAt" : "2021-12-31T23:06:51.547637",
+      "reviewCreatedAt" : "2022-01-01T18:08:49.971221",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1861,7 +1944,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 4",
-      "reviewCreatedAt" : "2021-12-31T23:06:51.547645",
+      "reviewCreatedAt" : "2022-01-01T18:08:49.971226",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1871,7 +1954,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 5",
-      "reviewCreatedAt" : "2021-12-31T23:06:51.547652",
+      "reviewCreatedAt" : "2022-01-01T18:08:49.97123",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1885,7 +1968,7 @@ Content-Length: 1502
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 19. request fields</caption>
+<caption class="title">Table 20. request fields</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1908,7 +1991,7 @@ Content-Length: 1502
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 20. response fields</caption>
+<caption class="title">Table 21. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2076,7 +2159,7 @@ Content-Length: 1420
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 21. response fields</caption>
+<caption class="title">Table 22. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2176,7 +2259,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 22. request fields</caption>
+<caption class="title">Table 23. request fields</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2280,7 +2363,7 @@ Content-Length: 1460
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 23. response fields</caption>
+<caption class="title">Table 24. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2391,7 +2474,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 24. /api/subquests/{subQuestId}/complete</caption>
+<caption class="title">Table 25. /api/subquests/{subQuestId}/complete</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2420,7 +2503,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 25. response fields</caption>
+<caption class="title">Table 26. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2466,7 +2549,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 26. /api/subquests/{subQuestId}/cancel</caption>
+<caption class="title">Table 27. /api/subquests/{subQuestId}/cancel</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2495,7 +2578,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 27. response fields</caption>
+<caption class="title">Table 28. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2545,7 +2628,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 28. /api/roadmaps/{roadmapId}</caption>
+<caption class="title">Table 29. /api/roadmaps/{roadmapId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2606,7 +2689,7 @@ Content-Length: 707
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 29. response fields</caption>
+<caption class="title">Table 30. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2731,7 +2814,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 30. request fields</caption>
+<caption class="title">Table 31. request fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2787,7 +2870,7 @@ Content-Length: 88
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 31. response fields</caption>
+<caption class="title">Table 32. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2833,7 +2916,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 32. /api/roadmaps/{roadmapId}</caption>
+<caption class="title">Table 33. /api/roadmaps/{roadmapId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2866,7 +2949,7 @@ Content-Length: 88
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 33. response fields</caption>
+<caption class="title">Table 34. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2912,7 +2995,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 34. /api/roadmaps/{roadmapId}/scrap</caption>
+<caption class="title">Table 35. /api/roadmaps/{roadmapId}/scrap</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2948,7 +3031,7 @@ Content-Length: 91
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 35. response fields</caption>
+<caption class="title">Table 36. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3056,7 +3139,7 @@ Content-Length: 1091
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 36. response fields</caption>
+<caption class="title">Table 37. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3166,13 +3249,13 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQwOTU5NjE1LCJleHAiOjI2NDA5NTk2MTV9.yREOZrL6Mv8VZt_HT8s3mazF8T-vXaKydfhjB3xgPmY"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxMDI4MTM0LCJleHAiOjI2NDEwMjgxMzR9.a0duPF2xhWdJ14kAxkcxwW9N4JpCvozoiRAZ3KesOPg"
   }
 }</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 37. response</caption>
+<caption class="title">Table 38. response</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3239,13 +3322,13 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQwOTU5NjE0LCJleHAiOjI2NDA5NTk2MTR9.JJs1uDEiFpSyzcrtLMFWyPg-kGV1pcIpmLhEzca7CKk"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxMDI4MTMzLCJleHAiOjI2NDEwMjgxMzN9.ou7IOmvK2Eghf4HX9C8EiQqfvzt263I3bT1B8eAaNd4"
   }
 }</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 38. response</caption>
+<caption class="title">Table 39. response</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3331,7 +3414,7 @@ Content-Length: 225
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 39. response fields</caption>
+<caption class="title">Table 40. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3437,7 +3520,7 @@ Content-Length: 473
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 40. response fields</caption>
+<caption class="title">Table 41. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3550,7 +3633,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 41. request</caption>
+<caption class="title">Table 42. request</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3587,7 +3670,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 42. response fields</caption>
+<caption class="title">Table 43. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3639,7 +3722,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 43. request</caption>
+<caption class="title">Table 44. request</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3671,7 +3754,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 44. response fields</caption>
+<caption class="title">Table 45. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3712,7 +3795,7 @@ Host: docs.api.com:8080
 <div class="sect2">
 <h3 id="_post_apiupload_업로드"><a class="link" href="#_post_apiupload_업로드">POST /api/upload 업로드</a></h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 45. request</caption>
+<caption class="title">Table 46. request</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3762,7 +3845,7 @@ Content-Length: 198
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 46. response fields</caption>
+<caption class="title">Table 47. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3805,7 +3888,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-12-31 23:02:24 +0900
+Last updated 2022-01-01 18:07:00 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

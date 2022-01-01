@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.quest.dao
 
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.vo.QuestPositionCountVo
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 
 interface QuestSupportRepository {
@@ -10,4 +11,6 @@ interface QuestSupportRepository {
     fun search(keyword: String, position: Position, size: Long, questId: Long?): List<QuestSupportVo>
 
     fun findByQuestId(questId: Long): QuestSupportVo?
+
+    fun getQuestPositionCount(): List<QuestPositionCountVo>
 }

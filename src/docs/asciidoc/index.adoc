@@ -51,6 +51,16 @@ include::{snippets}/quests/count/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/count/get/response-fields.adoc[]
 
+=== GET /api/quests/position/count
+==== 포지션 별 퀘스트 수 조회
+
+.request
+include::{snippets}/quests/position/count/get/http-request.adoc[]
+.response
+include::{snippets}/quests/position/count/get/http-response.adoc[]
+.response fields
+include::{snippets}/quests/position/count/get/response-fields.adoc[]
+
 === GET /api/quests/{questId}/info
 ==== 퀘스트 상세 페이지 정보 조회
 

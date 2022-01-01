@@ -29,7 +29,8 @@ class WebSecurityConfig(
             "/api/quests/**/info",
             "/api/quests/search",
             "/api/users/**/roadmaps/**",
-            "/api/quests/**/participation/status"
+            "/api/quests/**/participation/status",
+            "/api/quests/position/count"
         )
         web.ignoring().antMatchers(HttpMethod.GET, "/api/quests", "/api/quests/**/reviews")
     }
