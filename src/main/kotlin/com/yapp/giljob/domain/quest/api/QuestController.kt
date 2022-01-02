@@ -5,6 +5,7 @@ import com.yapp.giljob.domain.quest.application.QuestService
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailSubQuestResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestPositionCountResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.subquest.application.SubQuestParticipationService
 import com.yapp.giljob.domain.user.domain.User
@@ -62,4 +63,16 @@ class QuestController(
             )
         )
     }
+
+    @GetMapping("/position/count")
+    fun getQuestPositionCount(): ResponseEntity<BaseResponse<List<QuestPositionCountResponseDto>>> {
+        return ResponseEntity.ok(
+            BaseResponse.of(
+                HttpStatus.OK,
+                "포지션 별 퀘스트 개수 조회 성공입니다.",
+                questService.getQuestPositionCount()
+            )
+        )
+    }
+
 }

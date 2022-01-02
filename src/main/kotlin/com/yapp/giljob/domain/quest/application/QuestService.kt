@@ -6,6 +6,7 @@ import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.dto.request.QuestRequestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestPositionCountResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.roadmap.domain.Roadmap
 import com.yapp.giljob.domain.roadmap.domain.RoadmapQuest
@@ -77,5 +78,12 @@ class QuestService(
         }
 
         return roadmapQuestList
+    }
+
+    fun getQuestPositionCount(): List<QuestPositionCountResponseDto> {
+        val questPositionCountVoList = questRepository.getQuestPositionCount()
+        return questPositionCountVoList.map {
+            QuestPositionCountResponseDto(position = it.position.name, questCount = it.questCount)
+        }
     }
 }

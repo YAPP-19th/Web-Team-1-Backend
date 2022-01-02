@@ -10,6 +10,7 @@ import com.querydsl.jpa.JPAExpressions
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
+import com.yapp.giljob.domain.quest.vo.QuestPositionCountVo
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.user.domain.QUser.user
 
@@ -93,5 +94,18 @@ class QuestSupportRepositoryImpl(
             .where(quest.id.eq(questId))
             .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
             .fetchOne()
+    }
+
+    override fun getQuestPositionCount(): List<QuestPositionCountVo> {
+        return query.select(
+            Projections.constructor(
+                QuestPositionCountVo::class.java,
+                quest.position,
+                quest.count()
+            )
+        )
+            .from(quest)
+            .groupBy(quest.position)
+            .fetch()
     }
 }

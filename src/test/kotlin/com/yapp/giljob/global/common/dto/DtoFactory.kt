@@ -182,5 +182,10 @@ class DtoFactory {
                 QuestReviewResponseDto("리뷰 5", LocalDateTime.now(), testUserInfoResponse()),
             )
         )
+
+        fun testQuestPositionCountResponse() = QuestPositionCountResponseDto(
+            position = Position.BACKEND.name,
+            questCount = 10
+        )
     }
 }
