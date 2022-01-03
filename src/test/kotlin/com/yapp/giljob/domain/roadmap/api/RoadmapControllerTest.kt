@@ -11,7 +11,6 @@ import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.global.config.security.GiljobTestUser
 import org.junit.jupiter.api.Test
-import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.BDDMockito
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -167,6 +166,60 @@ class RoadmapControllerTest : AbstractRestDocs() {
                             .description("성공 메세지"),
                         PayloadDocumentation.fieldWithPath("data")
                             .description("null")
+                    )
+                )
+            )
+    }
+
+    @Test
+    fun getRoadmapList() {
+        BDDMockito.given(roadmapService.getRoadmapList(anyLong())).willReturn(
+            listOf(
+                DtoFactory.testRoadmapResponse(),
+                DtoFactory.testRoadmapResponse(),
+                DtoFactory.testRoadmapResponse()
+            )
+        )
+
+        val result = mockMvc.perform(
+            RestDocumentationRequestBuilders
+                .get("/api/roadmaps")
+                .param("size", "3")
+        ).andDo(MockMvcResultHandlers.print())
+
+        result
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "roadmaps/get",
+                    RequestDocumentation.requestParameters(
+                        RequestDocumentation.parameterWithName("size").description("조회할 로드맵 개수")
+                    ),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("응답 데이터"),
+                        PayloadDocumentation.fieldWithPath("data[*].id")
+                            .description("로드맵 아이디"),
+                        PayloadDocumentation.fieldWithPath("data[*].name")
+                            .description("로드맵 이름"),
+                        PayloadDocumentation.fieldWithPath("data[*].position")
+                            .description("로드맵 직군"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer")
+                            .description("로드맵 작성자 정보"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.id")
+                            .description("로드맵 작성자 id"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.nickname")
+                            .description("로드맵 작성자 닉네임"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.position")
+                            .description("로드맵 작성자 직군"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.point")
+                            .description("로드맵 작성자 능력치"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.intro")
+                            .description("로드맵 작성자 소개"),
                     )
                 )
             )

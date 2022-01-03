@@ -204,6 +204,18 @@ include::{snippets}/roadmaps/{roadmapId}/get/http-response.adoc[]
 .response fields
 include::{snippets}/roadmaps/{roadmapId}/get/response-fields.adoc[]
 
+=== GET /api/roadmaps
+==== 최근 등록한 로드맵 리스트 조회
+
+.request
+include::{snippets}/roadmaps/get/http-request.adoc[]
+.request parameter
+include::{snippets}/roadmaps/get/request-parameters.adoc[]
+.response
+include::{snippets}/roadmaps/get/http-response.adoc[]
+.response fields
+include::{snippets}/roadmaps/get/response-fields.adoc[]
+
 === POST /api/roadmaps
 ==== 로드맵 등록
 
