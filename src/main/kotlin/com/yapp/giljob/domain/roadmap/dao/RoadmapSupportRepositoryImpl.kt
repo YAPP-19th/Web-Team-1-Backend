@@ -39,4 +39,19 @@ class RoadmapSupportRepositoryImpl(
     private fun ltRoadmapId(roadmapId: Long?): BooleanExpression? {
         return roadmapId?.let { QRoadmapScrap.roadmapScrap.roadmap.id.lt(roadmapId) }
     }
+
+    override fun findRoadmapList(size: Long): List<RoadmapSupportVo> {
+        return query.select(
+            Projections.constructor(
+                RoadmapSupportVo::class.java,
+                roadmap,
+                ability.point
+            )
+        )
+            .from(roadmap)
+            .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))
+            .orderBy(roadmap.id.desc())
+            .limit(size)
+            .fetch()
+    }
 }

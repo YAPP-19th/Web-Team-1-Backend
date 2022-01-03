@@ -39,4 +39,13 @@ class RoadmapController(
         roadmapService.saveRoadmap(roadmapSaveRequestDto, user)
         return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "로드맵 등록 성공입니다."))
     }
+
+    @GetMapping
+    fun getRoadmapList(
+        @RequestParam size: Long
+    ): ResponseEntity<BaseResponse<List<RoadmapResponseDto>>> {
+        return ResponseEntity.ok(
+            BaseResponse.of(HttpStatus.OK, "최근 등록된 로드맵 리스트 조회 성공입니다.", roadmapService.getRoadmapList(size))
+        )
+    }
 }

@@ -32,7 +32,8 @@ class WebSecurityConfig(
             "/api/quests/**/participation/status",
             "/api/quests/position/count"
         )
-        web.ignoring().antMatchers(HttpMethod.GET, "/api/quests", "/api/quests/**/reviews")
+        web.ignoring().antMatchers(HttpMethod.GET,
+            "/api/quests", "/api/roadmaps", "/api/quests/**/reviews")
     }
 
     override fun configure(http: HttpSecurity) {
