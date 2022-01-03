@@ -4,7 +4,9 @@ import com.yapp.giljob.domain.user.application.UserQuestService
 import com.yapp.giljob.domain.user.application.UserRoadmapService
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
+import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
+import com.yapp.giljob.global.config.security.GiljobTestUser
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -83,6 +85,66 @@ class UserRoadmapControllerTest : AbstractRestDocs() {
                             .description("로드맵 작성자 능력치"),
                         PayloadDocumentation.fieldWithPath("data[*].writer.intro")
                             .description("로드맵 작성자 자기소개")
+                    )
+                )
+            )
+    }
+
+    @Test
+    fun getMyRegisteredRoadmapList() {
+        BDDMockito.given(userRoadmapService.getRoadmapListByUser(userId, 10, 6)).willReturn(
+            listOf(
+                DtoFactory.testRoadmapResponse(),
+                DtoFactory.testRoadmapResponse(),
+                DtoFactory.testRoadmapResponse(),
+                DtoFactory.testRoadmapResponse(),
+                DtoFactory.testRoadmapResponse(),
+                DtoFactory.testRoadmapResponse()
+            )
+        )
+
+        val result = mockMvc.perform(
+            RestDocumentationRequestBuilders
+                .get("/api/users/{userId}/roadmaps", userId)
+                .param("cursor", "10")
+                .param("size", "6")
+        ).andDo(MockMvcResultHandlers.print())
+
+        result
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "users/{userId}/roadmaps/get",
+                    RequestDocumentation.requestParameters(
+                        RequestDocumentation.parameterWithName("cursor")
+                            .description("마지막으로 조회된 로드맵 id, 해당 로드맵보다 오래된 로드맵 리스트가 조회됩니다."),
+                        RequestDocumentation.parameterWithName("size").description("조회할 로드맵 개수")
+                    ),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("응답 데이터"),
+                        PayloadDocumentation.fieldWithPath("data[*].id")
+                            .description("로드맵 아이디"),
+                        PayloadDocumentation.fieldWithPath("data[*].name")
+                            .description("로드맵 이름"),
+                        PayloadDocumentation.fieldWithPath("data[*].position")
+                            .description("로드맵 직군"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer")
+                            .description("로드맵 작성자 정보"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.id")
+                            .description("로드맵 작성자 id"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.nickname")
+                            .description("로드맵 작성자 닉네임"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.position")
+                            .description("로드맵 작성자 직군"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.point")
+                            .description("로드맵 작성자 능력치"),
+                        PayloadDocumentation.fieldWithPath("data[*].writer.intro")
+                            .description("로드맵 작성자 소개"),
                     )
                 )
             )

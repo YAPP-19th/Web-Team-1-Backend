@@ -251,6 +251,16 @@ include::{snippets}/users/{userId}/roadmaps/scrap/get/http-response.adoc[]
 .response fields
 include::{snippets}/users/{userId}/roadmaps/scrap/get/response-fields.adoc[]
 
+=== GET /api/users/{userId}/roadmaps
+==== 유저가 등록한 로드맵 리스트 조회
+
+.request
+include::{snippets}/users/{userId}/roadmaps/get/http-request.adoc[]
+.response
+include::{snippets}/users/{userId}/roadmaps/get/http-response.adoc[]
+.response fields
+include::{snippets}/users/{userId}/roadmaps/get/response-fields.adoc[]
+
 == Sign API
 === POST /api/sign-up 회원가입
 .request

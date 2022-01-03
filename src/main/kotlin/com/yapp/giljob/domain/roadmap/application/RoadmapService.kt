@@ -7,6 +7,8 @@ import com.yapp.giljob.domain.roadmap.domain.Roadmap
 import com.yapp.giljob.domain.roadmap.domain.RoadmapScrapPK
 import com.yapp.giljob.domain.roadmap.dto.request.RoadmapSaveRequestDto
 import com.yapp.giljob.domain.roadmap.dto.response.RoadmapDetailResponseDto
+import com.yapp.giljob.domain.roadmap.dto.response.RoadmapResponseDto
+import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.application.UserService
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
@@ -23,7 +25,8 @@ class RoadmapService(
     private val userService: UserService,
     private val questService: QuestService,
 
-    private val roadmapMapper: RoadmapMapper
+    private val roadmapMapper: RoadmapMapper,
+    private val userMapper: UserMapper
 ) {
     fun getRoadmapDetail(roadmapId: Long, user: User): RoadmapDetailResponseDto {
         val roadmap = roadmapRepository.findByIdOrNull(roadmapId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
