@@ -7,14 +7,11 @@ import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.infra.kakao.application.KakaoService
 import org.junit.jupiter.api.Test
-import org.mockito.BDDMockito.*
-import org.mockito.Mock
+import org.mockito.BDDMockito.anyString
+import org.mockito.BDDMockito.given
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
-import org.springframework.restdocs.headers.HeaderDocumentation
-import org.springframework.restdocs.headers.HeaderDocumentation.headerWithName
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
 import org.springframework.restdocs.payload.PayloadDocumentation
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders

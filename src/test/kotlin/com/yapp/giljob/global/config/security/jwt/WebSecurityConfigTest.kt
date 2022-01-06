@@ -10,9 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -52,7 +52,7 @@ class WebSecurityConfigTest{
 
     @Test
     fun `유효하지 않은 access token 에러`() {
-        val accessToken: String = "invalid access token"
+        val accessToken = "invalid access token"
 
         mockMvc
             .perform(post("/invalid-access-token").header("Authorization", accessToken))

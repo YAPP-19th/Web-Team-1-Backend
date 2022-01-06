@@ -6,13 +6,16 @@ import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import com.yapp.giljob.infra.kakao.application.KakaoService
-import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito.given
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.anyString
+import org.mockito.Mockito.mock
 import org.mockito.Spy
 import org.mockito.junit.jupiter.MockitoExtension
 import org.springframework.boot.test.context.SpringBootTest
@@ -72,7 +75,7 @@ class SignServiceTest {
         given(signRepository.findBySocialId(anyString())).willReturn(user)
         given(kakaoService.getKakaoIdFromToken(anyString())).willReturn(user.socialId)
 
-        val exception = Assertions.assertThrows(BusinessException::class.java) {
+        val exception = assertThrows(BusinessException::class.java) {
             signService.signUp(signUpRequest)
         }
 

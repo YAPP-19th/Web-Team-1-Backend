@@ -1,12 +1,9 @@
 package com.yapp.giljob.domain.user.api
 
-import com.yapp.giljob.domain.user.application.UserQuestService
 import com.yapp.giljob.domain.user.application.UserRoadmapService
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
-import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
-import com.yapp.giljob.global.config.security.GiljobTestUser
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest

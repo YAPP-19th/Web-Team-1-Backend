@@ -6,7 +6,6 @@ import com.querydsl.jpa.JPAExpressions
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
-import com.yapp.giljob.domain.quest.domain.QuestParticipation
 import com.yapp.giljob.domain.quest.vo.QuestReviewVo
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.user.domain.QAbility.ability

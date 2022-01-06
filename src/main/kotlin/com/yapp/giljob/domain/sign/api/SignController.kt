@@ -1,12 +1,11 @@
 package com.yapp.giljob.domain.sign.api
 
+import com.yapp.giljob.domain.sign.application.SignService
 import com.yapp.giljob.domain.sign.dto.request.SignInRequestDto
 import com.yapp.giljob.domain.sign.dto.request.SignUpRequestDto
-import com.yapp.giljob.domain.sign.application.SignService
 import com.yapp.giljob.domain.sign.dto.response.SignInResponseDto
 import com.yapp.giljob.domain.sign.dto.response.SignUpResponseDto
 import com.yapp.giljob.global.common.dto.BaseResponse
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated

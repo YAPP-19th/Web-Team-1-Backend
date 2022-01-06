@@ -19,10 +19,8 @@ import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import org.mockito.ArgumentMatchers.anyLong
 import org.springframework.data.repository.findByIdOrNull
 
 class QuestParticipationServiceTest {
@@ -190,7 +188,6 @@ class QuestParticipationServiceTest {
     }
 
     @Test
-    @Disabled
     fun  `퀘스트 리뷰 작성 성공`() {
         questParticipation.isCompleted = true
         every { questParticipationRepository.findByQuestIdAndParticipantId(any(), any()) } returns questParticipation

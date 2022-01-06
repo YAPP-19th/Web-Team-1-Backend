@@ -2,10 +2,10 @@ package com.yapp.giljob.domain.user.domain.achieve
 
 class QuestAchieve {
     companion object {
-        val LEVEL_5 = 0L
-        val LEVEL_4 = 25L
-        val LEVEL_3 = 50L
-        val LEVEL_2 = 75L
-        val LEVEL_1 = 100L
+        const val LEVEL_5 = 0L
+        const val LEVEL_4 = 25L
+        const val LEVEL_3 = 50L
+        const val LEVEL_2 = 75L
+        const val LEVEL_1 = 100L
     }
 }
