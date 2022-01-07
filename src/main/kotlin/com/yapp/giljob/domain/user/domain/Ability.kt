@@ -23,6 +23,10 @@ class Ability(
     @Column(nullable = false)
     var point: Long = 0L
 ) {
+    fun addPoint(point: Long) {
+        this.point += point
+    }
+
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)

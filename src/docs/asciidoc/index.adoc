@@ -51,15 +51,15 @@ include::{snippets}/quests/count/get/http-response.adoc[]
 .response fields
 include::{snippets}/quests/count/get/response-fields.adoc[]
 
-=== GET /api/quests/position/count
+=== GET /api/quests/positions/count
 ==== 포지션 별 퀘스트 수 조회
 
 .request
-include::{snippets}/quests/position/count/get/http-request.adoc[]
+include::{snippets}/quests/positions/count/get/http-request.adoc[]
 .response
-include::{snippets}/quests/position/count/get/http-response.adoc[]
+include::{snippets}/quests/positions/count/get/http-response.adoc[]
 .response fields
-include::{snippets}/quests/position/count/get/response-fields.adoc[]
+include::{snippets}/quests/positions/count/get/response-fields.adoc[]
 
 === GET /api/quests/{questId}/info
 ==== 퀘스트 상세 페이지 정보 조회

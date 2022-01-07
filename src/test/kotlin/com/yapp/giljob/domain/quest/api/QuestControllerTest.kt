@@ -244,39 +244,4 @@ internal class QuestControllerTest : AbstractRestDocs() {
                 )
             )
     }
-
-    @Test
-    fun getQuestPositionCount() {
-        given(questService.getQuestPositionCount())
-            .willReturn(
-                listOf(
-                    DtoFactory.testQuestPositionCountResponse(),
-                    DtoFactory.testQuestPositionCountResponse().apply { this.position = Position.FRONTEND.name }
-                )
-            )
-
-        val result = mockMvc.perform(
-            get("/api/quests/position/count")
-        ).andDo(print())
-
-        result
-            .andExpect(status().isOk)
-            .andDo(
-                MockMvcRestDocumentation.document(
-                    "quests/position/count/get",
-                    PayloadDocumentation.responseFields(
-                        PayloadDocumentation.fieldWithPath("status")
-                            .description("200"),
-                        PayloadDocumentation.fieldWithPath("message")
-                            .description("성공 메세지"),
-                        PayloadDocumentation.fieldWithPath("data")
-                            .description("응답 데이터"),
-                        PayloadDocumentation.fieldWithPath("data[*].position")
-                            .description("퀘스트 포지션"),
-                        PayloadDocumentation.fieldWithPath("data[*].questCount")
-                            .description("퀘스트 포지션별 개수"),
-                    )
-                )
-            )
-    }
 }

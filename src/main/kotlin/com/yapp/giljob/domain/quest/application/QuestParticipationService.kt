@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
+private const val POINT_UNIT = 100L
+
 @Service
 class QuestParticipationService(
     private val questRepository: QuestRepository,
@@ -33,7 +35,9 @@ class QuestParticipationService(
     fun participateQuest(questId: Long, user: User) {
         val quest = QuestHelper.getQuestById(questRepository, questId)
 
-        if (questParticipationRepository.existsByQuestIdAndParticipantId(user.id!!, questId)) throw BusinessException(ErrorCode.ALREADY_PARTICIPATED_QUEST)
+        if (questParticipationRepository.existsByQuestIdAndParticipantId(user.id!!, questId)) {
+            throw BusinessException(ErrorCode.ALREADY_PARTICIPATED_QUEST)
+        }
 
         questParticipationRepository.save(QuestParticipation(quest = quest, participant = user))
     }
@@ -45,18 +49,22 @@ class QuestParticipationService(
         totalParticipantCount = getQuestParticipantCount()
     )
 
-
     @Transactional
     fun completeQuest(questId: Long, user: User) {
         val questParticipation = questParticipationRepository.findByQuestIdAndParticipantId(user.id!!, questId)
             ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
 
         validateCompletedQuest(questParticipation, questId, user.id!!)
-        questParticipation.isCompleted = true
+        questParticipation.complete()
 
         val quest = questParticipation.quest
-        val ability = abilityRepository.findByUserIdAndPosition(user.id!!, quest.position!!) ?: abilityRepository.save(Ability(user = user, position = quest.position!!))
-        ability.point += quest.difficulty!! * 100L
+        val ability = abilityRepository.findByUserIdAndPosition(user.id!!, quest.position) ?: abilityRepository.save(
+            Ability(
+                user = user,
+                position = quest.position
+            )
+        )
+        ability.addPoint(quest.difficulty * POINT_UNIT)
     }
 
     private fun validateCompletedQuest(questParticipation: QuestParticipation, questId: Long, userId: Long) {
@@ -68,10 +76,6 @@ class QuestParticipationService(
             throw BusinessException(ErrorCode.NOT_COMPLETED_QUEST)
         }
     }
-
-    private fun getOnProgressQuestCount() = questParticipationRepository.countQuests()
-
-    private fun getQuestParticipantCount() = questParticipationRepository.countParticipants()
 
     @Transactional
     fun createQuestReview(
@@ -94,11 +98,10 @@ class QuestParticipationService(
     }
 
     fun getQuestParticipationStatus(questId: Long, userId: Long): String {
-        val questParticipation
-                = questParticipationRepository.findByQuestIdAndParticipantId(questId, userId)
+        val questParticipation = questParticipationRepository.findByQuestIdAndParticipantId(questId, userId)
             ?: return "아직 참여하지 않은 퀘스트입니다."
 
-        return when(questParticipation.isCompleted) {
+        return when (questParticipation.isCompleted) {
             false -> "참여중인 퀘스트입니다."
             true -> "완료한 퀘스트입니다."
         }
@@ -107,7 +110,8 @@ class QuestParticipationService(
     @Transactional(readOnly = true)
     fun getQuestReviewList(questId: Long, cursor: Long?, size: Long): QuestReviewWithTotalCountResponseDto {
         val totalReviewCount = questParticipationRepository.countByQuestId(questId)
-        val reviewListVo = questParticipationRepository.getQuestReviewByQuestIdLessThanAndOrderByIdDesc(questId, cursor, size)
+        val reviewListVo =
+            questParticipationRepository.getQuestReviewByQuestIdLessThanAndOrderByIdDesc(questId, cursor, size)
 
         return QuestReviewWithTotalCountResponseDto(
             totalReviewCount = totalReviewCount,
@@ -115,8 +119,12 @@ class QuestParticipationService(
         )
     }
 
-    private fun toQuestReviewResponseDto(reviewListVo: List<QuestReviewVo>): List<QuestReviewResponseDto>{
-        return reviewListVo.map{
+    private fun getOnProgressQuestCount() = questParticipationRepository.countQuests()
+
+    private fun getQuestParticipantCount() = questParticipationRepository.countParticipants()
+
+    private fun toQuestReviewResponseDto(reviewListVo: List<QuestReviewVo>): List<QuestReviewResponseDto> {
+        return reviewListVo.map {
             QuestReviewResponseDto(
                 review = it.review,
                 reviewCreatedAt = it.reviewCreatedAt,

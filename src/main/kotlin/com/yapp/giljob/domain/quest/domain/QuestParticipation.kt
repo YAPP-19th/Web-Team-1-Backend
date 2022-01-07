@@ -31,6 +31,10 @@ class QuestParticipation(
     @Column(name = "review_created_at", nullable = true)
     var reviewCreatedAt: LocalDateTime? = null
 ) : BaseEntity() {
+    fun complete() {
+        this.isCompleted = true
+    }
+
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
 
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
