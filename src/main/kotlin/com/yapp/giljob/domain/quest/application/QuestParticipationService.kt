@@ -35,9 +35,9 @@ class QuestParticipationService(
     fun participateQuest(questId: Long, user: User) {
         val quest = QuestHelper.getQuestById(questRepository, questId)
 
-        if (questParticipationRepository.existsByQuestIdAndParticipantId(user.id!!, questId)) throw BusinessException(
-            ErrorCode.ALREADY_PARTICIPATED_QUEST
-        )
+        if (questParticipationRepository.existsByQuestIdAndParticipantId(user.id!!, questId)) {
+            throw BusinessException(ErrorCode.ALREADY_PARTICIPATED_QUEST)
+        }
 
         questParticipationRepository.save(QuestParticipation(quest = quest, participant = user))
     }
@@ -64,7 +64,7 @@ class QuestParticipationService(
                 position = quest.position
             )
         )
-        ability.point += quest.difficulty * POINT_UNIT
+        ability.addPoint(quest.difficulty * POINT_UNIT)
     }
 
     private fun validateCompletedQuest(questParticipation: QuestParticipation, questId: Long, userId: Long) {
