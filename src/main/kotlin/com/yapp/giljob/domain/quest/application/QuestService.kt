@@ -51,30 +51,37 @@ class QuestService(
 
     @Transactional(readOnly = true)
     fun getQuestDetailInfo(questId: Long): QuestDetailInfoResponseDto {
-        val questSupportVo = questRepository.findByQuestId(questId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
-        return questMapper.toQuestDetailInfoDto(questSupportVo, userMapper.toDto(questSupportVo.quest.user, questSupportVo.point))
+        val questSupportVo =
+            questRepository.findByQuestId(questId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        return questMapper.toQuestDetailInfoDto(
+            questSupportVo,
+            userMapper.toDto(questSupportVo.quest.user, questSupportVo.point)
+        )
     }
 
-    fun convertToQuestList(roadmap: Roadmap, questList: List<QuestRequestDto>) : List<RoadmapQuest> {
+    fun convertToQuestList(roadmap: Roadmap, questList: List<QuestRequestDto>): List<RoadmapQuest> {
         val roadmapQuestList: MutableList<RoadmapQuest> = mutableListOf()
         for (quest in questList) {
-
             val questToSave =
-                quest.questId?. let {
+                quest.questId?.let {
                     QuestHelper.getQuestById(questRepository, quest.questId)
                 } ?: run {
                     questRepository.save(
                         Quest(
                             user = roadmap.user,
                             name = quest.name!!,
-                            isRealQuest = false)
+                            isRealQuest = false,
+                            position = roadmap.position
+                        )
                     )
                 }
 
-            roadmapQuestList.add(RoadmapQuest(
-                roadmap = roadmap,
-                quest = questToSave
-            ))
+            roadmapQuestList.add(
+                RoadmapQuest(
+                    roadmap = roadmap,
+                    quest = questToSave
+                )
+            )
         }
 
         return roadmapQuestList

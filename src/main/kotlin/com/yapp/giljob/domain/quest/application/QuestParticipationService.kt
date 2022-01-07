@@ -58,13 +58,13 @@ class QuestParticipationService(
         questParticipation.complete()
 
         val quest = questParticipation.quest
-        val ability = abilityRepository.findByUserIdAndPosition(user.id!!, quest.position!!) ?: abilityRepository.save(
+        val ability = abilityRepository.findByUserIdAndPosition(user.id!!, quest.position) ?: abilityRepository.save(
             Ability(
                 user = user,
-                position = quest.position!!
+                position = quest.position
             )
         )
-        ability.point += quest.difficulty!! * POINT_UNIT
+        ability.point += quest.difficulty * POINT_UNIT
     }
 
     private fun validateCompletedQuest(questParticipation: QuestParticipation, questId: Long, userId: Long) {
