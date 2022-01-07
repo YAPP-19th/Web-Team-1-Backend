@@ -470,7 +470,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_랜딩_페이지_퀘스트_수_조회">랜딩 페이지 퀘스트 수 조회</a></li>
 </ul>
 </li>
-<li><a href="#_get_apiquestspositioncount">GET /api/quests/position/count</a>
+<li><a href="#_get_apiquestspositionscount">GET /api/quests/positions/count</a>
 <ul class="sectlevel3">
 <li><a href="#_포지션_별_퀘스트_수_조회">포지션 별 퀘스트 수 조회</a></li>
 </ul>
@@ -1210,13 +1210,13 @@ Content-Length: 188
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_apiquestspositioncount"><a class="link" href="#_get_apiquestspositioncount">GET /api/quests/position/count</a></h3>
+<h3 id="_get_apiquestspositionscount"><a class="link" href="#_get_apiquestspositionscount">GET /api/quests/positions/count</a></h3>
 <div class="sect3">
 <h4 id="_포지션_별_퀘스트_수_조회"><a class="link" href="#_포지션_별_퀘스트_수_조회">포지션 별 퀘스트 수 조회</a></h4>
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/quests/position/count HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/quests/positions/count HTTP/1.1
 Host: docs.api.com:8080</code></pre>
 </div>
 </div>
@@ -1924,7 +1924,7 @@ Content-Length: 1502
     "totalReviewCount" : 10,
     "reviewList" : [ {
       "review" : "리뷰 1",
-      "reviewCreatedAt" : "2022-01-03T12:46:56.730206",
+      "reviewCreatedAt" : "2022-01-08T01:08:35.234899",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1934,7 +1934,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 2",
-      "reviewCreatedAt" : "2022-01-03T12:46:56.730291",
+      "reviewCreatedAt" : "2022-01-08T01:08:35.234929",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1944,7 +1944,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 3",
-      "reviewCreatedAt" : "2022-01-03T12:46:56.730303",
+      "reviewCreatedAt" : "2022-01-08T01:08:35.234931",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1954,7 +1954,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 4",
-      "reviewCreatedAt" : "2022-01-03T12:46:56.730308",
+      "reviewCreatedAt" : "2022-01-08T01:08:35.234933",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1964,7 +1964,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 5",
-      "reviewCreatedAt" : "2022-01-03T12:46:56.730312",
+      "reviewCreatedAt" : "2022-01-08T01:08:35.234935",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -3585,7 +3585,7 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxMTgxNjIwLCJleHAiOjI2NDExODE2MjB9.k0uz5QzMnwVMvk-2mh1XXVDN2ol-6-UYCWRMtDVABeo"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxNTcxNzIwLCJleHAiOjI2NDE1NzE3MjB9.-gqoh5sF9iEZ4xGqwi1nL9upSOzrwYIi-hC48liv_iI"
   }
 }</code></pre>
 </div>
@@ -3658,7 +3658,7 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxMTgxNjE5LCJleHAiOjI2NDExODE2MTl9.LQV7nQVnaoDMpEb9JzYTEXotGyXOzGCtJfxijmmi1lU"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxNTcxNzE5LCJleHAiOjI2NDE1NzE3MTl9.LKqATAIJpd63AeQvklERgBabWor3IMv7VfZ_hnUx8tE"
   }
 }</code></pre>
 </div>
@@ -4224,7 +4224,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-01-03 12:44:55 +0900
+Last updated 2022-01-08 01:03:49 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
