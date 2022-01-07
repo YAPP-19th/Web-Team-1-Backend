@@ -4,7 +4,6 @@ import com.yapp.giljob.domain.roadmap.application.RoadmapMapper
 import com.yapp.giljob.domain.roadmap.dao.RoadmapRepository
 import com.yapp.giljob.domain.roadmap.dao.RoadmapScrapRepository
 import com.yapp.giljob.domain.roadmap.dto.response.RoadmapResponseDto
-import com.yapp.giljob.domain.user.domain.User
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

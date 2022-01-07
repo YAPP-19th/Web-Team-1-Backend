@@ -1,11 +1,13 @@
 package com.yapp.giljob.domain.quest.dao
 
+import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.domain.QuestParticipation
 import com.yapp.giljob.domain.user.dao.UserRepository
-import com.yapp.giljob.global.common.domain.EntityFactory
+import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.config.QuerydslTestConfig
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
@@ -18,15 +20,14 @@ class QuestParticipationRepositoryTest @Autowired constructor(
     private val userRepository: UserRepository,
     private val questParticipationRepository: QuestParticipationRepository
 ){
-
-    private val user  = EntityFactory.testUser()
-    private val quest = EntityFactory.testQuest()
-
     @Test
-    @Disabled
     fun `getQuestParticipationByQuestIdAndParticipantId 성공`() {
-        val savedQuest = questRepository.save(quest)
+
+        val user = User(socialId = "socialId", nickname = "nickname", intro = "intro", position = Position.FRONTEND)
+        val quest = Quest(user = user, isRealQuest = false, name = "quest")
+
         val savedUser = userRepository.save(user)
+        val savedQuest = questRepository.save(quest)
         questParticipationRepository.save(
             QuestParticipation(quest = savedQuest, participant = savedUser)
         )

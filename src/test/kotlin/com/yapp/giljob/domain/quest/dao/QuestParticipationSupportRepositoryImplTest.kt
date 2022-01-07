@@ -8,7 +8,6 @@ import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.config.QuerydslTestConfig
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
@@ -59,7 +58,6 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
 
     }
 
-    @Disabled
     @Test
     fun `1명이 여러 개의 퀘스트에 참여하는 경우 조회 테스트`() {
         // given
@@ -76,7 +74,6 @@ class QuestParticipationSupportRepositoryImplTest @Autowired constructor(
         assertEquals(4L, onProgressQuestCount)
     }
 
-    @Disabled
     @Test
     fun `여러 명이 1개의 퀘스트에 참여하는 경우 조회 테스트`() {
         // given

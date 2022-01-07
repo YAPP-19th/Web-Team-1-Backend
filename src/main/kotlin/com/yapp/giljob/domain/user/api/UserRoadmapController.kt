@@ -2,8 +2,6 @@ package com.yapp.giljob.domain.user.api
 
 import com.yapp.giljob.domain.roadmap.dto.response.RoadmapResponseDto
 import com.yapp.giljob.domain.user.application.UserRoadmapService
-import com.yapp.giljob.domain.user.domain.User
-import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

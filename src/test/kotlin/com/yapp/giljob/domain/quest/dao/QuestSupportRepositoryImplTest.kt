@@ -8,8 +8,10 @@ import com.yapp.giljob.domain.user.domain.Ability
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.config.QuerydslTestConfig
-import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.Import
@@ -226,7 +228,7 @@ class QuestSupportRepositoryImplTest {
     }
 
     @Nested
-    inner class questDetailTest {
+    inner class QuestDetailTest {
 
         @Test
         fun `questDetailInfo 성공`() {

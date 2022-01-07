@@ -3,12 +3,9 @@ package com.yapp.giljob.domain.roadmap.domain
 import au.com.console.kassava.kotlinEquals
 import au.com.console.kassava.kotlinHashCode
 import com.yapp.giljob.domain.position.domain.Position
-import com.yapp.giljob.domain.quest.domain.Quest
-import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.roadmap.dto.request.RoadmapSaveRequestDto
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.domain.BaseEntity
-import javax.persistence.*
 import org.hibernate.annotations.SQLDelete
 import org.hibernate.annotations.Where
 import javax.persistence.*

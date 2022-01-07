@@ -79,7 +79,6 @@ class QuestParticipationService(
         questReviewCreateRequestDto: QuestReviewCreateRequestDto,
         user: User
     ) {
-
         val questParticipation: QuestParticipation =
             questParticipationRepository.findByQuestIdAndParticipantId(questId, user.id!!)
                 ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
@@ -90,6 +89,8 @@ class QuestParticipationService(
 
         questParticipation.review = questReviewCreateRequestDto.review
         questParticipation.reviewCreatedAt = LocalDateTime.now()
+
+        questParticipationRepository.save(questParticipation)
     }
 
     fun getQuestParticipationStatus(questId: Long, userId: Long): String {

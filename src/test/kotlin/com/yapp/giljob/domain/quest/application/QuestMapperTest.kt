@@ -24,7 +24,7 @@ class QuestMapperTest {
         val expectedQuestResponse = DtoFactory.testQuestResponse()
 
         // when
-        val questResponse = questMapper.toDto(testQuestSupportDto, userMapper.toDto(testQuestSupportDto.quest.user!!, testQuestSupportDto.point))
+        val questResponse = questMapper.toDto(testQuestSupportDto, userMapper.toDto(testQuestSupportDto.quest.user, testQuestSupportDto.point))
 
         // then
         assertEquals(expectedQuestResponse.id, questResponse.id)

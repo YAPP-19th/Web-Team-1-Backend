@@ -26,7 +26,6 @@ class QuestSearchControllerTest : AbstractRestDocs() {
     @MockBean
     private lateinit var userRepository: UserRepository
 
-
     @Test
     fun getQuestListTest() {
         BDDMockito.given(questSearchService.search("test", Position.BACKEND,4, 10L)).willReturn(

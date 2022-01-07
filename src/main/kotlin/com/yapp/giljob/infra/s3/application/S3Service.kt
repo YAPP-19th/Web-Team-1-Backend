@@ -5,7 +5,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile

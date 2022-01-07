@@ -31,9 +31,6 @@ class RoadmapServiceTest {
     private lateinit var roadmapScrapRepository: RoadmapScrapRepository
 
     @MockK
-    private lateinit var roadmapScrapService: RoadmapScrapService
-
-    @MockK
     private lateinit var userService: UserService
 
     @MockK

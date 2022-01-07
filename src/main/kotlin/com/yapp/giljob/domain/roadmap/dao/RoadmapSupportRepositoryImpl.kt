@@ -8,7 +8,6 @@ import com.yapp.giljob.domain.roadmap.domain.QRoadmapScrap
 import com.yapp.giljob.domain.roadmap.vo.RoadmapSupportVo
 import com.yapp.giljob.domain.user.domain.QAbility.ability
 import com.yapp.giljob.domain.user.domain.QUser
-import com.yapp.giljob.domain.user.domain.User
 
 class RoadmapSupportRepositoryImpl(
     private val query: JPAQueryFactory
