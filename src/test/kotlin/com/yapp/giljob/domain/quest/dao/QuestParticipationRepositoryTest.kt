@@ -24,7 +24,7 @@ class QuestParticipationRepositoryTest @Autowired constructor(
     fun `getQuestParticipationByQuestIdAndParticipantId 성공`() {
 
         val user = User(socialId = "socialId", nickname = "nickname", intro = "intro", position = Position.FRONTEND)
-        val quest = Quest(user = user, isRealQuest = false, name = "quest")
+        val quest = Quest(user = user, isRealQuest = false, name = "quest", position = Position.BACKEND)
 
         val savedUser = userRepository.save(user)
         val savedQuest = questRepository.save(quest)
