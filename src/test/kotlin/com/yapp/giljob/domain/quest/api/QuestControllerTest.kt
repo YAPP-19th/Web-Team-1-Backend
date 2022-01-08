@@ -1,7 +1,6 @@
 package com.yapp.giljob.domain.quest.api
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
 import com.yapp.giljob.domain.subquest.application.SubQuestParticipationService
 import com.yapp.giljob.domain.user.dao.UserRepository
@@ -25,12 +24,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @WebMvcTest(QuestController::class)
-internal class QuestControllerTest : AbstractRestDocs() {
+class QuestControllerTest : AbstractRestDocs() {
 
     private fun <T> any(): T {
         Mockito.any<T>()
         return uninitialized()
     }
+
     private fun <T> uninitialized(): T = null as T
 
     @MockBean
@@ -91,7 +91,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
 
     @Test
     fun getQuestListTest() {
-        given(questService.getQuestList(10, Position.ALL, 4L)).willReturn(
+        given(questService.getQuestList(any(), any())).willReturn(
             listOf(
                 DtoFactory.testQuestResponse().apply { this.id = 9L; this.name = "quest test 9" },
                 DtoFactory.testQuestResponse().apply { this.id = 8L; this.name = "quest test 8" },
@@ -102,7 +102,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
 
         val result = mockMvc.perform(
             get("/api/quests")
-                .param("cursor", "10")
+                .param("page", "0")
                 .param("size", "4")
         ).andDo(print())
 
@@ -114,7 +114,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
                     HeaderDocumentation.responseHeaders(),
                     HeaderDocumentation.responseHeaders(),
                     requestParameters(
-                        parameterWithName("cursor").description("마지막으로 조회된 퀘스트 id, 해당 퀘스트보다 오래된 퀘스트 리스트가 조회됩니다."),
+                        parameterWithName("page").description("페이지 번호"),
                         parameterWithName("size").description("조회할 퀘스트 개수")
                     ),
                     PayloadDocumentation.responseFields(
@@ -161,8 +161,9 @@ internal class QuestControllerTest : AbstractRestDocs() {
 
         result
             .andExpect(status().isOk)
-            .andDo(MockMvcRestDocumentation.document(
-                "quests/info/get",
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "quests/info/get",
                     pathParameters(
                         parameterWithName("questId").description("퀘스트 id")
                     ),

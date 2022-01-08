@@ -2,6 +2,7 @@ package com.yapp.giljob.domain.quest.dao
 
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.domain.Quest
+import com.yapp.giljob.domain.quest.dto.QuestConditionDto
 import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.domain.user.domain.Ability
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.Import
+import org.springframework.data.domain.PageRequest
 
 @DataJpaTest
 @Import(QuerydslTestConfig::class)
@@ -62,17 +64,15 @@ class QuestSupportRepositoryImplTest {
     @Nested
     inner class CursorBasedTest {
         @Test
-        fun `cursorId가 null인 경우 최신순으로 전체 리스트를 불러온다`() {
+        fun `page가 0인 경우 최신순으로 전체 리스트를 불러온다`() {
             // given
-            val cursorId = null
             lastQuestId = questSaveList[questSaveList.size - 1].id!!
 
             // when
             val questList =
-                questRepository.findByIdLessThanAndOrderByIdDesc(
-                    questId = cursorId,
-                    position = Position.ALL,
-                    size = questSaveSize.toLong()
+                questRepository.getQuestList(
+                    QuestConditionDto(position = Position.ALL),
+                    PageRequest.of(0, questSaveSize)
                 )
 
             // then
@@ -80,43 +80,6 @@ class QuestSupportRepositoryImplTest {
             assertEquals(lastQuestId, questList[0].quest.id)
             assertEquals(lastQuestId - 1L, questList[1].quest.id)
             assertEquals(lastQuestId - 2L, questList[2].quest.id)
-        }
-
-        @Test
-        fun `cursorId가 null이 아닌 경우, cursorId - 1 퀘스트부터 최신순으로 리스트를 가져온다`() {
-            // given
-            val cursorId = questSaveList[questSaveList.size - 1].id!! - 1L
-            val size = 3L
-
-            // when
-            val questList = questRepository.findByIdLessThanAndOrderByIdDesc(
-                questId = cursorId,
-                position = Position.ALL,
-                size = size
-            )
-
-            // then
-            assertEquals(size, questList.size.toLong())
-            assertEquals(cursorId - 1L, questList[0].quest.id)
-            assertEquals(cursorId - 2L, questList[1].quest.id)
-            assertEquals(cursorId - 3L, questList[2].quest.id)
-        }
-
-        @Test
-        fun `주어진 퀘스트 리스트 사이즈보다 더 큰 사이즈를 요구하면 리스트 사이즈만큼 가져온다`() {
-            // given
-            val size = questSaveList.size + 1L
-            lastQuestId = questSaveList[questSaveList.size - 1].id!!
-
-            // when
-            val questList = questRepository.findByIdLessThanAndOrderByIdDesc(
-                questId = lastQuestId,
-                position = Position.ALL,
-                size = size
-            )
-
-            // then
-            assertNotEquals(questSaveList.size, questList.size.toLong())
         }
     }
 
@@ -126,16 +89,15 @@ class QuestSupportRepositoryImplTest {
         @Test
         fun `능력치가 존재하면 해당 point를 가져온다`() {
             // given
-            val size = 1L
+            val size = 1
             val point = 100L
             abilityRepository.save(Ability(user = user, position = Position.BACKEND, point = point))
 
             // when
             val questList =
-                questRepository.findByIdLessThanAndOrderByIdDesc(
-                    questId = questSaveList[questSaveList.size - 1].id,
-                    position = Position.ALL,
-                    size = size
+                questRepository.getQuestList(
+                    QuestConditionDto(position = Position.ALL),
+                    PageRequest.of(0, size)
                 )
 
             // then
@@ -145,14 +107,13 @@ class QuestSupportRepositoryImplTest {
         @Test
         fun `능력치가 존재하지 않으면 0을 반환한다`() {
             // given
-            val size = 1L
+            val size = 1
 
             // when
             val questList =
-                questRepository.findByIdLessThanAndOrderByIdDesc(
-                    questId = questSaveList[questSaveList.size - 1].id,
-                    position = Position.ALL,
-                    size = size
+                questRepository.getQuestList(
+                    QuestConditionDto(position = Position.ALL),
+                    PageRequest.of(0, size)
                 )
 
             // then
@@ -182,13 +143,11 @@ class QuestSupportRepositoryImplTest {
         @Test
         fun `ALL 포지션 조회`() {
             // when
-            lastQuestId = questSaveList[questSaveList.size - 1].id!!
-
-            val questList = questRepository.findByIdLessThanAndOrderByIdDesc(
-                questId = lastQuestId + 1L,
-                position = Position.ALL,
-                size = questSaveList.size.toLong()
-            )
+            val questList =
+                questRepository.getQuestList(
+                    QuestConditionDto(position = Position.ALL),
+                    PageRequest.of(0, questSaveList.size)
+                )
 
             // then
             assertEquals(6, questList.size)
@@ -197,15 +156,11 @@ class QuestSupportRepositoryImplTest {
         @Test
         fun `BACKEND 포지션 조회`() {
             // when
-            lastQuestId = questSaveList[questSaveList.size - 1].id!!
-
-            println(lastQuestId)
-
-            val questList = questRepository.findByIdLessThanAndOrderByIdDesc(
-                questId = lastQuestId + 1L,
-                position = Position.BACKEND,
-                size = questSaveList.size.toLong()
-            )
+            val questList =
+                questRepository.getQuestList(
+                    QuestConditionDto(position = Position.BACKEND),
+                    PageRequest.of(0, questSaveList.size)
+                )
 
             // then
             assertEquals(5, questList.size)
@@ -214,13 +169,11 @@ class QuestSupportRepositoryImplTest {
         @Test
         fun `FRONTEND 포지션 조회`() {
             // when
-            lastQuestId = questSaveList[questSaveList.size - 1].id!!
-
-            val questList = questRepository.findByIdLessThanAndOrderByIdDesc(
-                questId = lastQuestId + 1L,
-                position = Position.FRONTEND,
-                size = questSaveList.size.toLong()
-            )
+            val questList =
+                questRepository.getQuestList(
+                    QuestConditionDto(position = Position.FRONTEND),
+                    PageRequest.of(0, questSaveList.size)
+                )
 
             // then
             assertEquals(1, questList.size)

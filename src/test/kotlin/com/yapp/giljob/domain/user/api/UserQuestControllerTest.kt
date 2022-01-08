@@ -1,14 +1,15 @@
 package com.yapp.giljob.domain.user.api
 
-import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.user.application.UserQuestService
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.dto.DtoFactory
 import org.junit.jupiter.api.Test
 import org.mockito.BDDMockito
+import org.mockito.Mockito
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.domain.PageRequest
 import org.springframework.restdocs.headers.HeaderDocumentation
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
@@ -20,6 +21,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 @WebMvcTest(UserQuestController::class)
 class UserQuestControllerTest : AbstractRestDocs() {
 
+    private fun <T> any(): T {
+        Mockito.any<T>()
+        return uninitialized()
+    }
+
+    private fun <T> uninitialized(): T = null as T
+
     @MockBean
     private lateinit var userQuestService: UserQuestService
 
@@ -30,7 +38,7 @@ class UserQuestControllerTest : AbstractRestDocs() {
 
     @Test
     fun getQuestListByUserTest() {
-        BDDMockito.given(userQuestService.getQuestListByUser(userId, 10, Position.ALL, 4L)).willReturn(
+        BDDMockito.given(userQuestService.getQuestListByUser(any(), any())).willReturn(
             listOf(
                 DtoFactory.testQuestResponse().apply { this.id = 9L; this.name = "quest test 9" },
                 DtoFactory.testQuestResponse().apply { this.id = 7L; this.name = "quest test 7" },
@@ -41,7 +49,7 @@ class UserQuestControllerTest : AbstractRestDocs() {
 
         val result = mockMvc.perform(
             RestDocumentationRequestBuilders.get("/api/users/{userId}/quests", userId)
-                .param("cursor", "10")
+                .param("page", "0")
                 .param("size", "4")
         ).andDo(MockMvcResultHandlers.print())
 
@@ -53,8 +61,7 @@ class UserQuestControllerTest : AbstractRestDocs() {
                     HeaderDocumentation.responseHeaders(),
                     HeaderDocumentation.responseHeaders(),
                     RequestDocumentation.requestParameters(
-                        RequestDocumentation.parameterWithName("cursor")
-                            .description("마지막으로 조회된 퀘스트 id, 해당 퀘스트보다 오래된 퀘스트 리스트가 조회됩니다."),
+                        RequestDocumentation.parameterWithName("page").description("페이지 번호"),
                         RequestDocumentation.parameterWithName("size").description("조회할 퀘스트 개수")
                     ),
                     PayloadDocumentation.responseFields(
@@ -93,12 +100,16 @@ class UserQuestControllerTest : AbstractRestDocs() {
 
     @Test
     fun getQuestListByParticipantTest() {
-        BDDMockito.given(userQuestService.getQuestListByParticipant(userId, 10, false, 4L)).willReturn(
+        BDDMockito.given(userQuestService.getQuestListByParticipant(userId, false, PageRequest.of(0, 4))).willReturn(
             listOf(
-                DtoFactory.testQuestByParticipantResponse().apply { this.id = 9L; this.name = "quest test 9"; this.progress = 90},
-                DtoFactory.testQuestByParticipantResponse().apply { this.id = 7L; this.name = "quest test 7"; this.progress = 70 },
-                DtoFactory.testQuestByParticipantResponse().apply { this.id = 6L; this.name = "quest test 6"; this.progress = 33 },
-                DtoFactory.testQuestByParticipantResponse().apply { this.id = 3L; this.name = "quest test 3"; this.progress = 50 },
+                DtoFactory.testQuestByParticipantResponse()
+                    .apply { this.id = 9L; this.name = "quest test 9"; this.progress = 90 },
+                DtoFactory.testQuestByParticipantResponse()
+                    .apply { this.id = 7L; this.name = "quest test 7"; this.progress = 70 },
+                DtoFactory.testQuestByParticipantResponse()
+                    .apply { this.id = 6L; this.name = "quest test 6"; this.progress = 33 },
+                DtoFactory.testQuestByParticipantResponse()
+                    .apply { this.id = 3L; this.name = "quest test 3"; this.progress = 50 },
             )
         )
 
