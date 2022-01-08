@@ -460,11 +460,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_전체_퀘스트_리스트_조회">전체 퀘스트 리스트 조회</a></li>
 </ul>
 </li>
-<li><a href="#_get_apiquestssearch">GET /api/quests/search</a>
-<ul class="sectlevel3">
-<li><a href="#_퀘스트_검색">퀘스트 검색</a></li>
-</ul>
-</li>
 <li><a href="#_get_apiquestscount">GET /api/quests/count</a>
 <ul class="sectlevel3">
 <li><a href="#_랜딩_페이지_퀘스트_수_조회">랜딩 페이지 퀘스트 수 조회</a></li>
@@ -758,7 +753,7 @@ Host: docs.api.com:8080
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/quests?cursor=10&amp;size=4 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/quests?page=0&amp;size=4 HTTP/1.1
 Host: docs.api.com:8080</code></pre>
 </div>
 </div>
@@ -835,297 +830,10 @@ Content-Length: 1400
 }</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. response fields</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Path</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터(퀘스트 리스트)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].id</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 id</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 이름</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].participantCount</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.id</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.nickname</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.position</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 직군</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.point</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.intro</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 자기소개</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].difficulty</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 난이도</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].thumbnail</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 썸네일 url</p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<div class="title">response fields</div>
+<p>include::/Users/ayoung/Dev/SpringBoot/yapp/giljob/build/generated-snippets/quests/get/response-fields.adoc[</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_get_apiquestssearch"><a class="link" href="#_get_apiquestssearch">GET /api/quests/search</a></h3>
-<div class="sect3">
-<h4 id="_퀘스트_검색"><a class="link" href="#_퀘스트_검색">퀘스트 검색</a></h4>
-<div class="listingblock">
-<div class="title">request</div>
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/quests/search?keyword=test&amp;position=BACKEND&amp;size=4&amp;cursor=10 HTTP/1.1
-Host: docs.api.com:8080</code></pre>
-</div>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 4. request fields</caption>
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Parameter</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keyword</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">검색할 키워드, 대소문자 구분없이 퀘스트 이름을 검색합니다.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>position</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">검색할 포지션(BACKEND, FRONTEND) 전체 검색인 경우 생략 가능합니다.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">조회할 퀘스트 개수</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cursor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">마지막으로 조회된 퀘스트 id, 해당 퀘스트보다 오래된 퀘스트 리스트가 조회됩니다.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="listingblock">
-<div class="title">response</div>
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json;charset=UTF-8
-Content-Length: 1390
-
-{
-  "status" : 200,
-  "message" : "퀘스트 검색 성공입니다.",
-  "data" : [ {
-    "id" : 9,
-    "name" : "quest Test 9",
-    "position" : "BACKEND",
-    "writer" : {
-      "id" : 1,
-      "nickname" : "testNickname",
-      "position" : "BACKEND",
-      "point" : 100,
-      "intro" : "자기소개 테스트"
-    },
-    "difficulty" : 1,
-    "thumbnail" : "test.png",
-    "participantCount" : 100
-  }, {
-    "id" : 8,
-    "name" : "quest TEST 8",
-    "position" : "BACKEND",
-    "writer" : {
-      "id" : 1,
-      "nickname" : "testNickname",
-      "position" : "BACKEND",
-      "point" : 100,
-      "intro" : "자기소개 테스트"
-    },
-    "difficulty" : 1,
-    "thumbnail" : "test.png",
-    "participantCount" : 100
-  }, {
-    "id" : 7,
-    "name" : "quest test 7",
-    "position" : "BACKEND",
-    "writer" : {
-      "id" : 1,
-      "nickname" : "testNickname",
-      "position" : "BACKEND",
-      "point" : 100,
-      "intro" : "자기소개 테스트"
-    },
-    "difficulty" : 1,
-    "thumbnail" : "test.png",
-    "participantCount" : 100
-  }, {
-    "id" : 6,
-    "name" : "quest test 6",
-    "position" : "BACKEND",
-    "writer" : {
-      "id" : 1,
-      "nickname" : "testNickname",
-      "position" : "BACKEND",
-      "point" : 100,
-      "intro" : "자기소개 테스트"
-    },
-    "difficulty" : 1,
-    "thumbnail" : "test.png",
-    "participantCount" : 100
-  } ]
-}</code></pre>
-</div>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. response fields</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Path</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>status</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터(퀘스트 리스트)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].id</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 id</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 이름</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].participantCount</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.id</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.nickname</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.position</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 직군</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.point</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.intro</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 자기소개</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].difficulty</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 난이도</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].thumbnail</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 썸네일 url</p></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="sect2">
@@ -1161,7 +869,7 @@ Content-Length: 188
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. response fields</caption>
+<caption class="title">Table 3. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1244,7 +952,7 @@ Content-Length: 222
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. response fields</caption>
+<caption class="title">Table 4. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1333,7 +1041,7 @@ Content-Length: 458
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. /api/quests/{questId}/info</caption>
+<caption class="title">Table 5. /api/quests/{questId}/info</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1352,7 +1060,7 @@ Content-Length: 458
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 9. response fields</caption>
+<caption class="title">Table 6. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1455,7 +1163,7 @@ Content-Length: 458
 <div class="sect3">
 <h4 id="_로그인한_유저에_대한_퀘스트의_상태_정보_조회"><a class="link" href="#_로그인한_유저에_대한_퀘스트의_상태_정보_조회">로그인한 유저에 대한 퀘스트의 상태 정보 조회</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. /api/quests/{questId}/participation/status</caption>
+<caption class="title">Table 7. /api/quests/{questId}/participation/status</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1498,7 +1206,7 @@ Content-Length: 152
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. response fields</caption>
+<caption class="title">Table 8. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1536,7 +1244,7 @@ Content-Length: 152
 <div class="sect3">
 <h4 id="_퀘스트의_서브_퀘스트_진행_현황_조회"><a class="link" href="#_퀘스트의_서브_퀘스트_진행_현황_조회">퀘스트의 서브 퀘스트 진행 현황 조회</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. /api/quests/{questId}/subquests</caption>
+<caption class="title">Table 9. /api/quests/{questId}/subquests</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1583,7 +1291,7 @@ Content-Length: 380
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 13. response fields</caption>
+<caption class="title">Table 10. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1654,7 +1362,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 14. /api/quests/{questId}/participation</caption>
+<caption class="title">Table 11. /api/quests/{questId}/participation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1690,7 +1398,7 @@ Content-Length: 88
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 15. response fields</caption>
+<caption class="title">Table 12. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1736,7 +1444,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 16. /api/quests/{questId}/participation</caption>
+<caption class="title">Table 13. /api/quests/{questId}/participation</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1772,7 +1480,7 @@ Content-Length: 88
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 17. response fields</caption>
+<caption class="title">Table 14. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1841,7 +1549,7 @@ Content-Length: 95
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 18. request fields</caption>
+<caption class="title">Table 15. request fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1863,7 +1571,7 @@ Content-Length: 95
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 19. response fields</caption>
+<caption class="title">Table 16. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1915,7 +1623,7 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1501
+Content-Length: 1502
 
 {
   "status" : 200,
@@ -1924,7 +1632,7 @@ Content-Length: 1501
     "totalReviewCount" : 10,
     "reviewList" : [ {
       "review" : "리뷰 1",
-      "reviewCreatedAt" : "2022-01-08T11:13:26.764683",
+      "reviewCreatedAt" : "2022-01-09T02:31:44.891456",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1934,7 +1642,7 @@ Content-Length: 1501
       }
     }, {
       "review" : "리뷰 2",
-      "reviewCreatedAt" : "2022-01-08T11:13:26.76473",
+      "reviewCreatedAt" : "2022-01-09T02:31:44.891502",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1944,7 +1652,7 @@ Content-Length: 1501
       }
     }, {
       "review" : "리뷰 3",
-      "reviewCreatedAt" : "2022-01-08T11:13:26.764735",
+      "reviewCreatedAt" : "2022-01-09T02:31:44.891507",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1954,7 +1662,7 @@ Content-Length: 1501
       }
     }, {
       "review" : "리뷰 4",
-      "reviewCreatedAt" : "2022-01-08T11:13:26.764739",
+      "reviewCreatedAt" : "2022-01-09T02:31:44.891511",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1964,7 +1672,7 @@ Content-Length: 1501
       }
     }, {
       "review" : "리뷰 5",
-      "reviewCreatedAt" : "2022-01-08T11:13:26.764743",
+      "reviewCreatedAt" : "2022-01-09T02:31:44.891514",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1978,7 +1686,7 @@ Content-Length: 1501
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 20. request fields</caption>
+<caption class="title">Table 17. request fields</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2001,7 +1709,7 @@ Content-Length: 1501
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 21. response fields</caption>
+<caption class="title">Table 18. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2091,7 +1799,7 @@ Content-Length: 1501
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/1/quests?cursor=10&amp;size=4 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/1/quests?page=0&amp;size=4 HTTP/1.1
 Host: docs.api.com:8080</code></pre>
 </div>
 </div>
@@ -2169,7 +1877,7 @@ Content-Length: 1420
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 22. response fields</caption>
+<caption class="title">Table 19. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2264,12 +1972,12 @@ Content-Length: 1420
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/1/quests/participation?cursor=10&amp;completed=false&amp;size=4 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/1/quests/participation?completed=false&amp;page=0&amp;size=4 HTTP/1.1
 Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 23. request fields</caption>
+<caption class="title">Table 20. request fields</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2282,8 +1990,8 @@ Host: docs.api.com:8080</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cursor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">마지막으로 조회된 퀘스트 id, 해당 퀘스트보다 오래된 퀘스트 리스트가 조회됩니다.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">페이지 번호</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
@@ -2373,7 +2081,7 @@ Content-Length: 1460
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 24. response fields</caption>
+<caption class="title">Table 21. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2484,7 +2192,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 25. /api/subquests/{subQuestId}/complete</caption>
+<caption class="title">Table 22. /api/subquests/{subQuestId}/complete</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2513,7 +2221,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 26. response fields</caption>
+<caption class="title">Table 23. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2559,7 +2267,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 27. /api/subquests/{subQuestId}/cancel</caption>
+<caption class="title">Table 24. /api/subquests/{subQuestId}/cancel</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2588,7 +2296,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 28. response fields</caption>
+<caption class="title">Table 25. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2638,7 +2346,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 29. /api/roadmaps/{roadmapId}</caption>
+<caption class="title">Table 26. /api/roadmaps/{roadmapId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2702,7 +2410,7 @@ Content-Length: 707
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 30. response fields</caption>
+<caption class="title">Table 27. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2812,7 +2520,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 31. request parameter</caption>
+<caption class="title">Table 28. request parameter</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2881,7 +2589,7 @@ Content-Length: 836
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 32. response fields</caption>
+<caption class="title">Table 29. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -2986,7 +2694,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 33. request fields</caption>
+<caption class="title">Table 30. request fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3045,7 +2753,7 @@ Content-Length: 88
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 34. response fields</caption>
+<caption class="title">Table 31. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3091,7 +2799,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 35. /api/roadmaps/{roadmapId}</caption>
+<caption class="title">Table 32. /api/roadmaps/{roadmapId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3127,7 +2835,7 @@ Content-Length: 88
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 36. response fields</caption>
+<caption class="title">Table 33. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3173,7 +2881,7 @@ Host: docs.api.com:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 37. /api/roadmaps/{roadmapId}/scrap</caption>
+<caption class="title">Table 34. /api/roadmaps/{roadmapId}/scrap</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -3209,7 +2917,7 @@ Content-Length: 91
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 38. response fields</caption>
+<caption class="title">Table 35. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3320,7 +3028,7 @@ Content-Length: 1091
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 39. response fields</caption>
+<caption class="title">Table 36. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3488,7 +3196,7 @@ Content-Length: 1562
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 40. response fields</caption>
+<caption class="title">Table 37. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3603,13 +3311,13 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxNjA4MDEwLCJleHAiOjI2NDE2MDgwMTB9.Mn0kwa5QVgjziAEunP31mGlK5o8tAY5BXLDS7bcOpwU"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxNjYzMTE3LCJleHAiOjI2NDE2NjMxMTd9.aMXDffCivNlEC1SivZZxWtYwwmIlAJJ0ZkPa0_HGBzA"
   }
 }</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 41. response</caption>
+<caption class="title">Table 38. response</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3676,13 +3384,13 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxNjA4MDA5LCJleHAiOjI2NDE2MDgwMDl9.2WuzFoZlEAr0XQKJeJMTOfmHHY2LQQiNrOndxmDOFh8"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxNjYzMTE1LCJleHAiOjI2NDE2NjMxMTV9.u9QVWCXzWpsYU5fhHr905xxEuR-0V0eGHLQjNYrZvMs"
   }
 }</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 42. response</caption>
+<caption class="title">Table 39. response</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3768,7 +3476,7 @@ Content-Length: 225
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 43. response fields</caption>
+<caption class="title">Table 40. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3874,7 +3582,7 @@ Content-Length: 473
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 44. response fields</caption>
+<caption class="title">Table 41. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3987,7 +3695,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 45. request</caption>
+<caption class="title">Table 42. request</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -4024,7 +3732,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 46. response fields</caption>
+<caption class="title">Table 43. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -4076,7 +3784,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 47. request</caption>
+<caption class="title">Table 44. request</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -4108,7 +3816,7 @@ Host: docs.api.com:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 48. response fields</caption>
+<caption class="title">Table 45. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -4149,7 +3857,7 @@ Host: docs.api.com:8080
 <div class="sect2">
 <h3 id="_post_apiupload_업로드"><a class="link" href="#_post_apiupload_업로드">POST /api/upload 업로드</a></h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 49. request</caption>
+<caption class="title">Table 46. request</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -4199,7 +3907,7 @@ Content-Length: 198
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 50. response fields</caption>
+<caption class="title">Table 47. response fields</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -4242,7 +3950,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-01-08 11:08:24 +0900
+Last updated 2022-01-09 02:40:48 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

@@ -115,8 +115,8 @@ class UserQuestControllerTest : AbstractRestDocs() {
 
         val result = mockMvc.perform(
             RestDocumentationRequestBuilders.get("/api/users/{userId}/quests/participation", userId)
-                .param("cursor", "10")
                 .param("completed", "false")
+                .param("page", "0")
                 .param("size", "4")
         ).andDo(MockMvcResultHandlers.print())
 
@@ -128,8 +128,7 @@ class UserQuestControllerTest : AbstractRestDocs() {
                     HeaderDocumentation.responseHeaders(),
                     HeaderDocumentation.responseHeaders(),
                     RequestDocumentation.requestParameters(
-                        RequestDocumentation.parameterWithName("cursor")
-                            .description("마지막으로 조회된 퀘스트 id, 해당 퀘스트보다 오래된 퀘스트 리스트가 조회됩니다."),
+                        RequestDocumentation.parameterWithName("page").description("페이지 번호"),
                         RequestDocumentation.parameterWithName("size").description("조회할 퀘스트 개수"),
                         RequestDocumentation.parameterWithName("completed").description("완료 퀘스트 여부(기본값: false)")
                     ),
