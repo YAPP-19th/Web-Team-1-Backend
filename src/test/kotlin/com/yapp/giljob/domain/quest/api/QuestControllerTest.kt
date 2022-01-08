@@ -211,7 +211,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
             .willReturn(DtoFactory.testQuestDetailSubQuestResponseDto())
 
         val result = mockMvc.perform(
-            get("/api/quests/{questId}/subquest", 1)
+            get("/api/quests/{questId}/subquests", 1)
                 .header("Authorization", "Access Token")
         ).andDo(print())
 
@@ -219,7 +219,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
             .andExpect(status().isOk)
             .andDo(
                 MockMvcRestDocumentation.document(
-                    "quests/subquest/get",
+                    "quests/{questId}/subquests/get",
                     pathParameters(
                         parameterWithName("questId").description("퀘스트 id")
                     ),
