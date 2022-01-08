@@ -9,6 +9,7 @@ import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipatio
 import com.yapp.giljob.domain.quest.vo.QuestReviewVo
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.user.domain.QAbility.ability
+import org.springframework.data.domain.Pageable
 
 class QuestParticipationSupportRepositoryImpl(
     private val query: JPAQueryFactory
@@ -27,12 +28,7 @@ class QuestParticipationSupportRepositoryImpl(
             .fetchCount()
     }
 
-    override fun findByParticipantId(
-        questId: Long?,
-        participantId: Long,
-        isCompleted: Boolean,
-        size: Long
-    ): List<QuestSupportVo> {
+    override fun findByParticipantId(participantId: Long, isCompleted: Boolean, pageable: Pageable): List<QuestSupportVo> {
         val quest = questParticipation.quest
         val questParticipationCount = QQuestParticipation("questParticipationCount")
 
@@ -47,14 +43,15 @@ class QuestParticipationSupportRepositoryImpl(
                 )
             ).from(questParticipation)
             .where(
-                (questParticipation.participant.id.eq(participantId)).and(eqIsCompleted(isCompleted)).and(ltQuestId(questId))
+                (questParticipation.participant.id.eq(participantId)).and(eqIsCompleted(isCompleted))
             )
             .leftJoin(ability).on(
                 ability.position.eq(quest.user.position)
                     .and(ability.user.id.eq(quest.user.id))
             )
-        .orderBy(quest.id.desc())
-            .limit(size)
+            .orderBy(quest.id.desc())
+            .limit(pageable.pageSize.toLong())
+            .offset(pageable.pageNumber * pageable.pageSize.toLong())
             .fetch()
     }
 
@@ -82,10 +79,6 @@ class QuestParticipationSupportRepositoryImpl(
             .limit(size)
             .fetch()
     }
-
-    private fun ltQuestId(questId: Long?): BooleanExpression? {
-        return questId?.let { questParticipation.quest.id.lt(questId) }
- }
 
     private fun eqIsCompleted(isCompleted: Boolean): BooleanExpression {
         return questParticipation.isCompleted.eq(isCompleted)

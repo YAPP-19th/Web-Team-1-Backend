@@ -95,8 +95,6 @@ class QuestSupportRepositoryImpl(
             .fetch()
     }
 
-    private fun ltQuestId(questId: Long?) = questId?.let { quest.id.lt(questId) }
-
     private fun eqPosition(position: Position): BooleanExpression? {
         return if (position == Position.ALL) null else quest.position.eq(position)
     }

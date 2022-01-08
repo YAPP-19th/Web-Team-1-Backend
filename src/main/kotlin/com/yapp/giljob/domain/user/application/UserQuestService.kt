@@ -35,11 +35,10 @@ class UserQuestService(
     @Transactional(readOnly = true)
     fun getQuestListByParticipant(
         participantId: Long,
-        questId: Long?,
         isCompleted: Boolean,
-        size: Long
+        pageable: Pageable
     ): List<QuestByParticipantResponseDto> {
-        val questList = questParticipationRepository.findByParticipantId(questId, participantId, isCompleted, size)
+        val questList = questParticipationRepository.findByParticipantId(participantId, isCompleted, pageable)
 
         if (isCompleted) {
             return getCompletedQuestListByParticipant(questList)
