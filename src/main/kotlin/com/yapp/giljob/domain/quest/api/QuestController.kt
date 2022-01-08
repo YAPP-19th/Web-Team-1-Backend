@@ -50,7 +50,7 @@ class QuestController(
         )
     }
 
-    @GetMapping("/{questId}/subquest")
+    @GetMapping("/{questId}/subquests")
     fun getQuestDetailSubQuestProgress(
         @PathVariable("questId") questId: Long,
         @CurrentUser user: User): ResponseEntity<BaseResponse<QuestDetailSubQuestResponseDto>> {

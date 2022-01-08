@@ -485,7 +485,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_로그인한_유저에_대한_퀘스트의_상태_정보_조회">로그인한 유저에 대한 퀘스트의 상태 정보 조회</a></li>
 </ul>
 </li>
-<li><a href="#_get_apiquestsquestidsubquest">GET /api/quests/{questId}/subquest</a>
+<li><a href="#_get_apiquestsquestidsubquests">GET /api/quests/{questId}/subquests</a>
 <ul class="sectlevel3">
 <li><a href="#_퀘스트의_서브_퀘스트_진행_현황_조회">퀘스트의 서브 퀘스트 진행 현황 조회</a></li>
 </ul>
@@ -1532,11 +1532,11 @@ Content-Length: 152
 </div>
 </div>
 <div class="sect2">
-<h3 id="_get_apiquestsquestidsubquest"><a class="link" href="#_get_apiquestsquestidsubquest">GET /api/quests/{questId}/subquest</a></h3>
+<h3 id="_get_apiquestsquestidsubquests"><a class="link" href="#_get_apiquestsquestidsubquests">GET /api/quests/{questId}/subquests</a></h3>
 <div class="sect3">
 <h4 id="_퀘스트의_서브_퀘스트_진행_현황_조회"><a class="link" href="#_퀘스트의_서브_퀘스트_진행_현황_조회">퀘스트의 서브 퀘스트 진행 현황 조회</a></h4>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. /api/quests/{questId}/subquest</caption>
+<caption class="title">Table 12. /api/quests/{questId}/subquests</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1915,7 +1915,7 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1502
+Content-Length: 1501
 
 {
   "status" : 200,
@@ -1924,7 +1924,7 @@ Content-Length: 1502
     "totalReviewCount" : 10,
     "reviewList" : [ {
       "review" : "리뷰 1",
-      "reviewCreatedAt" : "2022-01-08T01:08:35.234899",
+      "reviewCreatedAt" : "2022-01-08T11:13:26.764683",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1934,7 +1934,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 2",
-      "reviewCreatedAt" : "2022-01-08T01:08:35.234929",
+      "reviewCreatedAt" : "2022-01-08T11:13:26.76473",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1944,7 +1944,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 3",
-      "reviewCreatedAt" : "2022-01-08T01:08:35.234931",
+      "reviewCreatedAt" : "2022-01-08T11:13:26.764735",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1954,7 +1954,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 4",
-      "reviewCreatedAt" : "2022-01-08T01:08:35.234933",
+      "reviewCreatedAt" : "2022-01-08T11:13:26.764739",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1964,7 +1964,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 5",
-      "reviewCreatedAt" : "2022-01-08T01:08:35.234935",
+      "reviewCreatedAt" : "2022-01-08T11:13:26.764743",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -2660,6 +2660,9 @@ Host: docs.api.com:8080</code></pre>
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
 Content-Length: 707
 
@@ -2831,6 +2834,9 @@ Host: docs.api.com:8080</code></pre>
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
 Content-Length: 836
 
@@ -3025,6 +3031,9 @@ Host: docs.api.com:8080
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
 Content-Length: 88
 
@@ -3104,6 +3113,9 @@ Host: docs.api.com:8080</code></pre>
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
 Content-Length: 88
 
@@ -3250,6 +3262,9 @@ Host: docs.api.com:8080</code></pre>
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
 Content-Length: 1091
 
@@ -3393,6 +3408,9 @@ Host: docs.api.com:8080</code></pre>
 <div class="title">response</div>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
 Content-Length: 1562
 
@@ -3585,7 +3603,7 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxNTcxNzIwLCJleHAiOjI2NDE1NzE3MjB9.-gqoh5sF9iEZ4xGqwi1nL9upSOzrwYIi-hC48liv_iI"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxNjA4MDEwLCJleHAiOjI2NDE2MDgwMTB9.Mn0kwa5QVgjziAEunP31mGlK5o8tAY5BXLDS7bcOpwU"
   }
 }</code></pre>
 </div>
@@ -3658,7 +3676,7 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxNTcxNzE5LCJleHAiOjI2NDE1NzE3MTl9.LKqATAIJpd63AeQvklERgBabWor3IMv7VfZ_hnUx8tE"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxNjA4MDA5LCJleHAiOjI2NDE2MDgwMDl9.2WuzFoZlEAr0XQKJeJMTOfmHHY2LQQiNrOndxmDOFh8"
   }
 }</code></pre>
 </div>
@@ -4224,7 +4242,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-01-08 01:03:49 +0900
+Last updated 2022-01-08 11:08:24 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
