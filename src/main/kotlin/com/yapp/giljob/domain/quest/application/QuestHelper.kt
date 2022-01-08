@@ -19,7 +19,6 @@ class QuestHelper {
         fun countQuestsByParticipantIdAndCompleted(
             questParticipationRepository: QuestParticipationRepository,
             participantId: Long
-        ) =
-            questParticipationRepository.countByParticipantIdAndIsCompletedTrue(participantId)
+        ) = questParticipationRepository.countByParticipantIdAndIsCompletedTrue(participantId)
     }
 }

@@ -1,8 +1,8 @@
 package com.yapp.giljob.domain.quest.application
 
-import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
+import com.yapp.giljob.domain.quest.dto.QuestConditionDto
 import com.yapp.giljob.domain.quest.dto.request.QuestRequestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
@@ -16,6 +16,7 @@ import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -40,9 +41,8 @@ class QuestService(
     }
 
     @Transactional(readOnly = true)
-    fun getQuestList(questId: Long?, position: Position, size: Long): List<QuestResponseDto> {
-        val questList =
-            questRepository.findByIdLessThanAndOrderByIdDesc(questId = questId, position = position, size = size)
+    fun getQuestList(conditionDto: QuestConditionDto, pageable: Pageable): List<QuestResponseDto> {
+        val questList = questRepository.getQuestList(conditionDto, pageable)
 
         return questList.map {
             questMapper.toDto(it, userMapper.toDto(it.quest.user, it.point))
