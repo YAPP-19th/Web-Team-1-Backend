@@ -1,7 +1,6 @@
 package com.yapp.giljob.domain.quest.api
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
 import com.yapp.giljob.domain.subquest.application.SubQuestParticipationService
 import com.yapp.giljob.domain.user.dao.UserRepository
@@ -25,12 +24,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @WebMvcTest(QuestController::class)
-internal class QuestControllerTest : AbstractRestDocs() {
+class QuestControllerTest : AbstractRestDocs() {
 
     private fun <T> any(): T {
         Mockito.any<T>()
         return uninitialized()
     }
+
     private fun <T> uninitialized(): T = null as T
 
     @MockBean
@@ -91,18 +91,11 @@ internal class QuestControllerTest : AbstractRestDocs() {
 
     @Test
     fun getQuestListTest() {
-        given(questService.getQuestList(10, Position.ALL, 4L)).willReturn(
-            listOf(
-                DtoFactory.testQuestResponse().apply { this.id = 9L; this.name = "quest test 9" },
-                DtoFactory.testQuestResponse().apply { this.id = 8L; this.name = "quest test 8" },
-                DtoFactory.testQuestResponse().apply { this.id = 7L; this.name = "quest test 7" },
-                DtoFactory.testQuestResponse().apply { this.id = 6L; this.name = "quest test 6" },
-            )
-        )
+        given(questService.getQuestList(any(), any())).willReturn(DtoFactory.testQuestResponse())
 
         val result = mockMvc.perform(
             get("/api/quests")
-                .param("cursor", "10")
+                .param("page", "0")
                 .param("size", "4")
         ).andDo(print())
 
@@ -114,7 +107,7 @@ internal class QuestControllerTest : AbstractRestDocs() {
                     HeaderDocumentation.responseHeaders(),
                     HeaderDocumentation.responseHeaders(),
                     requestParameters(
-                        parameterWithName("cursor").description("마지막으로 조회된 퀘스트 id, 해당 퀘스트보다 오래된 퀘스트 리스트가 조회됩니다."),
+                        parameterWithName("page").description("페이지 번호"),
                         parameterWithName("size").description("조회할 퀘스트 개수")
                     ),
                     PayloadDocumentation.responseFields(
@@ -124,27 +117,29 @@ internal class QuestControllerTest : AbstractRestDocs() {
                             .description("성공 메세지"),
                         PayloadDocumentation.fieldWithPath("data")
                             .description("응답 데이터(퀘스트 리스트)"),
-                        PayloadDocumentation.fieldWithPath("data[*].id")
+                        PayloadDocumentation.fieldWithPath("data.totalCount")
+                            .description("퀘스트 전체 개수"),
+                        PayloadDocumentation.fieldWithPath("data.questList[*].id")
                             .description("퀘스트 id"),
-                        PayloadDocumentation.fieldWithPath("data[*].name")
+                        PayloadDocumentation.fieldWithPath("data.questList[*].name")
                             .description("퀘스트 이름"),
-                        PayloadDocumentation.fieldWithPath("data[*].position")
+                        PayloadDocumentation.fieldWithPath("data.questList[*].position")
                             .description("퀘스트 카테고리(position)"),
-                        PayloadDocumentation.fieldWithPath("data[*].participantCount")
+                        PayloadDocumentation.fieldWithPath("data.questList[*].participantCount")
                             .description("퀘스트 참여자 수"),
-                        PayloadDocumentation.fieldWithPath("data[*].writer.id")
+                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.id")
                             .description("퀘스트 작성자 id"),
-                        PayloadDocumentation.fieldWithPath("data[*].writer.nickname")
+                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.nickname")
                             .description("퀘스트 작성자 nickname"),
-                        PayloadDocumentation.fieldWithPath("data[*].writer.position")
+                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.position")
                             .description("퀘스트 작성자 직군"),
-                        PayloadDocumentation.fieldWithPath("data[*].writer.point")
+                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.point")
                             .description("퀘스트 작성자 능력치"),
-                        PayloadDocumentation.fieldWithPath("data[*].writer.intro")
+                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.intro")
                             .description("퀘스트 작성자 자기소개"),
-                        PayloadDocumentation.fieldWithPath("data[*].difficulty")
+                        PayloadDocumentation.fieldWithPath("data.questList[*].difficulty")
                             .description("퀘스트 난이도"),
-                        PayloadDocumentation.fieldWithPath("data[*].thumbnail")
+                        PayloadDocumentation.fieldWithPath("data.questList[*].thumbnail")
                             .description("퀘스트 썸네일 url"),
                     )
                 )
@@ -161,8 +156,9 @@ internal class QuestControllerTest : AbstractRestDocs() {
 
         result
             .andExpect(status().isOk)
-            .andDo(MockMvcRestDocumentation.document(
-                "quests/info/get",
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "quests/info/get",
                     pathParameters(
                         parameterWithName("questId").description("퀘스트 id")
                     ),

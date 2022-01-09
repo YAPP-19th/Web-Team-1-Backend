@@ -1,16 +1,14 @@
 package com.yapp.giljob.domain.quest.dao
 
-import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.dto.QuestConditionDto
 import com.yapp.giljob.domain.quest.vo.QuestPositionCountVo
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
+import com.yapp.giljob.domain.quest.vo.QuestListVo
+import org.springframework.data.domain.Pageable
 
 interface QuestSupportRepository {
-    fun findByIdLessThanAndOrderByIdDesc(questId: Long?, position: Position, userId: Long? = null, size: Long): List<QuestSupportVo>
     fun countParticipantsByQuestId(questId: Long): Long
-
-    fun search(keyword: String, position: Position, size: Long, questId: Long?): List<QuestSupportVo>
-
     fun findByQuestId(questId: Long): QuestSupportVo?
-
+    fun getQuestList(conditionDto: QuestConditionDto, pageable: Pageable): QuestListVo
     fun getQuestPositionCount(): List<QuestPositionCountVo>
 }
