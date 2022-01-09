@@ -5,6 +5,7 @@ import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.dto.QuestConditionDto
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
@@ -24,12 +25,12 @@ class UserQuestService(
     private val userMapper: UserMapper
 ) {
     @Transactional(readOnly = true)
-    fun getQuestListByUser(conditionDto: QuestConditionDto, pageable: Pageable): List<QuestResponseDto> {
-        val questList = questRepository.getQuestList(conditionDto, pageable)
+    fun getQuestListByUser(conditionDto: QuestConditionDto, pageable: Pageable): QuestResponseDto<QuestDetailResponseDto> {
+        val questListVo = questRepository.getQuestList(conditionDto, pageable)
 
-        return questList.map {
+        return QuestResponseDto(questListVo.totalCount, questListVo.questList.map {
             questMapper.toDto(it, userMapper.toDto(it.quest.user, it.point))
-        }
+        })
     }
 
     @Transactional(readOnly = true)
@@ -37,18 +38,18 @@ class UserQuestService(
         participantId: Long,
         isCompleted: Boolean,
         pageable: Pageable
-    ): List<QuestByParticipantResponseDto> {
-        val questList = questParticipationRepository.findByParticipantId(participantId, isCompleted, pageable)
+    ): QuestResponseDto<QuestByParticipantResponseDto> {
+        val questListVo = questParticipationRepository.findByParticipantId(participantId, isCompleted, pageable)
 
         if (isCompleted) {
-            return getCompletedQuestListByParticipant(questList)
+            return QuestResponseDto(questListVo.totalCount, getCompletedQuestListByParticipant(questListVo.questList))
         }
 
         val subQuestCompletedCountList =
             subQuestParticipationRepository.countSubQuestCompletedByParticipantId(participantId)
                 .associateBy { it.questId }
 
-        return getNotCompletedQuestListByParticipant(questList, subQuestCompletedCountList)
+        return QuestResponseDto(questListVo.totalCount, getNotCompletedQuestListByParticipant(questListVo.questList, subQuestCompletedCountList))
     }
 
     private fun getCompletedQuestListByParticipant(questList: List<QuestSupportVo>) =

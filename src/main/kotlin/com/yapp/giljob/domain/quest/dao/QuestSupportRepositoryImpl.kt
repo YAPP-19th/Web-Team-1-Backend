@@ -13,6 +13,7 @@ import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipatio
 import com.yapp.giljob.domain.quest.dto.QuestConditionDto
 import com.yapp.giljob.domain.quest.vo.QuestPositionCountVo
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
+import com.yapp.giljob.domain.quest.vo.QuestListVo
 import com.yapp.giljob.domain.user.domain.QUser.user
 import org.springframework.data.domain.Pageable
 
@@ -42,22 +43,30 @@ class QuestSupportRepositoryImpl(
             .fetchOne()
     }
 
-    override fun getQuestList(conditionDto: QuestConditionDto, pageable: Pageable): List<QuestSupportVo> {
+    override fun getQuestList(conditionDto: QuestConditionDto, pageable: Pageable): QuestListVo {
         val condition = BooleanBuilder()
             .and(eqRealQuest())
             .and(eqPosition(conditionDto.position))
-            .and(likeName(conditionDto.keyword)?.or(eqUserId(conditionDto.userId)))
+            .and(likeName(conditionDto.keyword)) //?.or(eqUserId(conditionDto.userId)))
 
-        val idList = query
+        if (conditionDto.userId != null) {
+            condition.and(eqUserId(conditionDto.userId))
+        }
+
+        val totalIdList = query
             .select(quest.id)
             .from(quest)
             .where(condition)
             .orderBy(quest.id.desc())
+
+        val totalCount = totalIdList.fetchCount()
+
+        val idList = totalIdList
             .limit(pageable.pageSize.toLong())
             .offset(pageable.pageNumber * pageable.pageSize.toLong())
             .fetch()
 
-        return if (idList.isEmpty()) {
+        val questList = if (idList.isEmpty()) {
             mutableListOf()
         } else {
             query
@@ -80,6 +89,8 @@ class QuestSupportRepositoryImpl(
                 .orderBy(quest.id.desc())
                 .fetch()
         }
+
+        return QuestListVo(totalCount, questList)
     }
 
     override fun getQuestPositionCount(): List<QuestPositionCountVo> {

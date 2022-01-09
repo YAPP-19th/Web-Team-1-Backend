@@ -5,6 +5,7 @@ import com.yapp.giljob.domain.quest.application.QuestService
 import com.yapp.giljob.domain.quest.dto.QuestConditionDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailSubQuestResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.subquest.application.SubQuestParticipationService
@@ -38,7 +39,7 @@ class QuestController(
         @RequestParam(required = false, defaultValue = "ALL") position: Position,
         @RequestParam(required = false) keyword: String?,
         @PageableDefault(size = 16) pageable: Pageable
-    ): ResponseEntity<BaseResponse<List<QuestResponseDto>>> {
+    ): ResponseEntity<BaseResponse<QuestResponseDto<QuestDetailResponseDto>>> {
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK,

@@ -36,7 +36,7 @@ class DtoFactory {
             subQuestList = listOf(SubQuestRequestDto("sub quest 1"), SubQuestRequestDto("sub quest 2"))
         )
 
-        fun testQuestResponse() = QuestResponseDto(
+        fun testQuestDetailResponse() = QuestDetailResponseDto(
             id = 1L,
             name = "test quest",
             position = Position.BACKEND,
@@ -52,7 +52,36 @@ class DtoFactory {
             )
         )
 
-        fun testQuestByParticipantResponse() = QuestByParticipantResponseDto(
+        fun testQuestResponse(): QuestResponseDto<QuestDetailResponseDto> {
+            val questList = listOf(
+                testQuestDetailResponse().apply { this.id = 9L; this.name = "quest test 9" },
+                testQuestDetailResponse().apply { this.id = 8L; this.name = "quest test 8" },
+                testQuestDetailResponse().apply { this.id = 7L; this.name = "quest test 7" },
+                testQuestDetailResponse().apply { this.id = 6L; this.name = "quest test 6" },
+            )
+            return QuestResponseDto(
+                questList.size.toLong(), questList
+            )
+        }
+
+
+        fun testQuestByParticipantResponse(): QuestResponseDto<QuestByParticipantResponseDto> {
+            val questList = listOf(
+                testQuestDetailByParticipantResponse()
+                    .apply { this.id = 9L; this.name = "quest test 9"; this.progress = 90 },
+                testQuestDetailByParticipantResponse()
+                    .apply { this.id = 7L; this.name = "quest test 7"; this.progress = 70 },
+                testQuestDetailByParticipantResponse()
+                    .apply { this.id = 6L; this.name = "quest test 6"; this.progress = 33 },
+                testQuestDetailByParticipantResponse()
+                    .apply { this.id = 3L; this.name = "quest test 3"; this.progress = 50 },
+            )
+            return QuestResponseDto(
+                questList.size.toLong(), questList
+            )
+        }
+
+        fun testQuestDetailByParticipantResponse() = QuestByParticipantResponseDto(
             id = 1L,
             name = "test quest",
             position = Position.BACKEND,

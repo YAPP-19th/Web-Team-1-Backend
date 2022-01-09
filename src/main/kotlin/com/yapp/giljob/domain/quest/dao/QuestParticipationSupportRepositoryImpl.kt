@@ -8,6 +8,7 @@ import com.yapp.giljob.domain.quest.domain.QQuestParticipation
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
 import com.yapp.giljob.domain.quest.vo.QuestReviewVo
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
+import com.yapp.giljob.domain.quest.vo.QuestListVo
 import com.yapp.giljob.domain.user.domain.QAbility.ability
 import org.springframework.data.domain.Pageable
 
@@ -28,11 +29,11 @@ class QuestParticipationSupportRepositoryImpl(
             .fetchCount()
     }
 
-    override fun findByParticipantId(participantId: Long, isCompleted: Boolean, pageable: Pageable): List<QuestSupportVo> {
+    override fun findByParticipantId(participantId: Long, isCompleted: Boolean, pageable: Pageable): QuestListVo {
         val quest = questParticipation.quest
         val questParticipationCount = QQuestParticipation("questParticipationCount")
 
-        return query
+        val totalQuestList = query
             .select(
                 Projections.constructor(
                     QuestSupportVo::class.java,
@@ -50,12 +51,22 @@ class QuestParticipationSupportRepositoryImpl(
                     .and(ability.user.id.eq(quest.user.id))
             )
             .orderBy(quest.id.desc())
+
+        val totalCount = totalQuestList.fetchCount()
+
+        val questList = totalQuestList
             .limit(pageable.pageSize.toLong())
             .offset(pageable.pageNumber * pageable.pageSize.toLong())
             .fetch()
+
+        return QuestListVo(totalCount, questList)
     }
 
-    override fun getQuestReviewByQuestIdLessThanAndOrderByIdDesc(questId: Long, cursor: Long?, size: Long): List<QuestReviewVo> {
+    override fun getQuestReviewByQuestIdLessThanAndOrderByIdDesc(
+        questId: Long,
+        cursor: Long?,
+        size: Long
+    ): List<QuestReviewVo> {
         return query
             .select(
                 Projections.constructor(

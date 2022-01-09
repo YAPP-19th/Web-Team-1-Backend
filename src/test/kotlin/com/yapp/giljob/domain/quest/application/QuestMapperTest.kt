@@ -21,7 +21,7 @@ class QuestMapperTest {
             point = 100,
             participantCount = 1L
         )
-        val expectedQuestResponse = DtoFactory.testQuestResponse()
+        val expectedQuestResponse = DtoFactory.testQuestDetailResponse()
 
         // when
         val questResponse = questMapper.toDto(testQuestSupportDto, userMapper.toDto(testQuestSupportDto.quest.user, testQuestSupportDto.point))

@@ -69,17 +69,17 @@ class QuestSupportRepositoryImplTest {
             lastQuestId = questSaveList[questSaveList.size - 1].id!!
 
             // when
-            val questList =
+            val questListVo =
                 questRepository.getQuestList(
                     QuestConditionDto(position = Position.ALL),
                     PageRequest.of(0, questSaveSize)
                 )
 
             // then
-            assertEquals(questSaveSize, questList.size)
-            assertEquals(lastQuestId, questList[0].quest.id)
-            assertEquals(lastQuestId - 1L, questList[1].quest.id)
-            assertEquals(lastQuestId - 2L, questList[2].quest.id)
+            assertEquals(questSaveSize, questListVo.questList.size)
+            assertEquals(lastQuestId, questListVo.questList[0].quest.id)
+            assertEquals(lastQuestId - 1L, questListVo.questList[1].quest.id)
+            assertEquals(lastQuestId - 2L, questListVo.questList[2].quest.id)
         }
     }
 
@@ -94,14 +94,14 @@ class QuestSupportRepositoryImplTest {
             abilityRepository.save(Ability(user = user, position = Position.BACKEND, point = point))
 
             // when
-            val questList =
+            val questListVo =
                 questRepository.getQuestList(
                     QuestConditionDto(position = Position.ALL),
                     PageRequest.of(0, size)
                 )
 
             // then
-            assertEquals(point, questList[0].point)
+            assertEquals(point, questListVo.questList[0].point)
         }
 
         @Test
@@ -110,14 +110,14 @@ class QuestSupportRepositoryImplTest {
             val size = 1
 
             // when
-            val questList =
+            val questListVo =
                 questRepository.getQuestList(
                     QuestConditionDto(position = Position.ALL),
                     PageRequest.of(0, size)
                 )
 
             // then
-            assertEquals(0, questList[0].point)
+            assertEquals(0, questListVo.questList[0].point)
         }
     }
 
@@ -143,40 +143,40 @@ class QuestSupportRepositoryImplTest {
         @Test
         fun `ALL 포지션 조회`() {
             // when
-            val questList =
+            val questListVo =
                 questRepository.getQuestList(
                     QuestConditionDto(position = Position.ALL),
                     PageRequest.of(0, questSaveList.size)
                 )
 
             // then
-            assertEquals(6, questList.size)
+            assertEquals(6, questListVo.questList.size)
         }
 
         @Test
         fun `BACKEND 포지션 조회`() {
             // when
-            val questList =
+            val questListVo =
                 questRepository.getQuestList(
                     QuestConditionDto(position = Position.BACKEND),
                     PageRequest.of(0, questSaveList.size)
                 )
 
             // then
-            assertEquals(5, questList.size)
+            assertEquals(5, questListVo.questList.size)
         }
 
         @Test
         fun `FRONTEND 포지션 조회`() {
             // when
-            val questList =
+            val questListVo =
                 questRepository.getQuestList(
                     QuestConditionDto(position = Position.FRONTEND),
                     PageRequest.of(0, questSaveList.size)
                 )
 
             // then
-            assertEquals(1, questList.size)
+            assertEquals(1, questListVo.questList.size)
         }
     }
 

@@ -6,6 +6,7 @@ import com.yapp.giljob.domain.quest.dto.QuestConditionDto
 import com.yapp.giljob.domain.quest.dto.request.QuestRequestDto
 import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestPositionCountResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.roadmap.domain.Roadmap
@@ -41,12 +42,12 @@ class QuestService(
     }
 
     @Transactional(readOnly = true)
-    fun getQuestList(conditionDto: QuestConditionDto, pageable: Pageable): List<QuestResponseDto> {
-        val questList = questRepository.getQuestList(conditionDto, pageable)
+    fun getQuestList(conditionDto: QuestConditionDto, pageable: Pageable): QuestResponseDto<QuestDetailResponseDto> {
+        val questListVo = questRepository.getQuestList(conditionDto, pageable)
 
-        return questList.map {
+        return QuestResponseDto(questListVo.totalCount, questListVo.questList.map {
             questMapper.toDto(it, userMapper.toDto(it.quest.user, it.point))
-        }
+        })
     }
 
     @Transactional(readOnly = true)

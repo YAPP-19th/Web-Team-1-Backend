@@ -2,6 +2,7 @@ package com.yapp.giljob.domain.quest.application
 
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestDetailResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.user.application.UserMapper
@@ -21,7 +22,7 @@ interface QuestMapper {
         Mapping(target = "participantCount", source = "questSupportVo.participantCount"),
         Mapping(target = "writer", source = "user")
     )
-    fun toDto(questSupportVo: QuestSupportVo, user: UserInfoResponseDto): QuestResponseDto
+    fun toDto(questSupportVo: QuestSupportVo, user: UserInfoResponseDto): QuestDetailResponseDto
 
     @Mappings(
         Mapping(target = "id", source = "questSupportVo.quest.id"),
