@@ -14,6 +14,8 @@ import com.yapp.giljob.domain.quest.dto.QuestConditionDto
 import com.yapp.giljob.domain.quest.vo.QuestPositionCountVo
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.quest.vo.QuestListVo
+import com.yapp.giljob.domain.tag.domain.QQuestTag.questTag
+import com.yapp.giljob.domain.tag.domain.QTag.tag
 import com.yapp.giljob.domain.user.domain.QUser.user
 import org.springframework.data.domain.Pageable
 
@@ -39,7 +41,9 @@ class QuestSupportRepositoryImpl(
         ).distinct()
             .from(quest)
             .where(quest.id.eq(questId))
+            .leftJoin(quest.user, user).fetchJoin()
             .leftJoin(ability).on(ability.position.eq(quest.user.position).and(ability.user.id.eq(quest.user.id)))
+            .leftJoin(questTag).on(questTag.quest.eq(quest)).fetchJoin()
             .fetchOne()
     }
 

@@ -9,10 +9,12 @@ import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestPositionCountResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
+import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.roadmap.domain.Roadmap
 import com.yapp.giljob.domain.roadmap.domain.RoadmapQuest
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.tag.application.TagService
+import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
 import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
@@ -54,10 +56,7 @@ class QuestService(
     fun getQuestDetailInfo(questId: Long): QuestDetailInfoResponseDto {
         val questSupportVo =
             questRepository.findByQuestId(questId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
-        return questMapper.toQuestDetailInfoDto(
-            questSupportVo,
-            userMapper.toDto(questSupportVo.quest.user, questSupportVo.point)
-        )
+        return convertToQuestDetailInfo(questSupportVo)
     }
 
     fun convertToQuestList(roadmap: Roadmap, questList: List<QuestRequestDto>): List<RoadmapQuest> {
@@ -86,6 +85,17 @@ class QuestService(
         }
 
         return roadmapQuestList
+    }
+
+    private fun convertToQuestDetailInfo(questSupportVo: QuestSupportVo): QuestDetailInfoResponseDto {
+        val questDetailInfoResponseDto = questMapper.toQuestDetailInfoDto(
+            questSupportVo,
+            userMapper.toDto(questSupportVo.quest.user, questSupportVo.point)
+        )
+        questDetailInfoResponseDto.tagList = questSupportVo.quest.tagList.map {
+            TagResponseDto(it.tag.name)
+        }
+        return questDetailInfoResponseDto
     }
 
     fun getQuestPositionCount(): List<QuestPositionCountResponseDto> {
