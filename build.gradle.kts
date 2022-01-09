@@ -72,6 +72,8 @@ dependencies {
     kapt("com.querydsl:querydsl-apt:$querydslVersion:jpa")
 
     implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+
+    implementation("org.springframework.boot:spring-boot-starter-validation:2.6.2")
 }
 
 tasks {
