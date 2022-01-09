@@ -1,4 +1,4 @@
-package com.yapp.giljob.domain.user.application
+package com.yapp.giljob.global.util.calculator
 
 import com.yapp.giljob.domain.user.domain.achieve.PointAchieve
 import com.yapp.giljob.domain.user.domain.achieve.QuestAchieve

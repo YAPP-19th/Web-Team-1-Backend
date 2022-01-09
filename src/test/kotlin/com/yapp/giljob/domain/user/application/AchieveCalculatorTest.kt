@@ -1,5 +1,6 @@
 package com.yapp.giljob.domain.user.application
 
+import com.yapp.giljob.global.util.calculator.AchieveCalculator
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test

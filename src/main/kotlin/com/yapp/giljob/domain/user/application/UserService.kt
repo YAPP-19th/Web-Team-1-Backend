@@ -3,8 +3,8 @@ package com.yapp.giljob.domain.user.application
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestHelper
 import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
-import com.yapp.giljob.domain.user.application.AchieveCalculator.Companion.calculatePointAchieve
-import com.yapp.giljob.domain.user.application.AchieveCalculator.Companion.calculateQuestAchieve
+import com.yapp.giljob.global.util.calculator.AchieveCalculator.Companion.calculatePointAchieve
+import com.yapp.giljob.global.util.calculator.AchieveCalculator.Companion.calculateQuestAchieve
 import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.domain.user.domain.User

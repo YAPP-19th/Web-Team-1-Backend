@@ -10,7 +10,7 @@ import com.yapp.giljob.domain.subquest.vo.SubQuestParticipationVo
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
-import com.yapp.giljob.global.util.SubQuestProgressCalculate.Companion.calculateProgress
+import com.yapp.giljob.global.util.calculator.SubQuestProgressCalculator.Companion.calculateProgress
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
