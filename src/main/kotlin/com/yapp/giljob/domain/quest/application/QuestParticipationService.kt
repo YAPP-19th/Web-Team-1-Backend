@@ -86,10 +86,10 @@ class QuestParticipationService(
     ) {
         val questParticipation: QuestParticipation =
             questParticipationRepository.findByQuestIdAndParticipantId(questId, user.id!!)
-                ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+                ?: throw BusinessException(ErrorCode.NOT_COMPLETED_QUEST)
 
         if (!questParticipation.isCompleted) {
-            throw BusinessException(ErrorCode.CAN_NOT_CREATE_QUEST_REVIEW)
+            throw BusinessException(ErrorCode.NOT_COMPLETED_QUEST)
         }
 
         questParticipation.review = questReviewCreateRequestDto.review
