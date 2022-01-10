@@ -1615,7 +1615,7 @@ Content-Length: 95
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/quests/1/reviews?cursor=10&amp;size=5 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/quests/1/reviews?page=0&amp;size=5 HTTP/1.1
 Host: docs.api.com:8080</code></pre>
 </div>
 </div>
@@ -1627,16 +1627,16 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1502
+Content-Length: 1496
 
 {
   "status" : 200,
   "message" : "퀘스트 리뷰 리스트 조회 성공입니다.",
   "data" : {
-    "totalReviewCount" : 10,
-    "reviewList" : [ {
+    "totalCount" : 5,
+    "contentList" : [ {
       "review" : "리뷰 1",
-      "reviewCreatedAt" : "2022-01-10T22:18:22.087278",
+      "reviewCreatedAt" : "2022-01-10T22:28:45.950939",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1646,7 +1646,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 2",
-      "reviewCreatedAt" : "2022-01-10T22:18:22.087348",
+      "reviewCreatedAt" : "2022-01-10T22:28:45.950971",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1656,7 +1656,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 3",
-      "reviewCreatedAt" : "2022-01-10T22:18:22.087355",
+      "reviewCreatedAt" : "2022-01-10T22:28:45.950974",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1666,7 +1666,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 4",
-      "reviewCreatedAt" : "2022-01-10T22:18:22.087361",
+      "reviewCreatedAt" : "2022-01-10T22:28:45.950976",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1676,7 +1676,7 @@ Content-Length: 1502
       }
     }, {
       "review" : "리뷰 5",
-      "reviewCreatedAt" : "2022-01-10T22:18:22.087366",
+      "reviewCreatedAt" : "2022-01-10T22:28:45.950978",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1703,8 +1703,8 @@ Content-Length: 1502
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cursor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">마지막으로 조회된 퀘스트 한 줄 후기 id, 후기보다 오래된 후기 리스트가 조회됩니다.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">조회할 페이지</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
@@ -1738,52 +1738,52 @@ Content-Length: 1502
 <td class="tableblock halign-left valign-top"><p class="tableblock">성공 메세지</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.totalReviewCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.totalCount</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리뷰 총 개수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.reviewList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리뷰 리스트</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.reviewList[*].review</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].review</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리뷰</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.reviewList[*].reviewCreatedAt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].reviewCreatedAt</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리뷰 작성 날짜</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.reviewList[*].reviewWriter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].reviewWriter</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리뷰 작성자</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.reviewList[*].reviewWriter.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].reviewWriter.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리뷰 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.reviewList[*].reviewWriter.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].reviewWriter.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리뷰 nickname</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.reviewList[*].reviewWriter.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].reviewWriter.position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리뷰 작성자 직군</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.reviewList[*].reviewWriter.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].reviewWriter.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리뷰 작성자 능력치</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.reviewList[*].reviewWriter.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].reviewWriter.intro</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 리뷰 작성자 소개</p></td>
 </tr>
@@ -3374,7 +3374,7 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxODIwNjgxLCJleHAiOjI2NDE4MjA2ODF9._kpy5n1vhYGJ-h-CKr6xtjhSXGQcTkKdZpOA2FfJYZQ"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxODIxMzExLCJleHAiOjI2NDE4MjEzMTF9.RHdmVoos95y-LhTcUBgIROOMJRpdrurIet8zUkn3kWU"
   }
 }</code></pre>
 </div>
@@ -3447,7 +3447,7 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxODIwNjgxLCJleHAiOjI2NDE4MjA2ODF9.Y4JbBMy-R7iQGU4BW8eoaSiywjwNPGGyq1-47YdZfPc"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxODIxMzEwLCJleHAiOjI2NDE4MjEzMTB9.-S_dKAHPW0gby6iLIuT9uGSOW7HjwYdZE_ky67fQN2o"
   }
 }</code></pre>
 </div>

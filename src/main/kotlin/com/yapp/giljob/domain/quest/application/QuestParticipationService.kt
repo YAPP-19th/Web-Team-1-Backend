@@ -6,15 +6,16 @@ import com.yapp.giljob.domain.quest.domain.QuestParticipation
 import com.yapp.giljob.domain.quest.dto.request.QuestReviewCreateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestReviewResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestReviewWithTotalCountResponseDto
 import com.yapp.giljob.domain.quest.vo.QuestReviewVo
 import com.yapp.giljob.domain.subquest.application.SubQuestService
 import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.domain.Ability
 import com.yapp.giljob.domain.user.domain.User
+import com.yapp.giljob.global.common.dto.ListResponseDto
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
@@ -108,14 +109,14 @@ class QuestParticipationService(
     }
 
     @Transactional(readOnly = true)
-    fun getQuestReviewList(questId: Long, cursor: Long?, size: Long): QuestReviewWithTotalCountResponseDto {
-        val totalReviewCount = questParticipationRepository.countByQuestId(questId)
+    fun getQuestReviewList(questId: Long, pageable: Pageable): ListResponseDto<QuestReviewResponseDto> {
+        val totalReviewCount = questParticipationRepository.countByQuestIdAndReviewIsNotNull(questId)
         val reviewListVo =
-            questParticipationRepository.getQuestReviewByQuestIdLessThanAndOrderByIdDesc(questId, cursor, size)
+            questParticipationRepository.getQuestReviewList(questId, pageable)
 
-        return QuestReviewWithTotalCountResponseDto(
-            totalReviewCount = totalReviewCount,
-            reviewList = toQuestReviewResponseDto(reviewListVo)
+        return ListResponseDto(
+            totalCount = totalReviewCount,
+            contentList = toQuestReviewResponseDto(reviewListVo)
         )
     }
 

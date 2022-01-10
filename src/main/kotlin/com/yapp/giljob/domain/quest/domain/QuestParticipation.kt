@@ -7,7 +7,10 @@ import com.yapp.giljob.global.common.domain.BaseEntity
 import java.time.LocalDateTime
 import javax.persistence.*
 
-@Table(name = "quest_participation")
+@Table(
+    name = "quest_participation",
+    indexes = [Index(name = "i_quest_id_and_review", columnList = "quest_id, review")]
+)
 @Entity
 class QuestParticipation(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
