@@ -7,11 +7,11 @@ import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailSubQuestResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.subquest.application.SubQuestParticipationService
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
+import com.yapp.giljob.global.common.dto.ListResponseDto
 import org.springframework.data.domain.Pageable
 import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
@@ -40,7 +40,7 @@ class QuestController(
         @RequestParam(required = false, defaultValue = "ALL") position: Position,
         @RequestParam(required = false) keyword: String?,
         @PageableDefault(size = 16) pageable: Pageable
-    ): ResponseEntity<BaseResponse<QuestResponseDto<QuestDetailResponseDto>>> {
+    ): ResponseEntity<BaseResponse<ListResponseDto<QuestDetailResponseDto>>> {
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK,

@@ -107,7 +107,7 @@ include::{snippets}/quests/{questId}/complete/patch/http-response.adoc[]
 .response fields
 include::{snippets}/quests/{questId}/complete/patch/response-fields.adoc[]
 
-=== POST /api/quests/{questId}/review
+=== PATCH /api/quests/{questId}/review
 ==== 퀘스트 한줄 후기 작성
 
 .request

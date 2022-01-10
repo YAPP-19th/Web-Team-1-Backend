@@ -52,20 +52,20 @@ class DtoFactory {
             )
         )
 
-        fun testQuestResponse(): QuestResponseDto<QuestDetailResponseDto> {
+        fun testQuestResponse(): ListResponseDto<QuestDetailResponseDto> {
             val questList = listOf(
                 testQuestDetailResponse().apply { this.id = 9L; this.name = "quest test 9" },
                 testQuestDetailResponse().apply { this.id = 8L; this.name = "quest test 8" },
                 testQuestDetailResponse().apply { this.id = 7L; this.name = "quest test 7" },
                 testQuestDetailResponse().apply { this.id = 6L; this.name = "quest test 6" },
             )
-            return QuestResponseDto(
+            return ListResponseDto(
                 questList.size.toLong(), questList
             )
         }
 
 
-        fun testQuestByParticipantResponse(): QuestResponseDto<QuestByParticipantResponseDto> {
+        fun testQuestByParticipantResponse(): ListResponseDto<QuestByParticipantResponseDto> {
             val questList = listOf(
                 testQuestDetailByParticipantResponse()
                     .apply { this.id = 9L; this.name = "quest test 9"; this.progress = 90 },
@@ -76,7 +76,7 @@ class DtoFactory {
                 testQuestDetailByParticipantResponse()
                     .apply { this.id = 3L; this.name = "quest test 3"; this.progress = 50 },
             )
-            return QuestResponseDto(
+            return ListResponseDto(
                 questList.size.toLong(), questList
             )
         }
@@ -198,17 +198,6 @@ class DtoFactory {
                     subQuestName = "서브퀘스트2",
                     isCompleted = false
                 )
-            )
-        )
-
-        fun testQuestReviewWithTotalCountResponse() = QuestReviewWithTotalCountResponseDto(
-            totalReviewCount = 10,
-            reviewList = listOf(
-                QuestReviewResponseDto("리뷰 1", LocalDateTime.now(), testUserInfoResponse()),
-                QuestReviewResponseDto("리뷰 2", LocalDateTime.now(), testUserInfoResponse()),
-                QuestReviewResponseDto("리뷰 3", LocalDateTime.now(), testUserInfoResponse()),
-                QuestReviewResponseDto("리뷰 4", LocalDateTime.now(), testUserInfoResponse()),
-                QuestReviewResponseDto("리뷰 5", LocalDateTime.now(), testUserInfoResponse()),
             )
         )
 

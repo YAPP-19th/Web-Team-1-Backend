@@ -27,7 +27,6 @@ enum class ErrorCode(
     ALREADY_PARTICIPATED_QUEST(HttpStatus.BAD_REQUEST, "Q001", "Already Participated Quest"),
     ALREADY_COMPLETED_QUEST(HttpStatus.BAD_REQUEST, "Q002", "Already Completed Quest"),
     NOT_COMPLETED_QUEST(HttpStatus.BAD_REQUEST, "Q003", "Not Completed Quest"),
-    CAN_NOT_CREATE_QUEST_REVIEW(HttpStatus.BAD_REQUEST, "Q004", "Can Not Create Quest Review"),
 
     // SubQuest
     ALREADY_COMPLETED_SUBQUEST(HttpStatus.BAD_REQUEST, "SQ001", "Already Completed SubQuest"),

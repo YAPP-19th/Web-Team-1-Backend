@@ -207,7 +207,7 @@ class QuestParticipationServiceTest {
                 questParticipationService.createQuestReview(1L, questReviewCreateRequestDto, user)
             }
 
-        assertEquals(ErrorCode.ENTITY_NOT_FOUND, exception.errorCode)
+        assertEquals(ErrorCode.NOT_COMPLETED_QUEST, exception.errorCode)
     }
 
     @Test
@@ -220,6 +220,6 @@ class QuestParticipationServiceTest {
                 questParticipationService.createQuestReview(1L, questReviewCreateRequestDto, user)
             }
 
-        assertEquals(ErrorCode.CAN_NOT_CREATE_QUEST_REVIEW, exception.errorCode)
+        assertEquals(ErrorCode.NOT_COMPLETED_QUEST, exception.errorCode)
     }
 }

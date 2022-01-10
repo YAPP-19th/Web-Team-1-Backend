@@ -10,7 +10,10 @@ import org.hibernate.annotations.SQLDelete
 import org.hibernate.annotations.Where
 import javax.persistence.*
 
-@Table(name = "roadmap")
+@Table(
+    name = "roadmap",
+    indexes = [Index(name = "i_writer_id", columnList = "writer_id")]
+)
 @Entity
 @SQLDelete(sql = "UPDATE roadmap SET deleted = true WHERE roadmap_id=?")
 @Where(clause = "deleted = false")

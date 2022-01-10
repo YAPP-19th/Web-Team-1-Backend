@@ -3,7 +3,6 @@ package com.yapp.giljob.domain.quest.application
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
