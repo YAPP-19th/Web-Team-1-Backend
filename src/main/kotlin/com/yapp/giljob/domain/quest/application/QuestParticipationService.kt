@@ -15,12 +15,11 @@ import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.dto.ListResponseDto
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
+import com.yapp.giljob.global.util.calculator.PointCalculator
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
-
-private const val POINT_UNIT = 100L
 
 @Service
 class QuestParticipationService(
@@ -65,7 +64,7 @@ class QuestParticipationService(
                 position = quest.position
             )
         )
-        ability.addPoint(quest.difficulty * POINT_UNIT)
+        ability.addPoint(PointCalculator.calculatePoint(quest.difficulty))
     }
 
     private fun validateCompletedQuest(questParticipation: QuestParticipation, questId: Long, userId: Long) {
@@ -133,4 +132,5 @@ class QuestParticipationService(
             )
         }
     }
+
 }
