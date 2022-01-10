@@ -5,3 +5,6 @@ import com.yapp.giljob.domain.roadmap.domain.RoadmapScrapPK
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface RoadmapScrapRepository: JpaRepository<RoadmapScrap, RoadmapScrapPK>, RoadmapScrapSupportRepository
+{
+    fun countByUserId(userId: Long): Long
+}

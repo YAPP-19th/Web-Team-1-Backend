@@ -22,8 +22,8 @@ class RoadmapSupportRepositoryImpl(
             .from(roadmap)
             .where(roadmap.user.id.eq(userId))
             .orderBy(roadmap.id.desc())
+            .offset(pageable.offset)
             .limit(pageable.pageSize.toLong())
-            .offset(pageable.pageNumber * pageable.pageSize.toLong())
             .fetch()
 
         return query.select(

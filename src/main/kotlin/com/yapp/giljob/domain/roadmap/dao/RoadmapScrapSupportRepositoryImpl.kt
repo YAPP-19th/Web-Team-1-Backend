@@ -27,8 +27,8 @@ class RoadmapScrapSupportRepositoryImpl(
             .fetchJoin()
             .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))
             .orderBy(roadmap.id.desc())
+            .offset(pageable.offset)
             .limit(pageable.pageSize.toLong())
-            .offset(pageable.pageNumber * pageable.pageSize.toLong())
             .fetch()
     }
 

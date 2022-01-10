@@ -19,24 +19,20 @@ class UserRoadmapService(
 ) {
     @Transactional(readOnly = true)
     fun getScrapRoadmapListByUser(userId: Long, pageable: Pageable): ListResponseDto<RoadmapResponseDto> {
-        val scrapRoadmapList = roadmapScrapRepository.findByUserId(userId, pageable).map {
-            roadmapMapper.toDto(it.roadmap, userMapper.toDto(it.roadmap.user, it.point))
-        }
-
         return ListResponseDto(
-            totalCount = scrapRoadmapList.size.toLong(),
-            contentList = scrapRoadmapList
+            totalCount = roadmapScrapRepository.countByUserId(userId),
+            contentList = roadmapScrapRepository.findByUserId(userId, pageable).map {
+                roadmapMapper.toDto(it.roadmap, userMapper.toDto(it.roadmap.user, it.point))
+            }
         )
     }
 
     fun getRoadmapListByUser(userId: Long, pageable: Pageable): ListResponseDto<RoadmapResponseDto> {
-        val roadmapList = roadmapRepository.getRoadmapListByUser(userId, pageable).map {
-            roadmapMapper.toDto(it.roadmap, userMapper.toDto(it.roadmap.user, it.point))
-        }
-
         return ListResponseDto(
-            totalCount = roadmapList.size.toLong(),
-            contentList = roadmapList
+            totalCount = roadmapRepository.countByUserId(userId),
+            contentList = roadmapRepository.getRoadmapListByUser(userId, pageable).map {
+                roadmapMapper.toDto(it.roadmap, userMapper.toDto(it.roadmap.user, it.point))
+            }
         )
     }
 }
