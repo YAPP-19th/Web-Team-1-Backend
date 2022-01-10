@@ -16,7 +16,7 @@ class RoadmapSupportRepositoryImpl(
         pageable: Pageable
     ): List<RoadmapSupportVo> {
 
-        val ids = query.select(roadmap.id)
+        val idList = query.select(roadmap.id)
             .from(roadmap)
             .where(roadmap.user.id.eq(userId))
             .orderBy(roadmap.id.desc())
@@ -32,7 +32,7 @@ class RoadmapSupportRepositoryImpl(
             )
         )
             .from(roadmap)
-            .where(roadmap.user.id.`in`(ids))
+            .where(roadmap.user.id.`in`(idList))
             .leftJoin(roadmap.user, QUser.user)
             .fetchJoin()
             .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))

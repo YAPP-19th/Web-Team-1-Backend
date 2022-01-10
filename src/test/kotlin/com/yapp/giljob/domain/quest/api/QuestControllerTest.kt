@@ -90,7 +90,7 @@ class QuestControllerTest : AbstractRestDocs() {
     }
 
     @Test
-    fun getcontentListTest() {
+    fun getContentListTest() {
         given(questService.getQuestList(any(), any())).willReturn(DtoFactory.testQuestResponse())
 
         val result = mockMvc.perform(

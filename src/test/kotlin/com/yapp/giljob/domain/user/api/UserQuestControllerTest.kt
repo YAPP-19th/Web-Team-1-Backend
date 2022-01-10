@@ -94,7 +94,7 @@ class UserQuestControllerTest : AbstractRestDocs() {
     }
 
     @Test
-    fun getcontentListByParticipantTest() {
+    fun getContentListByParticipantTest() {
         BDDMockito.given(userQuestService.getQuestListByParticipant(userId, false, PageRequest.of(0, 4)))
             .willReturn(DtoFactory.testQuestByParticipantResponse())
 
