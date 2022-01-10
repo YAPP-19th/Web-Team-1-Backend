@@ -8,7 +8,6 @@ import com.yapp.giljob.domain.quest.dto.request.QuestSaveRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailInfoResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestPositionCountResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
 import com.yapp.giljob.domain.roadmap.domain.Roadmap
 import com.yapp.giljob.domain.roadmap.domain.RoadmapQuest
@@ -17,6 +16,7 @@ import com.yapp.giljob.domain.tag.application.TagService
 import com.yapp.giljob.domain.tag.dto.response.TagResponseDto
 import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.domain.User
+import com.yapp.giljob.global.common.dto.ListResponseDto
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import org.springframework.data.domain.Pageable
@@ -44,10 +44,10 @@ class QuestService(
     }
 
     @Transactional(readOnly = true)
-    fun getQuestList(conditionDto: QuestConditionDto, pageable: Pageable): QuestResponseDto<QuestDetailResponseDto> {
+    fun getQuestList(conditionDto: QuestConditionDto, pageable: Pageable): ListResponseDto<QuestDetailResponseDto> {
         val questListVo = questRepository.getQuestList(conditionDto, pageable)
 
-        return QuestResponseDto(questListVo.totalCount, questListVo.questList.map {
+        return ListResponseDto(questListVo.totalCount, questListVo.questList.map {
             questMapper.toDto(it, userMapper.toDto(it.quest.user, it.point))
         })
     }

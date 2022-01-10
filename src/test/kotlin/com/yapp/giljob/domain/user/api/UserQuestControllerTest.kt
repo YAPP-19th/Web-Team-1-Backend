@@ -37,7 +37,7 @@ class UserQuestControllerTest : AbstractRestDocs() {
     private val userId = 1L
 
     @Test
-    fun getQuestListByUserTest() {
+    fun getcontentListByUserTest() {
         BDDMockito.given(userQuestService.getQuestListByUser(any(), any())).willReturn(DtoFactory.testQuestResponse())
 
         val result = mockMvc.perform(
@@ -66,27 +66,27 @@ class UserQuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 리스트"),
                         PayloadDocumentation.fieldWithPath("data.totalCount")
                             .description("퀘스트 전체 개수"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].id")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].id")
                             .description("퀘스트 id"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].name")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].name")
                             .description("퀘스트 이름"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].position")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].position")
                             .description("퀘스트 카테고리(position)"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].participantCount")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].participantCount")
                             .description("퀘스트 참여자 수"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.id")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].writer.id")
                             .description("퀘스트 작성자 id"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.nickname")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].writer.nickname")
                             .description("퀘스트 작성자 nickname"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.position")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].writer.position")
                             .description("퀘스트 작성자 직군"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.point")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].writer.point")
                             .description("퀘스트 작성자 능력치"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.intro")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].writer.intro")
                             .description("퀘스트 작성자 자기소개"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].difficulty")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].difficulty")
                             .description("퀘스트 난이도"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].thumbnail")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].thumbnail")
                             .description("퀘스트 썸네일 url"),
                     )
                 )
@@ -94,7 +94,7 @@ class UserQuestControllerTest : AbstractRestDocs() {
     }
 
     @Test
-    fun getQuestListByParticipantTest() {
+    fun getcontentListByParticipantTest() {
         BDDMockito.given(userQuestService.getQuestListByParticipant(userId, false, PageRequest.of(0, 4)))
             .willReturn(DtoFactory.testQuestByParticipantResponse())
 
@@ -126,29 +126,29 @@ class UserQuestControllerTest : AbstractRestDocs() {
                             .description("퀘스트 리스트"),
                         PayloadDocumentation.fieldWithPath("data.totalCount")
                             .description("퀘스트 전체 개수"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].id")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].id")
                             .description("퀘스트 id"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].name")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].name")
                             .description("퀘스트 이름"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].position")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].position")
                             .description("퀘스트 카테고리(position)"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].participantCount")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].participantCount")
                             .description("퀘스트 참여자 수"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.id")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].writer.id")
                             .description("퀘스트 작성자 id"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.nickname")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].writer.nickname")
                             .description("퀘스트 작성자 nickname"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.position")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].writer.position")
                             .description("퀘스트 작성자 직군"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.point")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].writer.point")
                             .description("퀘스트 작성자 능력치"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].writer.intro")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].writer.intro")
                             .description("퀘스트 작성자 자기소개"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].difficulty")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].difficulty")
                             .description("퀘스트 난이도"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].thumbnail")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].thumbnail")
                             .description("퀘스트 썸네일 url"),
-                        PayloadDocumentation.fieldWithPath("data.questList[*].progress")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].progress")
                             .description("퀘스트 진행률(퍼센트 단위/Int)")
                     )
                 )

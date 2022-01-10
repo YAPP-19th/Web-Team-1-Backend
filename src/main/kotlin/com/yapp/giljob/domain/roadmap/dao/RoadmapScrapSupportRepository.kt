@@ -1,7 +1,8 @@
 package com.yapp.giljob.domain.roadmap.dao
 
 import com.yapp.giljob.domain.roadmap.vo.RoadmapSupportVo
+import org.springframework.data.domain.Pageable
 
 interface RoadmapScrapSupportRepository {
-    fun findByUserId(userId: Long, roadmapId: Long?, size: Long): List<RoadmapSupportVo>
+    fun findByUserId(userId: Long, pageable: Pageable): List<RoadmapSupportVo>
 }

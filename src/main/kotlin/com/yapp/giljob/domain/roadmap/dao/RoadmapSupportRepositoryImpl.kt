@@ -8,15 +8,23 @@ import com.yapp.giljob.domain.roadmap.domain.QRoadmapScrap
 import com.yapp.giljob.domain.roadmap.vo.RoadmapSupportVo
 import com.yapp.giljob.domain.user.domain.QAbility.ability
 import com.yapp.giljob.domain.user.domain.QUser
+import org.springframework.data.domain.Pageable
 
 class RoadmapSupportRepositoryImpl(
     private val query: JPAQueryFactory
 ): RoadmapSupportRepository {
-    override fun findByUserAndIdLessThanAndOrderByIdDesc(
+    override fun getRoadmapListByUser(
         userId: Long,
-        cursor: Long?,
-        size: Long
+        pageable: Pageable
     ): List<RoadmapSupportVo> {
+
+        val ids = query.select(roadmap.id)
+            .from(roadmap)
+            .where(roadmap.user.id.eq(userId))
+            .orderBy(roadmap.id.desc())
+            .limit(pageable.pageSize.toLong())
+            .offset(pageable.pageNumber * pageable.pageSize.toLong())
+            .fetch()
 
         return query.select(
             Projections.constructor(
@@ -26,12 +34,11 @@ class RoadmapSupportRepositoryImpl(
             )
         )
             .from(roadmap)
-            .where(roadmap.user.id.eq(userId).and(ltRoadmapId(cursor)))
+            .where(roadmap.user.id.`in`(ids))
             .leftJoin(roadmap.user, QUser.user)
             .fetchJoin()
             .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))
             .orderBy(roadmap.id.desc())
-            .limit(size)
             .fetch()
     }
 

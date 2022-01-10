@@ -4,7 +4,7 @@ import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dto.QuestConditionDto
 import com.yapp.giljob.domain.quest.dto.response.QuestByParticipantResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestDetailResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestResponseDto
+import com.yapp.giljob.global.common.dto.ListResponseDto
 import com.yapp.giljob.domain.user.application.UserQuestService
 import com.yapp.giljob.global.common.dto.BaseResponse
 import org.springframework.data.domain.Pageable
@@ -24,7 +24,7 @@ class UserQuestController(
         @PathVariable userId: Long,
         @RequestParam(required = false, defaultValue = "ALL") position: Position,
         @PageableDefault(size = 6) pageable: Pageable,
-    ): ResponseEntity<BaseResponse<QuestResponseDto<QuestDetailResponseDto>>> {
+    ): ResponseEntity<BaseResponse<ListResponseDto<QuestDetailResponseDto>>> {
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK, "유저가 생성한 퀘스트 리스트 조회 성공입니다.",
@@ -38,7 +38,7 @@ class UserQuestController(
         @PathVariable userId: Long,
         @RequestParam(required = false, defaultValue = "false", value = "completed") isCompleted: Boolean,
         @PageableDefault(size = 6) pageable: Pageable
-    ): ResponseEntity<BaseResponse<QuestResponseDto<QuestByParticipantResponseDto>>> {
+    ): ResponseEntity<BaseResponse<ListResponseDto<QuestByParticipantResponseDto>>> {
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK, "유저가 참여한 퀘스트 리스트 조회 성공입니다.",

@@ -1,17 +1,17 @@
 package com.yapp.giljob.domain.roadmap.dao
 
 import com.querydsl.core.types.Projections
-import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.yapp.giljob.domain.user.domain.QUser.user
-import com.yapp.giljob.domain.user.domain.QAbility.ability
 import com.yapp.giljob.domain.roadmap.domain.QRoadmapScrap.roadmapScrap
 import com.yapp.giljob.domain.roadmap.vo.RoadmapSupportVo
+import com.yapp.giljob.domain.user.domain.QAbility.ability
+import com.yapp.giljob.domain.user.domain.QUser.user
+import org.springframework.data.domain.Pageable
 
 class RoadmapScrapSupportRepositoryImpl(
     private val query: JPAQueryFactory
 ) : RoadmapScrapSupportRepository {
-    override fun findByUserId(userId: Long, roadmapId: Long?, size: Long): List<RoadmapSupportVo> {
+    override fun findByUserId(userId: Long, pageable: Pageable): List<RoadmapSupportVo> {
 
         val roadmap = roadmapScrap.roadmap
         return query.select(
@@ -22,16 +22,14 @@ class RoadmapScrapSupportRepositoryImpl(
             )
         )
             .from(roadmapScrap)
-            .where(roadmapScrap.user.id.eq(userId).and(ltRoadmapId(roadmapId)))
+            .where(roadmapScrap.user.id.eq(userId))
             .leftJoin(roadmap.user, user)
             .fetchJoin()
             .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))
             .orderBy(roadmap.id.desc())
-            .limit(size)
+            .limit(pageable.pageSize.toLong())
+            .offset(pageable.pageNumber * pageable.pageSize.toLong())
             .fetch()
     }
 
-    private fun ltRoadmapId(roadmapId: Long?): BooleanExpression? {
-        return roadmapId?.let { roadmapScrap.roadmap.id.lt(roadmapId) }
-    }
 }

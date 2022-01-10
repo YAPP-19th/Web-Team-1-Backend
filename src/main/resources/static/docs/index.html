@@ -765,14 +765,14 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1558
+Content-Length: 1560
 
 {
   "status" : 200,
   "message" : "퀘스트 리스트 조회 성공입니다.",
   "data" : {
     "totalCount" : 4,
-    "questList" : [ {
+    "contentList" : [ {
       "id" : 9,
       "name" : "quest test 9",
       "position" : "BACKEND",
@@ -835,7 +835,7 @@ Content-Length: 1558
 </div>
 <div class="paragraph">
 <div class="title">response fields</div>
-<p>include::/Users/ayoung/Dev/SpringBoot/yapp/giljob/build/generated-snippets/quests/get/response-fields.adoc[</p>
+<p>include::/Users/we/Web-Team-1-Backend/build/generated-snippets/quests/get/response-fields.adoc[</p>
 </div>
 </div>
 </div>
@@ -1626,7 +1626,7 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1501
+Content-Length: 1499
 
 {
   "status" : 200,
@@ -1635,7 +1635,7 @@ Content-Length: 1501
     "totalReviewCount" : 10,
     "reviewList" : [ {
       "review" : "리뷰 1",
-      "reviewCreatedAt" : "2022-01-09T10:14:51.391064",
+      "reviewCreatedAt" : "2022-01-10T11:53:23.88177",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1645,7 +1645,7 @@ Content-Length: 1501
       }
     }, {
       "review" : "리뷰 2",
-      "reviewCreatedAt" : "2022-01-09T10:14:51.39111",
+      "reviewCreatedAt" : "2022-01-10T11:53:23.88183",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1655,7 +1655,7 @@ Content-Length: 1501
       }
     }, {
       "review" : "리뷰 3",
-      "reviewCreatedAt" : "2022-01-09T10:14:51.391112",
+      "reviewCreatedAt" : "2022-01-10T11:53:23.88184",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1665,7 +1665,7 @@ Content-Length: 1501
       }
     }, {
       "review" : "리뷰 4",
-      "reviewCreatedAt" : "2022-01-09T10:14:51.391115",
+      "reviewCreatedAt" : "2022-01-10T11:53:23.881848",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1675,7 +1675,7 @@ Content-Length: 1501
       }
     }, {
       "review" : "리뷰 5",
-      "reviewCreatedAt" : "2022-01-09T10:14:51.391121",
+      "reviewCreatedAt" : "2022-01-10T11:53:23.881876",
       "reviewWriter" : {
         "id" : 1,
         "nickname" : "nickname",
@@ -1814,14 +1814,14 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1578
+Content-Length: 1580
 
 {
   "status" : 200,
   "message" : "유저가 생성한 퀘스트 리스트 조회 성공입니다.",
   "data" : {
     "totalCount" : 4,
-    "questList" : [ {
+    "contentList" : [ {
       "id" : 9,
       "name" : "quest test 9",
       "position" : "BACKEND",
@@ -1918,57 +1918,57 @@ Content-Length: 1578
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 전체 개수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 이름</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].participantCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].participantCount</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].writer.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].writer.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].writer.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 직군</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].writer.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].writer.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.intro</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 자기소개</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].difficulty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].difficulty</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 난이도</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].thumbnail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].thumbnail</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 썸네일 url</p></td>
 </tr>
@@ -2022,14 +2022,14 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1626
+Content-Length: 1628
 
 {
   "status" : 200,
   "message" : "유저가 참여한 퀘스트 리스트 조회 성공입니다.",
   "data" : {
     "totalCount" : 4,
-    "questList" : [ {
+    "contentList" : [ {
       "id" : 9,
       "name" : "quest test 9",
       "position" : "BACKEND",
@@ -2130,62 +2130,62 @@ Content-Length: 1626
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 전체 개수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 이름</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 카테고리(position)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].participantCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].participantCount</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 참여자 수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].writer.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].writer.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 nickname</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].writer.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 직군</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].writer.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 능력치</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].writer.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.intro</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 작성자 자기소개</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].difficulty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].difficulty</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 난이도</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].thumbnail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].thumbnail</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 썸네일 url</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.questList[*].progress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].progress</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">퀘스트 진행률(퍼센트 단위/Int)</p></td>
 </tr>
@@ -2981,7 +2981,7 @@ Content-Length: 91
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/1/roadmaps/scrap?cursor=7&amp;size=4 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/1/roadmaps/scrap?page=0&amp;size=6 HTTP/1.1
 Host: docs.api.com:8080</code></pre>
 </div>
 </div>
@@ -2993,56 +2993,81 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1091
+Content-Length: 1757
 
 {
   "status" : 200,
   "message" : "유저가 스크랩한 로드맵 리스트 조회 성공입니다.",
-  "data" : [ {
-    "id" : 6,
-    "name" : "로드맵 테스트 6",
-    "position" : "FRONTEND",
-    "writer" : {
+  "data" : {
+    "totalCount" : 6,
+    "contentList" : [ {
+      "id" : 6,
+      "name" : "로드맵 테스트 6",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    }, {
+      "id" : 5,
+      "name" : "로드맵 테스트 5",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    }, {
+      "id" : 4,
+      "name" : "로드맵 테스트 4",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    }, {
+      "id" : 3,
+      "name" : "로드맵 테스트 3",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    }, {
+      "id" : 2,
+      "name" : "로드맵 테스트 2",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    }, {
       "id" : 1,
-      "nickname" : "nickname",
-      "position" : "BACKEND",
-      "point" : 1000,
-      "intro" : "test introduce"
-    }
-  }, {
-    "id" : 5,
-    "name" : "로드맵 테스트 5",
-    "position" : "FRONTEND",
-    "writer" : {
-      "id" : 1,
-      "nickname" : "nickname",
-      "position" : "BACKEND",
-      "point" : 1000,
-      "intro" : "test introduce"
-    }
-  }, {
-    "id" : 4,
-    "name" : "로드맵 테스트 4",
-    "position" : "FRONTEND",
-    "writer" : {
-      "id" : 1,
-      "nickname" : "nickname",
-      "position" : "BACKEND",
-      "point" : 1000,
-      "intro" : "test introduce"
-    }
-  }, {
-    "id" : 3,
-    "name" : "로드맵 테스트 3",
-    "position" : "FRONTEND",
-    "writer" : {
-      "id" : 1,
-      "nickname" : "nickname",
-      "position" : "BACKEND",
-      "point" : 1000,
-      "intro" : "test introduce"
-    }
-  } ]
+      "name" : "로드맵 테스트 1",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    } ]
+  }
 }</code></pre>
 </div>
 </div>
@@ -3073,46 +3098,56 @@ Content-Length: 1091
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 response</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.totalCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 개수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 리스트</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 이름</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 카테고리(position)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 nickname</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 직군</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 능력치</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.intro</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 자기소개</p></td>
 </tr>
@@ -3127,7 +3162,7 @@ Content-Length: 1091
 <div class="listingblock">
 <div class="title">request</div>
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/1/roadmaps?cursor=10&amp;size=6 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/users/1/roadmaps?page=0&amp;size=6 HTTP/1.1
 Host: docs.api.com:8080</code></pre>
 </div>
 </div>
@@ -3139,78 +3174,81 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 1562
+Content-Length: 1742
 
 {
   "status" : 200,
   "message" : "유저가 등록한 로드맵 리스트 조회 성공입니다.",
-  "data" : [ {
-    "id" : 1,
-    "name" : "로드맵 테스트",
-    "position" : "FRONTEND",
-    "writer" : {
+  "data" : {
+    "totalCount" : 6,
+    "contentList" : [ {
       "id" : 1,
-      "nickname" : "nickname",
-      "position" : "BACKEND",
-      "point" : 1000,
-      "intro" : "test introduce"
-    }
-  }, {
-    "id" : 1,
-    "name" : "로드맵 테스트",
-    "position" : "FRONTEND",
-    "writer" : {
+      "name" : "로드맵 테스트",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    }, {
       "id" : 1,
-      "nickname" : "nickname",
-      "position" : "BACKEND",
-      "point" : 1000,
-      "intro" : "test introduce"
-    }
-  }, {
-    "id" : 1,
-    "name" : "로드맵 테스트",
-    "position" : "FRONTEND",
-    "writer" : {
+      "name" : "로드맵 테스트",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    }, {
       "id" : 1,
-      "nickname" : "nickname",
-      "position" : "BACKEND",
-      "point" : 1000,
-      "intro" : "test introduce"
-    }
-  }, {
-    "id" : 1,
-    "name" : "로드맵 테스트",
-    "position" : "FRONTEND",
-    "writer" : {
+      "name" : "로드맵 테스트",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    }, {
       "id" : 1,
-      "nickname" : "nickname",
-      "position" : "BACKEND",
-      "point" : 1000,
-      "intro" : "test introduce"
-    }
-  }, {
-    "id" : 1,
-    "name" : "로드맵 테스트",
-    "position" : "FRONTEND",
-    "writer" : {
+      "name" : "로드맵 테스트",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    }, {
       "id" : 1,
-      "nickname" : "nickname",
-      "position" : "BACKEND",
-      "point" : 1000,
-      "intro" : "test introduce"
-    }
-  }, {
-    "id" : 1,
-    "name" : "로드맵 테스트",
-    "position" : "FRONTEND",
-    "writer" : {
+      "name" : "로드맵 테스트",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    }, {
       "id" : 1,
-      "nickname" : "nickname",
-      "position" : "BACKEND",
-      "point" : 1000,
-      "intro" : "test introduce"
-    }
-  } ]
+      "name" : "로드맵 테스트",
+      "position" : "FRONTEND",
+      "writer" : {
+        "id" : 1,
+        "nickname" : "nickname",
+        "position" : "BACKEND",
+        "point" : 1000,
+        "intro" : "test introduce"
+      }
+    } ]
+  }
 }</code></pre>
 </div>
 </div>
@@ -3241,53 +3279,58 @@ Content-Length: 1562
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 response</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.totalCount</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 아이디</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 개수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 리스트</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 이름</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 직군</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 카테고리(position)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 정보</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 id</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.nickname</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.nickname</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 닉네임</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 nickname</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.position</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 직군</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.point</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.point</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 능력치</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data[*].writer.intro</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>data.contentList[*].writer.intro</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 소개</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">로드맵 작성자 자기소개</p></td>
 </tr>
 </tbody>
 </table>
@@ -3330,7 +3373,7 @@ Content-Length: 238
   "status" : 200,
   "message" : "회원 가입 성공입니다.",
   "data" : {
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxNjkwODk3LCJleHAiOjI2NDE2OTA4OTd9.CaagszaL6ZLb1WiDNcQyPkjbjk0Un78yzxKWVj_dM90"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudWxsIiwiaWF0IjoxNjQxNzgzMjA3LCJleHAiOjI2NDE3ODMyMDd9.hqlSyQYJREH2dnWxbguqjjxRte0N18CWECk0Xn-7xVg"
   }
 }</code></pre>
 </div>
@@ -3403,7 +3446,7 @@ Content-Length: 266
   "message" : "로그인 및 조회 성공입니다.",
   "data" : {
     "isSignedUp" : true,
-    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxNjkwODk2LCJleHAiOjI2NDE2OTA4OTZ9.Lw6AuT27q2_T1WjTx2dDUuAIjzUNx3xdRkikARQkaaU"
+    "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjQxNzgzMjA3LCJleHAiOjI2NDE3ODMyMDd9.Pmm_AISNh9St6PtvXAhOoZt55OfWFoWNSut230pr-_A"
   }
 }</code></pre>
 </div>
@@ -3969,7 +4012,7 @@ Content-Length: 198
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-01-09 02:40:48 +0900
+Last updated 2022-01-10 11:02:14 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
