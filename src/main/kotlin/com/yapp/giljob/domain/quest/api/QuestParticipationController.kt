@@ -3,10 +3,13 @@ package com.yapp.giljob.domain.quest.api
 import com.yapp.giljob.domain.quest.application.QuestParticipationService
 import com.yapp.giljob.domain.quest.dto.request.QuestReviewCreateRequestDto
 import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
-import com.yapp.giljob.domain.quest.dto.response.QuestReviewWithTotalCountResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestReviewResponseDto
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
+import com.yapp.giljob.global.common.dto.ListResponseDto
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -67,14 +70,13 @@ class QuestParticipationController(
     @GetMapping("/{questId}/reviews")
     fun getQuestReview(
         @PathVariable questId: Long,
-        @RequestParam(required = false) cursor: Long?,
-        @RequestParam(required = false, defaultValue = "5") size: Long,
-    ): ResponseEntity<BaseResponse<QuestReviewWithTotalCountResponseDto>> {
+        @PageableDefault(size = 5) pageable: Pageable
+    ): ResponseEntity<BaseResponse<ListResponseDto<QuestReviewResponseDto>>> {
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK,
                 "퀘스트 리뷰 리스트 조회 성공입니다.",
-                questParticipationService.getQuestReviewList(questId, cursor, size)
+                questParticipationService.getQuestReviewList(questId, pageable)
             )
         )
     }

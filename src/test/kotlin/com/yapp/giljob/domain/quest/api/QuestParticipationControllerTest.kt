@@ -4,16 +4,19 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.yapp.giljob.domain.quest.application.QuestParticipationService
 import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
 import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
+import com.yapp.giljob.domain.quest.dto.response.QuestReviewResponseDto
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.global.AbstractRestDocs
 import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
+import com.yapp.giljob.global.common.dto.ListResponseDto
 import com.yapp.giljob.global.config.security.GiljobTestUser
 import org.junit.jupiter.api.Test
 import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.BDDMockito
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.domain.Pageable
 import org.springframework.http.MediaType
 import org.springframework.restdocs.headers.HeaderDocumentation
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
@@ -22,6 +25,7 @@ import org.springframework.restdocs.payload.PayloadDocumentation
 import org.springframework.restdocs.request.RequestDocumentation
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import java.time.LocalDateTime
 
 @WebMvcTest(QuestParticipationController::class)
 internal class QuestParticipationControllerTest : AbstractRestDocs() {
@@ -200,12 +204,21 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
 
     @Test
     fun getQuestReviewTest() {
-        BDDMockito.given(questParticipationService.getQuestReviewList(anyLong(), anyLong(), anyLong()))
-            .willReturn(DtoFactory.testQuestReviewWithTotalCountResponse())
+        BDDMockito.given(questParticipationService.getQuestReviewList(1, Pageable.ofSize(5)))
+            .willReturn(ListResponseDto(
+                totalCount = 5,
+                contentList = listOf(
+                    QuestReviewResponseDto("리뷰 1", LocalDateTime.now(), DtoFactory.testUserInfoResponse()),
+                    QuestReviewResponseDto("리뷰 2", LocalDateTime.now(), DtoFactory.testUserInfoResponse()),
+                    QuestReviewResponseDto("리뷰 3", LocalDateTime.now(), DtoFactory.testUserInfoResponse()),
+                    QuestReviewResponseDto("리뷰 4", LocalDateTime.now(), DtoFactory.testUserInfoResponse()),
+                    QuestReviewResponseDto("리뷰 5", LocalDateTime.now(), DtoFactory.testUserInfoResponse()),
+                )
+            ))
 
         val result = mockMvc.perform(
             RestDocumentationRequestBuilders.get("/api/quests/{questId}/reviews", 1)
-                .param("cursor", "10")
+                .param("page", "0")
                 .param("size", "5")
         ).andDo(MockMvcResultHandlers.print())
 
@@ -218,8 +231,8 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
                         RequestDocumentation.parameterWithName("questId").description("퀘스트 id")
                     ),
                     RequestDocumentation.requestParameters(
-                        RequestDocumentation.parameterWithName("cursor")
-                            .description("마지막으로 조회된 퀘스트 한 줄 후기 id, 후기보다 오래된 후기 리스트가 조회됩니다."),
+                        RequestDocumentation.parameterWithName("page")
+                            .description("조회할 페이지"),
                         RequestDocumentation.parameterWithName("size").description("조회할 한 줄 후기 개수")
                     ),
                     PayloadDocumentation.responseFields(
@@ -227,25 +240,25 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
                             .description("200"),
                         PayloadDocumentation.fieldWithPath("message")
                             .description("성공 메세지"),
-                        PayloadDocumentation.fieldWithPath("data.totalReviewCount")
+                        PayloadDocumentation.fieldWithPath("data.totalCount")
                             .description("퀘스트 리뷰 총 개수"),
-                        PayloadDocumentation.fieldWithPath("data.reviewList")
+                        PayloadDocumentation.fieldWithPath("data.contentList")
                             .description("퀘스트 리뷰 리스트"),
-                        PayloadDocumentation.fieldWithPath("data.reviewList[*].review")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].review")
                             .description("퀘스트 리뷰"),
-                        PayloadDocumentation.fieldWithPath("data.reviewList[*].reviewCreatedAt")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].reviewCreatedAt")
                             .description("퀘스트 리뷰 작성 날짜"),
-                        PayloadDocumentation.fieldWithPath("data.reviewList[*].reviewWriter")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].reviewWriter")
                             .description("퀘스트 리뷰 작성자"),
-                        PayloadDocumentation.fieldWithPath("data.reviewList[*].reviewWriter.id")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].reviewWriter.id")
                             .description("퀘스트 리뷰 작성자 id"),
-                        PayloadDocumentation.fieldWithPath("data.reviewList[*].reviewWriter.nickname")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].reviewWriter.nickname")
                             .description("퀘스트 리뷰 nickname"),
-                        PayloadDocumentation.fieldWithPath("data.reviewList[*].reviewWriter.position")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].reviewWriter.position")
                             .description("퀘스트 리뷰 작성자 직군"),
-                        PayloadDocumentation.fieldWithPath("data.reviewList[*].reviewWriter.point")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].reviewWriter.point")
                             .description("퀘스트 리뷰 작성자 능력치"),
-                        PayloadDocumentation.fieldWithPath("data.reviewList[*].reviewWriter.intro")
+                        PayloadDocumentation.fieldWithPath("data.contentList[*].reviewWriter.intro")
                             .description("퀘스트 리뷰 작성자 소개"),
                     )
                 )

@@ -201,17 +201,6 @@ class DtoFactory {
             )
         )
 
-        fun testQuestReviewWithTotalCountResponse() = QuestReviewWithTotalCountResponseDto(
-            totalReviewCount = 10,
-            reviewList = listOf(
-                QuestReviewResponseDto("리뷰 1", LocalDateTime.now(), testUserInfoResponse()),
-                QuestReviewResponseDto("리뷰 2", LocalDateTime.now(), testUserInfoResponse()),
-                QuestReviewResponseDto("리뷰 3", LocalDateTime.now(), testUserInfoResponse()),
-                QuestReviewResponseDto("리뷰 4", LocalDateTime.now(), testUserInfoResponse()),
-                QuestReviewResponseDto("리뷰 5", LocalDateTime.now(), testUserInfoResponse()),
-            )
-        )
-
         fun testQuestPositionCountResponse() = QuestPositionCountResponseDto(
             position = Position.BACKEND.name,
             questCount = 10
