@@ -11,7 +11,6 @@ import com.yapp.giljob.domain.subquest.dao.SubQuestParticipationRepository
 import com.yapp.giljob.domain.subquest.vo.SubQuestCompletedCountVo
 import com.yapp.giljob.global.util.calculator.SubQuestProgressCalculator.Companion.calculateProgress
 import com.yapp.giljob.global.common.dto.ListResponseDto
-import com.yapp.giljob.global.util.SubQuestProgressCalculate.Companion.calculateProgress
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

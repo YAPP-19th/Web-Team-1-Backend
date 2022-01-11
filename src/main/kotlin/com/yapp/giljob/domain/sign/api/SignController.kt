@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import javax.servlet.http.HttpServletResponse
 
-@CrossOrigin
+@CrossOrigin("https://giljob.netlify.app")
 @RestController
 class SignController (private val signService: SignService){
 
