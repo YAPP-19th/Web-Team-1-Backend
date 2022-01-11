@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class WebConfig : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-            .allowedOrigins("https://giljob.netlify.app/**")
+            .allowedOrigins("https://giljob.netlify.app")
             .allowedMethods(
                 HttpMethod.GET.name,
                 HttpMethod.PATCH.name,
