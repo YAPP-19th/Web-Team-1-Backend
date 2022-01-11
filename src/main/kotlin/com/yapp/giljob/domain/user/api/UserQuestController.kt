@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-@CrossOrigin("https://giljob.netlify.app")
 @RestController
 @RequestMapping("/api/users/{userId}/quests")
 class UserQuestController(

@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-@CrossOrigin("https://giljob.netlify.app")
 @RequestMapping("/api/subquests")
 @RestController
 class SubQuestController(
