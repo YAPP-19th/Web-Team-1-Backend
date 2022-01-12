@@ -2,6 +2,7 @@ package com.yapp.giljob.domain.roadmap.application
 
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestService
+import com.yapp.giljob.domain.roadmap.dao.RoadmapQuestRepository
 import com.yapp.giljob.domain.roadmap.dao.RoadmapRepository
 import com.yapp.giljob.domain.roadmap.dao.RoadmapScrapRepository
 import com.yapp.giljob.domain.user.application.UserMapper
@@ -31,6 +32,9 @@ class RoadmapServiceTest {
     private lateinit var roadmapScrapRepository: RoadmapScrapRepository
 
     @MockK
+    private lateinit var roadmapQuestRepository: RoadmapQuestRepository
+
+    @MockK
     private lateinit var userService: UserService
 
     @MockK
@@ -47,7 +51,15 @@ class RoadmapServiceTest {
     @BeforeEach
     fun setUp() {
         MockKAnnotations.init(this)
-        roadmapService = RoadmapService(roadmapRepository, roadmapScrapRepository, userService, questService, roadmapMapper, userMapper)
+        roadmapService = RoadmapService(
+            roadmapRepository,
+            roadmapScrapRepository,
+            roadmapQuestRepository,
+            userService,
+            questService,
+            roadmapMapper,
+            userMapper
+        )
     }
 
     @Test
