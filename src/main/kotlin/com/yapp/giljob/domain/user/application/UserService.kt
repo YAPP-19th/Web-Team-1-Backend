@@ -3,18 +3,18 @@ package com.yapp.giljob.domain.user.application
 import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.application.QuestHelper
 import com.yapp.giljob.domain.quest.dao.QuestParticipationRepository
-import com.yapp.giljob.global.util.calculator.AchieveCalculator.Companion.calculatePointAchieve
-import com.yapp.giljob.global.util.calculator.AchieveCalculator.Companion.calculateQuestAchieve
 import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.dao.UserRepository
 import com.yapp.giljob.domain.user.domain.User
-import com.yapp.giljob.domain.user.dto.response.AbilityResponseDto
 import com.yapp.giljob.domain.user.dto.request.UserInfoUpdateRequestDto
+import com.yapp.giljob.domain.user.dto.response.AbilityResponseDto
 import com.yapp.giljob.domain.user.dto.response.AchieveResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
+import com.yapp.giljob.global.util.calculator.AchieveCalculator.Companion.calculatePointAchieve
+import com.yapp.giljob.global.util.calculator.AchieveCalculator.Companion.calculateQuestAchieve
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -52,12 +52,12 @@ class UserService(
         )
     }
 
-    private fun getUserAbility(userId: Long, position: Position) =
-        userMapper.toDto(
-            abilityRepository.findByUserIdAndPosition(userId, position) ?: throw BusinessException(
-                ErrorCode.ENTITY_NOT_FOUND
-            )
-        )
+    private fun getUserAbility(userId: Long, position: Position): AbilityResponseDto {
+        val ability = abilityRepository.findByUserIdAndPosition(userId, position)
+
+        return if (ability == null) AbilityResponseDto(position, 0)
+        else userMapper.toDto(ability)
+    }
 
     private fun getAbilityListByUserId(userId: Long): List<AbilityResponseDto> {
         val abilityList = abilityRepository.findByUserId(userId)
