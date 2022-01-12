@@ -11,10 +11,10 @@ import com.yapp.giljob.global.common.domain.EntityFactory
 import com.yapp.giljob.global.common.dto.DtoFactory
 import com.yapp.giljob.global.config.security.GiljobTestUser
 import org.junit.jupiter.api.Test
-import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.BDDMockito
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.domain.Pageable
 import org.springframework.http.MediaType
 import org.springframework.restdocs.headers.HeaderDocumentation
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
@@ -173,8 +173,9 @@ class RoadmapControllerTest : AbstractRestDocs() {
 
     @Test
     fun getRoadmapList() {
-        BDDMockito.given(roadmapService.getRoadmapList(anyLong())).willReturn(
+        BDDMockito.given(roadmapService.getRoadmapList(Pageable.ofSize(4))).willReturn(
             listOf(
+                DtoFactory.testRoadmapResponse(),
                 DtoFactory.testRoadmapResponse(),
                 DtoFactory.testRoadmapResponse(),
                 DtoFactory.testRoadmapResponse()
@@ -184,7 +185,8 @@ class RoadmapControllerTest : AbstractRestDocs() {
         val result = mockMvc.perform(
             RestDocumentationRequestBuilders
                 .get("/api/roadmaps")
-                .param("size", "3")
+                .param("page", "0")
+                .param("size", "4")
         ).andDo(MockMvcResultHandlers.print())
 
         result
@@ -193,6 +195,7 @@ class RoadmapControllerTest : AbstractRestDocs() {
                 MockMvcRestDocumentation.document(
                     "roadmaps/get",
                     RequestDocumentation.requestParameters(
+                        RequestDocumentation.parameterWithName("page").description("조회할 로드맵 페이지"),
                         RequestDocumentation.parameterWithName("size").description("조회할 로드맵 개수")
                     ),
                     PayloadDocumentation.responseFields(

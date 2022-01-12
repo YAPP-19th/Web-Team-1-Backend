@@ -6,6 +6,8 @@ import com.yapp.giljob.domain.roadmap.dto.response.RoadmapResponseDto
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.common.annotation.CurrentUser
 import com.yapp.giljob.global.common.dto.BaseResponse
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -43,10 +45,10 @@ class RoadmapController(
 
     @GetMapping
     fun getRoadmapList(
-        @RequestParam size: Long
+        @PageableDefault(size = 4) pageable: Pageable
     ): ResponseEntity<BaseResponse<List<RoadmapResponseDto>>> {
         return ResponseEntity.ok(
-            BaseResponse.of(HttpStatus.OK, "최근 등록된 로드맵 리스트 조회 성공입니다.", roadmapService.getRoadmapList(size))
+            BaseResponse.of(HttpStatus.OK, "최근 등록된 로드맵 리스트 조회 성공입니다.", roadmapService.getRoadmapList(pageable))
         )
     }
 }
