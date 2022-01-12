@@ -2,20 +2,18 @@ package com.yapp.giljob.domain.quest.dao
 
 import com.querydsl.core.BooleanBuilder
 import com.querydsl.core.types.Projections
-import com.yapp.giljob.domain.quest.domain.QQuest.quest
-import com.yapp.giljob.domain.user.domain.QAbility.ability
-
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.jpa.JPAExpressions
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.yapp.giljob.domain.position.domain.Position
+import com.yapp.giljob.domain.quest.domain.QQuest.quest
 import com.yapp.giljob.domain.quest.domain.QQuestParticipation.questParticipation
 import com.yapp.giljob.domain.quest.dto.QuestConditionDto
+import com.yapp.giljob.domain.quest.vo.QuestListVo
 import com.yapp.giljob.domain.quest.vo.QuestPositionCountVo
 import com.yapp.giljob.domain.quest.vo.QuestSupportVo
-import com.yapp.giljob.domain.quest.vo.QuestListVo
 import com.yapp.giljob.domain.tag.domain.QQuestTag.questTag
-import com.yapp.giljob.domain.tag.domain.QTag.tag
+import com.yapp.giljob.domain.user.domain.QAbility.ability
 import com.yapp.giljob.domain.user.domain.QUser.user
 import org.springframework.data.domain.Pageable
 
@@ -106,6 +104,7 @@ class QuestSupportRepositoryImpl(
             )
         )
             .from(quest)
+            .where(quest.isRealQuest.eq(true))
             .groupBy(quest.position)
             .fetch()
     }

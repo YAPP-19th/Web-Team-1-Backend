@@ -30,6 +30,7 @@ internal class PositionControllerTest : AbstractRestDocs() {
             .willReturn(
                 listOf(
                     DtoFactory.testQuestPositionCountResponse(),
+                    DtoFactory.testQuestPositionCountResponse().apply { this.position = Position.BACKEND.name },
                     DtoFactory.testQuestPositionCountResponse().apply { this.position = Position.FRONTEND.name }
                 )
             )

@@ -22,7 +22,6 @@ import com.yapp.giljob.domain.user.dto.response.AchieveResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserInfoResponseDto
 import com.yapp.giljob.domain.user.dto.response.UserProfileResponseDto
 import com.yapp.giljob.infra.s3.dto.responsne.S3UploadResponseDto
-import java.time.LocalDateTime
 
 class DtoFactory {
     companion object {
@@ -202,7 +201,7 @@ class DtoFactory {
         )
 
         fun testQuestPositionCountResponse() = QuestPositionCountResponseDto(
-            position = Position.BACKEND.name,
+            position = "퀘스트 전체",
             questCount = 10
         )
     }

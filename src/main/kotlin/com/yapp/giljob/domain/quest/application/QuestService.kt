@@ -100,8 +100,18 @@ class QuestService(
 
     fun getQuestPositionCount(): List<QuestPositionCountResponseDto> {
         val questPositionCountVoList = questRepository.getQuestPositionCount()
-        return questPositionCountVoList.map {
+
+        val responseList = questPositionCountVoList.map {
             QuestPositionCountResponseDto(position = it.position.name, questCount = it.questCount)
-        }
+        }.toMutableList()
+
+        responseList.add(0,
+            QuestPositionCountResponseDto(
+                position = "퀘스트 전체",
+                questCount = questPositionCountVoList.sumOf { it.questCount }
+            )
+        )
+
+        return responseList
     }
 }
