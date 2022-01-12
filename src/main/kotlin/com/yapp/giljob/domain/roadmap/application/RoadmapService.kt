@@ -14,6 +14,7 @@ import com.yapp.giljob.domain.user.application.UserService
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -62,8 +63,8 @@ class RoadmapService(
     private fun getRoadmap(roadmapId: Long) =
         roadmapRepository.findByIdOrNull(roadmapId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
 
-    fun getRoadmapList(size: Long): List<RoadmapResponseDto>? {
-        val roadmapVoList = roadmapRepository.findRoadmapList(size)
+    fun getRoadmapList(pageable: Pageable): List<RoadmapResponseDto>? {
+        val roadmapVoList = roadmapRepository.findRoadmapList(pageable)
         return roadmapVoList.map {
             roadmapMapper.toDto(it.roadmap, userMapper.toDto(it.roadmap.user, it.point))
         }
