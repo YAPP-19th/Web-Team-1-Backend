@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.roadmap.application
 
 import com.yapp.giljob.domain.quest.application.QuestService
+import com.yapp.giljob.domain.roadmap.dao.RoadmapQuestRepository
 import com.yapp.giljob.domain.roadmap.dao.RoadmapRepository
 import com.yapp.giljob.domain.roadmap.dao.RoadmapScrapRepository
 import com.yapp.giljob.domain.roadmap.domain.Roadmap
@@ -13,6 +14,7 @@ import com.yapp.giljob.domain.user.application.UserService
 import com.yapp.giljob.domain.user.domain.User
 import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -21,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional
 class RoadmapService(
     private val roadmapRepository: RoadmapRepository,
     private val roadmapScrapRepository: RoadmapScrapRepository,
+    private val roadmapQuestRepository: RoadmapQuestRepository,
 
     private val userService: UserService,
     private val questService: QuestService,
@@ -53,14 +56,15 @@ class RoadmapService(
         val questList = questService.convertToQuestList(roadmap, roadmapSaveRequestDto.questList)
         roadmap.questList.addAll(questList)
 
+        roadmapQuestRepository.saveAll(questList)
         roadmapRepository.save(roadmap)
     }
 
     private fun getRoadmap(roadmapId: Long) =
         roadmapRepository.findByIdOrNull(roadmapId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
 
-    fun getRoadmapList(size: Long): List<RoadmapResponseDto>? {
-        val roadmapVoList = roadmapRepository.findRoadmapList(size)
+    fun getRoadmapList(pageable: Pageable): List<RoadmapResponseDto>? {
+        val roadmapVoList = roadmapRepository.findRoadmapList(pageable)
         return roadmapVoList.map {
             roadmapMapper.toDto(it.roadmap, userMapper.toDto(it.roadmap.user, it.point))
         }

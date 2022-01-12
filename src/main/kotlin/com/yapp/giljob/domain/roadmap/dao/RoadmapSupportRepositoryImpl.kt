@@ -40,7 +40,7 @@ class RoadmapSupportRepositoryImpl(
             .fetch()
     }
 
-    override fun findRoadmapList(size: Long): List<RoadmapSupportVo> {
+    override fun findRoadmapList(pageable: Pageable): List<RoadmapSupportVo> {
         return query.select(
             Projections.constructor(
                 RoadmapSupportVo::class.java,
@@ -51,7 +51,8 @@ class RoadmapSupportRepositoryImpl(
             .from(roadmap)
             .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))
             .orderBy(roadmap.id.desc())
-            .limit(size)
+            .offset(pageable.offset)
+            .limit(pageable.pageSize.toLong())
             .fetch()
     }
 }
