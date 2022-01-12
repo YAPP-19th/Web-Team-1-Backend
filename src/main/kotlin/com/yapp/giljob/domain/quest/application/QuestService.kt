@@ -1,5 +1,6 @@
 package com.yapp.giljob.domain.quest.application
 
+import com.yapp.giljob.domain.position.domain.Position
 import com.yapp.giljob.domain.quest.dao.QuestRepository
 import com.yapp.giljob.domain.quest.domain.Quest
 import com.yapp.giljob.domain.quest.dto.QuestConditionDto
@@ -107,7 +108,7 @@ class QuestService(
 
         responseList.add(0,
             QuestPositionCountResponseDto(
-                position = "퀘스트 전체",
+                position = Position.ALL.name,
                 questCount = questPositionCountVoList.sumOf { it.questCount }
             )
         )
