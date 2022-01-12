@@ -53,10 +53,8 @@ class UserService(
     }
 
     private fun getUserAbility(userId: Long, position: Position): AbilityResponseDto {
-        val ability = abilityRepository.findByUserIdAndPosition(userId, position)
-
-        return if (ability == null) AbilityResponseDto(position, 0)
-        else userMapper.toDto(ability)
+        return abilityRepository.findByUserIdAndPosition(userId, position)?.let{userMapper.toDto(it)}
+            ?: AbilityResponseDto(position, 0)
     }
 
     private fun getAbilityListByUserId(userId: Long): List<AbilityResponseDto> {
