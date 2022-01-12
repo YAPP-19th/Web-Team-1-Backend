@@ -1,6 +1,7 @@
 package com.yapp.giljob.domain.roadmap.application
 
 import com.yapp.giljob.domain.quest.application.QuestService
+import com.yapp.giljob.domain.roadmap.dao.RoadmapQuestRepository
 import com.yapp.giljob.domain.roadmap.dao.RoadmapRepository
 import com.yapp.giljob.domain.roadmap.dao.RoadmapScrapRepository
 import com.yapp.giljob.domain.roadmap.domain.Roadmap
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional
 class RoadmapService(
     private val roadmapRepository: RoadmapRepository,
     private val roadmapScrapRepository: RoadmapScrapRepository,
+    private val roadmapQuestRepository: RoadmapQuestRepository,
 
     private val userService: UserService,
     private val questService: QuestService,
@@ -53,6 +55,7 @@ class RoadmapService(
         val questList = questService.convertToQuestList(roadmap, roadmapSaveRequestDto.questList)
         roadmap.questList.addAll(questList)
 
+        roadmapQuestRepository.saveAll(questList)
         roadmapRepository.save(roadmap)
     }
 
