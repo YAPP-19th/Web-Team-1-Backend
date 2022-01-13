@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController
 import javax.servlet.http.HttpServletResponse
 
 @RestController
-class SignController (private val signService: SignService){
-
+class SignController(
+    private val signService: SignService
+) {
     @PostMapping("/api/sign-up")
     fun signUp(
         @Validated @RequestBody signUpRequestDto: SignUpRequestDto,
         response: HttpServletResponse
     ): ResponseEntity<BaseResponse<SignUpResponseDto>> {
-
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK,
@@ -30,7 +30,6 @@ class SignController (private val signService: SignService){
                 signService.signUp(signUpRequestDto)
             )
         )
-
     }
 
     @PostMapping("/api/sign-in")
@@ -38,7 +37,6 @@ class SignController (private val signService: SignService){
         @Validated @RequestBody signInRequestDto: SignInRequestDto,
         response: HttpServletResponse
     ): ResponseEntity<BaseResponse<SignInResponseDto>> {
-
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK,
@@ -46,6 +44,5 @@ class SignController (private val signService: SignService){
                 signService.signIn(signInRequestDto)
             )
         )
-
     }
 }

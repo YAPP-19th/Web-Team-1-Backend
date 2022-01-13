@@ -32,7 +32,7 @@ class RoadmapSupportRepositoryImpl(
             )
         )
             .from(roadmap)
-            .where(roadmap.user.id.`in`(idList))
+            .where(roadmap.id.`in`(idList))
             .leftJoin(roadmap.user, QUser.user)
             .fetchJoin()
             .leftJoin(ability).on(ability.position.eq(roadmap.user.position).and(ability.user.id.eq(roadmap.user.id)))

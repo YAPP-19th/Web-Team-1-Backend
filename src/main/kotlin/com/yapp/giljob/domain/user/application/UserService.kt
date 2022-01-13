@@ -38,7 +38,7 @@ class UserService(
         val user = userRepository.findByIdOrNull(userId) ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
         val abilityList = getAbilityListByUserId(userId)
         val ability =
-            abilityList.find { it.position == user.position } ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+            abilityList.find { it.position == user.position } ?: AbilityResponseDto(user.position, 0)
         val completedQuestCount =
             QuestHelper.countQuestsByParticipantIdAndCompleted(questParticipantRepository, userId)
 
@@ -53,7 +53,7 @@ class UserService(
     }
 
     private fun getUserAbility(userId: Long, position: Position): AbilityResponseDto {
-        return abilityRepository.findByUserIdAndPosition(userId, position)?.let{userMapper.toDto(it)}
+        return abilityRepository.findByUserIdAndPosition(userId, position)?.let { userMapper.toDto(it) }
             ?: AbilityResponseDto(position, 0)
     }
 
