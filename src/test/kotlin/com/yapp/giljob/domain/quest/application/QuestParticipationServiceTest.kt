@@ -137,7 +137,7 @@ class QuestParticipationServiceTest {
                 }
 
             // then
-            assertEquals(ErrorCode.ENTITY_NOT_FOUND, exception.errorCode)
+            assertEquals(ErrorCode.QUEST_PARTICIPATION_NOT_FOUND, exception.errorCode)
         }
 
         @Test
