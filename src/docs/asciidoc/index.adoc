@@ -101,11 +101,23 @@ include::{snippets}/quests/{questId}/participation/post/response-fields.adoc[]
 .request
 include::{snippets}/quests/{questId}/complete/patch/http-request.adoc[]
 .request fields
-include::{snippets}/quests/{questId}/participation/post/path-parameters.adoc[]
+include::{snippets}/quests/{questId}/complete/patch/path-parameters.adoc[]
 .response
 include::{snippets}/quests/{questId}/complete/patch/http-response.adoc[]
 .response fields
 include::{snippets}/quests/{questId}/complete/patch/response-fields.adoc[]
+
+=== PATCH /api/quests/{questId}/cancel
+==== 퀘스트 취소
+
+.request
+include::{snippets}/quests/{questId}/cancel/patch/http-request.adoc[]
+.request fields
+include::{snippets}/quests/{questId}/cancel/patch/path-parameters.adoc[]
+.response
+include::{snippets}/quests/{questId}/cancel/patch/http-response.adoc[]
+.response fields
+include::{snippets}/quests/{questId}/cancel/patch/response-fields.adoc[]
 
 === PATCH /api/quests/{questId}/review
 ==== 퀘스트 한줄 후기 작성

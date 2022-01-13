@@ -44,7 +44,7 @@ class SubQuestParticipationService(
         subQuestParticipation?.let {
             if (it.isCompleted) it.cancel()
             else throw BusinessException(ErrorCode.NOT_COMPLETED_SUBQUEST)
-        } ?: throw BusinessException(ErrorCode.SUBQUEST_PARTICIPATION_NOT_FOUND)
+        } ?: throw BusinessException(ErrorCode.NOT_PARTICIPATED_SUBQUEST)
     }
 
     private fun getSubQuestParticipationVo(subQuestId: Long, user: User): SubQuestParticipationVo {

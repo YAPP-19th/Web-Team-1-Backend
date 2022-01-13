@@ -8,6 +8,8 @@ import com.yapp.giljob.domain.quest.dto.response.QuestCountResponseDto
 import com.yapp.giljob.domain.quest.dto.response.QuestReviewResponseDto
 import com.yapp.giljob.domain.quest.vo.QuestReviewVo
 import com.yapp.giljob.domain.subquest.application.SubQuestService
+import com.yapp.giljob.domain.subquest.domain.SubQuestParticipationPK
+import com.yapp.giljob.domain.subquest.vo.SubQuestParticipationVo
 import com.yapp.giljob.domain.user.application.UserMapper
 import com.yapp.giljob.domain.user.dao.AbilityRepository
 import com.yapp.giljob.domain.user.domain.Ability
@@ -17,6 +19,7 @@ import com.yapp.giljob.global.error.ErrorCode
 import com.yapp.giljob.global.error.exception.BusinessException
 import com.yapp.giljob.global.util.calculator.PointCalculator
 import org.springframework.data.domain.Pageable
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
@@ -97,9 +100,16 @@ class QuestParticipationService(
         questParticipationRepository.save(questParticipation)
     }
 
+    @Transactional
+    fun cancelQuest(questId: Long, user: User) {
+        val questParticipation = findQuestParticipation(questId, user.id!!)
+            ?: throw BusinessException(ErrorCode.NOT_PARTICIPATED_QUEST)
+        if (questParticipation.isCompleted) throw BusinessException(ErrorCode.ALREADY_COMPLETED_QUEST)
+        questParticipationRepository.delete(questParticipation)
+    }
+
     fun getQuestParticipationStatus(questId: Long, userId: Long): String {
-        val questParticipation = questParticipationRepository.findByQuestIdAndParticipantId(questId, userId)
-            ?: return "아직 참여하지 않은 퀘스트입니다."
+        val questParticipation = findQuestParticipation(questId, userId) ?: return "아직 참여하지 않은 퀘스트입니다."
 
         return when (questParticipation.isCompleted) {
             false -> "참여중인 퀘스트입니다."
@@ -118,6 +128,9 @@ class QuestParticipationService(
             contentList = toQuestReviewResponseDto(reviewListVo)
         )
     }
+
+    private fun findQuestParticipation(questId: Long, userId: Long) =
+        questParticipationRepository.findByQuestIdAndParticipantId(questId, userId)
 
     private fun getOnProgressQuestCount() = questParticipationRepository.countQuests()
 

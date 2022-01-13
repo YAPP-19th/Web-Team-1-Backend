@@ -108,7 +108,7 @@ class SubQuestParticipationServiceTest {
             }
 
         // then
-        assertEquals(ErrorCode.SUBQUEST_PARTICIPATION_NOT_FOUND, exception.errorCode)
+        assertEquals(ErrorCode.NOT_PARTICIPATED_SUBQUEST, exception.errorCode)
     }
 
     @Test
