@@ -48,7 +48,8 @@ class QuestParticipationController(
     fun createQuestReview(
         @PathVariable questId: Long,
         @RequestBody questReviewCreateRequestDto: QuestReviewCreateRequestDto,
-        @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
+        @CurrentUser user: User
+    ): ResponseEntity<BaseResponse<Unit>> {
         questParticipationService.createQuestReview(questId, questReviewCreateRequestDto, user)
         return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "퀘스트 리뷰 작성 성공입니다."))
     }
@@ -56,13 +57,14 @@ class QuestParticipationController(
     @GetMapping("/{questId}/participation/status")
     fun getQuestParticipationStatus(
         @PathVariable("questId") questId: Long,
-        @RequestParam(value = "userId") userId:Long
-    ): ResponseEntity<BaseResponse<String>>{
+        @RequestParam(value = "userId") userId: Long
+    ): ResponseEntity<BaseResponse<String>> {
         return ResponseEntity.ok(
             BaseResponse.of(
                 HttpStatus.OK,
                 "유저의 퀘스트에 대한 정보 성공입니다.",
-                questParticipationService.getQuestParticipationStatus(questId, userId))
+                questParticipationService.getQuestParticipationStatus(questId, userId)
+            )
         )
     }
 
@@ -78,5 +80,11 @@ class QuestParticipationController(
                 questParticipationService.getQuestReviewList(questId, pageable)
             )
         )
+    }
+
+    @PatchMapping("/{questId}/cancel")
+    fun cancelSubQuest(@PathVariable questId: Long, @CurrentUser user: User): ResponseEntity<BaseResponse<Unit>> {
+        questParticipationService.cancelQuest(questId, user)
+        return ResponseEntity.ok(BaseResponse.of(HttpStatus.OK, "서브퀘스트 취소 성공입니다."))
     }
 }

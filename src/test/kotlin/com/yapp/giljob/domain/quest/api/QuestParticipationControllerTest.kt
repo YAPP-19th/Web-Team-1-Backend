@@ -117,6 +117,41 @@ internal class QuestParticipationControllerTest : AbstractRestDocs() {
             .andDo(
                 MockMvcRestDocumentation.document(
                     "quests/{questId}/complete/patch",
+                    RequestDocumentation.pathParameters(
+                        RequestDocumentation.parameterWithName("questId").description("완료할 퀘스트 id")
+                    ),
+                    HeaderDocumentation.responseHeaders(),
+                    HeaderDocumentation.responseHeaders(),
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("status")
+                            .description("200"),
+                        PayloadDocumentation.fieldWithPath("message")
+                            .description("성공 메세지"),
+                        PayloadDocumentation.fieldWithPath("data")
+                            .description("null")
+                    )
+                )
+            )
+    }
+
+    @GiljobTestUser
+    @Test
+    fun cancelQuestTest() {
+        val result = mockMvc.perform(
+            RestDocumentationRequestBuilders.patch("/api/quests/{questId}/cancel", 1L)
+                .header("Authorization", "Access Token")
+        ).andDo(
+            MockMvcResultHandlers.print()
+        )
+
+        result
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andDo(
+                MockMvcRestDocumentation.document(
+                    "quests/{questId}/cancel/patch",
+                    RequestDocumentation.pathParameters(
+                        RequestDocumentation.parameterWithName("questId").description("취소할 퀘스트 id")
+                    ),
                     HeaderDocumentation.responseHeaders(),
                     HeaderDocumentation.responseHeaders(),
                     PayloadDocumentation.responseFields(

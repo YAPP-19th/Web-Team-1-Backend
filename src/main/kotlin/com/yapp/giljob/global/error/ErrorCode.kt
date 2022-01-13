@@ -27,11 +27,12 @@ enum class ErrorCode(
     ALREADY_PARTICIPATED_QUEST(HttpStatus.BAD_REQUEST, "Q001", "Already Participated Quest"),
     ALREADY_COMPLETED_QUEST(HttpStatus.BAD_REQUEST, "Q002", "Already Completed Quest"),
     NOT_COMPLETED_QUEST(HttpStatus.BAD_REQUEST, "Q003", "Not Completed Quest"),
+    NOT_PARTICIPATED_QUEST(HttpStatus.BAD_REQUEST, "Q005", "Not Participated Quest"),
 
     // SubQuest
     ALREADY_COMPLETED_SUBQUEST(HttpStatus.BAD_REQUEST, "SQ001", "Already Completed SubQuest"),
     NOT_COMPLETED_SUBQUEST(HttpStatus.BAD_REQUEST, "SQ002", "Not Completed SubQuest"),
-    SUBQUEST_PARTICIPATION_NOT_FOUND(HttpStatus.BAD_REQUEST, "SQ003", "SubQuest Participation Not Found"),
+    NOT_PARTICIPATED_SUBQUEST(HttpStatus.BAD_REQUEST, "SQ003", "Not Participated SubQuest"),
 
     // Roadmap
     ALREADY_SCRAPED_ROADMAP(HttpStatus.BAD_REQUEST, "R001", "Already Scraped Roadmap"),
