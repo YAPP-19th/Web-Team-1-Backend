@@ -59,26 +59,23 @@ class SubQuestParticipationService(
     }
 
     fun getQuestDetailSubQuestProgress(questId: Long, user: User): QuestDetailSubQuestResponseDto {
-        val subQuestProgressList
-                = subQuestParticipationRepository.getSubQuestProgressByQuestIdAndParticipantId(questId, user.id!!)
+        val subQuestList = subQuestRepository.findByQuestId(questId)
 
-        if (subQuestProgressList.isEmpty()) return QuestDetailSubQuestResponseDto(
-            progress = 0,
-            subQuestProgressList = emptyList()
-        )
+        val completedSubQuestList
+                = subQuestParticipationRepository.getCompletedSubQuestByQuestIdAndParticipantId(questId, user.id!!)
 
-        val totalSubQuestCount = subQuestProgressList.size
-        val subQuestCompletedCount = subQuestProgressList.count{ it.isCompleted }.toLong()
+        val totalSubQuestCount = subQuestList.size
+        val subQuestCompletedCount = completedSubQuestList.size.toLong()
 
         val progress = calculateProgress(totalSubQuestCount, subQuestCompletedCount)
 
         return QuestDetailSubQuestResponseDto(
             progress = progress,
-            subQuestProgressList = subQuestProgressList.map {
+            subQuestProgressList = subQuestList.map {
                 SubQuestProgressResponseDto(
-                    subQuestId = it.subQuestId,
-                    subQuestName = it.subQuestName,
-                    isCompleted = it.isCompleted
+                    subQuestId = it.id!!,
+                    subQuestName = it.name,
+                    isCompleted = completedSubQuestList.any { completed -> completed.subQuestId == it.id }
                 )
             }
         )
