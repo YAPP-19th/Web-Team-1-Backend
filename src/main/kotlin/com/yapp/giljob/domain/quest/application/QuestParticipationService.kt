@@ -51,8 +51,8 @@ class QuestParticipationService(
 
     @Transactional
     fun completeQuest(questId: Long, user: User) {
-        val questParticipation = questParticipationRepository.findByQuestIdAndParticipantId(user.id!!, questId)
-            ?: throw BusinessException(ErrorCode.ENTITY_NOT_FOUND)
+        val questParticipation = questParticipationRepository.findByQuestIdAndParticipantId(questId, user.id!!)
+            ?: throw BusinessException(ErrorCode.QUEST_PARTICIPATION_NOT_FOUND)
 
         validateCompletedQuest(questParticipation, questId, user.id!!)
         questParticipation.complete()
