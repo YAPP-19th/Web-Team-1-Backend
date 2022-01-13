@@ -2,8 +2,8 @@ package com.yapp.giljob.domain.subquest.dao
 
 import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
-import com.yapp.giljob.domain.subquest.vo.SubQuestCompletedCountVo
 import com.yapp.giljob.domain.subquest.domain.QSubQuestParticipation.subQuestParticipation
+import com.yapp.giljob.domain.subquest.vo.SubQuestCompletedCountVo
 import com.yapp.giljob.domain.subquest.vo.SubQuestProgressVo
 
 class SubQuestParticipationSupportRepositoryImpl(
@@ -24,7 +24,7 @@ class SubQuestParticipationSupportRepositoryImpl(
             .fetch()
     }
 
-    override fun getSubQuestProgressByQuestIdAndParticipantId(
+    override fun getCompletedSubQuestByQuestIdAndParticipantId(
         questId: Long,
         participantId: Long
     ): List<SubQuestProgressVo> {
@@ -39,6 +39,7 @@ class SubQuestParticipationSupportRepositoryImpl(
                 .where(
                     subQuestParticipation.quest.id.eq(questId)
                         .and(subQuestParticipation.participant.id.eq(participantId))
+                        .and(subQuestParticipation.isCompleted.eq(true))
                 )
         .fetch()
     }
