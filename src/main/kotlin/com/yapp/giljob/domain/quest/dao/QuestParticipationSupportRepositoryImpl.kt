@@ -50,7 +50,7 @@ class QuestParticipationSupportRepositoryImpl(
                 ability.position.eq(quest.user.position)
                     .and(ability.user.id.eq(quest.user.id))
             )
-            .orderBy(quest.id.desc())
+            .orderBy(questParticipation.id.desc())
 
         val totalCount = totalQuestList.fetchCount()
 
