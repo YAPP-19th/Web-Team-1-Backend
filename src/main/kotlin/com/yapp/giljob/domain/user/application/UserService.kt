@@ -47,7 +47,7 @@ class UserService(
 
         return UserProfileResponseDto(
             userInfo = userMapper.toDto(user, ability),
-            abilityList = abilityList,
+            abilityList = if (abilityList.isEmpty()) listOf(ability) else abilityList,
             achieve = achieve
         )
     }
